@@ -1,0 +1,312 @@
+2016-05-16 09:44:01,131 (OFBiz-config-0) [       DatabaseUtil.java:159:ERROR] Unable to establish a connection with the database for helperName [localmysql]... Error was: java.sql.SQLException: Unable to acquire a new connection from the pool
+2016-05-16 09:44:01,131 (OFBiz-config-0) [       DatabaseUtil.java:986:ERROR] Unable to establish a connection with the database, no additional information available.
+2016-05-16 09:44:01,131 (OFBiz-config-0) [       DatabaseUtil.java:197:ERROR] Could not get table name information from the database, aborting.
+2016-05-16 09:44:05,141 (OFBiz-config-2) [       DatabaseUtil.java:159:ERROR] Unable to establish a connection with the database for helperName [localmysqltenant]... Error was: java.sql.SQLException: Unable to acquire a new connection from the pool
+2016-05-16 09:44:05,141 (OFBiz-config-2) [       DatabaseUtil.java:986:ERROR] Unable to establish a connection with the database, no additional information available.
+2016-05-16 09:44:05,142 (OFBiz-config-2) [       DatabaseUtil.java:197:ERROR] Could not get table name information from the database, aborting.
+2016-05-16 09:44:41,459 (default-invoker-Thread-19) [  GenericServiceJob.java:118:ERROR] 
+---- exception report ----------------------------------------------------------
+Async-Service failed.
+Exception: org.ofbiz.service.GenericServiceException
+Message: Cannot find a service engine definition for the engine name [java] in the serviceengine.xml file
+---- stack trace ---------------------------------------------------------------
+org.ofbiz.service.GenericServiceException: Cannot find a service engine definition for the engine name [java] in the serviceengine.xml file
+org.ofbiz.service.engine.GenericEngineFactory.getGenericEngine(GenericEngineFactory.java:63)
+org.ofbiz.service.ServiceDispatcher.getGenericEngine(ServiceDispatcher.java:809)
+org.ofbiz.service.ServiceDispatcher.runSync(ServiceDispatcher.java:301)
+org.ofbiz.service.ServiceDispatcher.runSync(ServiceDispatcher.java:237)
+org.ofbiz.service.GenericDispatcher.runSync(GenericDispatcher.java:163)
+org.ofbiz.service.job.GenericServiceJob.exec(GenericServiceJob.java:71)
+org.ofbiz.service.job.JobInvoker.run(JobInvoker.java:242)
+java.lang.Thread.run(Thread.java:745)
+--------------------------------------------------------------------------------
+
+2016-05-16 09:44:41,461 (default-invoker-Thread-21) [  GenericServiceJob.java:118:ERROR] 
+---- exception report ----------------------------------------------------------
+Async-Service failed.
+Exception: org.ofbiz.service.GenericServiceException
+Message: Cannot find a service engine definition for the engine name [simple] in the serviceengine.xml file
+---- stack trace ---------------------------------------------------------------
+org.ofbiz.service.GenericServiceException: Cannot find a service engine definition for the engine name [simple] in the serviceengine.xml file
+org.ofbiz.service.engine.GenericEngineFactory.getGenericEngine(GenericEngineFactory.java:63)
+org.ofbiz.service.ServiceDispatcher.getGenericEngine(ServiceDispatcher.java:809)
+org.ofbiz.service.ServiceDispatcher.runSync(ServiceDispatcher.java:301)
+org.ofbiz.service.ServiceDispatcher.runSync(ServiceDispatcher.java:237)
+org.ofbiz.service.GenericDispatcher.runSync(GenericDispatcher.java:163)
+org.ofbiz.service.job.GenericServiceJob.exec(GenericServiceJob.java:71)
+org.ofbiz.service.job.JobInvoker.run(JobInvoker.java:242)
+java.lang.Thread.run(Thread.java:745)
+--------------------------------------------------------------------------------
+
+2016-05-16 09:44:41,461 (default-invoker-Thread-20) [  GenericServiceJob.java:118:ERROR] 
+---- exception report ----------------------------------------------------------
+Async-Service failed.
+Exception: org.ofbiz.service.GenericServiceException
+Message: Cannot find a service engine definition for the engine name [java] in the serviceengine.xml file
+---- stack trace ---------------------------------------------------------------
+org.ofbiz.service.GenericServiceException: Cannot find a service engine definition for the engine name [java] in the serviceengine.xml file
+org.ofbiz.service.engine.GenericEngineFactory.getGenericEngine(GenericEngineFactory.java:63)
+org.ofbiz.service.ServiceDispatcher.getGenericEngine(ServiceDispatcher.java:809)
+org.ofbiz.service.ServiceDispatcher.runSync(ServiceDispatcher.java:301)
+org.ofbiz.service.ServiceDispatcher.runSync(ServiceDispatcher.java:237)
+org.ofbiz.service.GenericDispatcher.runSync(GenericDispatcher.java:163)
+org.ofbiz.service.job.GenericServiceJob.exec(GenericServiceJob.java:71)
+org.ofbiz.service.job.JobInvoker.run(JobInvoker.java:242)
+java.lang.Thread.run(Thread.java:745)
+--------------------------------------------------------------------------------
+
+2016-05-16 09:44:41,460 (default-invoker-Thread-22) [  GenericServiceJob.java:118:ERROR] 
+---- exception report ----------------------------------------------------------
+Async-Service failed.
+Exception: org.ofbiz.service.GenericServiceException
+Message: Cannot find a service engine definition for the engine name [simple] in the serviceengine.xml file
+---- stack trace ---------------------------------------------------------------
+org.ofbiz.service.GenericServiceException: Cannot find a service engine definition for the engine name [simple] in the serviceengine.xml file
+org.ofbiz.service.engine.GenericEngineFactory.getGenericEngine(GenericEngineFactory.java:63)
+org.ofbiz.service.ServiceDispatcher.getGenericEngine(ServiceDispatcher.java:809)
+org.ofbiz.service.ServiceDispatcher.runSync(ServiceDispatcher.java:301)
+org.ofbiz.service.ServiceDispatcher.runSync(ServiceDispatcher.java:237)
+org.ofbiz.service.GenericDispatcher.runSync(GenericDispatcher.java:163)
+org.ofbiz.service.job.GenericServiceJob.exec(GenericServiceJob.java:71)
+org.ofbiz.service.job.JobInvoker.run(JobInvoker.java:242)
+java.lang.Thread.run(Thread.java:745)
+--------------------------------------------------------------------------------
+
+2016-05-16 09:44:41,460 (default-invoker-Thread-15) [  GenericServiceJob.java:118:ERROR] 
+---- exception report ----------------------------------------------------------
+Async-Service failed.
+Exception: org.ofbiz.service.GenericServiceException
+Message: Cannot find a service engine definition for the engine name [java] in the serviceengine.xml file
+---- stack trace ---------------------------------------------------------------
+org.ofbiz.service.GenericServiceException: Cannot find a service engine definition for the engine name [java] in the serviceengine.xml file
+org.ofbiz.service.engine.GenericEngineFactory.getGenericEngine(GenericEngineFactory.java:63)
+org.ofbiz.service.ServiceDispatcher.getGenericEngine(ServiceDispatcher.java:809)
+org.ofbiz.service.ServiceDispatcher.runSync(ServiceDispatcher.java:301)
+org.ofbiz.service.ServiceDispatcher.runSync(ServiceDispatcher.java:237)
+org.ofbiz.service.GenericDispatcher.runSync(GenericDispatcher.java:163)
+org.ofbiz.service.job.GenericServiceJob.exec(GenericServiceJob.java:71)
+org.ofbiz.service.job.JobInvoker.run(JobInvoker.java:242)
+java.lang.Thread.run(Thread.java:745)
+--------------------------------------------------------------------------------
+
+2016-05-16 09:44:41,526 (default-invoker-Thread-22) [  GenericServiceJob.java:118:ERROR] 
+---- exception report ----------------------------------------------------------
+Async-Service failed.
+Exception: org.ofbiz.service.GenericServiceException
+Message: Cannot find a service engine definition for the engine name [java] in the serviceengine.xml file
+---- stack trace ---------------------------------------------------------------
+org.ofbiz.service.GenericServiceException: Cannot find a service engine definition for the engine name [java] in the serviceengine.xml file
+org.ofbiz.service.engine.GenericEngineFactory.getGenericEngine(GenericEngineFactory.java:63)
+org.ofbiz.service.ServiceDispatcher.getGenericEngine(ServiceDispatcher.java:809)
+org.ofbiz.service.ServiceDispatcher.runSync(ServiceDispatcher.java:301)
+org.ofbiz.service.ServiceDispatcher.runSync(ServiceDispatcher.java:237)
+org.ofbiz.service.GenericDispatcher.runSync(GenericDispatcher.java:163)
+org.ofbiz.service.job.GenericServiceJob.exec(GenericServiceJob.java:71)
+org.ofbiz.service.job.JobInvoker.run(JobInvoker.java:242)
+java.lang.Thread.run(Thread.java:745)
+--------------------------------------------------------------------------------
+
+2016-05-16 09:44:41,533 (default-invoker-Thread-20) [  GenericServiceJob.java:118:ERROR] 
+---- exception report ----------------------------------------------------------
+Async-Service failed.
+Exception: org.ofbiz.service.GenericServiceException
+Message: Cannot find a service engine definition for the engine name [java] in the serviceengine.xml file
+---- stack trace ---------------------------------------------------------------
+org.ofbiz.service.GenericServiceException: Cannot find a service engine definition for the engine name [java] in the serviceengine.xml file
+org.ofbiz.service.engine.GenericEngineFactory.getGenericEngine(GenericEngineFactory.java:63)
+org.ofbiz.service.ServiceDispatcher.getGenericEngine(ServiceDispatcher.java:809)
+org.ofbiz.service.ServiceDispatcher.runSync(ServiceDispatcher.java:301)
+org.ofbiz.service.ServiceDispatcher.runSync(ServiceDispatcher.java:237)
+org.ofbiz.service.GenericDispatcher.runSync(GenericDispatcher.java:163)
+org.ofbiz.service.job.GenericServiceJob.exec(GenericServiceJob.java:71)
+org.ofbiz.service.job.JobInvoker.run(JobInvoker.java:242)
+java.lang.Thread.run(Thread.java:745)
+--------------------------------------------------------------------------------
+
+2016-05-16 09:44:41,539 (default-invoker-Thread-15) [  GenericServiceJob.java:118:ERROR] 
+---- exception report ----------------------------------------------------------
+Async-Service failed.
+Exception: org.ofbiz.service.GenericServiceException
+Message: Cannot find a service engine definition for the engine name [java] in the serviceengine.xml file
+---- stack trace ---------------------------------------------------------------
+org.ofbiz.service.GenericServiceException: Cannot find a service engine definition for the engine name [java] in the serviceengine.xml file
+org.ofbiz.service.engine.GenericEngineFactory.getGenericEngine(GenericEngineFactory.java:63)
+org.ofbiz.service.ServiceDispatcher.getGenericEngine(ServiceDispatcher.java:809)
+org.ofbiz.service.ServiceDispatcher.runSync(ServiceDispatcher.java:301)
+org.ofbiz.service.ServiceDispatcher.runSync(ServiceDispatcher.java:237)
+org.ofbiz.service.GenericDispatcher.runSync(GenericDispatcher.java:163)
+org.ofbiz.service.job.GenericServiceJob.exec(GenericServiceJob.java:71)
+org.ofbiz.service.job.JobInvoker.run(JobInvoker.java:242)
+java.lang.Thread.run(Thread.java:745)
+--------------------------------------------------------------------------------
+
+2016-05-16 09:44:41,540 (default-invoker-Thread-19) [  GenericServiceJob.java:118:ERROR] 
+---- exception report ----------------------------------------------------------
+Async-Service failed.
+Exception: org.ofbiz.service.GenericServiceException
+Message: Cannot find a service engine definition for the engine name [java] in the serviceengine.xml file
+---- stack trace ---------------------------------------------------------------
+org.ofbiz.service.GenericServiceException: Cannot find a service engine definition for the engine name [java] in the serviceengine.xml file
+org.ofbiz.service.engine.GenericEngineFactory.getGenericEngine(GenericEngineFactory.java:63)
+org.ofbiz.service.ServiceDispatcher.getGenericEngine(ServiceDispatcher.java:809)
+org.ofbiz.service.ServiceDispatcher.runSync(ServiceDispatcher.java:301)
+org.ofbiz.service.ServiceDispatcher.runSync(ServiceDispatcher.java:237)
+org.ofbiz.service.GenericDispatcher.runSync(GenericDispatcher.java:163)
+org.ofbiz.service.job.GenericServiceJob.exec(GenericServiceJob.java:71)
+org.ofbiz.service.job.JobInvoker.run(JobInvoker.java:242)
+java.lang.Thread.run(Thread.java:745)
+--------------------------------------------------------------------------------
+
+2016-05-16 09:44:41,612 (default-invoker-Thread-22) [  GenericServiceJob.java:118:ERROR] 
+---- exception report ----------------------------------------------------------
+Async-Service failed.
+Exception: org.ofbiz.service.GenericServiceException
+Message: Cannot find a service engine definition for the engine name [java] in the serviceengine.xml file
+---- stack trace ---------------------------------------------------------------
+org.ofbiz.service.GenericServiceException: Cannot find a service engine definition for the engine name [java] in the serviceengine.xml file
+org.ofbiz.service.engine.GenericEngineFactory.getGenericEngine(GenericEngineFactory.java:63)
+org.ofbiz.service.ServiceDispatcher.getGenericEngine(ServiceDispatcher.java:809)
+org.ofbiz.service.ServiceDispatcher.runSync(ServiceDispatcher.java:301)
+org.ofbiz.service.ServiceDispatcher.runSync(ServiceDispatcher.java:237)
+org.ofbiz.service.GenericDispatcher.runSync(GenericDispatcher.java:163)
+org.ofbiz.service.job.GenericServiceJob.exec(GenericServiceJob.java:71)
+org.ofbiz.service.job.JobInvoker.run(JobInvoker.java:242)
+java.lang.Thread.run(Thread.java:745)
+--------------------------------------------------------------------------------
+
+2016-05-16 09:44:41,612 (default-invoker-Thread-20) [  GenericServiceJob.java:118:ERROR] 
+---- exception report ----------------------------------------------------------
+Async-Service failed.
+Exception: org.ofbiz.service.GenericServiceException
+Message: Cannot find a service engine definition for the engine name [simple] in the serviceengine.xml file
+---- stack trace ---------------------------------------------------------------
+org.ofbiz.service.GenericServiceException: Cannot find a service engine definition for the engine name [simple] in the serviceengine.xml file
+org.ofbiz.service.engine.GenericEngineFactory.getGenericEngine(GenericEngineFactory.java:63)
+org.ofbiz.service.ServiceDispatcher.getGenericEngine(ServiceDispatcher.java:809)
+org.ofbiz.service.ServiceDispatcher.runSync(ServiceDispatcher.java:301)
+org.ofbiz.service.ServiceDispatcher.runSync(ServiceDispatcher.java:237)
+org.ofbiz.service.GenericDispatcher.runSync(GenericDispatcher.java:163)
+org.ofbiz.service.job.GenericServiceJob.exec(GenericServiceJob.java:71)
+org.ofbiz.service.job.JobInvoker.run(JobInvoker.java:242)
+java.lang.Thread.run(Thread.java:745)
+--------------------------------------------------------------------------------
+
+2016-05-16 09:44:41,615 (default-invoker-Thread-15) [  GenericServiceJob.java:118:ERROR] 
+---- exception report ----------------------------------------------------------
+Async-Service failed.
+Exception: org.ofbiz.service.GenericServiceException
+Message: Cannot find a service engine definition for the engine name [java] in the serviceengine.xml file
+---- stack trace ---------------------------------------------------------------
+org.ofbiz.service.GenericServiceException: Cannot find a service engine definition for the engine name [java] in the serviceengine.xml file
+org.ofbiz.service.engine.GenericEngineFactory.getGenericEngine(GenericEngineFactory.java:63)
+org.ofbiz.service.ServiceDispatcher.getGenericEngine(ServiceDispatcher.java:809)
+org.ofbiz.service.ServiceDispatcher.runSync(ServiceDispatcher.java:301)
+org.ofbiz.service.ServiceDispatcher.runSync(ServiceDispatcher.java:237)
+org.ofbiz.service.GenericDispatcher.runSync(GenericDispatcher.java:163)
+org.ofbiz.service.job.GenericServiceJob.exec(GenericServiceJob.java:71)
+org.ofbiz.service.job.JobInvoker.run(JobInvoker.java:242)
+java.lang.Thread.run(Thread.java:745)
+--------------------------------------------------------------------------------
+
+2016-05-16 09:44:41,639 (default-invoker-Thread-19) [  GenericServiceJob.java:118:ERROR] 
+---- exception report ----------------------------------------------------------
+Async-Service failed.
+Exception: org.ofbiz.service.GenericServiceException
+Message: Cannot find a service engine definition for the engine name [java] in the serviceengine.xml file
+---- stack trace ---------------------------------------------------------------
+org.ofbiz.service.GenericServiceException: Cannot find a service engine definition for the engine name [java] in the serviceengine.xml file
+org.ofbiz.service.engine.GenericEngineFactory.getGenericEngine(GenericEngineFactory.java:63)
+org.ofbiz.service.ServiceDispatcher.getGenericEngine(ServiceDispatcher.java:809)
+org.ofbiz.service.ServiceDispatcher.runSync(ServiceDispatcher.java:301)
+org.ofbiz.service.ServiceDispatcher.runSync(ServiceDispatcher.java:237)
+org.ofbiz.service.GenericDispatcher.runSync(GenericDispatcher.java:163)
+org.ofbiz.service.job.GenericServiceJob.exec(GenericServiceJob.java:71)
+org.ofbiz.service.job.JobInvoker.run(JobInvoker.java:242)
+java.lang.Thread.run(Thread.java:745)
+--------------------------------------------------------------------------------
+
+2016-05-16 09:44:41,738 (default-invoker-Thread-22) [  GenericServiceJob.java:118:ERROR] 
+---- exception report ----------------------------------------------------------
+Async-Service failed.
+Exception: org.ofbiz.service.GenericServiceException
+Message: Cannot find a service engine definition for the engine name [simple] in the serviceengine.xml file
+---- stack trace ---------------------------------------------------------------
+org.ofbiz.service.GenericServiceException: Cannot find a service engine definition for the engine name [simple] in the serviceengine.xml file
+org.ofbiz.service.engine.GenericEngineFactory.getGenericEngine(GenericEngineFactory.java:63)
+org.ofbiz.service.ServiceDispatcher.getGenericEngine(ServiceDispatcher.java:809)
+org.ofbiz.service.ServiceDispatcher.runSync(ServiceDispatcher.java:301)
+org.ofbiz.service.ServiceDispatcher.runSync(ServiceDispatcher.java:237)
+org.ofbiz.service.GenericDispatcher.runSync(GenericDispatcher.java:163)
+org.ofbiz.service.job.GenericServiceJob.exec(GenericServiceJob.java:71)
+org.ofbiz.service.job.JobInvoker.run(JobInvoker.java:242)
+java.lang.Thread.run(Thread.java:745)
+--------------------------------------------------------------------------------
+
+2016-05-16 09:44:41,747 (default-invoker-Thread-20) [  GenericServiceJob.java:118:ERROR] 
+---- exception report ----------------------------------------------------------
+Async-Service failed.
+Exception: org.ofbiz.service.GenericServiceException
+Message: Cannot find a service engine definition for the engine name [simple] in the serviceengine.xml file
+---- stack trace ---------------------------------------------------------------
+org.ofbiz.service.GenericServiceException: Cannot find a service engine definition for the engine name [simple] in the serviceengine.xml file
+org.ofbiz.service.engine.GenericEngineFactory.getGenericEngine(GenericEngineFactory.java:63)
+org.ofbiz.service.ServiceDispatcher.getGenericEngine(ServiceDispatcher.java:809)
+org.ofbiz.service.ServiceDispatcher.runSync(ServiceDispatcher.java:301)
+org.ofbiz.service.ServiceDispatcher.runSync(ServiceDispatcher.java:237)
+org.ofbiz.service.GenericDispatcher.runSync(GenericDispatcher.java:163)
+org.ofbiz.service.job.GenericServiceJob.exec(GenericServiceJob.java:71)
+org.ofbiz.service.job.JobInvoker.run(JobInvoker.java:242)
+java.lang.Thread.run(Thread.java:745)
+--------------------------------------------------------------------------------
+
+2016-05-16 09:44:42,135 (default-invoker-Thread-21) [  GenericServiceJob.java:118:ERROR] 
+---- exception report ----------------------------------------------------------
+Async-Service failed.
+Exception: org.ofbiz.service.GenericServiceException
+Message: Cannot find a service engine definition for the engine name [java] in the serviceengine.xml file
+---- stack trace ---------------------------------------------------------------
+org.ofbiz.service.GenericServiceException: Cannot find a service engine definition for the engine name [java] in the serviceengine.xml file
+org.ofbiz.service.engine.GenericEngineFactory.getGenericEngine(GenericEngineFactory.java:63)
+org.ofbiz.service.ServiceDispatcher.getGenericEngine(ServiceDispatcher.java:809)
+org.ofbiz.service.ServiceDispatcher.runSync(ServiceDispatcher.java:301)
+org.ofbiz.service.ServiceDispatcher.runSync(ServiceDispatcher.java:237)
+org.ofbiz.service.GenericDispatcher.runSync(GenericDispatcher.java:163)
+org.ofbiz.service.job.GenericServiceJob.exec(GenericServiceJob.java:71)
+org.ofbiz.service.job.JobInvoker.run(JobInvoker.java:242)
+java.lang.Thread.run(Thread.java:745)
+--------------------------------------------------------------------------------
+
+2016-05-16 09:59:41,953 (default-invoker-Thread-21) [  GenericServiceJob.java:118:ERROR] 
+---- exception report ----------------------------------------------------------
+Async-Service failed.
+Exception: org.ofbiz.service.GenericServiceException
+Message: Cannot find a service engine definition for the engine name [simple] in the serviceengine.xml file
+---- stack trace ---------------------------------------------------------------
+org.ofbiz.service.GenericServiceException: Cannot find a service engine definition for the engine name [simple] in the serviceengine.xml file
+org.ofbiz.service.engine.GenericEngineFactory.getGenericEngine(GenericEngineFactory.java:63)
+org.ofbiz.service.ServiceDispatcher.getGenericEngine(ServiceDispatcher.java:809)
+org.ofbiz.service.ServiceDispatcher.runSync(ServiceDispatcher.java:301)
+org.ofbiz.service.ServiceDispatcher.runSync(ServiceDispatcher.java:237)
+org.ofbiz.service.GenericDispatcher.runSync(GenericDispatcher.java:163)
+org.ofbiz.service.job.GenericServiceJob.exec(GenericServiceJob.java:71)
+org.ofbiz.service.job.JobInvoker.run(JobInvoker.java:242)
+java.lang.Thread.run(Thread.java:745)
+--------------------------------------------------------------------------------
+
+2016-05-16 10:15:02,178 (default-invoker-Thread-21) [  GenericServiceJob.java:118:ERROR] 
+---- exception report ----------------------------------------------------------
+Async-Service failed.
+Exception: org.ofbiz.service.GenericServiceException
+Message: Cannot find a service engine definition for the engine name [simple] in the serviceengine.xml file
+---- stack trace ---------------------------------------------------------------
+org.ofbiz.service.GenericServiceException: Cannot find a service engine definition for the engine name [simple] in the serviceengine.xml file
+org.ofbiz.service.engine.GenericEngineFactory.getGenericEngine(GenericEngineFactory.java:63)
+org.ofbiz.service.ServiceDispatcher.getGenericEngine(ServiceDispatcher.java:809)
+org.ofbiz.service.ServiceDispatcher.runSync(ServiceDispatcher.java:301)
+org.ofbiz.service.ServiceDispatcher.runSync(ServiceDispatcher.java:237)
+org.ofbiz.service.GenericDispatcher.runSync(GenericDispatcher.java:163)
+org.ofbiz.service.job.GenericServiceJob.exec(GenericServiceJob.java:71)
+org.ofbiz.service.job.JobInvoker.run(JobInvoker.java:242)
+java.lang.Thread.run(Thread.java:745)
+--------------------------------------------------------------------------------
+

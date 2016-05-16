@@ -1,0 +1,11 @@
+table.vertical-middle>thead>tr>td,
+table.vertical-middle>tbody>tr>td {
+	vertical-align: middle;
+}
+.dataTables_info .pagination {
+  margin: 0 12px;
+}
+
+.tabpadding {
+	margin: 0 12px;
+}

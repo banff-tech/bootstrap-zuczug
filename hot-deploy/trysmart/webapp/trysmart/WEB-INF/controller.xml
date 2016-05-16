@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site-conf xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/site-conf.xsd">
+    <!-- The controller elements that are common to all OFBiz components
+         can be found in the following xml file. A component can override the
+         elements found in the common-controller.xml file. -->
+    <include location="component://common/webcommon/WEB-INF/common-controller.xml"/>
+
+    <description>TrySmart Component Site Configuration File</description>
+
+    <!-- Events to run on every request before security (chains exempt) -->
+    <!--
+    <preprocessor>
+    </preprocessor>
+    -->
+    <!-- Events to run on every request after all other processing (chains exempt) -->
+    <!--
+    <postprocessor>
+        <event name="test" type="java" path="org.ofbiz.webapp.event.TestEvent" invoke="test"/>
+    </postprocessor>
+    -->
+
+    <!-- Request Mappings -->
+    <request-map uri="main"><security https="true" auth="true"/><response name="success" type="view" value="main"/></request-map>
+    <request-map uri="test1">
+    	<security https="true" auth="true"/>
+    	<response name="success" type="view" value="test1"/>
+    </request-map>
+    <request-map uri="test2">
+    	<security https="true" auth="true"/>
+    	<response name="success" type="view" value="test2"/>
+    </request-map>
+    <request-map uri="test3">
+    	<security https="true" auth="true"/>
+    	<response name="success" type="view" value="test3"/>
+    </request-map>
+    <request-map uri="test4">
+    	<security https="true" auth="true"/>
+    	<response name="success" type="view" value="test4"/>
+    </request-map>
+    
+    
+    
+    <!-- View Mappings -->
+    <view-map name="main" type="screen" page="component://trysmart/widget/TrySmartScreens.xml#main"/>
+    
+    
+    <view-map name="test1" type="screen" page="component://trysmart/widget/TrySmartScreens.xml#test1"/>
+    <view-map name="test2" type="screen" page="component://trysmart/widget/TrySmartScreens.xml#test2"/>
+    <view-map name="test3" type="screen" page="component://trysmart/widget/TrySmartScreens.xml#test3"/>
+    <view-map name="test4" type="screen" page="component://trysmart/widget/TrySmartScreens.xml#test4"/>
+
+    <view-map name="LookupPerson" type="screen" page="component://party/widget/partymgr/LookupScreens.xml#LookupPerson"/>
+    <view-map name="LookupPartyGroup" type="screen" page="component://party/widget/partymgr/LookupScreens.xml#LookupPartyGroup"/>
+    <view-map name="LookupPartyName" type="screen" page="component://party/widget/partymgr/LookupScreens.xml#LookupPartyName"/>
+    <view-map name="LookupProduct" type="screen" page="component://product/widget/catalog/LookupScreens.xml#LookupProduct"/>
+</site-conf>

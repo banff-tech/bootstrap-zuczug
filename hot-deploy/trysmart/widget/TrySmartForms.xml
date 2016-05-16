@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-form.xsd">
+	<form name="addFacility" type="single" target="">
+        <field name="facilityId" title="仓库 ID"><display/></field>
+        <field name="facilityName" title="仓库名称" widget-style="required"><text/></field>
+
+        <field name="password" title="密码" required-field="true" widget-style="required"><password/></field>
+        <field name="facilityType" title="仓库类型" widget-style="required">
+            <drop-down>
+                <option key="" description="请选择"/>
+                <option key="WAREHOUSE" description="仓库"/>
+                <option key="ROOM" description="房间"/>
+                <option key="BUILDING" description="建筑"/>
+            </drop-down>
+        </field>
+        <field name="flag" title="是否属于个人" tooltip="判断场所是属于公司还是个人" >
+            <radio>
+                <option key="Y" description="是"/>
+                <option key="N" description="否"/>
+            </radio>
+        </field>
+        <field name="checkbox" title="用途">
+            <check>
+                <option key="product" description="存放商品"/>
+                <option key="room" description="房间"/>
+                <option key="building" description="建筑物"/>
+            </check>
+        </field>
+        <field name="findData" title="时间区间"><date-find/></field>
+        <field name="thisData" title="时间"><date-time/></field>
+        <field name="queryOptions" title="查询条件"><text-find/></field>
+        <field name="desc" title="仓库描述"><textarea/></field>
+        <field name="uploadFile" title="附件" widget-style="required"><file/></field>
+
+        <field name="partyId" title="用户 ID">
+            <lookup target-form-name="LookupPerson"/>
+        </field>
+        <field name="productId" title="产品 ID">
+            <lookup target-form-name="LookupProduct"/>
+        </field>
+        <field name="partyIdTo" title="用户 IDs">
+            <lookup target-form-name="LookupPerson" width="800px"/>
+        </field>
+
+        <field name="submintButton" title="提交" widget-area-style="submit"><submit/></field>
+    </form>
+
+    <form name="listsFacility" type="list" list-name="productList">
+        <field name="productId" title="产品ID" title-style="listDisplay" widget-style="link">
+            <hyperlink description="${productId}" style="">
+                <parameter param-name="productId"/>
+            </hyperlink>
+        </field>
+        <field name="productTypeId" title="产品分类ID" title-style="listDisplay"><display/></field>
+        <field name="primaryProductCategoryId" title="父分类 ID" title-style="listDisplay"><display/></field>
+        <field name="eidt" title="编辑" widget-style="button" title-style="listDisplay">
+            <hyperlink description="修改">
+                <parameter param-name="productId"/>
+            </hyperlink>
+        </field>
+        <field name="textInput" title-style="listDisplay" widget-style="listDisplay">
+            <text/>
+        </field>
+    </form>
+
+</forms>

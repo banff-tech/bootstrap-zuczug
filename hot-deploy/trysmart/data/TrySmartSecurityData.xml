@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-engine-xml>
+    <SecurityPermission description="View operations in the TrySmart Component." permissionId="TRYSMART_VIEW"/>
+    <SecurityPermission description="Create operations in the TrySmart Component." permissionId="TRYSMART_CREATE"/>
+    <SecurityPermission description="Update operations in the TrySmart Component." permissionId="TRYSMART_UPDATE"/>
+    <SecurityPermission description="Delete operations in the TrySmart Component." permissionId="TRYSMART_DELETE"/>
+    <SecurityPermission description="ALL operations in the TrySmart Component." permissionId="TRYSMART_ADMIN"/>
+    <SecurityGroupPermission groupId="FULLADMIN" permissionId="TRYSMART_ADMIN"/>
+    <SecurityGroupPermission groupId="FLEXADMIN" permissionId="TRYSMART_CREATE"/>
+    <SecurityGroupPermission groupId="FLEXADMIN" permissionId="TRYSMART_DELETE"/>
+    <SecurityGroupPermission groupId="FLEXADMIN" permissionId="TRYSMART_UPDATE"/>
+    <SecurityGroupPermission groupId="FLEXADMIN" permissionId="TRYSMART_VIEW"/>
+    <SecurityGroupPermission groupId="VIEWADMIN" permissionId="TRYSMART_VIEW"/>
+    <SecurityGroupPermission groupId="BIZADMIN" permissionId="TRYSMART_ADMIN"/>
+</entity-engine-xml>

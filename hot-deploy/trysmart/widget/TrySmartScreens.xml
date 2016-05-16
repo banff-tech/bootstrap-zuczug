@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+    <screen name="main">
+        <section>
+            <actions>
+                <set field="headerItem" value="main"/><!-- this highlights the selected menu-item with name "main" -->
+            </actions>
+            <widgets>
+                <decorator-screen name="TrySmartCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+	
+	<screen name="test1">
+        <section>
+            <actions>
+                <set field="headerItem" value="test1"/><!-- this highlights the selected menu-item with name "main" -->
+                <set field="tabButtonItem" value="test1"/>
+                <set field="facilityId" value="10020"/>
+                <set field="facilityType" value="ROOM"/>
+                <set field="facilityName" value="ROOM"/>
+                <set field="password" value="ROOM"/>
+                <!--<set field="flag" value="Y"/>-->
+                <set field="checkbox" value="room"/>
+                <set field="findData" value="2016/01/01"/>
+                <set field="thisData" value="2016/01/02"/>
+                <set field="queryOptions" value="zhangwenwen"/>
+                <set field="desc" value="zhangwenwen"/>
+
+            </actions>
+            <widgets>
+                <decorator-screen name="TrySmartCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <include-menu name="test1" location="component://trysmart/widget/TrySmartMenus.xml"/>
+                    	<screenlet title="添加">
+                            <include-form name="addFacility" location="component://trysmart/widget/TrySmartForms.xml"/>
+                        </screenlet>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <screen name="test2">
+        <section>
+            <actions>
+                <set field="headerItem" value="test2"/>
+                <entity-condition entity-name="Product" list="productList"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="TrySmartCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <screenlet title="列表显示">
+                            <include-form name="listsFacility" location="component://trysmart/widget/TrySmartForms.xml"/>
+                        </screenlet>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <screen name="test3">
+        <section>
+            <actions>
+                <set field="headerItem" value="test3"/><!-- this highlights the selected menu-item with name "main" -->
+            </actions>
+            <widgets>
+                <decorator-screen name="TrySmartCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <screen name="test4">
+        <section>
+            <actions>
+                <set field="headerItem" value="test4"/><!-- this highlights the selected menu-item with name "main" -->
+            </actions>
+            <widgets>
+                <decorator-screen name="Test" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                    	<platform-specific><html><html-template location="component://trysmart/webapp/TrySmart/test.ftl"/></html></platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+	
+</screens>
