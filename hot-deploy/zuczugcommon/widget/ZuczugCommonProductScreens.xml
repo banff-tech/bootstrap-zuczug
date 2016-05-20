@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+    <screen name="EditProductAssoc">
+        <section>
+            <actions>
+               <set field="titleProperty" value="PageTitleEditProductAssociations"/>
+               <set field="tabButtonItem" value="EditProductAssoc"/>
+               <set field="labelTitleProperty" value="ProductAssociations"/>
+			   <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+			   <set field="productId" from-field="parameters.productId"/>
+               <set field="virtualProductId" from-field="parameters.virtualProductId"/>
+        	   <set field="formAction" value="updateAccessoryProduct"/>
+        	   <set field="productCategoryId" from-field="parameters.productCategoryId"/>
+        	   <set field="productTypeId" value="RAW_MATERIAL"/>        	   
+        	   <entity-one entity-name="GoodIdentification" value-field="zuczugGoodID">
+        	   		<field-map field-name="goodIdentificationTypeId" value="ZUCZUG_CODE"/>
+        	   		<field-map field-name="productId" from-field="productId"/>
+        	   </entity-one>
+        	   <set field="idValue" from-field="parameters.idValue"/> 
+        	   <set field="zuczugId" from-field="zuczugGoodID.idValue"/>
+               <set field="product" from-field="product"/>
+               <set field="errorMsg" from-field="parameters.errorMsg"/>
+        	   <set field="isVirtual" from-field="parameters.isVirtual"/>
+               <script location="component://zuczugcommon/webapp/zuczugcommon/WEB-INF/actions/GetProductAllFeature.groovy"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="CommonProductDecorator" location="${parameters.mainDecoratorLocation}">
+                   <decorator-section name="body">  
+	                   <screenlet title="生成变型商品">
+	                   		<container>
+			                   	<section>
+			                        <widgets>
+			                        	<platform-specific>
+											<html><html-template location="component://zuczugcommon/webapp/zuczugcommon/html/VirtualToVariantAssoc.ftl"/></html>
+										</platform-specific>
+			                        </widgets>
+			                    </section>	                  		
+		                   </container>  
+		               </screenlet> 
+		               <screenlet title="物料变型商品">
+		               		<include-form name="listProductVariantAssoc" location="component://zuczugcommon/widget/ZuczugCommonForms.xml"/>
+		               </screenlet>              	                         
+                   </decorator-section>
+               </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="findProdusedGoodProduct">
+		<section>
+           <actions>
+               <set field="titleProperty" value="findProdusedGoodProduct"/>
+               <set field="headerItem" value="findProdusedGoodProduct"/>
+               <set field="tabButtonItem" value="findProdusedGoodProduct"/>               
+               <set field="labelTitleProperty" value="PageTitleFindQuote"/>
+               <set field="productTypeId" from-field="parameters.productTypeId"/>
+        	   <set field="isVariant" from-field="parameters.isVariant"/> 
+        	   <set field="module" value="ZUCZUG"/> 
+        	   <set field="productTypeId" value="PROPOSED_GOOD"/>                 
+           </actions>
+           <widgets>
+               <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                   <decorator-section name="body">   
+                   		<include-menu name="SearchProductDesignTabBar" location="component://designdevelopment/widget/DesignDevelopmentMenus.xml"/>
+	                	<include-menu location="component://accessoriespurchase/widget/AccessoriesPurchaseMenus.xml" name="FindProdusedGoodProductTabBar"/>
+                        
+                        <container style="button-bar">
+                            <link  text="新建设计物料" target="CreateNewVirtualProduct" style="buttontext create ">
+                            	<parameter param-name="isNoVirtualNoVarient" value="true"/>
+                            </link>                            
+                        </container>
+                        <decorator-screen name="FindScreenDecorator" location="component://common/widget/CommonScreens.xml">
+                   			<decorator-section name="search-options">
+                        		<include-form name="findProdusedGoodProduct" location="component://zuczugcommon/widget/ZuczugCommonProductForms.xml"/>
+                   			</decorator-section>
+                   			<decorator-section name="search-results">
+                         		<include-form name="ListProdusedGoodProduct" location="component://zuczugcommon/widget/ZuczugCommonProductForms.xml"/>                   	
+                   			</decorator-section>
+                   		</decorator-screen>                                                
+                   </decorator-section>
+               </decorator-screen>
+           </widgets>
+		</section>
+	</screen>
+	
+	<screen name="FindCatalogAndCategory">
+        <section>
+            <actions>
+            	<set field="layoutSettings.javaScripts[]" value="/zuczugcommon/upload/plugins/validate/additional-methods.js" global="true"/>
+                <set field="headerItem" value="FindCatalogAndCategory"/>
+                <set field="tabButtonItem" value="FindCatalogAndCategory"/>
+                <set field="productTypeId" from-field="parameters.productTypeId"/>
+                <set field="titleProperty" value="${groovy:org.ofbiz.base.util.StringUtil.wrapString('目录和分类维护')}" />
+                <set field="module" from-field="parameters.module"/>
+                <script location="component://product/webapp/catalog/WEB-INF/actions/category/CategoryTree.groovy"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="ProdCatalogTreeCommonDecorator" location="${parameters.mainDecoratorLocation}">               	
+                    <decorator-section name="body">
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+</screens>

@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site-conf xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/site-conf.xsd">
+    <!-- The controller elements that are common to all OFBiz components
+         can be found in the following xml file. A component can override the
+         elements found in the common-controller.xml file. -->
+    
+    <request-map uri="FindFacility">
+    	<description>仓库列表</description>
+    	<security auth="true" https="false"/>
+    	<response name="success" type="view" value="FindFacility"/>
+    	<response name="error" type="view" value="FindFacility"/>
+    </request-map>
+    <request-map uri="EditFacility">
+        <description>编辑仓库界面</description>
+        <security auth="true" https="false"/>
+        <response name="success" type="view" value="EditFacility"/>
+        <response name="error" type="view" value="EditFacility"/>
+    </request-map>
+    <request-map uri="CreateFacility">
+    	<description>创建新的仓库</description>
+        <security https="false" auth="true"/>
+        <event type="service" path="component://commonext/script/org/ofbiz/setup/SetupEvents.xml" invoke="createFacility"/>
+        <response name="success" type="request-redirect" value="ViewFacilityContactMechs">
+        	<redirect-parameter name="facilityId"/>
+        	<redirect-parameter name="must" value="Y"/>
+        </response>
+        <response name="error" type="view" value="EditFacility"/>
+    </request-map>
+    <request-map uri="UpdateFacility">
+    	<description>保存仓库信息</description>
+        <security https="false" auth="true"/>
+        <event type="service" path="" invoke="updateFacility"/>
+        <response name="success" type="view" value="EditFacility"/>
+        <response name="error" type="view" value="EditFacility"/>
+    </request-map>
+    <request-map uri="ViewFacilityContactMechs">
+    	<description>显示仓库的联系方式</description>
+        <security https="false" auth="true"/>
+        <response name="success" type="view" value="ViewFacilityContactMechs"/>
+        <response name="error" type="view" value="ViewFacilityContactMechs"/>
+    </request-map>
+
+    <request-map uri="FacilitySearchResults">
+        <security https="false" auth="false"/>
+        <response name="success" type="view" value="FacilitySearchResults"/>
+    </request-map>
+    <request-map uri="FindInventoryItem"><security https="false" auth="true"/><response name="success" type="view" value="FindInventoryItem"/></request-map>
+    <request-map uri="InventoryItemSearchResults">
+        <security https="false" auth="false"/>
+        <response name="success" type="view" value="InventoryItemSearchResults"/>
+    </request-map>
+    <request-map uri="ViewFacilityInventoryByProduct">
+        <security https="false" auth="true"/>
+        <response name="success" type="view" value="ViewFacilityInventoryByProduct"/>
+    </request-map>
+    
+    <request-map uri="FindPurchaseOrderList">
+    	<description>查找采购单准备入库</description>
+        <security https="false" auth="true"/>
+        <response name="success" type="view" value="FindPurchaseOrderList"/>
+    </request-map>
+    <request-map uri="FindReceivePurchaseItem">
+    	<description>查找采购单准备入库</description>
+        <security https="false" auth="true"/>
+        <response name="success" type="view" value="FindReceivePurchaseItem"/>
+    </request-map>
+    <request-map uri="receivePurchaseOrder">
+    	<description>采购单接收库存</description>
+    	<security https="false" auth="true"/>
+    	<event type="service-multi" invoke="receivePurchaseFabric"/>
+    	<response name="success" type="request-redirect" value="FindReceivePurchaseItem"/>
+    	<response name="error" type="view" value="FindReceivePurchaseItem"/>
+   	</request-map>
+    <request-map uri="FindSalesOrders">
+    	<description>查找销售发货的订单</description>
+        <security https="false" auth="true"/>
+        <response name="success" type="view" value="FindSalesOrders"/>
+    </request-map>
+    <request-map uri="Facility.FindSalesOrderItem">
+    	<description>销售订单明细</description>
+        <security https="false" auth="true"/>
+        <event type="simple" path="component://fabricfacility/script/FabricFacilityServices.xml" invoke="createOrderShipmentAndPackage"/>
+        <response name="success" type="view" value="Facility.FindSalesOrderItem"/>
+    </request-map>
+    <request-map uri="ClothOrderPickList.pdf">
+   		<description>订单拣货单</description>
+        <security auth="true"/>
+        <event type="simple" path="component://fabricfacility/script/FabricFacilityServices.xml" invoke="addOrderPrintStatus"/>
+        <response name="success" type="view" value="ClothOrderPickListpdf"/>
+    </request-map>
+    <request-map uri="ClothOrderPickListBatch.pdf">
+   		<description>批量订单拣货单</description>
+        <security auth="true"/>
+        <response name="success" type="view" value="ClothOrderPickListBatchPdf"></response>
+    </request-map>
+    <request-map uri="ShipmentManifest.pdf">
+    	<description>打印送货单</description>
+        <security https="false" auth="true"/>
+        <response name="success" type="view" value="ShipmentManifest.pdf"/>
+    </request-map>
+    <request-map uri="ShowShipmentPacking">
+   		<description>shipment打包的界面</description>
+        <security auth="true"/>
+        <response name="success" type="view" value="ShowShipmentPacking"/>
+    </request-map>
+    <request-map uri="packingShipment">
+   		<description>列表打包</description>
+        <security auth="true"/>
+        <event type="service-multi" invoke="zuczug.addShipmentContentToPackage"></event>
+        <response name="success" type="request-redirect" value="ShowShipmentPacking">
+        	<redirect-parameter name="shipmentId"/>
+        </response>
+    </request-map>
+    <request-map uri="packingShipmentSku">
+   		<description>sku的打包，扫描的</description>
+        <security auth="true"/>
+        <event type="simple" path="component://fabricfacility/script/FabricFacilityServices.xml" invoke="packingShipmentSku"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <request-map uri="ShowShipmentPackingItem">
+   		<description>shipment打包的界面下面的列表，用作ajax刷新</description>
+        <security auth="true"/>
+        <response name="success" type="view" value="ShowShipmentPackingItem"/>
+    </request-map>
+    <request-map uri="createNewShipmentPackage">
+   		<description>创建一个新的包裹</description>
+        <security auth="true"/>
+        <event type="service" invoke="createShipmentPackage"/>
+        <response name="success" type="request-redirect" value="ShowShipmentPacking">
+        	<redirect-parameter name="shipmentId"/>
+        </response>
+    </request-map>
+    <request-map uri="ClearPackAll">
+    	<description>清楚所有打包</description>
+        <security https="false" auth="true"/>
+        <event type="simple" path="component://fabricfacility/script/FabricFacilityServices.xml" invoke="clearPackAll"/>
+        <response name="success" type="view" value="ShowShipmentPacking"/>
+        <response name="error" type="view" value="ShowShipmentPacking"/>
+    </request-map>
+    <request-map uri="ShipmentPcakgeDetail.pdf">
+    	<description>打印装箱单</description>
+        <security https="false" auth="true"/>
+        <response name="success" type="view" value="ShipmentPcakgeDetailPdf"/>
+    </request-map>
+    <request-map uri="updateShipmentRouteSegment">
+    	<description>保存发货单号</description>
+        <security https="false" auth="true"/>
+        <event type="simple" path="component://fabricfacility/script/FabricFacilityServices.xml" invoke="updateShipmentRouteSegment"/>
+        <response name="success" type="view" value="ShowShipmentPacking"/>
+    </request-map>
+    <request-map uri="sendClothSalesOrder">
+    	<description>销售订单发货</description>
+        <security https="false" auth="true"/>
+        <event type="simple" path="component://fabricfacility/script/FabricFacilityServices.xml" invoke="sendClothSalesOrderWithInvRes"/>
+        <response name="success" type="request-redirect" value="Facility.FindSalesOrderItem">
+        	<redirect-parameter name="orderId"/>
+        </response>
+        <response name="error" type="view" value="Facility.FindSalesOrderItem"/>
+    </request-map>
+    <request-map uri="FindFacilityLocation">
+        <security https="false" auth="true"/>
+        <response name="success" type="view" value="FindFacilityLocation"/>
+    </request-map>
+    <request-map uri="EditFacilityLocation">
+        <security https="false" auth="true"/>
+        <response name="success" type="view" value="EditFacilityLocation"/>
+    </request-map>
+    <request-map uri="CreateFacilityLocation">
+        <security https="false" auth="true"/>
+        <event type="service" path="" invoke="createFacilityLocation"/>
+        <response name="success" type="view" value="EditFacilityLocation"/>
+        <response name="error" type="view" value="EditFacilityLocation"/>
+    </request-map>
+    <request-map uri="UpdateFacilityLocation">
+        <security https="false" auth="true"/>
+        <event type="service" path="" invoke="updateFacilityLocation"/>
+        <response name="success" type="view" value="EditFacilityLocation"/>
+        <response name="error" type="view" value="EditFacilityLocation"/>
+    </request-map>
+    
+    <request-map uri="facility.EditContactMech">
+        <security https="false" auth="true"/>
+        <response name="success" type="view" value="EditFacilityContactMech"/>
+    </request-map>
+
+    <request-map uri="facility.createContactMech">
+        <security https="false" auth="true"/>
+        <event type="service" invoke="createFacilityContactMech"/>
+        <response name="success" type="view" value="EditFacilityContactMech"/>
+        <response name="error" type="view" value="EditFacilityContactMech"/>
+    </request-map>
+
+    <request-map uri="facility.updateContactMech">
+        <security https="false" auth="true"/>
+        <event type="service" invoke="updateFacilityContactMech"/>
+        <response name="success" type="view" value="EditFacilityContactMech"/>
+        <response name="error" type="view" value="EditFacilityContactMech"/>
+    </request-map>
+    <request-map uri="facility.deleteContactMech">
+        <security https="false" auth="true"/>
+        <event type="service" invoke="deleteFacilityContactMech"/>
+        <response name="success" type="view" value="EditFacilityContactMech"/>
+        <response name="error" type="view" value="EditFacilityContactMech"/>
+    </request-map>
+
+    <request-map uri="facility.createPostalAddressAndPurpose">
+        <security https="false" auth="true"/>
+        <event type="service" invoke="createFacilityPostalAddress"/>
+        <response name="success" type="view" value="EditFacilityContactMech"/>
+        <response name="error" type="view" value="EditFacilityContactMech"/>
+    </request-map>
+
+    <request-map uri="facility.createPostalAddress">
+        <security https="false" auth="true"/>
+        <event type="service" invoke="createFacilityPostalAddress"/>
+        <response name="success" type="view" value="EditFacilityContactMech"/>
+        <response name="error" type="view" value="EditFacilityContactMech"/>
+    </request-map>
+
+    <request-map uri="facility.updatePostalAddress">
+        <security https="false" auth="true"/>
+        <event type="service" invoke="updateFacilityPostalAddress"/>
+        <response name="success" type="view" value="EditFacilityContactMech"/>
+        <response name="error" type="view" value="EditFacilityContactMech"/>
+    </request-map>
+
+    <request-map uri="facility.createTelecomNumber">
+        <security https="false" auth="true"/>
+        <event type="service" invoke="createFacilityTelecomNumber"/>
+        <response name="success" type="view" value="EditFacilityContactMech"/>
+        <response name="error" type="view" value="EditFacilityContactMech"/>
+    </request-map>
+
+    <request-map uri="facility.updateTelecomNumber">
+        <security https="false" auth="true"/>
+        <event type="service" invoke="updateFacilityTelecomNumber"/>
+        <response name="success" type="view" value="EditFacilityContactMech"/>
+        <response name="error" type="view" value="EditFacilityContactMech"/>
+    </request-map>
+
+    <request-map uri="facility.createEmailAddress">
+        <security https="false" auth="true"/>
+        <event type="service" invoke="createFacilityEmailAddress"/>
+        <response name="success" type="view" value="EditFacilityContactMech"/>
+        <response name="error" type="view" value="EditFacilityContactMech"/>
+    </request-map>
+
+    <request-map uri="facility.updateEmailAddress">
+        <security https="false" auth="true"/>
+        <event type="service" invoke="updateFacilityEmailAddress"/>
+        <response name="success" type="view" value="EditFacilityContactMech"/>
+        <response name="error" type="view" value="EditFacilityContactMech"/>
+    </request-map>
+
+    <request-map uri="facility.createFacilityContactMechPurpose">
+        <security https="false" auth="true"/>
+        <event type="service" invoke="createFacilityContactMechPurpose"/>
+        <response name="success" type="view" value="EditFacilityContactMech"/>
+        <response name="error" type="view" value="EditFacilityContactMech"/>
+    </request-map>
+
+    <request-map uri="facility.deleteFacilityContactMechPurpose">
+        <security https="false" auth="true"/>
+        <event type="service" invoke="deleteFacilityContactMechPurpose"/>
+        <response name="success" type="view" value="EditFacilityContactMech"/>
+        <response name="error" type="view" value="EditFacilityContactMech"/>
+    </request-map>
+    <request-map uri="ReceiveInventoryItem">
+        <security https="false" auth="true"/>
+        <response name="success" type="view" value="ReceiveInventoryItem"/>
+        <response name="error" type="view" value="ReceiveInventoryItem"/>
+    </request-map>
+    <request-map uri="receiveSingleInventoryProduct">
+        <security https="false" auth="true"/>
+        <event type="service" path="" invoke="receiveInventoryProduct"/>
+        <response name="success" type="request-redirect" value="ReceiveInventoryItem">
+        	<redirect-parameter name="facilityId"/>
+        </response>
+        <response name="error" type="view" value="ReceiveInventoryItem"/>
+    </request-map>
+    
+    <request-map uri="FindInTransferShipment">
+   		<description>普通的转仓转入</description>
+        <security auth="true" https="false"/>
+        <response name="success" type="view" value="FindInTransferShipment"/>
+    </request-map>
+    <request-map uri="ReceiveInTransferShipment">
+   		<description>接收shipment转入的库存界面</description>
+        <security auth="true"/>
+        <response name="success" type="view" value="ReceiveInTransferShipment"/>
+    </request-map>
+    <request-map uri="saveInTransferShipment">
+   		<description>操作接收shipment转入的库存界面</description>
+        <security auth="true"/>
+        <event type="service-multi" invoke="receiveShipmentForTransfer"></event>
+        <response name="success" type="request-redirect" value="ReceiveInTransferShipment">
+        	<redirect-parameter name="shipmentId"/>
+        </response>
+        <response name="error" type="view" value="ReceiveInTransferShipment"></response>
+    </request-map>
+    <request-map uri="FindOutTransferShipment">
+   		<description>其他shipment出库单</description>
+        <security auth="true"/>
+        <response name="success" type="view" value="FindOutTransferShipment"/>
+    </request-map>
+    <request-map uri="ShipmentPickListBatch.pdf">
+   		<description>订单拣货单批量</description>
+        <security auth="true"/>
+        <response name="success" type="view" value="ShipmentPickListBatchPdf"></response>
+    </request-map>
+    <request-map uri="updateShipmentPackage">
+   		<description>更新包装</description>
+        <security auth="true"/>
+        <event type="service" invoke="updateShipmentPackage"></event>
+        <response name="success" type="view" value="ShowShipmentPacking"></response>
+        <response name="error" type="view" value="ShowShipmentPacking"></response>
+    </request-map>
+    <request-map uri="ShipmentPickList.pdf">
+   		<description>拣货单</description>
+        <security auth="true"/>
+        <event type="simple" path="component://fabricfacility/script/FabricFacilityServices.xml" invoke="addShipmentPrintStatus"></event>
+        <response name="success" type="view" value="ShipmentPickListPdf"></response>
+    </request-map>
+    <request-map uri="Facility.NewShipmentOut">
+   		<description>新建shipment出库单</description>
+        <security auth="true"/>
+        <response name="success" type="view" value="Facility.NewShipmentOut"></response>
+    </request-map>
+    <request-map uri="Facility.CreateShipmentTransfer">
+   		<description>创建新的shipment</description>
+        <security auth="true"/>
+        <event type="service" invoke="createShipment"></event>
+        <response name="success" type="request-redirect" value="Facility.NewShipmentOut">
+        	<redirect-parameter name="facilityId"/>
+        	<redirect-parameter name="shipmentId"/>
+        </response>
+        <response name="error" type="view" value="Facility.NewShipmentOut"></response>
+    </request-map>
+    <request-map uri="Facility.UpdateShipmentTransfer">
+   		<description>更新shipment</description>
+        <security auth="true"/>
+        <event type="service" invoke="updateShipment"></event>
+        <response name="success" type="request-redirect" value="Facility.NewShipmentOut">
+        	<redirect-parameter name="facilityId"/>
+        	<redirect-parameter name="shipmentId"/>
+        </response>
+        <response name="error" type="view" value="Facility.NewShipmentOut"></response>
+    </request-map>
+    <request-map uri="Facility.AddShipmentOutItem">
+   		<description>添加到shipment项目中</description>
+        <security auth="true"/>
+        <event type="service" invoke="createShipmentItem"></event>
+        <response name="success" type="request-redirect" value="Facility.NewShipmentOut">
+        	<redirect-parameter name="facilityId"/>
+        	<redirect-parameter name="shipmentId"/>
+        </response>
+        <response name="error" type="view" value="Facility.NewShipmentOut"></response>
+    </request-map>
+    <request-map uri="Facility.DeleteShipmentItem">
+   		<description>删除</description>
+        <security auth="true"/>
+        <event type="service" invoke="deleteShipmentItem"></event>
+        <response name="success" type="request-redirect" value="Facility.NewShipmentOut">
+        	<redirect-parameter name="facilityId"/>
+        	<redirect-parameter name="shipmentId"/>
+        </response>
+        <response name="error" type="view" value="Facility.NewShipmentOut"></response>
+    </request-map>
+    <request-map uri="Facility.ConfirmShipment">
+   		<description>把发货单变成计划中</description>
+        <security auth="true"/>
+        <event type="service" invoke="HazeIssuanceShipment"></event>
+        <response name="success" type="request-redirect" value="Facility.NewShipmentOut">
+        	<redirect-parameter name="facilityId"/>
+        	<redirect-parameter name="shipmentId"/>
+        </response>
+        <response name="error" type="request-redirect" value="Facility.NewShipmentOut">
+        	<redirect-parameter name="facilityId"/>
+        	<redirect-parameter name="shipmentId"/>
+        </response>
+    </request-map>
+    <request-map uri="Facility.sendShipmentForTransfer">
+   		<description>shipment的转仓发货</description>
+        <security auth="true"/>
+        <event type="service" invoke="sendShipmentForTransfer"></event>
+        <response name="success" type="request-redirect" value="FindOutTransferShipment">
+        	<redirect-parameter name="facilityId"/>
+        </response>
+        <response name="error" type="view" value="FindOutTransferShipment"></response>
+    </request-map>
+	<request-map uri="facility.completePurchaseOrder">
+    	<security https="false" auth="true"/>
+    	<event type="simple" path="component://fabricfacility/script/FabricFacilityServices.xml" invoke="completePurchaseOrder"></event>
+    	<response name="success" type="request-redirect" value="FindPurchaseOrderList"/>
+    	<response name="error" type="view" value="FindPurchaseOrderList"/>
+   	</request-map>    
+   	<request-map uri="ShipmentReceiptBatch.pdf">
+   		<description>shipment转运入库单批量打印</description>
+        <security auth="true"/>
+        <response name="success" type="view" value="ShipmentReceiptBatchPdf"></response>
+    </request-map>
+    
+    <view-map name="FindFacility" type="screen" page="component://haze/widget/FacilityScreens.xml#FindFacility"/>
+    <view-map name="EditFacility" type="screen" page="component://haze/widget/FacilityScreens.xml#EditFacility"/>
+    <view-map name="FindFacilityLocation" type="screen" page="component://haze/widget/FacilityScreens.xml#FindFacilityLocation"/>
+	<view-map name="EditFacilityLocation" type="screen" page="component://haze/widget/FacilityScreens.xml#EditFacilityLocation"/>
+    <view-map name="FacilitySearchResults" type="screen" page="component://product/widget/facility/FacilityScreens.xml#FacilitySearchResults"/>
+    <view-map name="FindInventoryItem" type="screen" page="component://haze/widget/FacilityScreens.xml#FindInventoryItem"/>
+    <view-map name="InventoryItemSearchResults" type="screen" page="component://haze/widget/FacilityScreens.xml#InventoryItemSearchResults"/>
+    <view-map name="ViewFacilityInventoryByProduct" type="screen" page="component://haze/widget/FacilityScreens.xml#ViewFacilityInventoryByProduct"/>
+    <view-map name="FindPurchaseOrderList" type="screen" page="component://haze/widget/FacilityScreens.xml#FindPurchaseOrderList"/>
+    <view-map name="FindReceivePurchaseItem" type="screen" page="component://haze/widget/FacilityScreens.xml#FindReceivePurchaseItem"/>
+    <view-map name="FindSalesOrders" type="screen" page="component://haze/widget/FacilityScreens.xml#FindSalesOrders"/>
+    <view-map name="Facility.FindSalesOrderItem" type="screen" page="component://haze/widget/FacilityScreens.xml#FindSalesOrderItem"/>
+    <view-map name="ClothOrderPickListpdf" page="component://fabricfacility/widget/ClothFacilityScreens.xml#ClothOrderPickListpdf" type="screenfop" content-type="application/pdf" encoding="none"/>
+    <view-map name="ClothOrderPickListBatchPdf" page="component://fabricfacility/widget/ClothFacilityScreens.xml#ClothOrderPickListBatchPdf" type="screenfop" content-type="application/pdf" encoding="none"/>
+	<view-map name="ShipmentManifest.pdf" type="screenfop" page="component://fabricfacility/widget/ClothFacilityScreens.xml#ShipmentManifest.fo" content-type="application/pdf" encoding="none"/>
+	<view-map name="ShowShipmentPacking" type="screen" page="component://haze/widget/FacilityScreens.xml#ShowShipmentPacking"/>
+	<view-map name="ShowShipmentPackingItem" type="screen" page="component://fabricfacility/widget/ClothFacilityScreens.xml#ShowShipmentPackingItem"/>
+	<view-map name="ShipmentPcakgeDetailPdf" type="screenfop" page="component://fabricfacility/widget/ClothFacilityScreens.xml#ShipmentPcakgeDetailPdf" content-type="application/pdf" encoding="none"/>
+	<view-map name="ViewFacilityContactMechs" type="screen" page="component://haze/widget/FacilityScreens.xml#ViewFacilityContactMechs"/>
+	<view-map name="EditFacilityContactMech" type="screen" page="component://haze/widget/FacilityScreens.xml#EditFacilityContactMech"/>
+	<view-map name="ReceiveInventoryItem" type="screen" page="component://haze/widget/FacilityScreens.xml#ReceiveInventoryItem"/>
+	<view-map name="FindInTransferShipment" type="screen" page="component://haze/widget/FacilityScreens.xml#FindInTransferShipment"/>
+	<view-map name="ReceiveInTransferShipment" type="screen" page="component://haze/widget/FacilityScreens.xml#ReceiveInTransferShipment"/>
+	<view-map name="saveInTransferShipment" type="screen" page="component://haze/widget/FacilityScreens.xml#saveInTransferShipment"/>
+	<view-map name="FindOutTransferShipment" type="screen" page="component://haze/widget/FacilityScreens.xml#FindOutTransferShipment"/>
+	<view-map name="Facility.NewShipmentOut" type="screen" page="component://haze/widget/FacilityScreens.xml#NewShipmentOut"/>
+	<view-map name="ShipmentPickListBatchPdf" type="screenfop" page="component://fabricfacility/widget/ClothFacilityScreens.xml#ShipmentPickListBatchPdf" content-type="application/pdf" encoding="none"/>
+	<view-map name="ShipmentPickListPdf" page="component://fabricfacility/widget/ClothFacilityScreens.xml#ShipmentPickListPdf" type="screenfop" content-type="application/pdf" encoding="none"/>
+	<view-map name="ShipmentReceiptBatchPdf" type="screenfop" page="component://fabricfacility/widget/ClothFacilityScreens.xml#ShipmentReceiptBatchPdf" content-type="application/pdf" encoding="none"/>
+</site-conf>

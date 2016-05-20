@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+    <!-- 查询CustRequest -->
+    <screen name="FindCustRequest">
+        <section>
+            <actions>
+                <set field="headerItem" value="RequestManage"/>
+                <set field="tabButtonItem" value="RequestManage"/>
+                <set field="titleProperty" value="${groovy:org.ofbiz.base.util.StringUtil.wrapString('需求管理')}" />
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                    	<include-menu location="component://haze/widget/HazeMenus.xml" name="SalesManageTabBar"/>
+                        <screenlet title="查询条件">
+                            <include-form location="component://haze/widget/CustRequestForms.xml" name="SearchCustRequestForm"/>
+                        </screenlet>
+                        <screenlet title="查询结果">
+                            <include-form location="component://haze/widget/CustRequestForms.xml" name="ListRequestList"/>
+                        </screenlet>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <!-- Request View -->
+    <screen name="ViewRequest">
+        <section>
+            <actions>
+                <set field="MainColumnStyle" value="rightonly"/>
+                <set field="tabButtonItem" value="ViewRequest"/>
+                <set field="headerItem" value="request"/>
+                <set field="titleProperty" value="PageTitleViewRequest"/>
+                <set field="showRequestManagementLinks" value="Y"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="CommonRequestDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <include-screen name="ViewCustRequest"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- viewCustRequest -->
+
+    <screen name="ViewCustRequest">
+        <section>
+            <actions>
+                <set field="custRequestId" from-field="parameters.custRequestId" default-value="${parameters.id}"/>
+                <entity-one entity-name="CustRequest" value-field="custRequest"/>
+                <get-related-one value-field="custRequest" relation-name="CustRequestType" to-value-field="custRequestType"/>
+                <get-related-one value-field="custRequest" relation-name="StatusItem" to-value-field="statusItem"/>
+                <get-related-one value-field="custRequest" relation-name="CurrencyUom" to-value-field="currency"/>
+                <get-related-one value-field="custRequest" relation-name="ProductStore" to-value-field="store"/>
+                <get-related-one value-field="custRequest" relation-name="FulfillContactMech" to-value-field="fulfillContactMech"/>
+                <entity-and list="requestWorkEfforts" entity-name="CustRequestAndWorkEffort">
+                    <field-map field-name="custRequestId" from-field="parameters.custRequestId"/>
+                </entity-and>
+                <get-related value-field="custRequest" relation-name="CustRequestParty" list="requestParties"/>
+                <set field="orderBy[]" value="sequenceNum"/>
+                <service service-name="findRequestItems" result-map="theResultMap">
+                    <field-map from-field="custRequestId" field-name="custRequestId"/>
+                </service>
+                <set field="custRequestItems" from-field="theResultMap.theRequestItems" type="List"/>
+                <!-- 
+                <entity-and entity-name="CustRequestItemNoteView" list="notes">
+                    <field-map field-name="custRequestId" from-field="custRequestId"/>
+                </entity-and>
+                 -->
+            </actions>
+            <widgets>
+                <screenlet title="${uiLabelMap.OrderRequest} ${custRequest.custRequestId} ${uiLabelMap.CommonInformation}">
+                    <include-form name="requestInfo" location="component://haze/widget/CustRequestForms.xml"/>
+                </screenlet>
+                <screenlet title="${uiLabelMap.PageTitleRequestItems}">
+                    <include-form name="ListRequestItems" location="component://haze/widget/CustRequestForms.xml"/>
+                </screenlet>
+            </widgets>
+        </section>
+    </screen>
+
+    <screen name="RequestItems">
+        <section>
+            <actions>
+                <set field="titleProperty" value="PageTitleRequestItems"/>
+                <set field="tabButtonItem" value="requestitems"/>
+                <set field="headerItem" value="request"/>
+                <set field="custRequestId" from-field="parameters.custRequestId"/>
+                <set field="viewIndex" from-field="parameters.VIEW_INDEX" type="Integer"/>
+                <property-to-field resource="widget" property="widget.form.defaultViewSize" field="viewSizeDefaultValue"/>
+                <set field="viewSize" from-field="parameters.VIEW_SIZE" type="Integer" default-value="${viewSizeDefaultValue}"/>
+                <entity-one entity-name="CustRequest" value-field="custRequest"/>
+                <!-- 
+                <entity-and entity-name="CustRequestItem" list="custRequestItems">
+                    <field-map from-field="custRequestId" field-name="custRequestId"/>
+                    <order-by field-name="sequenceNum"/>
+                    <order-by field-name="custRequestItemSeqId"/>
+                </entity-and>
+                 -->
+                <service service-name="findRequestItems" result-map="theResultMap">
+                    <field-map from-field="custRequestId" field-name="custRequestId"/>
+                </service>
+                <set field="custRequestItems" from-field="theResultMap.theRequestItems" type="List"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="CommonRequestDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <screenlet title="${uiLabelMap.PageTitleRequestItems}">
+                            <link target="requestitem" text="${uiLabelMap.OrderNewRequestItem}" style="buttontext">
+                                <parameter param-name="custRequestId"/>
+                            </link>
+                            <include-form name="ListRequestItemsHeng" location="component://haze/widget/CustRequestForms.xml"/>
+                        </screenlet>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <screen name="CustDataAnalysis">
+        <section>
+            <actions>
+                <set field="tabButtonItem" value="ViewCust"/>
+                <set field="headerItem" value="ViewCust"/>
+                <set field="titleProperty" value="PageTitleViewCust"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <platform-specific>
+                            <html><html-template location="component://haze/webapp/haze/html/forwardCustView.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+</screens>

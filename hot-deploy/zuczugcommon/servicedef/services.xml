@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>ZuczugCommon Services</description>
+    <vendor></vendor>
+    <version>1.0</version>
+
+    <service name="noSyntaxError" engine="interface">
+        <description>
+            Dummy service to prevent empty files and syntax error - Remove when the 1st real service will be added here 
+        </description>
+    </service> 
+
+    <service name="copyStandardFeaturesToVariants" engine="java" location="com.zuczug.product.ZuczugProductServices"
+             invoke="copyStandardFeaturesToVariants">
+        <description>将虚拟商品所有standard feature拷贝到所有虚拟商品。如果virtualProductId参数有值，则忽略variantProductId，如果virtualProductId无值，则通过variantProductId来找到virtualProductId</description>
+        <attribute name="virtualProductId" mode="IN" type="String" optional="true"></attribute>
+        <attribute name="variantProductId" mode="IN" type="String" optional="true"></attribute>
+    </service>
+    
+    <service name="copyProductSupplierToVariants" engine="java" location="com.zuczug.product.ZuczugProductServices"
+             invoke="copyProductSupplierToVariants">
+        <description>复制所有的供应商到变形商品</description>
+        <attribute name="virtualProductId" mode="IN" type="String" optional="true"></attribute>
+        <attribute name="variantProductId" mode="IN" type="String" optional="true"></attribute>
+    </service>
+
+    <service name="copyBom" engine="simple" location="component://zuczugcommon/script/ZuczugProductServices.xml"
+             invoke="copyBom">
+        <description>将一个product的BOM数据copy到另外一个product，包括所有过期的BOM数据。另外一个product的老BOM数据会删除</description>
+        <attribute name="productId" mode="IN" type="String" optional="false"></attribute>
+        <attribute name="copyToProductId" mode="IN" type="String" optional="false"></attribute>
+        <attribute name="productAssocTypeId" mode="IN" type="String" optional="false"></attribute>
+    </service>
+
+    <service name="copyBomByType" engine="simple" location="component://zuczugcommon/script/ZuczugProductServices.xml"
+             invoke="copyBomByType">
+        <description>
+        	根据ProductAssocType将一个product的BOM数据copy到另外一个product，包括所有过期的BOM数据。另外一个product的老BOM数据会删除。
+        	主要用途：设计师商品的BOM，板房是录入在ENGINEER_COMPONENT里，我们需要将其copy到正式商品的MANUF_COMPONENT里。
+        </description>
+        <attribute name="productId" mode="IN" type="String" optional="false"></attribute>
+        <attribute name="copyToProductId" mode="IN" type="String" optional="false"></attribute>
+        <attribute name="productAssocTypeId" mode="IN" type="String" optional="false"></attribute>
+        <attribute name="copyToProductAssocTypeId" mode="IN" type="String" optional="false"></attribute>
+    </service>
+    
+    <service name="getOrCreateVariantIncludeAllStand" engine="simple" location="component://zuczugcommon/script/ZuczugProductServices.xml"
+             invoke="getOrCreateVariantIncludeAllStand">
+        <description>根据虚拟商品的ID和productFeatureId，获取变型商品，如果不存在，就新建这个变型。这个service会包含所有的STANDARD_FEATURE的特征</description>
+        <attribute name="productId" mode="IN" type="String" optional="false"></attribute>
+        <attribute name="productFeatureId" mode="IN" type="String" optional="false"></attribute>
+        <attribute name="variantProductId" mode="OUT" type="String" optional="false"></attribute>
+    </service>
+    
+    <service name="getOrCopyVariant" engine="simple" location="component://zuczugcommon/script/ZuczugProductServices.xml"
+             invoke="getOrCreateVariant">
+        <description>根据虚拟商品的ID和productFeatureId，获取变型商品，如果不存在，就从商品编号复制一个成变型</description>
+        <attribute name="productId" mode="IN" type="String" optional="false"></attribute>
+        <attribute name="productFeatureId" mode="IN" type="String" optional="false"></attribute>
+        <attribute name="variantProductId" mode="OUT" type="String" optional="false"></attribute>
+    </service>
+
+    <service name="getProductComponents" engine="java"
+            location="com.zuczug.product.ZuczugProductServices" invoke="getProductComponents">
+        <description>Returns the product's routing id and the components of a given product (if necessary, running the configurator).</description>
+        <attribute mode="IN" name="productId" optional="false" type="String"/>
+        <attribute mode="IN" name="quantity" optional="true" type="BigDecimal"/>
+        <attribute mode="IN" name="amount" optional="true" type="BigDecimal"/>
+        <attribute mode="IN" name="fromDate" optional="true" type="String"/>
+        <attribute mode="IN" name="excludeWIPs" optional="true" type="Boolean"/>
+        <attribute mode="IN" name="productAssocTypeId" optional="true" type="String" default-value="MANUF_COMPONENT"/>
+        <attribute mode="OUT" name="workEffortId" optional="true" type="String"/>
+        <attribute mode="OUT" name="components" optional="true" type="java.util.List"/>
+        <attribute mode="OUT" name="componentsMap" optional="true" type="java.util.List"/>
+    </service>
+
+    <service name="calculateProductEngineerCosts" engine="simple" auth="true"
+                location="component://zuczugcommon/script/ZuczugProductServices.xml" invoke="calculateProductEngineerCosts">
+        <description>和ofbiz系统自带的calculateProductCosts实现相同的功能，只是calculateProductCosts计算的是MANUF_COMPONENT，而这个service计算的是ENGINEER_COMPONENT的成本</description>
+        <attribute mode="IN" name="productId" optional="false" type="String"/>
+        <attribute mode="IN" name="currencyUomId" optional="false" type="String"/>
+        <attribute mode="IN" name="costComponentTypePrefix" optional="false" type="String"/>
+        <attribute mode="OUT" name="totalCost" type="BigDecimal"/>
+    </service>
+    
+    <service name="getUpdateProductDescription" engine="java"
+            location="com.zuczug.product.ZuczugProductServices" invoke="getUpdateProductDescription">
+        <description>获取跟新虚拟商品时，虚拟商品所对应的变形商品同步虚拟商品的描述信息但不覆盖原来特征的新字符串</description>
+        <attribute mode="IN" name="variationProductId" optional="false" type="String"/>
+        <attribute mode="IN" name="newDescription" optional="true" type="String"/>
+        <attribute mode="OUT" name="description" optional="true" type="String"/>
+    </service>
+
+    <service name="getVirtualProductIdsByGroup" engine="java"
+            location="com.zuczug.product.ZuczugProductServices" invoke="getVirtualProductIdsByGroup">
+        <description>[停用(组别已经不是feature了)]根据组别的productFeatureId来查询该组别所有的productId，返回的是虚拟的商品Id。productTypeId如果为空，则会查找所有的productType，否则会查找指定productType</description>
+        <attribute mode="IN" name="productFeatureId" optional="false" type="String"/>
+        <attribute mode="IN" name="productTypeId" optional="true" type="String"/>
+        <attribute mode="OUT" name="productIds" optional="true" type="java.util.List"/>
+    </service>
+    
+    <service name="combinedRepeatVirtualProductBM" engine="java"
+            location="com.zuczug.accessoriespurchase.AccessoriesPurchaseServices" invoke="combinedRepeatVirtualProductBM">
+            <description>没有被使用，待确认</description>
+        <attribute mode="IN" name="virtualProduct" optional="true" type="String"/>
+        <attribute mode="IN" name="destroyVirtualProduct" optional="true" type="String"/>
+    </service>
+
+    <service name="getVariantProductIdsByGroup" engine="java"
+            location="com.zuczug.product.ZuczugProductServices" invoke="getVariantProductIdsByGroup">
+        <description>
+        	[停用(组别已经不是feature了)]根据组别的productFeatureId来查询该组别所有的productId，返回的是变型的商品Id。productTypeId如果为空，则会查找所有的productType，否则会查找指定productType。
+        	注意：变型商品是属于哪个组别的逻辑，并不是变型商品本身是否有这个组别的productFeatureId，而是看这个变型商品对应的虚拟商品，是否有这个组别的productFeatureId。
+        </description>
+        <attribute mode="IN" name="productFeatureId" optional="false" type="String"/>
+        <attribute mode="IN" name="productTypeId" optional="true" type="String"/>
+        <attribute mode="OUT" name="productIds" optional="true" type="java.util.List"/>
+    </service>
+
+    <service name="getProductIdByDesignProductId" engine="java"
+            location="com.zuczug.product.ZuczugProductServices" invoke="getProductIdByDesignProductId">
+        <description>
+        	根据设计商品ID，获取正式商品ID。传入的productId可以是虚拟的，也可以是变型的，传入虚拟返回虚拟，传入变型返回变型
+        </description>
+        <attribute mode="IN" name="designProductId" optional="false" type="String"/>
+        <attribute mode="OUT" name="productId" optional="true" type="String"/>
+    </service>
+    
+    <service name="getDesignProductIdByProductId" engine="java"
+            location="com.zuczug.product.ZuczugProductServices" invoke="getDesignProductIdByProductId">
+        <description>
+        	根据正式商品ID，获取设计商品ID。传入的productId可以是虚拟的，也可以是变型的，传入虚拟返回虚拟，传入变型返回变型
+        </description>
+        <attribute mode="IN" name="productId" optional="false" type="String"/>
+        <attribute mode="OUT" name="designProductId" optional="true" type="String"/>
+    </service>
+
+    <service name="cleanrAndCopyFeatureFromProduct" engine="simple"
+            location="component://zuczugcommon/script/ZuczugProductServices.xml" invoke="cleanrAndCopyFeatureFromProduct">
+        <description>
+        	清除一个商品的所有feature，并且从另外一个商品拷贝过来
+        </description>
+        <attribute mode="IN" name="fromProductId" optional="false" type="String"/>
+        <attribute mode="IN" name="toProductId" optional="false" type="String"/>
+    </service>
+
+    <service name="createTransferShipment" engine="java"
+            location="com.zuczug.util.FacilityUtilServices" invoke="createTransferShipment">
+        <description>
+        	根据inventoryTransfer，生成shipment对象
+        </description>
+        <attribute mode="IN" name="inventoryTransferId" optional="false" type="String"/>
+        <attribute mode="OUT" name="itemIssuanceId" optional="false" type="String"/>
+        <attribute mode="OUT" name="shipmentId" optional="false" type="String"/>
+    </service>
+    
+    <service name="completeTransferShipment" engine="java"
+            location="com.zuczug.util.FacilityUtilServices" invoke="completeTransferShipment">
+        <description>
+        	完成inventoryTransfer，完成shipment对象
+        </description>
+        <attribute mode="IN" name="shipmentId" optional="false" type="String"/>
+    </service>
+    
+    <service name="checkUpdateEstimatedQuantity" engine="simple"
+    	location="component://zuczugcommon/script/ZuczugDataServices.xml" invoke="checkUpdateEstimatedQuantity">
+    	<description>检查并修改物料的生产数量</description>
+    	<attribute name="productId" mode="IN" type="String" optional="false"></attribute>
+    </service>
+    
+    <service name="getNextAssocGeoList" engine="java" invoke="getNextAssocGeoList" location="com.zuczug.party.ZuczugPartyUtil" auth="false">
+		<description>获取 级联地理信息列表(国家/省/市/区)</description>
+		<attribute name="geoIdFrom" type="String" mode="IN" optional="false" />
+		<attribute name="geoAssocTypeId" type="String" mode="IN" optional="false" />
+		<attribute name="list" type="List" mode="OUT" optional="false" />
+	</service>
+    
+     
+</services>

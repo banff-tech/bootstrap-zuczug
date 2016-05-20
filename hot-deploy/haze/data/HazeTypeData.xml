@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-engine-xml>
+
+	<ProdCatalog prodCatalogId="defaultCatalog" catalogName="默认商品分类" useQuickAdd="N" />
+</entity-engine-xml>

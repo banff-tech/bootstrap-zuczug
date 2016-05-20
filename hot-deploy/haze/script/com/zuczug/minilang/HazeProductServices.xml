@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simple-methods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/simple-methods.xsd">
+
+	<simple-method method-name="createCategoreAndToProdCatalog" short-description="createCategoreAndToProdCatalog">
+		<entity-and list="prodCatalogCategorys" entity-name="ProdCatalogCategory">
+			<field-map field-name="prodCatalogId" from-field="parameters.prodCatalogId"/>
+		</entity-and>
+		
+		<iterate entry="prodCatalogCategory" list="prodCatalogCategorys">
+			<entity-one value-field="productCategory" entity-name="ProductCategory">
+				<field-map field-name="productCategoryId" from-field="prodCatalogCategory.productCategoryId"/>
+			</entity-one>
+			<if-compare operator="equals" value="${parameters.categoryName}" field="productCategory.categoryName">
+				<add-error><fail-message message="此分类已存在目录中，请勿重复添加"/></add-error>
+				<check-errors/>
+				<return/>
+			</if-compare>
+		</iterate>
+
+		<set-service-fields service-name="createProductCategory" to-map="inMap" map="parameters"/>
+		<call-service service-name="createProductCategory" in-map-name="inMap">
+			<result-to-field result-name="productCategoryId"/>
+		</call-service>
+		
+		<clear-field field="inMap"/>
+		<set-service-fields service-name="addProductCategoryToProdCatalog" to-map="inMap" map="parameters"/>
+		<set field="inMap.productCategoryId" from-field="productCategoryId"/>
+		<call-service service-name="addProductCategoryToProdCatalog" in-map-name="inMap"></call-service>
+		<set field="_EVENT_MESSAGE_" value="操作成功"/>
+		<field-to-request field="_EVENT_MESSAGE_"/>
+	</simple-method>
+	
+	
+	<simple-method method-name="createVariantFromVirtual" short-description="createVariantFromVirtual">
+		<entity-one value-field="oldProduct" entity-name="Product">
+			<field-map field-name="productId" from-field="parameters.productId"/>
+		</entity-one>
+		
+		<set field="inMap.oldProductId" from-field="parameters.productId"/>
+		<set field="inMap.productId" from-field="parameters.newproductId"/>
+		<set field="inMap.duplicateAttributes" value="Y"/>
+		<set field="inMap.duplicateCategoryMembers" value="Y"/>
+		<set field="inMap.duplicateFeatureAppls" value="Y"/>
+		<set field="inMap.duplicateIDs" value="Y"/>
+		<set field="inMap.duplicatePrices" value="Y"/>
+		<set field="inMap.newDescription" value="${oldProduct.description}"/>
+		<set field="inMap.newInternalName" value="${oldProduct.internalName}"/>
+		<set field="inMap.newLongDescription" value="${oldProduct.longDescription}"/>
+		<set field="inMap.newProductName" value="${oldProduct.productName}"/>
+		<call-service service-name="duplicateProduct" in-map-name="inMap"></call-service>
+	</simple-method>
+	
+	<simple-method method-name="addProductCategoryToProdCatalogNoRepeat" short-description="">
+		<entity-and list="prodCatalogCategory" entity-name="ProdCatalogCategory">
+			<field-map field-name="prodCatalogId" from-field="parameters.prodCatalogId"/>
+			<field-map field-name="productCategoryId" from-field="parameters.productCategoryId"/>
+		</entity-and>
+		<if-empty field="prodCatalogCategory">
+			<set-service-fields service-name="addProductCategoryToProdCatalog" to-map="inMap" map="parameters"/>
+			<call-service service-name="addProductCategoryToProdCatalog" in-map-name="inMap"></call-service>
+		<else>
+			<add-error><fail-message message="此分类已存在目录中，请勿重复添加"/></add-error>
+			<check-errors/>
+		</else>
+		</if-empty>		
+	</simple-method>
+</simple-methods>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+    <!-- ========================================================= -->
+    <!-- ======================== Defaults ======================= -->
+    <!-- ========================================================= -->
+    <title>Entity of ZuczugCommon Component</title>
+    <description>None</description>
+    <copyright></copyright>
+    <version></version>
+
+	<!-- <entity entity-name="AuditLog" package-name="">
+		<field name="auditLogId" type="id-ne"></field>
+		<field name="moduleId" type="id-ne"><description>模块和功能ID</description></field>
+		<field name="orderId" type="id-ne"><description>相关订单ID（可以为空）</description></field>
+		<field name="productId" type="id-ne"><description>相关商品ID（可以为空）</description></field>
+		<field name="workEffortId" type="id-ne"><description>相关workEffortId（可以为空）</description></field>
+		<field name="productStoreId" type="id-ne"><description>相关店铺id（可以为空）</description></field>
+		<field name="inventoryItemId" type="id-ne"><description>相关库存明细（可以为空）</description></field>
+		<field name="logContent" type="long-varchar"><description>日志内容</description></field>
+		<field name="createdUserLogin" type="id-ne"><description>操作人</description></field>
+		<field name="createdDate" type="date-time"><description>操作时间</description></field>
+	</entity> -->
+</entitymodel>

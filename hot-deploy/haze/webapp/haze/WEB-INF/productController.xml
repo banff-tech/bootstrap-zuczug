@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site-conf xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/site-conf.xsd">
+    <!-- The controller elements that are common to all OFBiz components
+         can be found in the following xml file. A component can override the
+         elements found in the common-controller.xml file. -->
+    
+    <request-map uri="ProductList">
+    	<description>商品列表</description>
+    	<security auth="true" https="false"/>
+    	<response name="success" type="view" value="ProductList"></response>
+    	<response name="error" type="view" value="ProductList"></response>
+    </request-map>
+    <request-map uri="EditProduct">
+    	<description>编辑和新增商品</description>
+    	<security auth="true" https="false"/>
+    	<response name="success" type="view" value="EditProduct"></response>
+    	<response name="error" type="view" value="EditProduct"></response>
+    </request-map>
+    <request-map uri="EditCatalog">
+    	<description>编辑和新增商品</description>
+    	<security auth="true" https="false"/>
+    	<response name="success" type="view" value="EditCatalog"></response>
+    	<response name="error" type="view" value="EditCatalog"></response>
+    </request-map>
+    
+    <request-map uri="EditCategory">
+    	<description>编辑分类</description>
+    	<security auth="true" https="false"/>
+    	<response name="success" type="view" value="EditCategory"></response>
+    	<response name="error" type="view" value="EditCategory"></response>
+    </request-map>
+    <request-map uri="createProduct">
+    	<description>创建新商品</description>
+    	<security auth="true" https="false"/>
+    	<event type="service" invoke="createProduct"></event>
+    	<response name="success" type="request-redirect" value="EditProduct">
+    		<redirect-parameter name="productId"/>
+    	</response>
+    	<response name="error" type="view" value="EditProduct"></response>
+    </request-map>
+    <request-map uri="updateProduct">
+    	<description>创建新商品</description>
+    	<security auth="true" https="false"/>
+    	<event type="service" invoke="updateProduct"></event>
+    	<response name="success" type="request-redirect" value="EditProduct">
+    		<redirect-parameter name="productId"/>
+    	</response>
+    	<response name="error" type="view" value="EditProduct"></response>
+    </request-map>
+    <request-map uri="FindProductCategoryMember">
+    	<description>查找商品在哪些目录</description>
+    	<security auth="true" https="false"/>
+    	<response name="success" type="view" value="FindProductCategoryMember"></response>
+    	<response name="error" type="view" value="FindProductCategoryMember"></response>
+    </request-map>
+    
+    
+    <request-map uri="FindCatalogAndCategory">
+    	<description>商品列表</description>
+    	<security auth="true" https="false"/>
+    	<response name="success" type="view" value="FindCatalogAndCategory"></response>
+    	<response name="error" type="view" value="FindCatalogAndCategory"></response>
+    </request-map>
+    <request-map uri="getCatalogChild">
+    	<description>获取目录的子集</description>
+        <security auth="false" https="false"/>
+        <event type="java" path="org.ofbiz.product.category.CategoryServices" invoke="getChildCategoryTree"/>
+        <response name="success" type="none"/>
+    </request-map>
+    
+    <request-map uri="EditProdCatalog">
+    	<description>编辑目录</description>
+        <security auth="false" https="false"/>
+        <response name="success" type="view" value="EditProdCatalog"/>
+    </request-map>
+    <request-map uri="EditProductCategory">
+    	<description>编辑分类</description>
+        <security auth="false" https="false"/>
+        <response name="success" type="view" value="EditProductCategory"/>
+    </request-map>
+    <request-map uri="updateProdCatalog">
+    	<description>编辑目录</description>
+        <security auth="false" https="false"/>
+        <event type="service" invoke="updateProdCatalog"></event>
+        <response name="success" type="view" value="EditCatalog"/>
+    </request-map>
+    <request-map uri="createProdCatalog">
+    	<description>编辑目录</description>
+        <security auth="false" https="false"/>
+        <event type="service" invoke="createProdCatalog"></event>
+        <response name="success" type="view" value="EditCatalog"/>
+    </request-map>
+    <request-map uri="updateProductCategory">
+    	<description>保存分类</description>
+        <security auth="false" https="false"/>
+        <event type="service" invoke="updateProductCategory"></event>
+        <response name="success" type="view" value="EditCategory"/>
+    </request-map>
+    <request-map uri="createProductCategory">
+    	<description>新建分类</description>
+        <security auth="false" https="false"/>
+        <!-- <event type="service" invoke="addProductCategoryToProdCatalog"></event> -->
+        <event type="simple" path="component://haze/script/com/zuczug/minilang/HazeProductServices.xml" invoke="createCategoreAndToProdCatalog"></event>
+        <response name="success" type="view" value="EditCatalog"/>
+    </request-map>
+    
+    
+    <request-map uri="addProductCategoryToProdCatalog">
+        <security https="true" auth="true"/>
+        <event type="simple" path="component://haze/script/com/zuczug/minilang/HazeProductServices.xml" invoke="addProductCategoryToProdCatalogNoRepeat"></event>
+        <response name="success" type="view" value="EditCatalog"/>
+        <response name="error" type="view" value="EditCatalog"/>
+    </request-map>
+    <request-map uri="removeProductCategoryFromProdCatalog">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="removeProductCategoryFromProdCatalog"/>
+        <response name="success" type="view" value="EditCategory"/>
+        <response name="error" type="view" value="EditCategory"/>
+    </request-map>
+    <request-map uri="addProductToCategory">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="safeAddProductToCategory"/>
+        <response name="success" type="view" value="FindProductCategoryMember"/>
+        <response name="error" type="view" value="FindProductCategoryMember"/>
+    </request-map>
+    <request-map uri="updateProductToCategory">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="updateProductToCategory"/>
+        <response name="success" type="view" value="FindProductCategoryMember"/>
+        <response name="error" type="view" value="FindProductCategoryMember"/>
+    </request-map>
+    <request-map uri="removeProductFromCategory">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="removeProductFromCategory"/>
+        <response name="success" type="view" value="FindProductCategoryMember"/>
+        <response name="error" type="view" value="FindProductCategoryMember"/>
+    </request-map>
+    <request-map uri="removeCategoryProductMember">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="removeProductFromCategory"/>
+        <response name="success" type="view" value="FindCatalogAndCategory"/>
+        <response name="error" type="view" value="FindCatalogAndCategory"/>
+    </request-map>
+    <request-map uri="FindProductFeatureTypeList">
+    	<description>进入特征类型列表</description>
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="FindProductFeatureTypeList"/>
+        <response name="error" type="view" value="FindProductFeatureTypeList"/>
+    </request-map>
+    <request-map uri="FindProductFeatureList">
+    	<description>查询特征</description>
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="FindProductFeatureList"/>
+        <response name="error" type="view" value="FindProductFeatureList"/>
+    </request-map>
+    
+    
+    <request-map uri="EditProductPrices">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="EditProductPrices"/>
+    </request-map>
+    <request-map uri="createProductPrice">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="createProductPrice"/>
+        <response name="success" type="request-redirect" value="EditProductPrices"><redirect-parameter name="productId"/></response>
+        <response name="error" type="view" value="EditProductPrices"/>
+    </request-map>
+    <request-map uri="updateProductPrice">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="updateProductPrice"/>
+        <response name="success" type="request-redirect" value="EditProductPrices"><redirect-parameter name="productId"/></response>
+        <response name="error" type="view" value="EditProductPrices"/>
+    </request-map>
+    <request-map uri="ProductPriceHistory">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="ProductPriceHistory"/>
+    </request-map>
+    <request-map uri="deleteProductPrice">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="deleteProductPrice"/>
+        <response name="success" type="request-redirect" value="EditProductPrices"><redirect-parameter name="productId"/></response>
+        <response name="error" type="view" value="EditProductPrices"/>
+    </request-map>
+    
+    
+    <!-- 商品特征 -->
+    <request-map uri="FindProductFeatureAppl">
+    	<description>商品特征的界面</description>
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="FindProductFeatureAppl"></response>
+        <response name="error" type="view" value="FindProductFeatureAppl"/>
+    </request-map>
+    
+    <request-map uri="applyProductFeatures">
+    	<description>保存产品特征</description>
+        <security https="true" auth="true"/>
+        <event type="java" path="com.zuczug.haze.HazaProductEvent" invoke="applyProductFeatures"/>
+        <response name="success" type="request-redirect" value="FindProductFeatureAppl">
+        	<redirect-parameter name="productId"/>
+        </response>
+        <response name="error" type="view" value="FindProductFeatureAppl"/>
+    </request-map>
+    
+    <request-map uri="addCategoryProductMember">
+    	<description>为分类添加商品</description>
+        <security https="true" auth="true"/>
+        <event type="java" path="com.zuczug.product.ProductEvents" invoke="addCategoryProductMember"/>
+        <response name="success" type="view" value="EditCategory"/>
+        <response name="error" type="view" value="EditCategory"/>
+    </request-map>
+    
+    <request-map uri="EditKeyWords">
+    	<description>查询商品的tag</description>
+	    <security auth="true"/>
+	    <response name="success" type="view" value="EditKeyWords"/>
+    </request-map>
+    <request-map uri="createProductKeyword">
+    	<description>创建一个新的关键字</description>
+        <security https="false" auth="true"/>
+        <event type="simple" path="component://zuczugcommon/script/ZuczugProductServices.xml" invoke="createProductKeyword"/>
+        <response name="success" type="request-redirect" value="EditKeyWords">
+        	<redirect-parameter name="productId"/>
+        </response>
+        <response name="error" type="view" value="EditKeyWords"/>
+    </request-map>
+    
+    <request-map uri="deleteProductKeyword">
+    	<description>删除一个关键字</description>
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="deleteProductKeyword"/>
+        <response name="success" type="request-redirect" value="EditKeyWords">
+        	<redirect-parameter name="productId"/>
+        </response>
+        <response name="error" type="view" value="EditKeyWords"/>
+    </request-map>
+    
+    <request-map uri="FindProductVariants">
+    	<description>查找虚拟商品的变型</description>
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="FindProductVariants"/>
+        <response name="error" type="view" value="FindProductVariants"/>
+    </request-map>
+    
+    <request-map uri="createVariantFromVirtual">
+    	<description>通过虚拟商品创建一个变型</description>
+        <security https="true" auth="true"/>
+        <event type="java" path="com.zuczug.haze.HazaProductEvent" invoke="createVariantFromVirtual" global-transaction="true"></event>
+        <response name="success" type="request-redirect" value="FindProductVariants">
+        	<redirect-parameter name="productId"/>
+        </response>
+        <response name="error" type="view" value="FindProductVariants"/>
+    </request-map>
+    
+    
+    <request-map uri="FindProductBOM">
+    	<description>查询商品的BOM</description>
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="FindProductBOM"/>
+        <response name="error" type="view" value="FindProductBOM"/>
+    </request-map>
+    <request-map uri="UpdateProductAssoc">
+    	<description>保存商品BOM</description>
+        <security https="false" auth="true"/>
+        <event type="java" path="org.ofbiz.product.product.ProductEvents" invoke="updateProductAssoc"/>
+        <response name="success" type="request-redirect" value="FindProductBOM">
+            <redirect-parameter name="productId"/>
+        </response>
+        <response name="error" type="view" value="FindProductBOM"/>
+    </request-map>
+    
+    <request-map uri="FindAccessoryCategory">
+    	<description>分类特征管理</description>
+    	<security https="true" auth="true"/>
+    	<response name="success" type="view" value="FindAccessoryCategory"/>
+   	</request-map>
+    
+    <request-map uri="ListAccessoryFeatureCatGrpAppl">
+    	<description>列出辅料ProductFeatureGroup的通用screen</description>
+	    <security auth="true"/>
+	    <response name="success" type="view" value="ListAccessoryFeatureCatGrpAppl"/>
+    </request-map>
+    
+    <request-map uri="ListAccessoryFeatureGroupAppl">
+	    <security auth="true"/>
+	    <response name="success" type="view" value="ListAccessoryFeatureGroupAppl"/>
+    </request-map>
+    
+
+    <request-map uri="CreateAccessoryFeatureCatGrpAppl">
+	    <security auth="true"/>
+	    <response name="success" type="view" value="CreateAccessoryFeatureCatGrpAppl"/>
+    </request-map>
+
+    <request-map uri="CreateAccessoryFeatureCategory">
+	    <security auth="true"/>
+	    <response name="success" type="view" value="CreateAccessoryFeatureCategory"/>
+    </request-map>
+    
+    <request-map uri="ListAccessorySelectableFeature">
+	    <security auth="true"/>
+	    <response name="success" type="view" value="ListAccessorySelectableFeature"/>
+    </request-map>
+    
+    <request-map uri="CreateAccessoryFeatureGroupAppl">
+	    <security auth="true"/>
+	    <response name="success" type="view" value="CreateAccessoryFeatureGroupAppl"/>
+    </request-map>
+    
+    <request-map uri="CreateAccessorySelectableFeature">
+	    <security auth="true"/>
+	    <response name="success" type="view" value="CreateAccessorySelectableFeature"/>
+    </request-map>
+    
+    <request-map uri="deleteAccessoryFeatureCatGrpAppl">
+	    <security auth="true"/>
+        <event type="java" path="com.zuczug.product.ProductEvents" invoke="deleteProductFeatureCatGrpAppl"/>
+        <response name="success" type="request-redirect" value="ListAccessoryFeatureCatGrpAppl">
+        	<redirect-parameter name="productCategoryId"/>
+        </response>
+	    <response name="error" type="view" value="ListAccessoryFeatureCatGrpAppl"/>
+    </request-map>
+    
+    <request-map uri="deleteAccessoryFeatureGroupAppl">
+	    <security auth="true"/>
+        <event type="java" path="com.zuczug.product.ProductEvents" invoke="deleteProductFeatureGroupAppl"/>
+	    <response name="success" type="request-redirect" value="ListAccessoryFeatureGroupAppl">
+	    	<redirect-parameter name="productFeatureGroupId"/>
+	    	<redirect-parameter name="productCategoryId"/>
+	    </response>
+	    <response name="error" type="view" value="ListAccessoryFeatureGroupAppl"/>
+    </request-map>
+    
+    <request-map uri="deleteAccessoryFeatureCategoryAppl">
+	    <security auth="true"/>
+        <event type="java" path="com.zuczug.product.ProductEvents" invoke="deleteProductFeatureCategoryAppl"/>
+        <response name="success" type="request-redirect" value="ListAccessoryFeatureCatGrpAppl">
+        	<redirect-parameter name="productCategoryId"/>
+        </response>
+	    <response name="error" type="view" value="ListAccessoryFeatureCatGrpAppl"/>
+    </request-map>
+    
+    <request-map uri="deleteAccessorySelectableFeature">
+	    <security auth="true"/>
+        <event type="java" path="com.zuczug.product.ProductEvents" invoke="deleteProductSelectableFeature"/>
+	    <response name="success" type="request-redirect" value="ListAccessorySelectableFeature">
+	    	<redirect-parameter name="productFeatureCategoryId"/>
+	    	<redirect-parameter name="productCategoryId"/>
+	    </response>
+	    <response name="error" type="view" value="ListAccessorySelectableFeature"/>
+    </request-map>
+    
+    <request-map uri="createAccessoryFeatureCatGrpAppl">
+	    <security auth="true"/>
+        <event type="java" path="com.zuczug.product.ProductEvents" invoke="createProductFeatureCatGrpAppl"/>
+        <response name="success" type="request-redirect" value="ListAccessoryFeatureCatGrpAppl">
+        	<redirect-parameter name="productCategoryId"/>
+        	<redirect-parameter name="categoryName"/>
+        </response>
+	    <response name="error" type="view" value="CreateAccessoryFeatureCatGrpAppl"/>
+    </request-map>
+    
+    <request-map uri="createAccessoryFeatureCategory">
+	    <security auth="true"/>
+        <event type="java" path="com.zuczug.product.ProductEvents" invoke="createProductFeatureCategory"/>
+        <response name="success" type="request-redirect" value="ListAccessoryFeatureCatGrpAppl">
+        	<redirect-parameter name="productCategoryId"/>
+        	<redirect-parameter name="categoryName"/>
+        </response>
+	    <response name="error" type="view" value="CreateAccessoryFeatureCategory"/>
+    </request-map>
+    
+    <request-map uri="createAccessoryFeatureGroupAppl">
+	    <security auth="true"/>
+        <event type="java" path="com.zuczug.product.ProductEvents" invoke="createProductFeatureGroupAppl"/>
+        <response name="success" type="request-redirect" value="ListAccessoryFeatureGroupAppl">
+        	<redirect-parameter name="productFeatureGroupId"/>
+	    	<redirect-parameter name="productCategoryId"/>
+        </response>
+	    <response name="error" type="view" value="CreateAccessoryFeatureGroupAppl"/>
+    </request-map>
+    
+    <request-map uri="createAccessorySelectableFeature">
+	    <security auth="true"/>
+        <event type="java" path="com.zuczug.product.ProductEvents" invoke="createProductSelectableFeature"/>
+        <response name="success" type="request-redirect" value="ListAccessorySelectableFeature">
+        	<redirect-parameter name="productCategoryId"/>
+        	<redirect-parameter name="productFeatureCategoryId"/>
+        </response>
+	    <response name="error" type="view" value="CreateAccessorySelectableFeature"/>
+    </request-map>
+    
+    <request-map uri="EditProduct">
+    	<security auth="true"/>
+    	<response name="success" type="view" value="EditProduct"/>
+    </request-map>
+    
+    <request-map uri="EditProductCategories">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="EditProductCategories"/>
+    </request-map>
+    
+    <request-map uri="EditProductInventoryItems">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="EditProductInventoryItems"/>
+    </request-map>
+    
+    <request-map uri="EditAccessorySuppliers">
+        <security auth="true"/>
+        <response name="success" type="view" value="EditAccessorySuppliers"/>
+        <response name="error" type="view" value="EditAccessorySuppliers"/>
+    </request-map>
+    
+    <request-map uri="viewProductOrder">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="findOrders"/>
+        <response name="success" type="view" value="ViewProductOrder"/>
+        <response name="error" type="view" value="EditProduct"/>
+    </request-map>
+    
+    <request-map uri="EditKeyWord">
+    	<description>关键字</description>
+	    <security auth="true"/>
+	    <response name="success" type="view" value="EditKeyWord"/>
+    </request-map>
+    
+    <request-map uri="EditProductAssoc">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="EditProductAssoc"/>
+    </request-map>
+    
+    <request-map uri="updateProductFeature">
+	    <security auth="true"/>
+        <event type="java" path="com.zuczug.product.ZuczugProductUtils" invoke="updateProductFeature"/>
+	    <response name="success" type="view" value="EditProduct"/>
+	    <response name="error" type="view" value="EditProduct"/>
+    </request-map>
+    
+    <request-map uri="deleteProductFromCategory">
+        <security https="true" auth="true"/>
+        <event type="simple" path="component://zuczugcommon/script/ZuczugProductServices.xml" invoke="deleteProductToCategory"/>
+        <response name="success" type="view" value="EditProductCategories">
+        	<redirect-parameter name="idValue"/>
+        </response>
+        <response name="error" type="view" value="EditProductCategories">
+        	<redirect-parameter name="idValue"/>
+        </response>
+    </request-map>
+    
+    <request-map uri="createVartualProduct">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.zuczug.product.ZuczugProductUtils" invoke="createVariantProductByVirtualProduct"/>
+        <response name="success" type="view" value="EditProductAssoc">
+        	<redirect-parameter name="productId" from="newVariantProductId"/>
+        	<redirect-parameter name="zuczugId"/>
+        	<redirect-parameter name="isVirtual"/>        	
+        </response>
+        <response name="error" type="view" value="EditProductAssoc">
+        	<redirect-parameter name="zuczugId"/>
+        	<redirect-parameter name="isVirtual"/>        	
+        </response>
+    </request-map>
+    
+    <request-map uri="AccessoryProofing">
+	    <security auth="true"/>
+	    <response name="success" type="view" value="AccessoryProofing"/>
+    </request-map>
+    
+    <request-map uri="AddAccessoryProofing">
+	    <security auth="true"/>
+	    <response name="success" type="view" value="AddAccessoryProofing"/>
+    </request-map>
+    
+    <request-map uri="createAccessoryProofingOrder">
+	    <security auth="true"/>
+	    <event type="java" path="com.zuczug.order.FabricOrderServices" invoke="createFabricProofingOrder"/>
+	    <response name="success" type="view" value="AccessoryProofing"/>
+    </request-map>
+    
+    <request-map uri="CreateAccessorySuppliers">
+        <security auth="true"/>
+        <event type="service" path="" invoke="modifySupplierProduct"/>
+        <response name="success" type="view" value="EditAccessorySuppliers"/>
+        <response name="error" type="view" value="EditAccessorySuppliers"/>
+    </request-map>
+    
+    <request-map uri="EditVariantProduct">
+    	<security https="true" auth="true"/>
+    	<response name="success" type="view" value="EditVariantProduct"/>
+   	</request-map>
+   	
+   	<request-map uri="updateVariantProductAndFeature">
+	    <security auth="true"/>
+        <event type="java" path="com.zuczug.accessoriespurchase.AccessoriesPurchaseServices" invoke="updateProductFeature"/>
+	    <response name="success" type="view" value="EditVariantProduct"/>
+	    <response name="error" type="view" value="EditVariantProduct"/>
+    </request-map>
+    
+    <request-map uri="CreateNewVirtualProduct">
+	    <security auth="true"/>
+	    <response name="success" type="view" value="CreateNewVirtualProduct"/>
+    </request-map>
+    
+    <request-map uri="CreateVirtualProduct">
+        <security auth="true"/>
+        <response name="success" type="view" value="CreateVirtualProduct"/>
+    </request-map>
+    
+    <request-map uri="createVirtualAccessory">
+        <security auth="true"/>
+        <event type="java" path="com.zuczug.product.ProductEvents" invoke="editVirtualProductWithAllFeature"/>
+        <response name="success" type="view" value="EditProduct">
+        	<redirect-parameter name="idValue" from="zuczugId"/>
+        </response>
+        <response name="error" type="request-redirect" value="CreateVirtualProduct">
+        	<redirect-parameter name="productCategoryId" from="productCategoryId"/>
+        	<redirect-parameter name="zuczugId" from="productZuczugId"/>
+        	<redirect-parameter name="internalName" from="internalName"/>
+        	<redirect-parameter name="comments" from="comments"/>      	
+        </response>
+    </request-map>
+    
+    <request-map uri="FindAccessoryQuoteKeyWord">
+        <security auth="true"/>
+        <response name="success" type="view" value="FindAccessoryQuoteKeyWord"/>
+    </request-map>
+    
+    <request-map uri="FindAccessoryQuoteCategory">
+        <security auth="true"/>
+        <response name="success" type="view" value="FindAccessoryQuoteCategory"/>
+    </request-map>
+    
+    <request-map uri="EditProductFacilities">
+	    <security auth="true"/>
+	    <response name="success" type="view" value="EditProductFacilities"/>
+    </request-map>
+    
+    <request-map uri="createProductFacility">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="createProductFacility"/>
+        <response name="success" type="view" value="EditProductFacilities"/>
+        <response name="error" type="view" value="EditProductFacilities"/>
+    </request-map>
+    
+    <request-map uri="updateProductFacility">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="updateProductFacility"/>
+        <response name="success" type="view" value="EditProductFacilities"/>
+        <response name="error" type="view" value="EditProductFacilities"/>
+    </request-map>
+    <request-map uri="deleteProductFacility">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="deleteProductFacility"/>
+        <response name="success" type="view" value="EditProductFacilities"/>
+        <response name="error" type="view" value="EditProductFacilities"/>
+    </request-map>
+    <view-map name="ProductList" type="screen" page="component://haze/widget/ProductScreens.xml#ProductList"/>
+    <view-map name="EditProdCatalog" type="screen" page="component://haze/widget/ProductScreens.xml#EditProdCatalog"/>
+    <view-map name="EditProductCategory" type="screen" page="component://haze/widget/ProductScreens.xml#EditProductCategory"/>
+    <view-map name="EditCategory" type="screen" page="component://haze/widget/ProductScreens.xml#EditCategory"/>
+    <view-map name="EditCatalog" type="screen" page="component://haze/widget/ProductScreens.xml#EditCatalog"/>
+    
+    <view-map name="FindProductFeatureTypeList" type="screen" page="component://haze/widget/ProductScreens.xml#FindProductFeatureTypeList"/>
+    <view-map name="FindProductFeatureList" type="screen" page="component://haze/widget/ProductScreens.xml#FindProductFeatureList"/>
+    <view-map name="EditProduct" type="screen" page="component://haze/widget/ProductScreens.xml#EditProduct"/>
+    <view-map name="FindProductCategoryMember" type="screen" page="component://haze/widget/ProductScreens.xml#FindProductCategoryMember"/>
+	<view-map name="EditProductPrices" type="screen" page="component://haze/widget/ProductScreens.xml#EditProductPrices"/>
+
+	<view-map name="FindProductFeatureAppl" type="screen" page="component://haze/widget/ProductScreens.xml#FindProductFeatureAppl"/>
+	<view-map name="EditKeyWords"  type="screen" page="component://haze/widget/ProductScreens.xml#EditKeyWords"/>
+	<view-map name="FindProductVariants"  type="screen" page="component://haze/widget/ProductScreens.xml#FindProductVariants"/>
+	<view-map name="FindProductBOM"  type="screen" page="component://haze/widget/ProductScreens.xml#FindProductBOM"/>
+	
+	<view-map name="FindAccessoryCategory" type="screen" page="component://haze/widget/ProductScreens.xml#FindProductFeatureTypeList"/>
+    <view-map name="ListAccessoryFeatureCatGrpAppl" type="screen" page="component://haze/widget/ProductScreens.xml#ListAccessoryFeatureCatGrpAppl"/>
+    <view-map name="ListAccessoryFeatureGroupAppl" type="screen" page="component://haze/widget/ProductScreens.xml#ListAccessoryFeatureGroupAppl"/>
+    <view-map name="CreateAccessoryFeatureCatGrpAppl" type="screen" page="component://haze/widget/ProductScreens.xml#CreateAccessoryFeatureCatGrpAppl"/>
+	<view-map name="CreateAccessoryFeatureCategory" type="screen" page="component://haze/widget/ProductScreens.xml#CreateAccessoryFeatureCategory"/>
+    <view-map name="ListAccessorySelectableFeature" type="screen" page="component://haze/widget/ProductScreens.xml#ListAccessorySelectableFeature"/>
+    <view-map name="CreateAccessoryFeatureGroupAppl" type="screen" page="component://haze/widget/ProductScreens.xml#CreateAccessoryFeatureGroupAppl"/>
+    <view-map name="CreateAccessorySelectableFeature" type="screen" page="component://haze/widget/ProductScreens.xml#CreateAccessorySelectableFeature"/>
+	<view-map name="EditProduct" type="screen" page="component://haze/widget/ProductScreens.xml#EditProduct"/>
+	<view-map name="EditProductCategories"  type="screen" page="component://haze/widget/ProductScreens.xml#EditProductCategories"/>
+	<view-map name="EditProductInventoryItems"  type="screen" page="component://haze/widget/ProductScreens.xml#EditProductInventoryItems"/>
+	<view-map name="EditAccessorySuppliers" type="screen" page="component://haze/widget/ProductScreens.xml#EditAccessorySuppliers"/>
+    <view-map name="ViewProductOrder"  type="screen" page="component://haze/widget/ProductScreens.xml#ViewProductOrder"/>
+    <view-map name="EditKeyWord"  type="screen" page="component://haze/widget/ProductScreens.xml#EditKeyWord"/>
+	<view-map name="EditProductAssoc"  type="screen" page="component://haze/widget/ProductScreens.xml#EditProductAssoc"/>
+	<view-map name="AccessoryProofing" type="screen" page="component://haze/widget/ProductScreens.xml#AccessoryProofing"/>
+	<view-map name="AddAccessoryProofing" type="screen" page="component://haze/widget/ProductScreens.xml#AddAccessoryProofing"/>
+	<view-map name="EditVariantProduct"  type="screen" page="component://haze/widget/ProductScreens.xml#EditVariantProduct"/>
+	<view-map name="CreateNewVirtualProduct" type="screen" page="component://haze/widget/ProductScreens.xml#CreateNewVirtualProduct"/>
+	<view-map name="CreateVirtualProduct"  type="screen" page="component://haze/widget/ProductScreens.xml#CreateVirtualProduct"/>
+	<view-map name="FindAccessoryQuoteKeyWord"    type="screen" page="component://haze/widget/ProductScreens.xml#FindAccessoryQuoteKeyWord"/>
+    <view-map name="FindAccessoryQuoteCategory"    type="screen" page="component://haze/widget/ProductScreens.xml#FindAccessoryQuoteCategory"/>
+    <view-map name="EditProductFacilities" type="screen" page="component://haze/widget/ProductScreens.xml#EditProductFacilities"/>
+    
+    <view-map name="FindCatalogAndCategory" type="screen" page="component://zuczugcommon/widget/ZuczugCommonProductScreens.xml#FindCatalogAndCategory"/>
+    
+</site-conf>

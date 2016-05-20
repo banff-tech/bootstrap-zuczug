@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+    <screen name="PartnersList">
+        <section>
+            <actions>
+                <set field="headerItem" value="PartnersManage"/>
+                <set field="tabButtonItem" value="PartnersList"/>
+                <set field="titleProperty" value="${groovy:org.ofbiz.base.util.StringUtil.wrapString('合作伙伴列表')}" />
+            </actions>
+            <widgets>
+                <decorator-screen name="HazeCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                    	<include-menu location="component://haze/widget/HazeMenus.xml" name="PartnersManageTabBar"/>
+                    	<screenlet title="${uiLabelMap.CommonFind}">
+                    		<include-form location="component://haze/widget/PartnersForms.xml" name="SearchPartnersForm"/>
+                    	</screenlet>
+                    	<screenlet title="${uiLabelMap.CommonList}">
+                    		<include-form location="component://haze/widget/PartnersForms.xml" name="ListPartnersForm"/>
+                    	</screenlet>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+	<screen name="EditPartner">
+        <section>
+            <actions>
+                <set field="headerItem" value="PartnersManage"/>
+                <set field="tabButtonItem" value="EditPartner"/>
+                <set field="titleProperty" value="${groovy:org.ofbiz.base.util.StringUtil.wrapString('合作伙伴新增')}" />
+                <set field="subMenuItem" value="EditPartner"/>
+                
+                <entity-one value-field="party" entity-name="Party"></entity-one>
+                
+                <entity-condition list="stateProvinceList" entity-name="GeoAssocAndGeoTo">
+					<condition-expr field-name="geoIdFrom" operator="equals" value="CHN" />
+					<condition-expr field-name="geoAssocTypeId" operator="equals" value="REGIONS" />
+				</entity-condition>
+				
+				<entity-condition list="roleTypeList" entity-name="RoleType">
+				</entity-condition>
+            </actions>
+            <widgets>
+                <decorator-screen name="HazeCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                    	<include-menu location="component://haze/widget/HazeMenus.xml" name="PartnersManageTabBar"/>
+                    	<section>
+                    		<condition>
+                    			<not><if-empty field="party"/></not>
+                    		</condition>
+                    		<widgets>
+                    			<include-menu location="component://haze/widget/HazeMenus.xml" name="PartnerSubTabBar"/>
+                    		</widgets>
+                    	</section>
+                    	<include-screen name="PartnersBasicInfoInput"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+	
+	
+	<screen name="PartnersBasicInfoInput">
+		<section>
+			<actions>
+				<property-map resource="CommonEntityLabels" map-name="uiLabelMap" global="true"/>
+				<property-map resource="PartyEntityLabels" map-name="uiLabelMap" global="true"/>
+				<property-map resource="PartyUiLabels" map-name="uiLabelMap" global="true"/>
+				<!-- 国家列表 -->
+				<entity-condition list="countryGeoList" entity-name="Geo">
+					<condition-expr field-name="geoTypeId" operator="equals" value="COUNTRY" />
+				</entity-condition>
+				<entity-one value-field="partyGroup" entity-name="PartyGroup"></entity-one>
+			</actions>
+			<widgets>
+				<screenlet title="${uiLabelMap.Partners}${uiLabelMap.BaseInfo}">
+					<!-- <include-form name="PartnersBasicInfoInput" location="component://haze/widget/PartnersForms.xml"/> -->
+					<platform-specific>
+						<html>
+							<html-template location="component://haze/webapp/haze/html/party/EditPartner.ftl"/>
+						</html>
+					</platform-specific>
+				</screenlet>
+			</widgets>
+		</section>
+	</screen>
+	
+	
+	<screen name="EditPartnerRoles">
+        <section>
+            <actions>
+                <set field="headerItem" value="PartnersManage"/>
+                <set field="tabButtonItem" value="EditPartner"/>
+                <set field="titleProperty" value="${groovy:org.ofbiz.base.util.StringUtil.wrapString('伙伴角色列表')}" />
+                <set field="subMenuItem" value="EditPartnerRoles"/>
+                
+                <entity-condition entity-name="RoleTypeAndParty" list="partyRoles">
+                    <condition-list combine="and">
+                        <condition-expr field-name="partyId" operator="equals" value="${parameters.partyId}"/>
+                        <condition-expr field-name="roleTypeId" operator="not-equals" value="_NA_"/>
+                    </condition-list>
+                </entity-condition>
+            </actions>
+            <widgets>
+                <decorator-screen name="HazeCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                    	<include-menu location="component://haze/widget/HazeMenus.xml" name="PartnersManageTabBar"/>
+                    	<include-menu location="component://haze/widget/HazeMenus.xml" name="PartnerSubTabBar"/>
+                    	<screenlet title="${uiLabelMap.CommonFind}">
+							<include-form name="ViewPartyRoles" location="component://party/widget/partymgr/PartyForms.xml"/>
+                    	</screenlet>
+                    	<screenlet title="${uiLabelMap.CommonList}">
+                    		<include-form name="AddPartyRole" location="component://haze/widget/PartnersForms.xml"/>
+                    	</screenlet>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    
+    <screen name="EditPartnerContactMech">
+        <section>
+            <actions>
+                <set field="headerItem" value="PartnersManage"/>
+                <set field="tabButtonItem" value="EditPartner"/>
+                <set field="titleProperty" value="${groovy:org.ofbiz.base.util.StringUtil.wrapString('联系方式列表')}" />
+                <set field="subMenuItem" value="EditPartnerContactMech"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="HazeCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                    	<include-menu location="component://haze/widget/HazeMenus.xml" name="PartnersManageTabBar"/>
+                    	<include-menu location="component://haze/widget/HazeMenus.xml" name="PartnerSubTabBar"/>
+                   		<include-screen name="Contact" />
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="Contact">
+        <section>
+            <actions>
+                <property-map resource="PartyUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="partyId" from-field="parameters.partyId" default-value="${userLogin.partyId}"/>
+                <script location="component://party/webapp/partymgr/WEB-INF/actions/party/GetContactMechs.groovy"/>
+                <script location="component://party/webapp/partymgr/WEB-INF/actions/party/GetUserLoginPrimaryEmail.groovy"/>
+            </actions>
+            <widgets>
+                <platform-specific>
+                    <html>
+                        <html-template location="component://haze/webapp/haze/html/party/Cantact.ftl"/>
+                    </html>
+                </platform-specific>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="editcontactmech">
+        <section>
+            <actions>
+                <set field="headerItem" value="PartnersManage"/>
+                <set field="tabButtonItem" value="EditPartner"/>
+                <set field="titleProperty" value="${groovy:org.ofbiz.base.util.StringUtil.wrapString('编辑联系方式')}" />
+                <set field="subMenuItem" value="EditPartnerContactMech"/>
+
+
+                <script location="component://party/webapp/partymgr/WEB-INF/actions/HasPartyPermissions.groovy"/>
+                <script location="component://party/webapp/partymgr/WEB-INF/actions/party/EditContactMech.groovy"/>
+
+                <set field="dependentForm" value="editcontactmechform"/>
+                <set field="paramKey" value="countryGeoId"/>
+                <set field="mainId" value="countryGeoId"/>
+                <set field="dependentId" value="stateProvinceGeoId"/>
+                <set field="requestName" value="getAssociatedStateList"/>
+                <set field="responseName" value="stateList"/>
+                <set field="dependentKeyName" value="geoId"/>
+                <set field="descName" value="geoName"/>
+                <set field="selectedDependentOption" from-field="mechMap.postalAddress.stateProvinceGeoId" default-value="_none_"/>
+                
+                <!-- 国家列表 -->
+				<entity-condition list="countryGeoList" entity-name="Geo">
+					<condition-expr field-name="geoTypeId" operator="equals" value="COUNTRY" />
+				</entity-condition>
+				<entity-one value-field="partyGroup" entity-name="PartyGroup"></entity-one>
+				
+				<entity-condition list="stateProvinceList" entity-name="GeoAssocAndGeoTo">
+					<condition-expr field-name="geoIdFrom" operator="equals" value="CHN" />
+					<condition-expr field-name="geoAssocTypeId" operator="equals" value="REGIONS" />
+				</entity-condition>
+            </actions>
+            <widgets>
+                <decorator-screen name="HazeCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                    	<include-menu location="component://haze/widget/HazeMenus.xml" name="PartnersManageTabBar"/>
+                    	<include-menu location="component://haze/widget/HazeMenus.xml" name="PartnerSubTabBar"/>
+						<platform-specific>
+						    <html>
+						        <!-- <html-template location="component://common/webcommon/includes/setDependentDropdownValuesJs.ftl"/> -->
+						        <html-template location="component://haze/webapp/haze/html/party/editcontactmech.ftl"/>
+						    </html>
+						</platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    
+    <screen name="FindPartnerNotes">
+        <section>
+            <actions>
+            	<set field="headerItem" value="PartnersManage"/>
+                <set field="tabButtonItem" value="EditPartner"/>
+                <set field="titleProperty" value="${groovy:org.ofbiz.base.util.StringUtil.wrapString('编辑备注')}" />
+                <set field="subMenuItem" value="FindPartnerNotes"/>
+            
+                <property-map resource="PartyUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="partyId" from-field="parameters.partyId" default-value="${userLogin.partyId}"/>
+                <entity-and entity-name="PartyNoteView" list="notes">
+                    <field-map field-name="targetPartyId" from-field="partyId"/>
+                    <order-by field-name="-noteDateTime"/>
+                </entity-and>
+            </actions>
+            <widgets>
+            	<decorator-screen name="HazeCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                    	<include-menu location="component://haze/widget/HazeMenus.xml" name="PartnersManageTabBar"/>
+                    	<include-menu location="component://haze/widget/HazeMenus.xml" name="PartnerSubTabBar"/>
+                    	<platform-specific>
+		                    <html>
+		                        <html-template location="component://party/webapp/partymgr/party/profileblocks/Notes.ftl"/>
+		                    </html>
+		                </platform-specific>
+                    	
+                   	</decorator-section>
+             	</decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    
+    <screen name="AddPartyNote">
+        <section>
+            <actions>
+                <set field="headerItem" value="PartnersManage"/>
+                <set field="tabButtonItem" value="EditPartner"/>
+                <set field="titleProperty" value="${groovy:org.ofbiz.base.util.StringUtil.wrapString('编辑备注')}" />
+                <set field="subMenuItem" value="FindPartnerNotes"/>
+
+                <set field="donePage" from-field="parameters.DONE_PAGE" default-value="FindPartnerNotes"/>
+                <set field="partyId" from-field="parameters.partyId"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="HazeCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                    	<include-menu location="component://haze/widget/HazeMenus.xml" name="PartnersManageTabBar"/>
+                    	<include-menu location="component://haze/widget/HazeMenus.xml" name="PartnerSubTabBar"/>
+                        <screenlet title="${uiLabelMap.PageTitleNewPartyNote}">
+                            <include-form name="AddPartyNote" location="component://party/widget/partymgr/PartyForms.xml"/>
+                        </screenlet>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    
+    <screen name="FindPartnerAccounting">
+        <section>
+            <actions>
+                <set field="headerItem" value="PartnersManage"/>
+                <set field="tabButtonItem" value="EditPartner"/>
+                <set field="titleProperty" value="${groovy:org.ofbiz.base.util.StringUtil.wrapString('合作伙伴账户信息')}" />
+                <set field="subMenuItem" value="FindPartnerAccounting"/>
+
+                <set field="partyId" from-field="parameters.partyId"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="HazeCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                    	<include-menu location="component://haze/widget/HazeMenus.xml" name="PartnersManageTabBar"/>
+                    	<include-menu location="component://haze/widget/HazeMenus.xml" name="PartnerSubTabBar"/>
+                        <screenlet title="${uiLabelMap.Partners}${uiLabelMap.Accounting}">
+                        	<link target="EditFinAccount?partyId=${partyId}" text="${uiLabelMap.AddNewAccount}" style="buttontext"></link>
+                            <include-form name="PartnerFinAccountList" location="component://haze/widget/PartnersForms.xml"/>
+                        </screenlet>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    
+    <screen name="EditFinAccount">
+        <section>
+            <actions>
+                <set field="headerItem" value="PartnersManage"/>
+                <set field="tabButtonItem" value="EditPartner"/>
+                <set field="titleProperty" value="${groovy:org.ofbiz.base.util.StringUtil.wrapString('合作伙伴账户信息')}" />
+                <set field="subMenuItem" value="FindPartnerAccounting"/>
+
+                <set field="partyId" from-field="parameters.partyId"/>
+                <set field="finAccountId" from-field="parameters.finAccountId"/>
+                <entity-one value-field="finAccount" entity-name="FinAccount"></entity-one>
+            </actions>
+            <widgets>
+                <decorator-screen name="HazeCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                    	<include-menu location="component://haze/widget/HazeMenus.xml" name="PartnersManageTabBar"/>
+                    	<include-menu location="component://haze/widget/HazeMenus.xml" name="PartnerSubTabBar"/>
+                        <screenlet title="${uiLabelMap.Partners}${uiLabelMap.Accounting}${uiLabelMap.CommonList}">
+                            <include-form name="EditFinAccount" location="component://haze/widget/PartnersForms.xml"/>
+                        </screenlet>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    
+    <screen name="FindPartnerBillingAccount">
+        <section>
+            <actions>
+                <set field="headerItem" value="PartnersManage"/>
+                <set field="tabButtonItem" value="EditPartner"/>
+                <set field="titleProperty" value="${groovy:org.ofbiz.base.util.StringUtil.wrapString('合作伙伴账户信息')}" />
+                <set field="subMenuItem" value="FindPartnerBillingAccount"/>
+                <script location="component://accounting/webapp/accounting/WEB-INF/actions/payment/BillingAccounts.groovy"/>
+                <set field="roleTypeId" value="BILL_TO_CUSTOMER"/>
+                <set field="partyId" from-field="parameters.partyId"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="HazeCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                    	<include-menu location="component://haze/widget/HazeMenus.xml" name="PartnersManageTabBar"/>
+                    	<include-menu location="component://haze/widget/HazeMenus.xml" name="PartnerSubTabBar"/>
+	                    <screenlet title="${uiLabelMap.PageTitleFindBillingAccount}">
+	                        <link target="EditBillingAccount" text="${uiLabelMap.CommonNew} " style="buttontext">
+	                            <parameter param-name="partyId" from-field="parameters.partyId"/>
+	                            <parameter param-name="roleTypeId" value="BILL_TO_CUSTOMER"/>
+	                        </link>
+	                        <include-form name="ListBillingAccountsByParty" location="component://haze/widget/PartnersForms.xml"/>
+	                    </screenlet>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+         </section>
+    </screen>
+    
+    <screen name="EditBillingAccount">
+        <section>
+            <actions>
+                <set field="headerItem" value="PartnersManage"/>
+                <set field="tabButtonItem" value="EditPartner"/>
+                <set field="titleProperty" value="${groovy:org.ofbiz.base.util.StringUtil.wrapString('编辑账单账户')}" />
+                <set field="subMenuItem" value="FindPartnerBillingAccount"/>
+                
+                <property-to-field field="defaultCurrencyUomId" resource="general" property="currency.uom.id.default" default="USD"/>
+                <set field="billingAccountId" from-field="parameters.billingAccountId"/>
+                <entity-one entity-name="BillingAccount" value-field="billingAccount"/>
+                <set field="partyId" from-field="parameters.partyId"/>
+                <set field="roleTypeId" from-field="parameters.roleTypeId"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="HazeCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                    	<include-menu location="component://haze/widget/HazeMenus.xml" name="PartnersManageTabBar"/>
+                    	<include-menu location="component://haze/widget/HazeMenus.xml" name="PartnerSubTabBar"/>
+                        <screenlet title="${uiLabelMap.PageTitleEditBillingAccount}">
+                            <include-form name="EditBillingAccount" location="component://haze/widget/PartnersForms.xml"/>
+                        </screenlet>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+         </section>
+    </screen>
+</screens>

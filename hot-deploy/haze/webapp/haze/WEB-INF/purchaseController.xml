@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site-conf xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/site-conf.xsd">
+    <!-- The controller elements that are common to all OFBiz components
+         can be found in the following xml file. A component can override the
+         elements found in the common-controller.xml file. -->
+    
+    <request-map uri="PurchaseOrderList">
+    	<description>采购单列表</description>
+    	<security auth="true" https="false"/>
+    	<response name="success" type="view" value="PurchaseOrderList"></response>
+    	<response name="error" type="view" value="PurchaseOrderList"></response>
+    </request-map>
+    
+    <request-map uri="EditPurchaseOrder">
+    	<description>新建采购单</description>
+    	<security auth="true" https="false"/>
+    	<response name="success" type="view" value="EditPurchaseOrder"></response>
+    	<response name="error" type="view" value="EditPurchaseOrder"></response>
+    </request-map>
+    
+    <request-map uri="addPurchaseOrderData">
+    	<description>设置采购单数据</description>
+        <security https="false" auth="true"/>
+        <event type="java" path="com.zuczug.order.FabricOrderServices" invoke="addFabricPurchaseData"/>
+        <response name="success" type="request-redirect" value="EditPurchaseOrder"/>
+        <response name="error" type="request-redirect" value="EditPurchaseOrder"/>
+        <response name="successToList" type="request-redirect" value="PurchaseOrderList"/>
+    </request-map>
+    <request-map uri="RecalculatedFabricPurchaseOrder">
+    	<description>重新计算</description>
+        <security https="false" auth="true"/>
+        <event type="java" path="com.zuczug.order.FabricOrderServices" invoke="recalculatedFabricPurchaseOrder"/>
+        <response name="success" type="request-redirect" value="EditPurchaseOrder"/>
+        <response name="error" type="request-redirect" value="EditPurchaseOrder"/>
+    </request-map>
+    <request-map uri="saveFabricPurchaseOrder">
+    	<description>保存采购单</description>
+        <security https="false" auth="true"/>
+        <event type="java" path="com.zuczug.order.FabricOrderServices" invoke="saveFabricPurchaseOrder"/>
+        <response name="success" type="request-redirect" value="PurchaseOrderList"/>
+        <response name="error" type="view" value="EditPurchaseOrder"/>
+    </request-map>
+    <request-map uri="purchase.emptycart">
+    	<description>清空订单</description>
+        <security https="false" auth="true"/>
+        <event type="java" path="org.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="destroyCart"/>
+        <response name="success" type="request-redirect" value="EditPurchaseOrder"/>
+        <response name="error" type="request-redirect" value="EditPurchaseOrder"/>
+    </request-map>
+    <request-map uri="cancelPurchaseOrder">
+    	<description>取消采购单</description>
+        <security auth="true"/>
+        <event type="service" invoke="changeOrderStatus"/>
+        <response name="success" type="request-redirect" value="PurchaseOrderList"/>
+        <response name="error" type="view" value="PurchaseOrderList"/>
+    </request-map>
+    <request-map uri="FindPurchaseOrderItem">
+    	<description>采购单详情</description>
+        <security auth="true"/>
+        <response name="success" type="view" value="FindPurchaseOrderItem"/>
+        <response name="error" type="view" value="FindPurchaseOrderItem"/>
+    </request-map>
+    
+    <request-map uri="updateOrderItems">
+    	<description>保存订单项目</description>
+        <security https="false" auth="true"/>
+        <event type="simple" path="component://fabricdevelopment/script/FabricDevelopmentServices.xml" invoke="updateFabricPurchaseItemsAndShipgroup"></event>
+        <response name="success" type="request-redirect" value="FindPurchaseOrderItem">
+        	<redirect-parameter name="orderId"/>
+        	<redirect-parameter name="editFlag" value="Y"/>
+        </response>
+        <response name="error" type="view" value="FindPurchaseOrderItem"/>
+    </request-map>
+    <request-map uri="EditOrderShipmentGroups">
+    	<description>编辑货运组界面</description>
+        <security https="false" auth="true"/>
+        <response name="success" type="view" value="EditOrderShipmentGroups"/>
+        <response name="error" type="view" value="EditOrderShipmentGroups"/>
+    </request-map>
+    <request-map uri="createOrderShipmentGroups">
+    	<description>创建一个新的货运组</description>
+        <security https="false" auth="true"/>
+        <event type="simple" path="component://fabricdevelopment/script/FabricDevelopmentServices.xml" invoke="createOrderShipmentGroups"></event>
+        <response name="success" type="request-redirect" value="FindPurchaseOrderItem">
+        	<redirect-parameter name="orderId"/>
+        </response>
+        <response name="error" type="view" value="FindPurchaseOrderItem"/>
+    </request-map>
+    <request-map uri="changeOrderStatus">
+    	<description>批准订单</description>
+        <security https="false" auth="true"/>
+        <event type="service" invoke="changeOrderStatus"/>
+        <response name="success" type="view" value="FindPurchaseOrderItem"/>
+        <response name="error" type="view" value="FindPurchaseOrderItem"/>
+    </request-map>
+    <request-map uri="updateOrderShipGroupAssoc">
+    	<description>修改订单的货运组信息</description>
+        <security https="false" auth="true"/>
+        <event type="service" invoke="zuczug.updateOrderShipGroupAssoc"></event>
+        <response name="success" type="request-redirect" value="EditOrderShipmentGroups">
+        	<redirect-parameter name="orderId"/>
+        </response>
+        <response name="error" type="view" value="EditOrderShipmentGroups"/>
+    </request-map>
+    
+    <view-map name="PurchaseOrderList" type="screen" page="component://haze/widget/PurchaseScreens.xml#PurchaseOrderList"/>
+    <view-map name="EditPurchaseOrder" type="screen" page="component://haze/widget/PurchaseScreens.xml#EditPurchaseOrder"/>
+    <view-map name="FindPurchaseOrderItem" type="screen" page="component://haze/widget/PurchaseScreens.xml#FindPurchaseOrderItem"/>
+    <view-map name="EditOrderShipmentGroups" type="screen" page="component://haze/widget/PurchaseScreens.xml#EditOrderShipmentGroups"/>
+</site-conf>

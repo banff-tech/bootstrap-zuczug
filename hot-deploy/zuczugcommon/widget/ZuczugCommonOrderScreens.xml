@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+        
+    <screen name="FindOrderByProduct">
+        <section>
+            <actions>
+                <set field="titleProperty" value="FindAccessoryPurchase"/>
+                <set field="headerItem" value="order"/>
+                <set field="tabButtonItem" value="FindAccessoryPurchase" />
+                <set field="viewIndex" from-field="parameters.VIEW_INDEX" type="Integer"/>
+                <property-to-field resource="widget" property="widget.form.defaultViewSize" field="viewSizeDefaultValue"/>
+                <set field="viewSize" from-field="parameters.VIEW_SIZE" type="Integer" default-value="${viewSizeDefaultValue}"/>
+                <set field="quoteTypeId" value="PURCHASE_QUOTE"/>
+                <set field="purchaseType" from-field="parameters.purchaseType"/>
+                
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                    	<include-menu location="component://zuczugcommon/widget/ZuczugCommonMenus.xml" name="PurchaseOrderManagement"/>                   	
+                    	<link target="AddFabricPurchase" text="新建采购单" style="buttontext"></link>
+                    	
+                    	<include-menu name="FindOrderTabBar" location="component://zuczugcommon/widget/ZuczugCommonMenus.xml"/>
+                    	
+                    	<decorator-screen name="FindScreenDecorator" location="component://common/widget/CommonScreens.xml">
+                   			<decorator-section name="search-options">
+                        		<include-form name="FindOrderByProduct" location="component://zuczugcommon/widget/ZuczugCommonOrderForms.xml"/>
+                   			</decorator-section>
+                   			<decorator-section name="search-results">
+                         		<include-form name="ListOrderByProduct" location="component://zuczugcommon/widget/ZuczugCommonOrderForms.xml"/>                   	
+                   			</decorator-section>
+                   		</decorator-screen>    
+                       
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+         </section>
+    </screen>
+    
+   <screen name="FindAccessoryPurchase">
+		<section>
+			<actions>
+				<set field="titleProperty" value="EditMaterialProduct"/>
+				<set field="headerItem" value="AccessoryPurchase"/>
+				<set field="tabButtonItem" value="FindAccessoryPurchase"/>               
+				<set field="labelTitleProperty" value="PageTitleEditMaterialProduct"/>
+				<set field="productId" from-field="parameters.productId"/>
+				<set field="purchaseType" from-field="parameters.purchaseType"/>
+				<entity-one entity-name="OrderHeader" value-field="oheader">
+					<field-map field-name="orderId" from-field="parameters.orderId"/>
+				</entity-one>
+				<property-map resource="FabricFacilityUiLabels" map-name="uiLabelMap" global="true"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                   	<decorator-section name="body">
+	                   	<include-menu name="PurchaseOrderManagement" location="component://zuczugcommon/widget/ZuczugCommonMenus.xml"/>
+	                   	<link target="AddFabricPurchase" text="新建采购单" style="buttontext">
+	                   		<parameter param-name="purchaseType"/>
+	                   	</link>
+                   		<include-menu name="FindOrderTabBar" location="component://zuczugcommon/widget/ZuczugCommonMenus.xml"/>
+	                   	<screenlet id="searchOptions" name="findScreenlet" collapsible="true" save-collapsed="true" initially-collapsed="true" title="${uiLabelMap.CommonSearchOptions}">
+		                    <container id="search-options">
+		                        <include-form name="SearchAccessoryPurchaseOrder" location="component://zuczugcommon/widget/ZuczugCommonOrderForms.xml"/>
+		                    </container>
+		                </screenlet>
+		                
+		                <screenlet id="search-results" title="采购单列表">
+		                    <container id="search-results">
+		                        <include-form name="ListAccessoryPurchaseOrder" location="component://zuczugcommon/widget/ZuczugCommonOrderForms.xml"/>
+		                    </container>
+		                </screenlet>
+                   </decorator-section>
+               </decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	
+	<screen name="AddFabricPurchase">
+		<section>
+			<actions>
+				<set field="titleProperty" value="EditMaterialProduct"/>
+				<set field="headerItem" value="AccessoryPurchase"/>
+				<set field="tabButtonItem" value="FindAccessoryPurchase"/>               
+				<set field="labelTitleProperty" value="PageTitleEditMaterialProduct"/>
+				<set field="productId" from-field="parameters.productId"/>
+				<set field="purchaseType" from-field="parameters.purchaseType"/>
+				<entity-one entity-name="OrderHeader" value-field="oheader">
+					<field-map field-name="orderId" from-field="parameters.orderId"/>
+				</entity-one>
+				<entity-condition list="facilityList" entity-name="Facility">
+            		<condition-list combine="or">
+            			<condition-expr field-name="facilityTypeId" value="WAREHOUSE"/>
+            			<condition-expr field-name="facilityTypeId" value="PLANT"/>
+            		</condition-list>
+            	</entity-condition>
+				<set field="cart" value="${groovy:org.ofbiz.order.shoppingcart.ShoppingCartEvents.getCartObject(request)}" type="Object"/>
+				<set field="cartItems" value="${groovy:cart.items()}" type="Object"/>
+				
+				<entity-and list="suppliers" entity-name="PartyRole">
+					<field-map field-name="roleTypeId" value="SUPPLIER"/>
+				</entity-and>
+				<!-- 获取已经在购物车中的数据 -->
+				<!-- <script location="component://fabricdevelopment/webapp/fabricdevelopment/WEB-INF/actions/purchaseShoppingCart.groovy" /> -->
+				<set field="layoutSettings.javaScripts[]" value="/zuczugcommon/upload/plugins/validate/additional-methods.js" global="true"/>
+				<property-map resource="FabricFacilityUiLabels" map-name="uiLabelMap" global="true"/>
+				<property-map resource="FabricDevelopmentUiLabels" map-name="uiLabelMap" global="true"/>
+			
+				<!-- 所有的服务项目 -->
+				<entity-and list="serviceList" entity-name="Product">
+					<field-map field-name="productTypeId" value="SERVICE"/>
+					<select-field field-name="productId"/>
+					<select-field field-name="productName"/>
+				</entity-and>
+				<set field="supplier" value="${groovy:orh.getPartyFromRole('SUPPLIER')}" type="Object"/>
+				
+			</actions>
+			<widgets>
+              <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+					<decorator-section name="body">
+						<include-menu name="PurchaseOrderManagement" location="component://zuczugcommon/widget/ZuczugCommonMenus.xml"/>
+						<platform-specific>
+							<html>
+								<html-template location="component://zuczugcommon/webapp/zuczugcommon/html/order/editAccessoryPurchase.ftl"/>
+							</html>
+						</platform-specific>
+                   	</decorator-section>
+               	</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	
+	<screen name="FindFabricPurchaseItem">
+        <section>
+            <actions>
+                <set field="headerItem" value="AccessoryPurchase"/>
+				<set field="tabButtonItem" value="FindAccessoryPurchase"/> 
+            	<property-map resource="FabricDevelopmentUiLabels" map-name="uiLabelMap" global="true"/>
+            	<set field="layoutSettings.javaScripts[]" value="/zuczugcommon/upload/plugins/validate/additional-methods.js" global="true"/>
+            	<entity-one value-field="orderHeader" entity-name="OrderHeader"></entity-one>
+            	<entity-and list="oisgList" entity-name="OrderItemShipGroup">
+            		<field-map field-name="orderId" from-field="parameters.orderId"/>
+            	</entity-and>  
+            	<entity-one value-field="oa" entity-name="OrderAttribute">
+            		<field-map field-name="orderId" from-field="orderId"/>
+            		<field-map field-name="attrName" value="purchaseType"/>
+            	</entity-one>  
+            	<set field="purchaseType" from-field="parameters.purchaseType"/>  	
+            	<entity-condition list="facilityList" entity-name="Facility">
+            		<condition-list combine="or">
+            			<condition-expr field-name="facilityTypeId" operator="equals" value="WAREHOUSE"/>
+            			<condition-expr field-name="facilityTypeId" operator="equals" value="PLANT"/>
+            		</condition-list>
+            	</entity-condition>
+            	<set field="orderId" from-field="parameters.orderId"/>
+            	<!-- 供应商 -->
+            	<set field="orh" value="${groovy:org.ofbiz.order.order.OrderReadHelper.getHelper(orderHeader)}" type="Object"/>
+            	<set field="supplier" value="${groovy:orh.getPartyFromRole('SUPPLIER')}" type="Object"/>
+				<set field="supplierId" from-field="supplier.partyId"/>
+				
+				<!-- 所有的服务项目 -->
+				<entity-and list="serviceList" entity-name="Product">
+					<field-map field-name="productTypeId" value="SERVICE"/>
+					<select-field field-name="productId"/>
+					<select-field field-name="productName"/>
+				</entity-and>
+				<set field="cart" value="${groovy:org.ofbiz.order.shoppingcart.ShoppingCartEvents.getCartObject(request)}" type="Object"/>
+				
+				<entity-one value-field="orderHeader" entity-name="OrderHeader">
+					<field-map field-name="orderId" from-field="parameters.orderId"/>
+				</entity-one>
+				<set field="agentSupplier" value="${groovy:orh.getPartyFromRole('SUPPLIER_AGENT')}" type="Object"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="AccessoryDevelopmentCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                    	<include-menu name="PurchaseOrderManagement" location="component://zuczugcommon/widget/ZuczugCommonMenus.xml"/>
+	                    <include-menu name="OrderTabBar" location="component://zuczugcommon/widget/ZuczugCommonMenus.xml"/>
+	                    
+	                    <screenlet id="orderHeader" title="订单信息">
+                    		<include-form name="purchaseOrderHeader" location="component://zuczugcommon/widget/ZuczugCommonOrderForms.xml"/>
+                    	</screenlet>
+                    	<section>
+                    		<condition>
+                    			<if-compare operator="equals" value="Y" field="parameters.editFlag"/>
+                    		</condition>
+                    		<widgets>
+                    			<platform-specific>
+			                    	<html><html-template location="component://zuczugcommon/webapp/zuczugcommon/html/order/editAccessoryOrderItemDetail.ftl"/></html>
+			                    </platform-specific>
+                    		</widgets>
+                    		<fail-widgets>
+                    			<platform-specific>
+			                    	<html><html-template location="component://zuczugcommon/webapp/zuczugcommon/html/order/orderItemDetail.ftl"/></html>
+			                    </platform-specific>
+                    		</fail-widgets>
+                    	</section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="EditOrderShipmentGroups">
+        <section>
+            <actions>
+                <set field="headerItem" value="AccessoryPurchase"/><!-- this highlights the selected menu-item with name "main" -->
+                <set field="tabButtonItem" value="FindAccessoryPurchase" />
+            	<property-map resource="FabricDevelopmentUiLabels" map-name="uiLabelMap" global="true"/>
+            	<set field="layoutSettings.javaScripts[]" value="/zuczugcommon/upload/plugins/validate/additional-methods.js" global="true"/>
+            	<entity-one value-field="orderHeader" entity-name="OrderHeader"></entity-one>
+            	<entity-and list="oisgList" entity-name="OrderItemShipGroup">
+            		<field-map field-name="orderId" from-field="parameters.orderId"/>
+            	</entity-and>
+            	<set field="purchaseType" from-field="parameters.purchaseType"/>
+            	<entity-condition list="facilityList" entity-name="Facility">
+            		<condition-list combine="or">
+            			<condition-expr field-name="facilityTypeId" operator="equals" value="WAREHOUSE"/>
+            			<condition-expr field-name="facilityTypeId" operator="equals" value="PLANT"/>
+            		</condition-list>
+            	</entity-condition>
+            	
+            	<!-- 供应商 -->
+            	<set field="orh" value="${groovy:org.ofbiz.order.order.OrderReadHelper.getHelper(orderHeader)}" type="Object"/>
+            	<set field="supplier" value="${groovy:orh.getPartyFromRole('SUPPLIER')}" type="Object"/>
+				<set field="supplierId" from-field="supplier.partyId"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="AccessoryDevelopmentCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                    	<include-menu name="PurchaseOrderManagement" location="component://zuczugcommon/widget/ZuczugCommonMenus.xml"/>
+                    	<link target="FindFabricPurchaseItem?purchaseType=${purchaseType}&amp;orderId=${parameters.orderId}" url-mode="plain" text="结束修改" style="buttontext" />
+                    	<!-- <screenlet id="orderHeader" title="订单信息">
+                    		<include-form name="purchaseOrderHeader" location="component://fabricdevelopment/widget/FabricDevelopmentForms.xml"/>
+                    	</screenlet> -->
+               			<platform-specific>
+	                    	<html><html-template location="component://zuczugcommon/webapp/zuczugcommon/html/order/editOrderShipmentGroups.ftl"/></html>
+	                    </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="AddProductPurchase">
+		<section>
+			<actions>
+				<set field="titleProperty" value="EditMaterialProduct"/>
+				<set field="headerItem" value="AccessoryPurchase"/>
+				<set field="tabButtonItem" value="FindAccessoryPurchase"/>               
+				<set field="labelTitleProperty" value="PageTitleEditMaterialProduct"/>
+				<set field="productId" from-field="parameters.productId"/>
+				<entity-one entity-name="OrderHeader" value-field="oheader">
+					<field-map field-name="orderId" from-field="parameters.orderId"/>
+				</entity-one>
+				<entity-condition list="facilityList" entity-name="Facility">
+            		<condition-list combine="or">
+            			<condition-expr field-name="facilityTypeId" value="WAREHOUSE"/>
+            			<condition-expr field-name="facilityTypeId" value="PLANT"/>
+            		</condition-list>
+            	</entity-condition>
+				<set field="cart" value="${groovy:org.ofbiz.order.shoppingcart.ShoppingCartEvents.getCartObject(request)}" type="Object"/>
+				<set field="cartItems" value="${groovy:cart.items()}" type="Object"/>
+				
+				<entity-and list="suppliers" entity-name="PartyRole">
+					<field-map field-name="roleTypeId" value="SUPPLIER"/>
+				</entity-and>
+				<!-- 获取已经在购物车中的数据 -->
+				<!-- <script location="component://fabricdevelopment/webapp/fabricdevelopment/WEB-INF/actions/purchaseShoppingCart.groovy" /> -->
+				<set field="layoutSettings.javaScripts[]" value="/zuczugcommon/upload/plugins/validate/additional-methods.js" global="true"/>
+				<property-map resource="FabricFacilityUiLabels" map-name="uiLabelMap" global="true"/>
+				<property-map resource="FabricDevelopmentUiLabels" map-name="uiLabelMap" global="true"/>
+			
+				<!-- 所有的服务项目 -->
+				<entity-and list="serviceList" entity-name="Product">
+					<field-map field-name="productTypeId" value="SERVICE"/>
+					<select-field field-name="productId"/>
+					<select-field field-name="productName"/>
+				</entity-and>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+					<decorator-section name="body">
+						<platform-specific>
+							<html>
+								<html-template location="component://commoditymanagement/webapp/commoditymanagement/WEB-INF/html/editProductPurchase.ftl"/>
+							</html>
+						</platform-specific>
+                   	</decorator-section>
+               	</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	
+	<screen name="FindOrderByKeyword">
+		<section>
+           <actions>
+               <set field="titleProperty" value="FindAccessoryPurchase"/>
+               <set field="headerItem" value="FindAccessoryPurchase"/>
+               <set field="tabButtonItem" value="FindAccessoryPurchase"/>               
+               <set field="labelTitleProperty" value="FindAccessoryPurchase"/>   
+               <set field="purchaseType" from-field="parameters.purchaseType"/>
+       
+           </actions>
+           <widgets>
+               <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                   <decorator-section name="body">                  		
+                        <include-menu location="component://zuczugcommon/widget/ZuczugCommonMenus.xml" name="PurchaseOrderManagement"/>                   	
+                    	<link target="AddFabricPurchase" text="新建采购单" style="buttontext"></link>
+                    	
+                    	<include-menu name="FindOrderTabBar" location="component://zuczugcommon/widget/ZuczugCommonMenus.xml"/>
+                        <decorator-screen name="FindScreenDecorator" location="component://common/widget/CommonScreens.xml">
+                   			<decorator-section name="search-options">
+                        		<include-form name="FindOrderByKeyword" location="component://zuczugcommon/widget/ZuczugCommonForms.xml"/>
+                   			</decorator-section>
+                   			<decorator-section name="search-results">
+                         		<include-form name="ListOrderByKeyword" location="component://zuczugcommon/widget/ZuczugCommonForms.xml"/>                   
+                   			</decorator-section>
+                   		</decorator-screen>                       
+                   </decorator-section>
+               </decorator-screen>
+           </widgets>
+		</section>
+	</screen>
+</screens>

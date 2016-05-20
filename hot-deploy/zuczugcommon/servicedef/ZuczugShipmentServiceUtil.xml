@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <vendor></vendor>
+    <version>1.0</version>
+
+    <!-- shipment占用库存数量准备发货 -->
+    <service name="PlaneShipmentForIssuance" engine="java"
+            location="com.zuczug.shipment.SalesShipmentServices" invoke="planeShipmentForIssuance" transaction-timeout="7200">
+        <description>shipment占用库存数量准备发货 by liujia</description>
+        <attribute name="shipmentId" type="String" mode="IN" optional="false"/>
+    </service>
+    
+    <service name="createShipmentAndAttribute" default-entity-name="Shipment" engine="simple"
+            location="component://zuczugcommon/script/ZuczugShipmentServices.xml" invoke="createShipmentAndAttribute" auth="true">
+        <description>Create 发货单  by liujia</description>
+        <permission-service service-name="facilityGenericPermission" main-action="CREATE"/>
+        <auto-attributes include="pk" mode="OUT" optional="false"/>
+        <auto-attributes include="pk" mode="IN" optional="true"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true">
+            <exclude field-name="createdDate"/>
+            <exclude field-name="createdByUserLogin"/>
+            <exclude field-name="lastModifiedDate"/>
+            <exclude field-name="lastModifiedByUserLogin"/>
+        </auto-attributes>
+        <attribute name="shipmentAttribute" type="String" mode="IN" optional="false"/>
+    </service>
+</services>

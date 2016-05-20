@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-engine-xml>
+    <SecurityPermission description="View operations in the ZuczugCommon Component." permissionId="ZUCZUGUTIL_VIEW"/>
+    <SecurityPermission description="Create operations in the ZuczugCommon Component." permissionId="ZUCZUGUTIL_CREATE"/>
+    <SecurityPermission description="Update operations in the ZuczugCommon Component." permissionId="ZUCZUGUTIL_UPDATE"/>
+    <SecurityPermission description="Delete operations in the ZuczugCommon Component." permissionId="ZUCZUGUTIL_DELETE"/>
+    <SecurityPermission description="ALL operations in the ZuczugCommon Component." permissionId="ZUCZUGUTIL_ADMIN"/>
+    <SecurityGroupPermission groupId="FULLADMIN" permissionId="ZUCZUGUTIL_ADMIN"/>
+    <SecurityGroupPermission groupId="FLEXADMIN" permissionId="ZUCZUGUTIL_CREATE"/>
+    <SecurityGroupPermission groupId="FLEXADMIN" permissionId="ZUCZUGUTIL_DELETE"/>
+    <SecurityGroupPermission groupId="FLEXADMIN" permissionId="ZUCZUGUTIL_UPDATE"/>
+    <SecurityGroupPermission groupId="FLEXADMIN" permissionId="ZUCZUGUTIL_VIEW"/>
+    <SecurityGroupPermission groupId="VIEWADMIN" permissionId="ZUCZUGUTIL_VIEW"/>
+    <SecurityGroupPermission groupId="BIZADMIN" permissionId="ZUCZUGUTIL_ADMIN"/>
+</entity-engine-xml>

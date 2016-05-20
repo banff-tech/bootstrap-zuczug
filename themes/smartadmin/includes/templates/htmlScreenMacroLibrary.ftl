@@ -94,10 +94,10 @@ under the License.
       <#elseif style=="h6">
         <h6${idText}>${text}</h6>
       <#else>
-        <span${idText} class="${style}">${text}</span>
+        <!-- <span${idText} class="${style}">${text}</span> -->
       </#if>
     <#else>
-      <span${idText}>${text}</span>
+      <span${idText}><!-- ${text} --> &nbsp;</span>
     </#if>
   </#if>
 </#macro>

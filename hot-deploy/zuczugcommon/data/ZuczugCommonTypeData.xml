@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-engine-xml>
+	<GoodIdentificationType goodIdentificationTypeId="ZUCZUG_CODE" description="素然物料编号"/>
+	<GoodIdentificationType goodIdentificationTypeId="IPAD_MEM_CODE" description="iPad助记码"/>
+	
+	<CustomMethod customMethodId="CM_TO_METER_FORMULA" customMethodTypeId="BOM_FORMULA" customMethodName="cmToMeterComponentFormula" description="因为很多面辅料的单位是米，而板房填写的时候都是按厘米来填写的，所以，需要有个service，在进行成本用量计算的时候，将板房的厘米转换成米。" />
+
+	<!-- 文件类型 -->
+	<MimeType mimeTypeId="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" description="微软excel2010"/>
+	<FileExtension fileExtensionId="xlsx" mimeTypeId="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
+	<FileExtension fileExtensionId="xls" mimeTypeId="application/vnd.ms-excel"/>
+	
+	<OrderContentType orderContentTypeId="DELIVERY_NOTE" hasTable="N" description="订单项的码单"/>
+	
+	
+	<!-- 几个服务的产品的类型 -->
+	<Product productId="XiaoGangFei" internalName="小缸费" productName="小缸费" isVirtual="N" isVariant="N" productTypeId="SERVICE" />
+	<Product productId="BanFei" internalName="版费" productName="版费" isVirtual="N" isVariant="N" productTypeId="SERVICE" />
+	<Product productId="ShangJiFei" internalName="上机费" productName="上机费" isVirtual="N" isVariant="N" productTypeId="SERVICE" />
+	<Product productId="BOOTUP_SERVICE" internalName="开机费" productName="开机费" isVirtual="N" isVariant="N" productTypeId="SERVICE" />
+	<Product productId="MoJuFei" internalName="模具费" productName="模具费" isVirtual="N" isVariant="N" productTypeId="SERVICE" />
+	<Product productId="RanSeFei" internalName="染色费" productName="染色费" isVirtual="N" isVariant="N" productTypeId="SERVICE" />
+	<Product productId="ShuiXiFei" internalName="水洗费" productName="水洗费" isVirtual="N" isVariant="N" productTypeId="SERVICE" />
+	<Product productId="YunFei" internalName="运费" productName="运费" isVirtual="N" isVariant="N" productTypeId="SERVICE" />
+	<Product productId="YinHuaFei" internalName="印花费" productName="印花费" isVirtual="N" isVariant="N" productTypeId="SERVICE" />
+	<Product productId="XiuLiFei" internalName="修理费" productName="修理费" isVirtual="N" isVariant="N" productTypeId="SERVICE" />
+	<Product productId="JianCheFei" internalName="检测费" productName="检测费" isVirtual="N" isVariant="N" productTypeId="SERVICE" />
+	<Product productId="DaiLiFei" internalName="代理费" productName="代理费" isVirtual="N" isVariant="N" productTypeId="SERVICE" />
+	
+	<ProductType description="设计材料" isPhysical="Y" isDigital="N" hasTable="N" parentTypeId="GOOD" productTypeId="PROPOSED_GOOD"/>
+	
+	<RoleType description="designer" hasTable="N" parentTypeId="EMPLOYEE" roleTypeId="DESIGNER"/>
+	<RoleType description="pattern maker" hasTable="N" parentTypeId="EMPLOYEE" roleTypeId="PATTERN"/>
+	<PartyRole partyId="198760" roleTypeId="BUYER"/> 
+	<PartyRole partyId="198761" roleTypeId="DESIGNER"/> 
+	<PartyRole partyId="198762" roleTypeId="WORKER"/> 
+	<PartyRole partyId="198763" roleTypeId="PATTERN"/> 
+	
+    <ProductContentType description="Color" hasTable="N" parentTypeId="" productContentTypeId="COLOR"/>
+	
+</entity-engine-xml>

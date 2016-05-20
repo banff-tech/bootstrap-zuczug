@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site-conf xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/site-conf.xsd">
+    <!-- The controller elements that are common to all OFBiz components
+         can be found in the following xml file. A component can override the
+         elements found in the common-controller.xml file. -->
+
+    <description>查询弹出框的controller，可以被引用</description>
+	
+	<request-map uri="lookupAccessoryByType">
+		<description>查询辅料</description>
+	    <security auth="true"/>
+	    <response name="success" type="view" value="lookupAccessoryByType"/>
+    </request-map>
+	
+	<request-map uri="lookupAccessory">
+		<description>查询辅料</description>
+	    <security auth="true"/>
+	    <response name="success" type="view" value="lookupAccessory"/>
+    </request-map>
+    <request-map uri="lookupAccessoryByOther">
+		<description>查询辅料</description>
+	    <security auth="true"/>
+	    <response name="success" type="view" value="lookupAccessoryByOther"/>
+    </request-map>
+    <request-map uri="lookupAccessoryByMetal">
+		<description>查询辅料金属件</description>
+	    <security auth="true"/>
+	    <response name="success" type="view" value="lookupAccessoryByMetal"/>
+    </request-map>
+	<request-map uri="lookupAccessoryNotVirtual">
+		<description>查询辅料非虚拟</description>
+	    <security auth="true"/>
+	    <response name="success" type="view" value="lookupAccessoryNotVirtual"/>
+    </request-map>
+    
+    <request-map uri="lookupFabric">
+    	<description>查询面料</description>
+	    <security auth="true"/>
+	    <response name="success" type="view" value="lookupFabric"/>
+    </request-map>
+    <request-map uri="LookupFabricNoVirtual">
+    	<description>查询面料非虚拟</description>
+	    <security auth="true"/>
+	    <response name="success" type="view" value="LookupFabricNoVirtual"/>
+    </request-map>
+    <request-map uri="lookupOrderFabric">
+    	<description>查询面料</description>
+	    <security auth="true"/>
+	    <response name="success" type="view" value="lookupOrderFabric"/>
+    </request-map>
+    <request-map uri="lookupOrderAccessory">
+    	<description>查询辅料</description>
+	    <security auth="true"/>
+	    <response name="success" type="view" value="lookupOrderAccessory"/>
+    </request-map>
+    <request-map uri="lookupOrderYarn">
+    	<description>查询纱线</description>
+	    <security auth="true"/>
+	    <response name="success" type="view" value="lookupOrderYarn"/>
+    </request-map>
+    <request-map uri="LookupFabricNoVariant">
+    	<description>查询面料，虚拟商品</description>
+	    <security auth="true"/>
+	    <response name="success" type="view" value="LookupFabricNoVariant"/>
+    </request-map>
+    
+    <request-map uri="lookupYarn">
+    	<description>查询纱线</description>
+        <security auth="true" https="true"/>
+        <response name="success" type="view" value="lookupYarn"/>
+    </request-map>
+    <request-map uri="LookupYarnNoVariant">
+    	<description>查询纱线，非变型</description>
+        <security auth="true" https="true"/>
+        <response name="success" type="view" value="LookupYarnNoVariant"/>
+    </request-map>
+    <request-map uri="LookupYarnNoVirtual">
+    	<description>查询纱线，非虚拟</description>
+        <security auth="true" https="true"/>
+        <response name="success" type="view" value="LookupYarnNoVirtual"/>
+    </request-map>
+    
+    <request-map uri="LookupSupplier">
+    	<description>查询供应商</description>
+	    <security auth="true"/>
+	    <response name="success" type="view" value="LookupSupplier"/>
+    </request-map>
+    
+    <request-map uri="LookupProductIngredient">
+    	<description>根据组编号查询该组下的特征</description>
+	    <security auth="true"/>
+	    <response name="success" type="view" value="LookupProductIngredient"/>
+    </request-map>
+    
+    <request-map uri="LookupProductFeatureByGroup">
+    	<description>根据组编号查询该组下的特征</description>
+	    <security auth="true"/>
+	    <response name="success" type="view" value="LookupProductFeatureByGroup"/>
+    </request-map>
+    
+    <request-map uri="LookupProduct">
+    	<description>无条件查询商品</description>
+    	<security auth="true" />
+    	<response name="success" type="view" value="LookupProduct"/>
+    </request-map>
+    
+    <request-map uri="lookupProductFeatureWithType">
+    	<description>根据特征类型查询特征的</description>
+	    <security auth="true"/>
+	    <response name="success" type="view" value="lookupProductFeatureWithType"/>
+    </request-map>
+    
+    <request-map uri="lookupIdentification">
+    	<description></description>
+	    <security auth="true"/>
+	    <response name="success" type="view" value="lookupIdentification"/>
+    </request-map>
+    
+    <request-map uri="LookupColor">
+    	<description>查询颜色</description>
+	    <security auth="true"/>
+	    <response name="success" type="view" value="LookupColor"/>
+    </request-map>
+    
+    <request-map uri="lookupProdGroupName">
+    	<description>查询组别</description>
+    	<security https="false" auth="true"/>
+    	<response name="success" type="view" value="lookupProdGroupName"/>
+    </request-map>
+    
+    <request-map uri="LookupFacility">
+    	<description>查询仓库,可以带ownerId、facilityTypeId 作为条件</description>
+    	<security https="false" auth="true"/>
+    	<response name="success" type="view" value="LookupFacility"/>
+    </request-map>
+    
+    <request-map uri="LookupProductMatch">
+    	<description>在添加搭配的时候选择商品，只显示中码的商品</description>
+    	<security https="false" auth="true"/>
+    	<response name="success" type="view" value="LookupProductMatch"/>
+    </request-map> 
+    
+    <request-map uri="LookupRealProductNoVirtual">
+    	<description>搜寻正式商品的变型</description>
+    	<security https="false" auth="true"/>
+    	<response name="success" type="view" value="LookupRealProductNoVirtual"/>
+    </request-map> 
+    
+    <request-map uri="LookupMaterialsAndClothsNoVirtual">
+    	<description>搜寻所有非变性</description>
+    	<security https="false" auth="true"/>
+    	<response name="success" type="view" value="LookupMaterialsAndClothsNoVirtual"/>
+    </request-map> 
+    
+    <request-map uri="LookupRealProductNoVirtualForSku">
+    	<description>查询商品非虚拟</description>
+	    <security auth="true"/>
+	    <response name="success" type="view" value="LookupRealProductNoVirtualForSku"/>
+    </request-map>
+    
+    <request-map uri="LookupRealProductNoVirtualForSkuNoAjex">
+    	<description>查询商品非虚拟</description>
+	    <security auth="true"/>
+	    <response name="success" type="view" value="LookupRealProductNoVirtualForSkuNoAjex"/>
+    </request-map>
+    
+    <request-map uri="LookupRealProductNoVariantForSku">
+    	<description>查询商品虚拟</description>
+	    <security auth="true"/>
+	    <response name="success" type="view" value="LookupRealProductNoVariantForSku"/>
+    </request-map>
+    
+    <request-map uri="LookupInventoryItem">
+    	<description>查询库存明细</description>
+	    <security auth="true"/>
+	    <response name="success" type="view" value="LookupInventoryItem"/>
+    </request-map>
+    
+    <request-map uri="LookupPartyName">
+	    <security auth="true"/>
+	    <response name="success" type="view" value="LookupPartyName"/>
+    </request-map>
+    
+    <request-map uri="ListLookupProductIngredient">
+	    <security auth="true"/>
+	    <response name="success" type="view" value="LookupProductIngredient"/>
+    </request-map>
+    <request-map uri="LookupProductCatalogCategory">
+    	<security auth="true" https="true"/>
+    	<response name="success" type="view" value="LookupProductCatalogCategory"/>
+    </request-map>
+    <request-map uri="LookupProductCatalogCategory">
+	    <security auth="true" https="true"/>
+	    <response name="success" type="view" value="LookupProductCatalogCategory"/>
+    </request-map>
+    <request-map uri="LookupProductCategory"><security auth="true" https="true"/><response name="success" type="view" value="LookupProductCategory"/></request-map>
+    
+    <request-map uri="lookupProductByType">
+    	<description>查询商品非虚拟</description>
+	    <security auth="true"/>
+	    <response name="success" type="view" value="lookupProductByType"/>
+    </request-map>
+    
+    <request-map uri="lookupVirtualAccessoryProduct">
+		<description>查询辅料</description>
+	    <security auth="true"/>
+	    <response name="success" type="view" value="lookupVirtualAccessoryProduct"/>
+    </request-map>
+    
+    <request-map uri="lookupAccessoryProductInCatalog">
+		<description>查询辅料</description>
+	    <security auth="true"/>
+	    <response name="success" type="view" value="lookupAccessoryProductInCatalog"/>
+    </request-map>
+    
+    <request-map uri="LookupFacilityLocation">
+    	<security auth="true" https="true"/>
+    	<response name="success" type="view" value="LookupFacilityLocation"/>
+    </request-map>
+    
+    <request-map uri="lookupSupplierProductNotVirtual">
+    	<security auth="true" https="true"/>
+    	<response name="success" type="view" value="lookupSupplierProductNotVirtual"/>
+    </request-map>
+    
+    <!-- 省市区联查 -->
+	<request-map uri="getNextAssocGeoList">
+		<security https="false" auth="false" />
+		<event type="service" invoke="getNextAssocGeoList" />
+		<response name="success" type="request" value="json" />
+		<response name="error" type="request" value="json" />
+	</request-map>
+	
+	<request-map uri="LookupDesignProduct">
+		<description>查询设计商品</description>
+	    <security auth="true"/>
+	    <response name="success" type="view" value="LookupDesignProduct"/>
+    </request-map>
+
+    <view-map name="lookupAccessory" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#lookupAccessory"/>
+    <view-map name="lookupAccessoryByType" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#lookupAccessoryByType"/>
+    <view-map name="lookupAccessoryByOther" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#lookupAccessoryByOther"/>
+    <view-map name="lookupAccessoryByMetal" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#lookupAccessoryByMetal"/>
+    <view-map name="LookupProductIngredient" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#LookupProductIngredient"/>
+    
+    
+    
+    <view-map name="lookupAccessoryNotVirtual" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#lookupAccessoryNotVirtual"/>
+	<view-map name="lookupFabric" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#lookupFabric"/>
+	<view-map name="lookupOrderFabric" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#lookupOrderFabric"/>
+	<view-map name="lookupOrderAccessory" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#lookupOrderAccessory"/>
+	<view-map name="lookupOrderYarn" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#lookupOrderYarn"/>
+	<view-map name="LookupSupplier" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#LookupSupplier"/>
+	<view-map name="LookupProductFeatureByGroup" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#LookupProductFeatureByGroup"/>
+	<view-map name="LookupProductIngredient" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#LookupProductIngredient"/>
+	
+	<view-map name="LookupProduct" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#LookupProduct" type="screen"/>
+	<view-map name="LookupFabricNoVariant" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#LookupFabricNoVariant"/>
+	<view-map name="LookupFabricNoVirtual" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#LookupFabricNoVirtual"/>
+	<view-map name="LookupYarnNoVariant" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#LookupYarnNoVariant"/>
+	<view-map name="LookupYarnNoVirtual" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#LookupYarnNoVirtual"/>
+	<view-map name="lookupYarn" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#lookupYarn"/>
+	<view-map name="lookupProductFeatureWithType" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#lookupProductFeatureWithType"/>
+	<view-map name="lookupIdentification" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#lookupIdentification"/>
+	<view-map name="LookupColor" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#LookupColor"/>
+	<view-map name="lookupProdGroupName" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#lookupProdGroupName"/>
+	<view-map name="LookupFacility" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#LookupFacility"/>
+	<view-map name="LookupProductMatch" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#LookupProductMatch"/>
+	<view-map name="LookupRealProductNoVirtual" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#LookupRealProductNoVirtual"/>
+	<view-map name="LookupMaterialsAndClothsNoVirtual" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#LookupMaterialsAndClothsNoVirtual"/>
+	<view-map name="LookupRealProductNoVirtualForSku" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#LookupRealProductNoVirtualForSku"/>
+
+	<view-map name="LookupRealProductNoVariantForSku" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#LookupRealProductNoVariantForSku"/>
+	<view-map name="lookupSupplierProductNotVirtual" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#lookupSupplierProductNotVirtual"/>
+	<view-map name="LookupDesignProduct" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#LookupDesignProduct"/>
+	<view-map name="lookupAccessoryProductInCatalog" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#lookupAccessoryProductInCatalog"/>
+	
+	
+	<view-map name="LookupRealProductNoVirtualForSkuNoAjex" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#LookupRealProductNoVirtualForSkuNoAjex"/>
+	<view-map name="LookupInventoryItem" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#LookupInventoryItem"/>
+	<view-map name="LookupProductCatalogCategory" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#LookupProductCatalogCategory"/>
+	<view-map name="LookupProductCategory" type="screen" page="component://product/widget/catalog/LookupScreens.xml#LookupProductCategory"/>
+    <view-map name="LookupProductCatalogCategory" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#LookupProductCatalogCategory"/>
+	<view-map name="lookupProductByType" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#lookupProductByType"/>	
+    <view-map name="lookupVirtualAccessoryProduct" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#lookupVirtualAccessoryProduct"/>	
+    <view-map name="LookupFacilityLocation" page="component://product/widget/facility/LookupScreens.xml#LookupFacilityLocation" type="screen"/>
+	<view-map name="LookupPartyName" type="screen" page="component://party/widget/partymgr/LookupScreens.xml#LookupPartyName"/>
+	
+	
+</site-conf>

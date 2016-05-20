@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+    <!-- ========================================================= -->
+    <!-- ======================== Defaults ======================= -->
+    <!-- ========================================================= -->
+    <title>Entity of Haze Component</title>
+    <description>None</description>
+    <copyright></copyright>
+    <version></version>
+    
+    <extend-entity entity-name="PostalAddress">
+        <field name="phoneNumber" type="id"><description>电话号码</description></field>
+        <field name="cityGeoId" type="id"><description>城市编号</description></field>
+    </extend-entity>
+
+    <view-entity entity-name="ProductFacilityInventoryItem" package-name="org.ofbiz.product.facility" title="ProductFacilityLocation Quantity Test View Entity">
+        <member-entity entity-alias="PRD" entity-name="Product"/>
+        <member-entity entity-alias="FCL" entity-name="Facility"/>
+        <member-entity entity-alias="II" entity-name="InventoryItem"/>
+        <alias entity-alias="PRD" name="productId" group-by="true"/>
+        <alias entity-alias="FCL" name="facilityId" group-by="true"/>
+        <alias entity-alias="PRD" name="productName" group-by="true"/>
+        <alias entity-alias="PRD" name="internalName" group-by="true"/>
+        <alias entity-alias="II" name="availableToPromiseTotal" function="sum"/>
+        <alias entity-alias="II" name="quantityOnHandTotal" function="sum"/>
+        <view-link entity-alias="II" rel-entity-alias="FCL">
+            <key-map field-name="facilityId"/>
+        </view-link>
+        <view-link entity-alias="II" rel-entity-alias="PRD">
+            <key-map field-name="productId"/>
+        </view-link>
+    </view-entity>
+    
+    <view-entity entity-name="ProductCategoryGoodIdentificationView"
+			package-name="org.ofbiz.product.catalog"
+			title="Product Supplier View">
+		<member-entity entity-alias="P" entity-name="Product"></member-entity>		
+		<member-entity entity-alias="DI" entity-name="GoodIdentification"></member-entity>			
+		<member-entity entity-alias="PCC" entity-name="ProdCatalogCategory"></member-entity>
+		<member-entity entity-alias="PCM" entity-name="ProductCategoryMember"></member-entity>	
+		<alias entity-alias="P" name="productId"/>
+		<alias entity-alias="P" name="productTypeId"/>
+		<alias entity-alias="P" name="productName"/>
+		<alias entity-alias="P" name="internalName"/>
+		<alias entity-alias="P" name="description"/>
+		<alias entity-alias="P" name="comments"/>
+		<alias entity-alias="P" name="longDescription"/>
+		<alias entity-alias="P" name="widthUomId"/>
+		<alias entity-alias="P" name="productWidth"/>
+		<alias entity-alias="P" name="isVariant"/>
+		<alias entity-alias="P" name="isVirtual"/>
+		<alias entity-alias="P" name="createdByUserLogin"/>
+		<alias entity-alias="P" name="primaryProductCategoryId"/>
+		<alias entity-alias="P" name="createdStamp"/>
+		<alias entity-alias="P" name="lastUpdatedStamp"/>		
+		<alias entity-alias="DI" name="idValue"/>
+		
+		<view-link entity-alias="P" rel-entity-alias="PCM">
+			<key-map field-name="productId" rel-field-name="productId"/>
+			<entity-condition>				
+				<condition-list>
+					<condition-expr entity-alias="P" field-name="primaryProductCategoryId" operator="equals" rel-entity-alias="PCM" rel-field-name="productCategoryId"/>
+				</condition-list>
+			</entity-condition>
+		</view-link>
+		<view-link entity-alias="PCM" rel-entity-alias="PCC">
+			<key-map field-name="productCategoryId" rel-field-name="productCategoryId"/>			
+			<entity-condition>
+				<condition-expr entity-alias="PCC" field-name="prodCatalogId" operator="equals" value="MATERIAL_CATALOG"/>				
+			</entity-condition>
+		</view-link>
+		<view-link entity-alias="P" rel-entity-alias="DI" rel-optional="true">
+			<key-map field-name="productId"/>
+			<entity-condition>
+				<condition-expr entity-alias="DI" field-name="goodIdentificationTypeId" operator="equals" value="ZUCZUG_CODE"/>
+			</entity-condition>
+		</view-link>		
+	</view-entity>
+
+</entitymodel>

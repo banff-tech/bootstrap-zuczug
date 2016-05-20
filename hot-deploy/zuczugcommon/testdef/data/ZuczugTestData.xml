@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<entity-engine-xml>
+    <Product productId="DemoDesignProduct" productTypeId="WIP" productName="Demo Design Product" internalName="Test Design Product" isVirtual="Y" isVariant="N" createdDate="2006-03-23 23:05:32.915" />
+    <ProductFeatureAppl productId="DemoDesignProduct" productFeatureId="GENERAL_COLOR_001" productFeatureApplTypeId="SELECTABLE_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <ProductFeatureAppl productId="DemoDesignProduct" productFeatureId="GENERAL_COLOR_002" productFeatureApplTypeId="SELECTABLE_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <ProductFeatureAppl productId="DemoDesignProduct" productFeatureId="SIZE_2" productFeatureApplTypeId="SELECTABLE_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <ProductFeatureAppl productId="DemoDesignProduct" productFeatureId="SIZE_4" productFeatureApplTypeId="SELECTABLE_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <ProductFeatureAppl productId="DemoDesignProduct" productFeatureId="SIZE_6" productFeatureApplTypeId="SELECTABLE_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <Product productId="DemoDesignProduct-001-2" productTypeId="WIP" productName="Demo Product 1" isVirtual="N" isVariant="Y" createdDate="2006-03-23 23:05:32.915" />
+    <ProductFeatureAppl productId="DemoDesignProduct-001-2" productFeatureId="GENERAL_COLOR_001" productFeatureApplTypeId="STANDARD_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <ProductFeatureAppl productId="DemoDesignProduct-001-2" productFeatureId="SIZE_2" productFeatureApplTypeId="STANDARD_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <Product productId="DemoDesignProduct-001-4" productTypeId="WIP" productName="Demo Product 2" isVirtual="N" isVariant="Y" createdDate="2006-03-23 23:05:32.915" salesDiscontinuationDate="2007-03-23 23:05:32.915"/>
+    <ProductFeatureAppl productId="DemoDesignProduct-001-4" productFeatureId="GENERAL_COLOR_001" productFeatureApplTypeId="STANDARD_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <ProductFeatureAppl productId="DemoDesignProduct-001-4" productFeatureId="SIZE_4" productFeatureApplTypeId="STANDARD_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <Product productId="DemoDesignProduct-001-6" productTypeId="WIP" productName="Demo Product 3" isVirtual="N" isVariant="Y" createdDate="2006-03-23 23:05:32.915" />
+    <ProductFeatureAppl productId="DemoDesignProduct-001-6" productFeatureId="GENERAL_COLOR_001" productFeatureApplTypeId="STANDARD_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <ProductFeatureAppl productId="DemoDesignProduct-001-6" productFeatureId="SIZE_6" productFeatureApplTypeId="STANDARD_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <Product productId="DemoDesignProduct-002-2" productTypeId="WIP" productName="Demo Product 1" isVirtual="N" isVariant="Y" createdDate="2006-03-23 23:05:32.915" />
+    <ProductFeatureAppl productId="DemoDesignProduct-002-2" productFeatureId="GENERAL_COLOR_002" productFeatureApplTypeId="STANDARD_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <ProductFeatureAppl productId="DemoDesignProduct-002-2" productFeatureId="SIZE_2" productFeatureApplTypeId="STANDARD_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <Product productId="DemoDesignProduct-002-4" productTypeId="WIP" productName="Demo Product 2" isVirtual="N" isVariant="Y" createdDate="2006-03-23 23:05:32.915" salesDiscontinuationDate="2007-03-23 23:05:32.915"/>
+    <ProductFeatureAppl productId="DemoDesignProduct-002-4" productFeatureId="GENERAL_COLOR_002" productFeatureApplTypeId="STANDARD_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <ProductFeatureAppl productId="DemoDesignProduct-002-4" productFeatureId="SIZE_4" productFeatureApplTypeId="STANDARD_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <Product productId="DemoDesignProduct-002-6" productTypeId="WIP" productName="Demo Product 3" isVirtual="N" isVariant="Y" createdDate="2006-03-23 23:05:32.915" />
+    <ProductFeatureAppl productId="DemoDesignProduct-002-6" productFeatureId="GENERAL_COLOR_002" productFeatureApplTypeId="STANDARD_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <ProductFeatureAppl productId="DemoDesignProduct-002-6" productFeatureId="SIZE_6" productFeatureApplTypeId="STANDARD_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <ProductAssoc fromDate="2006-05-13 12:00:00.0" productAssocTypeId="PRODUCT_VARIANT" productId="DemoDesignProduct" productIdTo="DemoDesignProduct-001-2" quantity="1.0" reason=""/>
+    <ProductAssoc fromDate="2006-05-13 12:00:00.0" productAssocTypeId="PRODUCT_VARIANT" productId="DemoDesignProduct" productIdTo="DemoDesignProduct-001-4" quantity="1.0" reason=""/>
+    <ProductAssoc fromDate="2006-05-13 12:00:00.0" productAssocTypeId="PRODUCT_VARIANT" productId="DemoDesignProduct" productIdTo="DemoDesignProduct-001-6" quantity="1.0" reason=""/>
+    <ProductAssoc fromDate="2006-05-13 12:00:00.0" productAssocTypeId="PRODUCT_VARIANT" productId="DemoDesignProduct" productIdTo="DemoDesignProduct-002-2" quantity="1.0" reason=""/>
+    <ProductAssoc fromDate="2006-05-13 12:00:00.0" productAssocTypeId="PRODUCT_VARIANT" productId="DemoDesignProduct" productIdTo="DemoDesignProduct-002-4" quantity="1.0" reason=""/>
+    <ProductAssoc fromDate="2006-05-13 12:00:00.0" productAssocTypeId="PRODUCT_VARIANT" productId="DemoDesignProduct" productIdTo="DemoDesignProduct-002-6" quantity="1.0" reason=""/>
+
+    <Product productId="DemoProduct" productTypeId="FINISHED_GOOD" productName="Demo Product" internalName="Test Product" isVirtual="Y" isVariant="N" createdDate="2006-03-23 23:05:32.915" />
+    <ProductFeatureAppl productId="DemoProduct" productFeatureId="COLOR_62" productFeatureApplTypeId="SELECTABLE_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <ProductFeatureAppl productId="DemoProduct" productFeatureId="COLOR_P60" productFeatureApplTypeId="SELECTABLE_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <ProductFeatureAppl productId="DemoProduct" productFeatureId="SIZE_2" productFeatureApplTypeId="SELECTABLE_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <ProductFeatureAppl productId="DemoProduct" productFeatureId="SIZE_4" productFeatureApplTypeId="SELECTABLE_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <ProductFeatureAppl productId="DemoProduct" productFeatureId="SIZE_6" productFeatureApplTypeId="SELECTABLE_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <Product productId="DemoProduct-62-2" productTypeId="FINISHED_GOOD" productName="Demo Product 1" isVirtual="N" isVariant="Y" createdDate="2006-03-23 23:05:32.915" />
+    <ProductFeatureAppl productId="DemoProduct-62-2" productFeatureId="COLOR_62" productFeatureApplTypeId="STANDARD_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <ProductFeatureAppl productId="DemoProduct-62-2" productFeatureId="SIZE_2" productFeatureApplTypeId="STANDARD_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <Product productId="DemoProduct-62-4" productTypeId="FINISHED_GOOD" productName="Demo Product 2" isVirtual="N" isVariant="Y" createdDate="2006-03-23 23:05:32.915" salesDiscontinuationDate="2007-03-23 23:05:32.915"/>
+    <ProductFeatureAppl productId="DemoProduct-62-4" productFeatureId="COLOR_62" productFeatureApplTypeId="STANDARD_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <ProductFeatureAppl productId="DemoProduct-62-4" productFeatureId="SIZE_4" productFeatureApplTypeId="STANDARD_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <Product productId="DemoProduct-62-6" productTypeId="FINISHED_GOOD" productName="Demo Product 3" isVirtual="N" isVariant="Y" createdDate="2006-03-23 23:05:32.915" />
+    <ProductFeatureAppl productId="DemoProduct-62-6" productFeatureId="COLOR_62" productFeatureApplTypeId="STANDARD_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <ProductFeatureAppl productId="DemoProduct-62-6" productFeatureId="SIZE_6" productFeatureApplTypeId="STANDARD_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <Product productId="DemoProduct-P60-2" productTypeId="FINISHED_GOOD" productName="Demo Product 1" isVirtual="N" isVariant="Y" createdDate="2006-03-23 23:05:32.915" />
+    <ProductFeatureAppl productId="DemoProduct-P60-2" productFeatureId="COLOR_P60" productFeatureApplTypeId="STANDARD_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <ProductFeatureAppl productId="DemoProduct-P60-2" productFeatureId="SIZE_2" productFeatureApplTypeId="STANDARD_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <Product productId="DemoProduct-P60-4" productTypeId="FINISHED_GOOD" productName="Demo Product 2" isVirtual="N" isVariant="Y" createdDate="2006-03-23 23:05:32.915" salesDiscontinuationDate="2007-03-23 23:05:32.915"/>
+    <ProductFeatureAppl productId="DemoProduct-P60-4" productFeatureId="COLOR_P60" productFeatureApplTypeId="STANDARD_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <ProductFeatureAppl productId="DemoProduct-P60-4" productFeatureId="SIZE_4" productFeatureApplTypeId="STANDARD_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <Product productId="DemoProduct-P60-6" productTypeId="FINISHED_GOOD" productName="Demo Product 3" isVirtual="N" isVariant="Y" createdDate="2006-03-23 23:05:32.915" />
+    <ProductFeatureAppl productId="DemoProduct-P60-6" productFeatureId="COLOR_P60" productFeatureApplTypeId="STANDARD_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <ProductFeatureAppl productId="DemoProduct-P60-6" productFeatureId="SIZE_6" productFeatureApplTypeId="STANDARD_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <ProductAssoc fromDate="2006-05-13 12:00:00.0" productAssocTypeId="PRODUCT_VARIANT" productId="DemoProduct" productIdTo="DemoProduct-62-2" quantity="1.0" reason=""/>
+    <ProductAssoc fromDate="2006-05-13 12:00:00.0" productAssocTypeId="PRODUCT_VARIANT" productId="DemoProduct" productIdTo="DemoProduct-62-4" quantity="1.0" reason=""/>
+    <ProductAssoc fromDate="2006-05-13 12:00:00.0" productAssocTypeId="PRODUCT_VARIANT" productId="DemoProduct" productIdTo="DemoProduct-62-6" quantity="1.0" reason=""/>
+    <ProductAssoc fromDate="2006-05-13 12:00:00.0" productAssocTypeId="PRODUCT_VARIANT" productId="DemoProduct" productIdTo="DemoProduct-P60-2" quantity="1.0" reason=""/>
+    <ProductAssoc fromDate="2006-05-13 12:00:00.0" productAssocTypeId="PRODUCT_VARIANT" productId="DemoProduct" productIdTo="DemoProduct-P60-4" quantity="1.0" reason=""/>
+    <ProductAssoc fromDate="2006-05-13 12:00:00.0" productAssocTypeId="PRODUCT_VARIANT" productId="DemoProduct" productIdTo="DemoProduct-P60-6" quantity="1.0" reason=""/>
+
+    <ProductAssoc fromDate="2006-05-13 12:00:00.0" productAssocTypeId="UNIQUE_ITEM" productId="DemoDesignProduct" productIdTo="DemoProduct" />
+	<ProductFeatureApplAttr productId="DemoProduct" productFeatureId="COLOR_62" fromDate="2006-05-13 12:00:00.0" attrName="DESIGN_FEATURE" attrValue="GENERAL_COLOR_001" />
+	<ProductFeatureApplAttr productId="DemoProduct" productFeatureId="COLOR_P60" fromDate="2006-05-13 12:00:00.0" attrName="DESIGN_FEATURE" attrValue="GENERAL_COLOR_002" />
+	<ProductFeatureApplAttr productId="DemoProduct" productFeatureId="SIZE_2" fromDate="2006-05-13 12:00:00.0" attrName="DESIGN_FEATURE" attrValue="SIZE_2" />
+	<ProductFeatureApplAttr productId="DemoProduct" productFeatureId="SIZE_4" fromDate="2006-05-13 12:00:00.0" attrName="DESIGN_FEATURE" attrValue="SIZE_4" />
+	<ProductFeatureApplAttr productId="DemoProduct" productFeatureId="SIZE_6" fromDate="2006-05-13 12:00:00.0" attrName="DESIGN_FEATURE" attrValue="SIZE_6" />
+
+    <ProductPrice productId="DemoProduct-62-2" productPricePurposeId="PURCHASE" productPriceTypeId="DEFAULT_PRICE" currencyUomId="CNY" productStoreGroupId="_NA_" fromDate="2006-05-13 12:00:00.0" price="15.00" createdDate="2006-05-13 12:00:00.0"  lastModifiedDate="2006-05-13 12:00:00.0"/>
+    <ProductPrice productId="DemoProduct-62-4" productPricePurposeId="PURCHASE" productPriceTypeId="DEFAULT_PRICE" currencyUomId="CNY" productStoreGroupId="_NA_" fromDate="2006-05-13 12:00:00.0" price="5.00" createdDate="2006-05-13 12:00:00.0"  lastModifiedDate="2006-05-13 12:00:00.0"/>
+    <ProductPrice productId="DemoProduct-62-6" productPricePurposeId="PURCHASE" productPriceTypeId="DEFAULT_PRICE" currencyUomId="CNY" productStoreGroupId="_NA_" fromDate="2006-05-13 12:00:00.0" price="10.00" createdDate="2006-05-13 12:00:00.0"  lastModifiedDate="2006-05-13 12:00:00.0"/>
+
+    <ProductCategory productCategoryId="DEMOGROUP" productCategoryTypeId="GROUPNAME" description="DEMOGROUP"/>
+    <ProductCategoryMember productId="DemoProduct" productCategoryId="DEMOGROUP" fromDate="2011-08-02 12:00:00.0" sequenceNum="1"/>
+    
+    <!-- 辅料测试demo数据 -->
+    <Product productId="DemoRibbon1" productTypeId="RAW_MATERIAL" productName="测试织带1" internalName="测试织带1" primaryProductCategoryId="ACCE_RIBBON" isVirtual="Y" isVariant="N" createdDate="2006-03-23 23:05:32.915" />
+    <ProductFeatureAppl productId="DemoRibbon1" productFeatureId="COLOR_62" productFeatureApplTypeId="SELECTABLE_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <ProductFeatureAppl productId="DemoRibbon1" productFeatureId="COLOR_P60" productFeatureApplTypeId="SELECTABLE_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <ProductFeatureAppl productId="DemoRibbon1" productFeatureId="11MM" productFeatureApplTypeId="SELECTABLE_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <ProductFeatureAppl productId="DemoRibbon1" productFeatureId="12MM" productFeatureApplTypeId="SELECTABLE_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <ProductFeatureAppl productId="DemoRibbon1" productFeatureId="13MM" productFeatureApplTypeId="SELECTABLE_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <ProductFeatureAppl productId="DemoRibbon1" productFeatureId="10252" productFeatureApplTypeId="STANDARD_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <Product productId="DemoRibbon1-62-11" productTypeId="RAW_MATERIAL" productName="测试织带1-62-11" primaryProductCategoryId="ACCE_RIBBON" isVirtual="N" isVariant="Y" createdDate="2006-03-23 23:05:32.915" />
+    <ProductFeatureAppl productId="DemoRibbon1-62-11" productFeatureId="COLOR_62" productFeatureApplTypeId="STANDARD_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <ProductFeatureAppl productId="DemoRibbon1-62-11" productFeatureId="11MM" productFeatureApplTypeId="STANDARD_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <ProductFeatureAppl productId="DemoRibbon1-62-11" productFeatureId="10252" productFeatureApplTypeId="STANDARD_FEATURE" fromDate="2006-05-13 12:00:00.0" />
+    <ProductAssoc fromDate="2006-05-13 12:00:00.0" productAssocTypeId="PRODUCT_VARIANT" productId="DemoRibbon1" productIdTo="DemoRibbon1-62-11" quantity="1.0" reason=""/>
+    
+    
+</entity-engine-xml>

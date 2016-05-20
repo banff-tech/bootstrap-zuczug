@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <property key="HazeApplication">
+        <value xml:lang="en">Haze Application</value>
+        <value xml:lang="zh">hello haze!</value>
+    </property>
+    <property key="HazeCompanyName">
+        <value xml:lang="en">OFBiz: Haze</value>
+    </property>
+    <property key="HazeCompanySubtitle">
+        <value xml:lang="en">Part of the Open For Business Family of Open Source Software</value>
+        <value xml:lang="it">Un modulo della famiglia di software open source Open For Business</value>
+        <value xml:lang="zh">开源软件OFBiz的组成部分</value>
+    </property>
+    <property key="HazeViewPermissionError">
+        <value xml:lang="en">You are not allowed to view this page.</value>
+        <value xml:lang="zh">oops,你没有权限。</value>
+    </property>
+    <property key="ManufactManage">
+        <value xml:lang="en">Manufactor</value>
+        <value xml:lang="zh">生产制造</value>
+    </property>
+    <property key="AccountingManage">
+        <value xml:lang="en">Accounting</value>
+        <value xml:lang="zh">财务</value>
+    </property>
+    <property key="FindFacility">
+        <value xml:lang="en">Facility</value>
+        <value xml:lang="zh">仓库</value>
+    </property>
+    <property key="FindInventoryItem">
+        <value xml:lang="en">Inventory Item</value>
+        <value xml:lang="zh">库存明细</value>
+    </property>
+    <property key="ViewFacilityInventoryByProduct">
+        <value xml:lang="en">Inventory</value>
+        <value xml:lang="zh">库存统计</value>
+    </property>
+    <property key="FindPayments">
+        <value xml:lang="en">Payment</value>
+        <value xml:lang="zh">支付</value>
+    </property>
+    <property key="FindInvoices">
+        <value xml:lang="en">Invoice</value>
+        <value xml:lang="zh">收据</value>
+    </property>
+    <property key="Partners">
+        <value xml:lang="en">Partners</value>
+        <value xml:lang="zh">合作伙伴</value>
+    </property>
+    <property key="BaseInfo">
+		<value xml:lang="en">BaseInfo</value>
+		<value xml:lang="zh">基本信息</value>
+	</property>
+	<property key="ContactAddress">
+		<value xml:lang="en">ContactAddress</value>
+		<value xml:lang="zh">联系地址</value>
+	</property>
+	<property key="TheBusinesslicense">
+		<value xml:lang="en">The business license</value>
+		<value xml:lang="zh">营业执照</value>
+	</property>
+	<property key="CompanyName">
+		<value xml:lang="en">CompanyName</value>
+		<value xml:lang="zh">公司名称</value>
+	</property>
+	<property key="FaRen">
+		<value xml:lang="en">FaRen</value>
+		<value xml:lang="zh">法人</value>
+	</property>
+	<property key="ShuiWuDengJiHao">
+		<value xml:lang="en">ShuiWuDengJiHao</value>
+		<value xml:lang="zh">税务登记号</value>
+	</property>
+	<property key="YiBanNaShuiRenZiGe">
+		<value xml:lang="en">YiBanNaShuiRenZiGe</value>
+		<value xml:lang="zh">一般纳税人资格</value>
+	</property>
+	<property key="ZhuCeZiJin">
+		<value xml:lang="en">ZhuCeZiJin</value>
+		<value xml:lang="zh">注册资金</value>
+	</property>
+	<property key="YingYeFanWei">
+		<value xml:lang="en">YingYeFanWei</value>
+		<value xml:lang="zh">营业范围</value>
+	</property>
+	<property key="ContactPeople">
+		<value xml:lang="en">ContactPeople</value>
+		<value xml:lang="zh">联系人</value>
+	</property>
+	<property key="Default">
+		<value xml:lang="en">The default</value>
+		<value xml:lang="zh">默认</value>
+	</property>
+	<property key="DetailedAddress">
+		<value xml:lang="en">DetailedAddress</value>
+		<value xml:lang="zh">详细地址</value>
+	</property>
+	<property key="ContactPhone">
+		<value xml:lang="en">ContactPhone</value>
+		<value xml:lang="zh">联系电话</value>
+	</property>
+	<property key="PhoneNumberRemark">
+		<value xml:lang="en">PhoneNumberRemark</value>
+		<value xml:lang="zh">[国家代码]-[区号]-[电话]-[分机]</value>
+	</property>
+	<property key="AddNewAccount">
+		<value xml:lang="en">AddNewAccount</value>
+		<value xml:lang="zh">添加新的账户信息</value>
+	</property>
+	<property key="BankName">
+		<value xml:lang="en">BankName</value>
+		<value xml:lang="zh">开户行</value>
+	</property>
+	<property key="Balance">
+		<value xml:lang="en">Balance</value>
+		<value xml:lang="zh">余额</value>
+	</property>
+	
+	
+	<property key="NewFacility">
+		<value xml:lang="en">NewFacility</value>
+		<value xml:lang="zh">新建仓库</value>
+	</property>
+	
+	<property key="DefInventoryStatus">
+		<value xml:lang="en">DefInventoryStatus</value>
+		<value xml:lang="zh">默认库存状态</value>
+	</property>
+	<property key="ZhanDiMianJi">
+		<value xml:lang="en">ZhanDiMianJi</value>
+		<value xml:lang="zh">占地面积</value>
+	</property>
+	<property key="EditFacility">
+		<value xml:lang="en">EditFacility</value>
+		<value xml:lang="zh">编辑仓库</value>
+	</property>
+	<property key="ZhiJieTianJiaKuCun">
+		<value xml:lang="en">ZhiJieTianJiaKuCun</value>
+		<value xml:lang="zh">直接接收库存</value>
+	</property>
+	<property key="FacilityLocationList">
+		<value xml:lang="en">FacilityLocationList</value>
+		<value xml:lang="zh">库位列表</value>
+	</property>
+	<property key="NewFacilityLocation">
+		<value xml:lang="en">NewFacilityLocation</value>
+		<value xml:lang="zh">新建库位</value>
+	</property>
+	<property key="InFacilitySelect">
+		<value xml:lang="en">InFacilitySelect</value>
+		<value xml:lang="zh">仓库选择</value>
+	</property>
+	<property key="OrderId">
+		<value xml:lang="en">OrderId</value>
+		<value xml:lang="zh">订单编号</value>
+	</property>
+	<property key="ShipAllItemTotal">
+		<value xml:lang="en">ShipAllItemTotal</value>
+		<value xml:lang="zh">订单项发货总数</value>
+	</property>
+	<property key="ShiFouDaYinJianHuoDan">
+		<value xml:lang="en">ShiFouDaYinJianHuoDan</value>
+		<value xml:lang="zh">是否打印拣货单</value>
+	</property>
+	<property key="PurchaseOrderStatus">
+		<value xml:lang="en">PurchaseOrderStatus</value>
+		<value xml:lang="zh">采购单状态</value>
+	</property>
+	<property key="estimatedReceiveDate">
+		<value xml:lang="en">estimatedReceiveDate</value>
+		<value xml:lang="zh">预计到货日期</value>
+	</property>
+	<property key="NewShipmentOrder">
+		<value xml:lang="en">NewShipmentOrder</value>
+		<value xml:lang="zh">创建新的发货单</value>
+	</property>
+	<property key="OutWarehouse">
+		<value xml:lang="en">OutWarehouse</value>
+		<value xml:lang="zh">转出仓库</value>
+	</property>
+	<property key="InWarehouse">
+		<value xml:lang="en">InWarehouse</value>
+		<value xml:lang="zh">转入仓库</value>
+	</property>
+	<property key="AddShipmentItem">
+		<value xml:lang="en">AddShipmentItem</value>
+		<value xml:lang="zh">添加发货商品</value>
+	</property>
+	<property key="ShipmentItemList">
+		<value xml:lang="en">ShipmentItemList</value>
+		<value xml:lang="zh">发货单的项目</value>
+	</property>
+	
+	<property key="includeProductId">
+		<value xml:lang="en">includeProductId</value>
+		<value xml:lang="zh">包含的产品</value>
+	</property>
+	<property key="AcctgTransType.description.CREDIT_LINE">
+        <value xml:lang="zh">信用额度</value>
+        <value xml:lang="zh_TW">信用額度</value>
+    </property>
+    <property key="ClearOrderConfrim">
+        <value xml:lang="en">ClearOrderConfrim</value>
+        <value xml:lang="zh">您确定要清除这个订单吗？</value>
+    </property> 
+</resource>

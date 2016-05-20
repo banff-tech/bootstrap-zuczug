@@ -1,0 +1,632 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-form.xsd">
+
+	<form name="EditProdCatalog" type="single" target="" title="" default-map-name="prodCatalog"
+        header-row-style="header-row" default-table-style="basic-table">
+        <alt-target use-when="prodCatalog==null" target="createProdCatalog"/>
+        <alt-target use-when="prodCatalog!=null" target="updateProdCatalog"/>
+        <field name="prodCatalogId" title="目录编号" use-when="prodCatalog!=null">
+        	<display></display>
+        </field>
+        <field name="catalogName" title="目录名称">
+        	<text></text>
+        </field>
+        <field name="productTypeId">
+        	<hidden value="${parameters.productTypeId}"/>
+        </field>
+        <field name="useQuickAdd">
+        	<hidden value="N"/>
+        </field>
+        <field name="viewAllowPermReqd">
+        	<hidden value="N"/>
+        </field>
+        <field name="purchaseAllowPermReqd">
+        	<hidden value="N"/>
+        </field>
+        <field name="submitButton" title="${uiLabelMap.CommonSave}"><submit button-type="button"/></field>
+    </form>
+    
+    <form name="EditProductCategory" type="single" target="" title="" default-map-name="productCategory"
+        header-row-style="header-row" default-table-style="basic-table">
+        <actions>
+        	<entity-one value-field="productCategory" entity-name="ProductCategory">
+        		<field-map field-name="productCategoryId" from-field="parameters.productCategoryId"/>
+        	</entity-one>
+        </actions>
+        <alt-target use-when="productCategory==null" target="createProductCategory"/>
+        <alt-target use-when="productCategory!=null" target="updateProductCategory"/>
+        <field name="module"><hidden value="${parameters.module}"/></field>
+        <field name="productTypeId"><hidden value="${parameters.productTypeId}"/></field>
+        <field name="prodCatalogId">
+        	<hidden/>
+        </field>
+        <field name="productCategoryId" title="分类编号" use-when="productCategory!=null">
+        	<display></display>
+        </field>
+        <field name="prodCatalogCategoryTypeId" use-when="productCategory==null">
+        	<hidden value="PCCT_OTHER_SEARCH"/>
+        </field>
+        <field name="productCategoryTypeId" title="分类类别" ><hidden value="CATALOG_CATEGORY"/></field>
+        <field name="categoryName" title="分类名称" required-field="true">
+        	<text></text>
+        </field>
+        <field name="description" title="分类说明" use-when="${productTypeId!='RAW_MATERIAL'}"><text></text></field>
+        <field name="description" title="分类简称" use-when="${productTypeId=='RAW_MATERIAL'}" required-field="true" required-field-style="capital"><text></text></field>
+        
+        <field name="fromDate" title="起始日期" use-when="productCategory==null">
+        	<date-time default-value="${groovy: org.ofbiz.base.util.UtilDateTime.nowTimestamp()}"/>
+        </field>
+        <field name="thruDate" title="结束日期" use-when="productCategory==null">
+        	<date-time/>
+        </field>
+        <field name="categoryImageUrl" title="分类图片地址">
+        	<text></text>
+        </field>
+        <field name="submitButton" title="添加" use-when="productCategory==null"><submit button-type="button"/></field>
+        <field name="submitButton" title="保存" use-when="productCategory!=null"><submit button-type="button"/></field>
+    </form>
+    
+    <form name="ListProductCategoryInCatalog" type="list" list-name="pccList" odd-row-style="odd" default-table-style="basic-table" 
+    	paginate-target="FindPurchaseOrderList" paginate="true" paginate-style="nav-pager">
+    	<actions>
+    		<entity-and entity-name="ProdCatalogCategory" list="pccList">
+    			<field-map field-name="productCategoryId" from-field="parameters.productCategoryId"/>
+    		</entity-and>
+    	</actions>
+    	<field name="prodCatalogId" title="目录">
+    		<display-entity entity-name="ProdCatalog" description="${catalogName}(${prodCatalogId})"></display-entity>
+    	</field>
+    	<field name="fromDate" title="开始时间">
+    		<display></display>
+    	</field>
+    	<field name="thruDate" title="结束时间">
+    		<display></display>
+    	</field>
+    	<field name="thruBtn" title="操作" widget-style="buttontext">
+    		<hyperlink target="removeProductCategoryFromProdCatalog" link-type="hidden-form" title="过期" description="取消" confirmation-message="您确定要把分类从目录中移除吗？">
+    			<parameter param-name="prodCatalogId"/>
+    			<parameter param-name="productCategoryId"/>
+    			<parameter param-name="fromDate"/>
+    			<parameter param-name="prodCatalogCategoryTypeId"/>
+    		</hyperlink>
+    	</field>
+    </form>
+    
+    <form name="addProductCategoryToProdCatalog" type="single" target="addProductCategoryToProdCatalog" title=""
+        header-row-style="header-row" default-table-style="basic-table">
+        <auto-fields-service service-name="addProductCategoryToProdCatalog"/>
+        <field name="prodCatalogId"><hidden/></field>
+        <field name="productCategoryId" title="分类"><lookup target-form-name="LookupProductCatalogCategory"></lookup></field>
+        <field name="prodCatalogCategoryTypeId">
+            <hidden value="PCCT_OTHER_SEARCH"/>
+        </field>
+        <field name="fromDate" title="起始时间"><date-time default-value="${groovy: org.ofbiz.base.util.UtilDateTime.nowTimestamp()}"/></field>
+        <field name="thruDate" title="结束时间"/>
+        <field name="sequenceNum" title="序号"/>
+        <field name="submitButton" title="${uiLabelMap.CommonAdd}" widget-style="smallSubmit"><submit button-type="button"/></field>
+    </form>
+    
+    <form name="UpdateProductCategoryMember" type="list" target="updateProductToCategory" title="" list-name="productCategoryMembers"
+        odd-row-style="alternate-row" default-table-style="basic-table">
+        <field name="productId"><hidden/></field>
+        <field name="productCategoryId" title="分类">
+            <display-entity entity-name="ProductCategory" also-hidden="true" description="${categoryName}">
+                <sub-hyperlink target="EditCategory" description="${productCategoryId}" link-style="buttontext"><parameter param-name="productCategoryId"/></sub-hyperlink>
+            </display-entity>
+        </field>
+        <field name="fromDate" title="起始日期"><display/></field>
+        <field name="thruDate" title="结束日期"><display/> </field>
+        <field name="sequenceNum" title="序号" ><text></text> </field>
+        <field name="comments" title="备注" ><display/></field>
+        <field name="submitButton" title="更新" widget-style="smallSubmit"><submit button-type="button"/></field>
+        <field name="deleteLink" title="删除" widget-style="buttontext">
+            <hyperlink target="removeProductFromCategory" description="${uiLabelMap.CommonDelete}" also-hidden="false">
+                <parameter param-name="productId"/><parameter param-name="productCategoryId"/><parameter param-name="fromDate"/>
+            </hyperlink>
+        </field>
+    </form>
+    
+    <form name="AddProductCategoryMember" type="single" target="addProductToCategory" title="${uiLabelMap.ProductAddProductCategoryMemberFromDate}:"
+        header-row-style="header-row" default-table-style="basic-table">
+        <!-- <auto-fields-service service-name="safeAddProductToCategory"/> -->
+        <field name="productId" title="商品编号" map-name="product"><hidden/></field>
+        <field name="productCategoryId" title="分类"><lookup target-form-name="LookupProductCategory"></lookup></field>
+        <field name="fromDate" title="起始日期" ><date-time/> </field>
+        <field name="thruDate" title="结束日期" ><date-time/></field>
+        <field name="sequenceNum" title="序号" ><text></text> </field>
+        <!-- <field name="quantity" title="${uiLabelMap.ProductQuantity}" ></field> -->
+        <field name="comments" title="备注"><textarea/></field>
+        <field name="submitButton" title="添加" widget-style="smallSubmit"><submit button-type="button"/></field>
+    </form>
+    
+    <form name="ProductListInProductCategory" type="list" target="updateProductToCategory" title="" list-name="productList"
+        odd-row-style="alternate-row" default-table-style="basic-table" paginate-target="EditCategory">
+        <actions>
+        	<entity-and entity-name="ProductAndCategoryMember" list="productList">
+        		<field-map field-name="productCategoryId" from-field="productCategoryId"/>
+        	</entity-and>
+        </actions>
+        <field name="productId" title="商品编号"><display/></field>
+        <field name="internalName" title="产品名称"><display/></field>
+        <field name="fromDate" title="起始日期"><display type="date-time"/></field>
+        <field name="thruDate" title="结束日期"><display/> </field>
+        <field name="sequenceNum" title="序号" ><display/> </field>
+        <field name="comments" title="备注" ><display/></field>
+        <field name="deleteLink" title="删除" widget-style="buttontext">
+            <hyperlink target="removeCategoryProductMember" description="删除" also-hidden="false">
+                <parameter param-name="productId"/>
+                <parameter param-name="productCategoryId"/>
+                <parameter param-name="fromDate"/>
+            </hyperlink>
+        </field>
+    </form>
+    <form name="FindFeatureType" type="single" target="FindProductFeatureTypeList"
+        header-row-style="header-row" default-table-style="basic-table">
+        <field name="productFeatureTypeId"><text-find size="25"></text-find></field>
+        <field name="description"><text-find size="25"></text-find></field>
+        <field name="searchButton" title="${uiLabelMap.CommonFind}" widget-style="smallSubmit"><submit/></field>
+    </form>
+    <form name="ListFeatureTypes" list-name="listIt" target="" title="" type="list" paginate-target="FindProductFeatureTypeList"
+        odd-row-style="alternate-row" default-table-style="basic-table">
+        <actions>
+            <set field="parameters.noConditionFind" value="Y"/>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="ProductFeatureType"/>
+                <field-map field-name="orderBy" value="productFeatureTypeId"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+            </service>
+        </actions>
+        <field name="productFeatureTypeId" widget-style="buttontext">
+            <hyperlink target="EditFeatureType" description="${productFeatureTypeId}">
+                <parameter param-name="productFeatureTypeId"/>
+            </hyperlink>
+        </field>
+        <field name="description"><display/></field>
+        <field name="removeFeatureType" title="${uiLabelMap.CommonDelete}" widget-style="buttontext">
+            <hyperlink target="removeProductFeatureType" description="${uiLabelMap.CommonDelete}">
+                <parameter param-name="productFeatureTypeId"/>
+            </hyperlink>
+        </field>
+    </form>
+    <form name="FindProductFeature" type="single" target="FindProductFeatureList"
+        header-row-style="header-row" default-table-style="basic-table">
+        <field name="productFeatureId"><text-find size="25"></text-find></field>
+        <field name="productFeatureTypeId" >
+        	<drop-down>
+        		<entity-options entity-name="ProductFeatureType" description="${description}" key-field-name="productFeatureTypeId"></entity-options>
+        	</drop-down>
+        </field>
+        <field name="description"><text-find size="25"></text-find></field>
+        <field name="searchButton" title="${uiLabelMap.CommonFind}" widget-style="smallSubmit"><submit/></field>
+    </form>
+    <form name="ListProductFeature" list-name="listIt" target="" title="" type="list" paginate-target="FindProductFeatureList"
+        odd-row-style="alternate-row" default-table-style="basic-table">
+        <actions>
+            <set field="parameters.noConditionFind" value="Y"/>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="ProductFeature"/>
+                <field-map field-name="orderBy" value="productFeatureId"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+            </service>
+        </actions>
+        <field name="productFeatureId"><display></display></field>
+        <field name="productFeatureTypeId" widget-style="buttontext">
+            <display-entity entity-name="ProductFeatureType" description="${description}(${productFeatureTypeId})"></display-entity>
+        </field>
+        <field name="description"><display/></field>
+        <field name="abbrev"><display/></field>
+        <field name="idCode"><display/></field>
+        <field name="removeFeatureType" title="${uiLabelMap.CommonDelete}" widget-style="buttontext">
+            <hyperlink target="removeProductFeatureType" description="${uiLabelMap.CommonDelete}">
+                <parameter param-name="productFeatureTypeId"/>
+            </hyperlink>
+        </field>
+    </form>
+
+	<form name="FindProduct" type="single" target="ProductList"
+        header-row-style="header-row" default-table-style="basic-table">
+        <field name="productId"><text-find size="25"></text-find></field>
+        <field name="productName" title="商品名">
+        	<text-find></text-find>
+        </field>
+        <field name="isVirtual" title="是否虚拟">
+        	<drop-down>
+        		<option key="N"/>
+        		<option key="Y"/>
+        	</drop-down>
+        </field>
+        <field name="isVariant" title="是否变型">
+        	<drop-down>
+        		<option key="N"/>
+        		<option key="Y"/>
+       		</drop-down>
+        </field>
+        <field name="searchButton" title="${uiLabelMap.CommonFind}" widget-style="smallSubmit"><submit/></field>
+    </form>
+    <form name="ListProduct" list-name="listIt" target="" title="" type="list" paginate-target="ProductList"
+        odd-row-style="alternate-row" default-table-style="basic-table">
+        <actions>
+            <set field="parameters.noConditionFind" value="N"/>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="Product"/>
+                <field-map field-name="orderBy" value="productId"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+            </service>
+        </actions>
+        <!-- <field name="productId" widget-style="buttontext">
+        	<hyperlink target="EditProduct" description="${productId}" target-window="_blank">
+        		<parameter param-name="productId"/>
+        	</hyperlink>
+        </field> -->
+        <field name="productId" widget-style="buttontext">
+        	<hyperlink target="EditProduct" description="${productId}" target-window="_blank">
+        		<parameter param-name="productId"/>
+        		<parameter param-name="productCategoryId" from-field="primaryProductCategoryId"/>
+        	</hyperlink>
+        </field>
+        <field name="productName" title="商品名称"><display></display></field>
+        <field name="primaryProductCategoryId" title="主要分类">
+        	<display-entity entity-name="ProductCategory" description="${categoryName}" key-field-name="productCategoryId"></display-entity>
+        </field>
+        <field name="introductionDate" title="发布日期"><display></display></field>
+        <field name="releaseDate" title="上市日期"><display></display></field>
+    </form>
+    
+    <form name="EditProduct" type="single" target="createProduct" default-map-name="product"
+        header-row-style="header-row" default-table-style="basic-table">
+        <actions>
+        	<entity-and entity-name="ProductCategoryAndMember" list="categoryMember" filter-by-date="true">
+        		<field-map field-name="productId" from-field="product.productId"/>
+        	</entity-and>
+        </actions>
+        <alt-target use-when="product==null" target="createProduct"/>
+        <alt-target use-when="product!=null" target="updateProduct"/>
+        <field name="productTypeId">
+        	<hidden value="FINISHED_GOOD"/>
+        </field>
+        <field name="productId" title="商品编号" required-field-style="idType" required-field="true" use-when="product==null" tooltip="添加后无法修改">
+        	<text></text>
+        </field>
+        <field name="productId" title="商品编号" use-when="product!=null" tooltip="不可修改">
+        	<display></display>
+        </field>
+        <field name="internalName" title="内部名称" required-field="true">
+        	<text></text>
+        </field>
+        <field name="productName" title="商品名" required-field="true">
+        	<text></text>
+        </field>
+        <field name="description" title="描述">
+        	<text></text>
+        </field>
+        <field name="primaryProductCategoryId" title="主分类" tooltip="从商品的所属分类中选择一个作为主要分类">
+        	<drop-down>
+        		<option key=""/>
+        		<list-options key-name="productCategoryId" description="${categoryName}" list-name="categoryMember"/>
+        	</drop-down>
+        </field>
+        <field name="longDescription" title="更多描述">
+        	<textarea cols="50" rows="4" maxlength="250"/>
+        </field>
+        <field name="isVirtual" title="是否虚拟">
+        	<display></display>
+        </field>
+        <field name="isVariant" title="是否变型">
+        	<display></display>
+        </field>
+        <field name="introductionDate" title="发布日期" required-field="true">
+        	<date-time/>
+        </field>
+        <field name="releaseDate" title="上市日期" required-field="true">
+        	<date-time/>
+        </field>
+        <field name="searchButton" title="${uiLabelMap.CommonAdd}" widget-style="smallSubmit" use-when="product==null"><submit/></field>
+        <field name="searchButton" title="${uiLabelMap.CommonSave}" widget-style="smallSubmit" use-when="product!=null"><submit/></field>
+    </form>
+    
+    
+    <form name="UpdateProductPrice" type="list" target="updateProductPrice" title="" list-name="productPrices"
+        odd-row-style="alternate-row" default-table-style="basic-table">
+        <auto-fields-service service-name="updateProductPrice" map-name="productPrice"/>
+        <field name="productId"><hidden/></field>
+        <field name="productPriceTypeId" title="${uiLabelMap.ProductPriceType}"><display-entity entity-name="ProductPriceType"/></field>
+        <field name="productPricePurposeId" title="${uiLabelMap.CommonPurpose}"><display-entity entity-name="ProductPricePurpose"/></field>
+        <field name="currencyUomId" title="${uiLabelMap.ProductCurrency}" ><display-entity entity-name="Uom" key-field-name="uomId" description="${description} [${uomId}]"/></field>
+        <field name="productStoreGroupId" title="${uiLabelMap.ProductProductStoreGroup}"><display-entity entity-name="ProductStoreGroup" description="${productStoreGroupName}"/></field>
+        <field name="fromDate" title="${uiLabelMap.CommonFromDateTime}"><display type="date-time"/></field>
+
+        <!-- <field name="termUomId">
+            <drop-down allow-empty="true">
+                <entity-options entity-name="UomAndType" key-field-name="uomId" description="${typeDescription}: ${description} (${abbreviation})">
+                    <entity-constraint name="uomTypeId" operator="not-equals" value="CURRENCY_MEASURE"/>
+                    <entity-order-by field-name="typeDescription"/>
+                    <entity-order-by field-name="uomId"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field name="customPriceCalcService">
+            <drop-down allow-empty="true">
+                <entity-options entity-name="CustomMethod" key-field-name="customMethodId" description="${description}">
+                    <entity-constraint name="customMethodTypeId" operator="equals" value="PRICE_FORMULA"/>
+                </entity-options>
+            </drop-down>
+        </field>
+
+        <field name="lastUpdatedByText" title="${uiLabelMap.ProductLastModifiedBy}:">
+            <display description="[${lastModifiedByUserLogin}] ${uiLabelMap.CommonOn} ${lastModifiedDate}" also-hidden="false"/>
+        </field> -->
+
+        <field name="submitButton" title="${uiLabelMap.CommonUpdate}"><submit button-type="button"/></field>
+
+        <!-- <field name="viewHistoryLink" title="${uiLabelMap.CommonEmptyHeader}" widget-style="buttontext">
+            <hyperlink target="ProductPriceHistory" description="${uiLabelMap.ProductHistory}" also-hidden="false">
+                <parameter param-name="productId"/>
+                <parameter param-name="productPriceTypeId"/>
+                <parameter param-name="fromDate"/>
+            </hyperlink>
+        </field> -->
+
+        <field name="deleteLink" title="${uiLabelMap.CommonEmptyHeader}" widget-style="buttontext">
+            <hyperlink target="deleteProductPrice" description="${uiLabelMap.CommonDelete}" also-hidden="false">
+                <parameter param-name="productId"/><parameter param-name="productPriceTypeId"/><parameter param-name="productPricePurposeId"/>
+                <parameter param-name="currencyUomId"/><parameter param-name="productStoreGroupId"/><parameter param-name="fromDate"/>
+            </hyperlink>
+        </field>
+    </form>
+    
+    
+    <form name="AddProductPrice" type="single" target="createProductPrice" title=""
+        header-row-style="header-row" default-table-style="basic-table">
+        <auto-fields-service service-name="createProductPrice"/>
+        <field name="productId"><hidden/></field>
+        <field name="productPriceTypeId" title="${uiLabelMap.ProductPriceType}">
+            <drop-down allow-empty="false" no-current-selected-key="DEFAULT_PRICE">
+                <entity-options entity-name="ProductPriceType" description="${description}">
+                    <entity-order-by field-name="description"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field name="productPricePurposeId" title="${uiLabelMap.CommonPurpose}">
+            <drop-down allow-empty="false" no-current-selected-key="PURCHASE">
+                <entity-options entity-name="ProductPricePurpose" description="${description}">
+                    <entity-order-by field-name="description"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field name="currencyUomId" title="${uiLabelMap.ProductCurrencyUomId}">
+            <drop-down allow-empty="false" no-current-selected-key="${defaultOrganizationPartyCurrencyUomId}">
+                <entity-options key-field-name="uomId" description="${description} - ${abbreviation}" entity-name="Uom">
+                    <entity-constraint name="uomTypeId" operator="equals" value="CURRENCY_MEASURE"/>
+                    <entity-order-by field-name="description"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field name="productStoreGroupId" title="${uiLabelMap.ProductProductStoreGroupId}">
+            <drop-down allow-empty="false" no-current-selected-key="_NA_">
+                <entity-options entity-name="ProductStoreGroup" description="${productStoreGroupName}">
+                    <entity-order-by field-name="productStoreGroupName"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <!-- <field name="termUomId">
+            <drop-down allow-empty="true">
+                <entity-options entity-name="UomAndType" key-field-name="uomId" description="${typeDescription}: ${description} (${abbreviation})">
+                    <entity-constraint name="uomTypeId" operator="not-equals" value="CURRENCY_MEASURE"/>
+                    <entity-order-by field-name="typeDescription"/>
+                    <entity-order-by field-name="description"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field name="customPriceCalcService">
+            <drop-down allow-empty="true">
+                <entity-options entity-name="CustomMethod" key-field-name="customMethodId" description="${description}">
+                    <entity-constraint name="customMethodTypeId" operator="equals" value="PRICE_FORMULA"/>
+                </entity-options>
+            </drop-down>
+        </field> -->
+        <field name="submitButton" title="${uiLabelMap.CommonCreate}" widget-style="smallSubmit"><submit button-type="button"/></field>
+    </form>
+    
+    <form name="ProductFeatureApplList" list-name="productFeatureAppls" target="" title="" type="list" paginate-target="FindProductFeatureAppl"
+        odd-row-style="alternate-row" default-table-style="basic-table">
+        <actions>
+        	<entity-and list="productFeatureAppls" entity-name="ProductFeatureAndAppl">
+	       		<field-map field-name="productId" from-field="productId"/>
+	       	</entity-and>
+        </actions>
+    	<field name="productFeatureId">
+    		<display></display>
+    	</field>
+    	<field name="description" title="特征说明">
+    		<display></display>
+    	</field>
+    	<field name="productFeatureApplTypeId" title="关联类型">
+    		<display-entity entity-name="ProductFeatureApplType" description="${description}"/>
+    	</field>
+    	<field name="fromDate">
+    		<display type="date-time"/>
+    	</field>
+    	<field name="thruDate">
+    		<display type="date-time"/>
+    	</field>
+	</form>
+    
+     <form name="AddCategoryProductMember" type="single" target="addCategoryProductMember" title="${uiLabelMap.ProductAddProductCategoryMemberFromDate}:"
+        header-row-style="header-row" default-table-style="basic-table">
+        <!-- <auto-fields-service service-name="safeAddProductToCategory"/> -->
+        <field name="productTypeId"><hidden value="${parameters.productTypeId}"/></field>
+        <field name="productId" title="商品编号" required-field="true">
+        	<lookup target-form-name="lookupProductByType?productTypeId=${productTypeId}" target-parameter="productTypeId" ></lookup>
+       	</field>
+        <field name="productCategoryId" title="分类"><hidden></hidden></field>
+        <field name="fromDate" title="起始日期"><date-time default-value="${groovy: org.ofbiz.base.util.UtilDateTime.nowTimestamp()}"/></field>
+        <field name="submitButton" title="添加" widget-style="smallSubmit"><submit button-type="button"/></field>
+    </form>
+    
+    <form name="AddProductKeyword" type="single" target="createProductKeyword" title=""
+        header-row-style="header-row" default-table-style="basic-table">
+        <auto-fields-service service-name="createProductKeyword"/>
+        <field name="productId"><hidden/></field>
+        <field name="relevancyWeight"><hidden value="1"/></field>
+        <field name="keywordTypeId" title="关键字类型"><hidden value="KWT_TAG"/></field>
+        <field name="statusId"><hidden value="KW_APPROVED"/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonCreate}"><submit button-type="button"/></field>
+    </form>
+    
+    <form name="UpdateProductKeyword" type="list" target="updateProductKeyword" title="" list-name=""
+        odd-row-style="alternate-row" default-table-style="basic-table">
+        <actions>
+            <entity-condition entity-name="ProductKeyword">
+                <condition-list combine="and">
+                    <condition-expr field-name="productId" operator="equals" from-field="productId"/>
+                    <condition-expr field-name="keywordTypeId" operator="equals" from-field="keywordTypeId"/>
+                </condition-list>
+                <order-by field-name="statusId"/>
+                <order-by field-name="-relevancyWeight"/>
+                <order-by field-name="keyword"/>
+            </entity-condition>
+        </actions>
+        <field name="productId"><hidden/></field>
+        <field name="keyword"><display/></field>
+        <field name="keywordTypeId" title="类型">
+            <display-entity entity-name="Enumeration" description="${description}" key-field-name="enumId"/>
+        </field>
+        <field name="deleteLink" title="${uiLabelMap.CommonEmptyHeader}" widget-style="buttontext">
+            <hyperlink target="deleteProductKeyword" description="${uiLabelMap.CommonDelete}" also-hidden="false">
+                <parameter param-name="productId"/>
+                <parameter param-name="keyword"/>
+                <parameter param-name="keywordTypeId"/>
+            </hyperlink>
+        </field>
+    </form>
+    
+    <form name="ProductVariantList" type="list" target="" title="" list-name="variants"
+        odd-row-style="alternate-row" default-table-style="basic-table">
+        <actions>
+            <entity-and list="variants" entity-name="ProductAssoc">
+  				<field-map field-name="productId" from-field="productId"/>
+  				<field-map field-name="productAssocTypeId" value="PRODUCT_VARIANT"/>
+  			</entity-and>
+        </actions>
+        <row-actions>
+        	<entity-one value-field="productTo" entity-name="Product">
+        		<field-map field-name="productId" from-field="productIdTo"/>
+        	</entity-one>
+        </row-actions>
+        <field name="productIdTo" title="商品编号">
+        	<display></display>
+        </field>
+        <field name="productName" map-name="productTo" title="商品名称">
+        	<display></display>
+        </field>
+    </form>
+    
+    <form name="ProductBOMList" type="list" target="" title="" list-name="bomList"
+        odd-row-style="alternate-row" default-table-style="basic-table">
+        <actions>bomToProductId
+            <entity-and list="bomList" entity-name="ProductAssoc">
+  				<field-map field-name="productId" from-field="productId"/>
+  				<field-map field-name="productAssocTypeId" value="MANUF_COMPONENT"/>
+  			</entity-and>
+        </actions>
+        <row-actions>
+        	<entity-one value-field="productTo" entity-name="Product">
+        		<field-map field-name="productId" from-field="productIdTo"/>
+        	</entity-one>
+        </row-actions>
+        <field name="productIdTo" title="原料编号">
+        	<display></display>
+        </field>
+        <field name="productName" map-name="productTo" title="原料名称">
+        	<display></display>
+        </field>
+        <field name="description" map-name="productTo" title="原料说明">
+        	<display></display>
+        </field>
+        <field name="fromDate" title="开始时间">
+        	<display type="date-time"></display>
+        </field>
+        <field name="thruDate" title="到期时间">
+        	<display type="date-time"></display>
+        </field>
+        <field name="sequenceNum" title="序号">
+        	<display></display>
+        </field>
+        <field name="quantity" title="数量">
+        	<display></display>
+        </field>
+        <field name="reason" title="备注">
+        	<display></display>
+        </field>
+        <field name="deleteLink" title="${uiLabelMap.CommonEmptyHeader}" widget-style="buttontext">
+            <hyperlink target="UpdateProductAssoc?UPDATE_MODE=DELETE" description="${uiLabelMap.CommonDelete}" also-hidden="false">
+            	<parameter param-name="productId" from-field="productId"/>
+            	<parameter param-name="PRODUCT_ID" from-field="productId"/>
+            	<parameter param-name="PRODUCT_ID_TO" from-field="productIdTo"/>
+            	<parameter param-name="PRODUCT_ASSOC_TYPE_ID" from-field="productAssocTypeId"/>
+            	<parameter param-name="FROM_DATE" from-field="fromDate"/>
+            </hyperlink>
+        </field>
+    </form>
+    
+    
+    <form name="ProductBOMAdd" type="single" target="UpdateProductAssoc" title="" list-name=""
+        odd-row-style="alternate-row" default-table-style="basic-table">
+        <actions>
+            
+        </actions>
+        <field name="UPDATE_MODE"><hidden value="CREATE"/></field>
+        <field name="PRODUCT_ASSOC_TYPE_ID"><hidden value="MANUF_COMPONENT"/></field>
+        <field name="PRODUCT_ID"><hidden value="${parameters.productId}"/></field>
+        <field name="productId"><hidden value="${parameters.productId}"/></field>
+        <field name="PRODUCT_ID_TO" title="物料"><lookup target-form-name="LookupProduct" /></field>
+        <field name="FROM_DATE" title="起始日期">
+            <date-time/>
+        </field>
+        <field name="THRU_DATE" title="过期日期">
+            <date-time/>
+        </field>
+        <field name="QUANTITY" title="数量">
+        	<text></text>
+        </field>
+        <field name="SEQUENCE_NUM" title="序号">
+        	<text></text>
+        </field>
+        <field name="REASON" title="说明">
+        	<text></text>
+        </field>
+        <field name="deleteLink" title="${uiLabelMap.CommonAdd}" widget-style="buttontext">
+            <submit/>
+        </field>
+    </form>
+    
+    <form name="productIdForm" target="ProductList" title="" type="list" list-name="listIt"
+        paginate-target="ProductList" paginate="true"
+         extends="ListProductList"  extends-resource="component://zuczugcommon/widget/ZuczugCommonForms.xml" >
+        <actions>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="orderBy" from-field="parameters.sortField"/>
+                <field-map field-name="entityName" value="ProductCategoryGoodIdentificationView"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+            </service>            
+        </actions>
+        <field name="productId" title="商品编号" use-when="${module=='HAZE'}" position="1"  widget-style="link" title-style="listDisplay">
+        	<hyperlink also-hidden="false" description="${productId}" target="EditProduct" target-window="_blank">
+                <parameter param-name="productId"/>
+                <parameter param-name="productCategoryId" from-field="primaryProductCategoryId"/> 
+                <parameter param-name="idValue"/>
+                <parameter param-name="isVirtual"/>
+                <parameter param-name="isVirtual"/>
+            </hyperlink>
+        </field>
+    </form>
+</forms>

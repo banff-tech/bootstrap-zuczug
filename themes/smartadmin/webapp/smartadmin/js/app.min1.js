@@ -442,8 +442,8 @@ var calc_navbar_height = function() {
                             window.location = a.attr("href")
                         }
                         $.SmartMessageBox({
-                                "title": "<i class='fa fa-sign-out txt-color-orangeDark'></i> Logout <span class='txt-color-orangeDark'><strong>" + $("#show-shortcut").text() + "</strong></span> ?",
-                                "content": a.data("logout-msg") || "You can improve your security further after logging out by closing this opened browser",
+                                "title": "<i class='fa fa-sign-out txt-color-orangeDark'></i> 注销 <span class='txt-color-orangeDark'><strong>" + $("#show-shortcut").text() + "</strong></span> ?",
+                                "content": a.data("logout-msg") || "",
                                 "buttons": "[No][Yes]"
                             },
                             function(a) {

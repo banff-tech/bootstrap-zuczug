@@ -1,0 +1,2120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-form.xsd">
+    
+    <form name="lookupAccessoryByType" target="lookupAccessoryByType" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+    	<field name="isVariant"><hidden value="${parameters.isVariant}"/></field>
+    	<field name="isVirtual"><hidden value="${parameters.isVariant}"/></field>
+        <field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>        
+        <!--  <field name="partyId" title="供应商编号"><text-find ignore-case="true"/></field>-->
+        <field name="supplierName" title="供应商名称"><text-find/></field>        
+        <field name="productId" title="内部编号"><text-find ignore-case="true"/></field>
+        <field name="internalName" title="物料名称"><text-find/></field>
+        <field name="idValue" title="素然物料编号"><text-find/></field>
+        <field name="description" title="物料规格"><text-find/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}"><submit/></field>
+    </form>
+    
+    <form name="listLookupAccessoryByType" list-name="listIt" title="" type="list" paginate-target="lookupAccessory"
+        odd-row-style="alternate-row" default-table-style="basic-table" view-size="20">
+        <actions>     	
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="AccessoriesSeasonGroupView"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+                <field-map field-name="noConditionFind" value="N"/>
+            </service>
+        </actions>
+
+        <field name="productId" title="内部编号" widget-style="buttontext">
+            <hyperlink also-hidden="false" target-type="plain" description="${productId}" target="javascript:set_value('${productId}')"/>
+        </field>
+        <field name="idValue" title="素然物料编号"><display/></field>
+        <field name="supplierProductId" title="供应商物料编号"><display></display></field>
+        <field name="internalName" title="物料名称"><display/></field>
+        <field name="description" title="物料规格"><display/></field>
+        <field name="partyId" title="供应商编号"><display/></field>
+        <field name="supplierName" title="供应商名称"><display/></field>
+    </form>	
+        
+	
+    
+	<form name="lookupAccessoryNoVirtual" target="lookupAccessoryNotVirtual" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <actions>
+        </actions>
+        <field name="noConditionFind"><hidden value="Y"/></field>
+       	<field name="partyId" title="供应商编号"><text-find default-value="${supplierId}"/></field>
+        <field name="supplierName" title="供应商名称"><text-find default-value="${partyName.groupName}"/></field>
+        <field name="productId" title="辅料编号"><text-find ignore-case="true"/></field>
+        <field name="internalName" title="辅料名称"><text-find/></field>
+        <field name="primaryProductCategoryId" title="辅料类别">
+			<drop-down>
+				<option key="" description="全部"/>
+				<entity-options description="${categoryName}" entity-name="ProdCatalogCategoryDetlView" key-field-name="productCategoryId">
+					<entity-constraint name="prodCatalogId" operator="equals" value="ACCESSORIES"/>
+				</entity-options>
+			</drop-down>        
+        </field>
+        <field name="description" title="规格"><text-find/></field>
+        <!-- 
+        <field name="partyId" title="供应商编号"><text-find ignore-case="true"/></field>
+        <field name="groupName" title="供应商名称"><text-find /></field>
+          -->
+        <!-- <field name="groupName" title="组名"><text-find/></field>
+        <field name="seasonId" title="季节">
+            <drop-down no-current-selected-key="${seasonId}" allow-empty="true">
+                <entity-options entity-name="ProductCategory" key-field-name="productCategoryId" description="${categoryName}">
+                	<entity-constraint name="productCategoryTypeId" value="ZUCZUG_SEASON"/>
+                	<entity-order-by field-name="productCategoryId"/>
+                </entity-options>
+            </drop-down>
+        </field> -->
+        <field name="submitButton" title="${uiLabelMap.CommonFind}" tooltip="精确的查询条件可以检索的更快"><submit/></field>
+    </form>
+    
+    
+    <form name="listLookupAccessoryNoVirtual" list-name="listIt" title="" type="list" paginate-target="lookupAccessoryNotVirtual"
+        odd-row-style="alternate-row" default-table-style="basic-table" view-size="20">
+        <actions>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="AccessoriesSeasonGroupNoVirtualView"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+                <field-map field-name="filterByDate" value="Y"/>
+            </service>
+        </actions>
+        <field name="productId" title="内部编号" widget-style="buttontext">
+            <hyperlink also-hidden="false" target-type="plain" description="${productId}" target="javascript:set_value('${productId}')"/>
+        </field>
+        <field name="supplierProductId" title="供应商物料编号"><display></display></field>
+        <field name="internalName" title="供应商物料名称"><display/></field>
+        <field name="description" title="物料规格"><display/></field>
+        <field name="groupName" title="组名"><display/></field>
+        <field name="seasonName" title="季节"><display/></field>
+        <field name="partyId" title="供应商编号"><display/></field>
+        <field name="supplierName" title="供应商名称"><display/></field>
+        <!-- <field name="idCode" title="色号"><display/></field>
+        <field name="colorDescription" title="颜色描述"><display/></field> -->
+    </form>	
+    
+    <form name="lookupAccessory" target="lookupAccessory" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <actions>
+        </actions>
+        <field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
+        <!--  <field name="partyId" title="供应商编号"><text-find ignore-case="true"/></field>-->
+        <!-- <field name="groupName" title="供应商名称"><display/></field>  -->      
+        <field name="idValue" title="辅料编号"><text-find ignore-case="true"/></field>
+        <field name="internalName" title="辅料名称"><text-find/></field>
+        <field name="isVirtual" title="是否虚拟">
+        	<drop-down>
+        		<option key="N" description="否"/>
+        		<option key="Y" description="是"/>
+        	</drop-down>
+        </field>
+        <field name="isVariant" title="是否变型">
+        	<drop-down>
+        		<option key="N" description="否"/>
+        		<option key="Y" description="是"/>
+        	</drop-down>
+        </field>
+        <field name="internalName" title="辅料名称"><text-find/></field>
+        <field name="primaryProductCategoryId" title="辅料类别" >
+            <drop-down>
+                <entity-options entity-name="ProdCatalogCategoryDetlView" key-field-name="productCategoryId" description="${categoryName}">
+                	<entity-constraint name="prodCatalogId" value="ACCESSORIES"/>
+                	<entity-constraint name="productCategoryTypeId" value="MATERIALS_CATEGORY"/>
+                    <entity-order-by field-name="categoryName"/>
+                </entity-options>
+            </drop-down>
+        </field>  
+        <field name="description" title="规格"><text-find/></field>
+        <!-- <field name="groupDescription" title="组名"><text-find/></field>
+        <field name="seasonId" title="季节">
+            <drop-down no-current-selected-key="${seasonId}" allow-empty="true">
+                <entity-options entity-name="ProductCategory" key-field-name="productCategoryId" description="${categoryName}">
+                	<entity-constraint name="productCategoryTypeId" value="ZUCZUG_SEASON"/>
+                	<entity-order-by field-name="productCategoryId"/>
+                </entity-options>
+            </drop-down>
+        </field> -->
+        <field name="submitButton" title="${uiLabelMap.CommonFind}"><submit/></field>
+    </form>
+    
+    <form name="listLookupAccessory" list-name="listIt" title="" type="list" paginate-target="lookupAccessory"
+        odd-row-style="alternate-row" default-table-style="basic-table" view-size="20">
+        <actions>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="findAllProductView"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+            </service>
+        </actions>
+
+        <field name="idValue" title="物料编号" widget-style="buttontext">
+            <hyperlink also-hidden="false" target-type="plain" description="${idValue}" target="javascript:set_value('${idValue}')"/>
+        </field>
+        <field name="internalName" title="物料名称"><display/></field>
+        
+        <field name="isVirtual" title="虚拟"><display/></field>
+        <field name="isVariant" title="变型"><display/></field>
+        <field name="description" title="物料规格"><display/></field>
+    </form>	
+    
+    <form name="lookupVirtualProduct" target="lookupVirtualProduct" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <actions>
+        </actions>
+        <field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
+        <field name="idValue" title="辅料编号"><text-find ignore-case="true"/></field>
+        <field name="internalName" title="辅料名称"><text-find/></field>
+        <field name="isVirtual" title="是否虚拟">
+        	<drop-down>
+        		<option key="N" description="否"/>
+        		<option key="Y" description="是"/>
+        	</drop-down>
+        </field>
+        <field name="internalName" title="辅料名称"><text-find/></field>
+        <field name="primaryProductCategoryId" title="辅料类别" >
+            <drop-down>
+            	<option key="" description="不检索"/>
+                <entity-options entity-name="ProdCatalogCategoryDetlView" key-field-name="productCategoryId" description="${categoryName}">
+                	<entity-constraint name="prodCatalogId" value="MATERIAL_CATALOG"/>
+                	<entity-constraint name="productCategoryTypeId" value="CATALOG_CATEGORY"/>
+                    <entity-order-by field-name="categoryName"/>
+                </entity-options>
+            </drop-down>
+        </field>  
+        <field name="description" title="规格"><text-find/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}"><submit/></field>
+    </form>
+    
+    <form name="listLookupVirtualProduct" list-name="listIt" title="" type="list" paginate-target="lookupVirtualProduct"
+        odd-row-style="alternate-row" default-table-style="basic-table" view-size="20">
+        <actions>
+        	<set field="parameters.productTypeId" value="RAW_MATERIAL"/>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="findAllProductView"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+            </service>
+        </actions>
+
+        <field name="idValue" title="物料编号" widget-style="buttontext">
+            <hyperlink also-hidden="false" target-type="plain" description="${idValue}" target="javascript:set_value('${idValue}')"/>
+        </field>
+        <field name="internalName" title="物料名称"><display/></field>
+        <field name="description" title="物料规格"><display/></field>
+    </form>	
+    
+    <form name="lookupYarn" target="lookupYarn" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
+        <field name="partyName.groupName" title="供应商名称"><display/></field>
+        <field name="productId" title="纱线编号"><text-find ignore-case="true"/></field>
+        <field name="internalName" title="纱线名称"><text-find/></field>
+        <field name="description" title="规格"><text-find/></field>
+        <!-- <field name="partyId" title="供应商编号"><text-find ignore-case="true"/></field>
+        <field name="groupName" title="供应商名称"><text-find/></field> -->
+
+        <field name="partyId" title="供应商编号"><hidden value="${supplierId}"/></field>
+        <field name="groupName" title="供应商名称"><hidden value="${partyName.groupName}"/></field>
+        
+        <field name="groupDescription" title="组名"><text-find/></field>
+        <field name="seasonId" title="季节">
+            <drop-down no-current-selected-key="${seasonId}" allow-empty="true">
+                <entity-options entity-name="ProductCategory" key-field-name="productCategoryId" description="${categoryName}">
+                	<entity-constraint name="productCategoryTypeId" value="ZUCZUG_SEASON"/>
+                	<entity-order-by field-name="productCategoryId"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}"><submit/></field>
+    </form>
+    
+    <form name="LookupYarnNoVariant" target="LookupYarnNoVariant" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
+        <field name="productId" title="纱线编号"><text-find ignore-case="true"/></field>
+        <field name="internalName" title="纱线名称"><text-find/></field>
+        <field name="description" title="规格"><text-find/></field>
+        <field name="partyId" title="供应商编号"><text-find ignore-case="true"/></field>
+        <field name="supplierName" title="供应商名称"><text-find/></field>
+        <field name="groupName" title="组名"><text-find/></field>
+        <field name="seasonId" title="季节">
+            <drop-down no-current-selected-key="${seasonId}" allow-empty="true">
+                <entity-options entity-name="ProductCategory" key-field-name="productCategoryId" description="${categoryName}">
+                	<entity-constraint name="productCategoryTypeId" value="ZUCZUG_SEASON"/>
+                	<entity-order-by field-name="productCategoryId"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}"><submit/></field>
+    </form>
+    
+    
+    <form name="listLookupYarn" list-name="listIt" title="" type="list" paginate-target="lookupYarn"
+        odd-row-style="alternate-row" default-table-style="basic-table" view-size="20">
+        <actions>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="YarnSeasonGroupVariantView"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+            </service>
+        </actions>
+        <field name="productId" title="内部编号" widget-style="buttontext">
+            <hyperlink also-hidden="false" target-type="plain" description="${productId}" target="javascript:set_value('${productId}')"/>
+        </field>
+        <field name="supplierProductId" title="供应商物料编号"><display></display></field>
+        <field name="internalName" title="供应商物料名称"><display/></field>
+        <field name="description" title="规格"><display/></field>
+        <field name="groupName" title="组名"><display/></field>
+        <field name="seasonName" title="季节"><display/></field>
+        <field name="partyId" title="供应商编号"><display/></field>
+        <field name="supplierName" title="供应商名称"><display/></field>
+        <field name="idCode" title="色号"><display/></field>
+        <field name="colorDescription" title="颜色描述"><display/></field>
+    </form>	
+    
+    <form name="LookupYarnNoVritual" target="LookupYarnNoVirtual" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <field name="noConditionFind"><hidden value="Y"/></field>
+        <field name="productId" title="纱线编号"><text-find ignore-case="true"/></field>
+        <field name="internalName" title="纱线名称"><text-find/></field>
+        <field name="description" title="规格"><text-find/></field>
+        <field name="partyId" title="供应商编号"><text-find default-value="${supplierId}"/></field>
+        <field name="supplierName" title="供应商名称"><text-find default-value="${partyName.groupName}"/></field>
+        <field name="groupName" title="组名"><text-find/></field>
+        <field name="seasonId" title="季节">
+            <drop-down no-current-selected-key="${seasonId}" allow-empty="true">
+                <entity-options entity-name="ProductCategory" key-field-name="productCategoryId" description="${categoryName}">
+                	<entity-constraint name="productCategoryTypeId" value="ZUCZUG_SEASON"/>
+                	<entity-order-by field-name="productCategoryId"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}"><submit/></field>
+    </form>
+    
+    <form name="ListLookupYarnNoVirtual" list-name="listIt" title="" type="list" paginate-target="LookupYarnNoVirtual"
+        odd-row-style="alternate-row" default-table-style="basic-table" view-size="20">
+        <actions>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="YarnSeasonGroupNoVirtualView"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+                <field-map field-name="distinct" value="Y"/>
+                <field-map field-name="filterByDate" value="Y"/>
+            </service>
+        </actions>
+
+        <field name="productId" title="内部编号" widget-style="buttontext">
+            <hyperlink also-hidden="false" target-type="plain" description="${productId}" target="javascript:set_value('${productId}')"/>
+        </field>
+        <field name="supplierProductId" title="供应商物料编号"><display></display> </field>
+        <field name="internalName" title="供应商物料名称"><display/></field>
+        <field name="description" title="规格"><display/></field>
+        <field name="groupName" title="组名"><display/></field>
+        <field name="seasonId" title="季节"><display/></field>
+        <field name="idCode" title="色号"><display/></field>
+        <field name="colorDescription" title="颜色描述"><display/></field>
+        <field name="partyId" title="供应商编号"><display/></field>
+        <field name="supplierName" title="供应商名称"><display/></field>
+    </form>
+    
+    <form name="lookupFabric" target="lookupFabric" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
+        <field name="partyId" title="供应商编号"><display default-value="${supplierId}"/></field>
+        <field name="supplierName" title="供应商名称"><display default-value="${partyName.groupName}"/></field>
+        <field name="productId" title="面料编号"><text-find ignore-case="true"/></field>
+        <field name="internalName" title="面料名称"><text-find/></field>
+        <field name="description" title="规格"><text-find/></field>
+        <field name="groupName" title="组名"><text-find/></field>
+        <field name="seasonId" title="季节">
+            <drop-down no-current-selected-key="${seasonId}" allow-empty="true">
+                <entity-options entity-name="ProductCategory" key-field-name="productCategoryId" description="${categoryName}">
+                	<entity-constraint name="productCategoryTypeId" value="ZUCZUG_SEASON"/>
+                	<entity-order-by field-name="productCategoryId"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}"><submit/></field>
+    </form>
+    
+    <form name="listLookupFabric" list-name="listIt" title="" type="list" paginate-target="lookupFabric"
+        odd-row-style="alternate-row" default-table-style="basic-table" view-size="20">
+        <actions>
+        	<set field="parameters.noConditionFind" value="N"/>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="FabricSeasonGroupView"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+                <field-map field-name="distinct" value="Y"/>
+            </service>
+        </actions>
+        <field name="productId" title="内部编号" widget-style="buttontext">
+            <hyperlink also-hidden="false" target-type="plain" description="${productId}" target="javascript:set_value('${productId}')"/>
+        </field>
+        <field name="supplierProductId" title="供应商物料编号"><display></display></field>
+        <field name="internalName" title="供应商物料名称"><display/></field>
+        <field name="description" title="规格"><display/></field>
+        <field name="groupName" title="组名"><display/></field>
+        <field name="seasonId" title="季节"><display/></field>
+        <field name="partyId" title="供应商编号"><display/></field>
+        <field name="supplierName" title="供应商名称"><display/></field>
+        <!-- <field name="idCode" title="色号"><display/></field>
+        <field name="colorDescription" title="颜色描述"><display/></field> -->
+    </form>
+    
+    <form name="lookupOrderFabric" target="lookupOrderFabric" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <field name="orderId" title="订单号"><hidden/></field> 
+        
+		<!-- 采购商： -->
+		<!-- <field name="supplierName" title="供应商：" position="2"><display default-value="${supplier.groupName} [${supplier.partyId}]"/></field>-->
+		<field name="supplierName" title="供应商名称"><text read-only="true" default-value="${agentSupplier.groupName}"/></field>
+		<field name="partyId" title="供应商编号"><text read-only="true" default-value="${agentSupplier.partyId}"/></field>
+        
+        <field name="productId" title="面料编号"><text-find ignore-case="true"/></field>
+        <field name="internalName" title="面料名称"><text-find/></field>
+        <field name="description" title="规格"><text-find/></field>
+        <!-- <field name="partyId" title="供应商编号"><text-find ignore-case="true"/></field>
+        <field name="groupName" title="供应商名称"><text-find/></field> -->
+        <field name="groupName" title="组名"><text-find/></field>
+            <!--drop-down no-current-selected-key="${groupId}" allow-empty="true">
+                <entity-options entity-name="ProductFeature" key-field-name="productFeatureId" description="${description}">
+                	<entity-constraint name="productFeatureTypeId" value="GROUPNAME"/>
+                    <entity-order-by field-name="description"/>
+                </entity-options>
+            </drop-down>
+        </field-->
+        <field name="seasonId" title="季节">
+            <drop-down no-current-selected-key="${seasonId}" allow-empty="true">
+                <entity-options entity-name="ProductCategory" key-field-name="productCategoryId" description="${categoryName}">
+                	<entity-constraint name="productCategoryTypeId" value="ZUCZUG_SEASON"/>
+                	<entity-order-by field-name="productCategoryId"/>
+                </entity-options>
+            </drop-down>
+        </field>
+
+        <!--   
+        <field name="partyId" title="供应商编号"><text-find ignore-case="true"/></field>
+        <field name="groupName" title="供应商名称"><text-find/></field>
+         -->
+        <field name="submitButton" title="${uiLabelMap.CommonFind}"><submit/></field>
+    </form>
+    
+    <form name="lookupOrderAccessory" target="lookupOrderAccessory" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <actions>
+        </actions>
+        <field name="isVariant"><hidden value="${parameters.isVariant}"/> </field>
+        <field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
+        
+        <field name="orderId" title="订单号"><hidden/></field> 
+        
+        <field name="" title="供应商：" position="1"><display default-value="${agentSupplier.groupName} [${agentSupplier.partyId}]"/></field>
+		<!-- 采购商： -->
+		<!-- <field name="supplierName" title="供应商：" position="2"><display default-value="${supplier.groupName} [${supplier.partyId}]"/></field>-->
+		<field name="supplierName" title="供应商名称"><hidden value="${agentSupplier.groupName}"/></field>
+		<field name="partyId" title="供应商名称"><hidden value="${agentSupplier.partyId}"/></field>
+        
+        <field name="productId" title="辅料编号"><text-find ignore-case="true"/></field>
+        <field name="internalName" title="辅料名称"><text-find/></field>
+        <field name="primaryProductCategoryId" title="辅料类别">
+			<drop-down>
+				<entity-options description="${categoryName}" entity-name="ProdCatalogCategoryDetlView" key-field-name="productCategoryId">
+					<entity-constraint name="prodCatalogId" operator="equals" value="ACCESSORIES"/>
+				</entity-options>
+			</drop-down>        
+        </field>
+        <field name="description" title="规格"><text-find/></field>
+        <field name="groupName" title="组名"><text-find/></field>
+        <field name="seasonId" title="季节">
+            <drop-down no-current-selected-key="${seasonId}" allow-empty="true">
+                <entity-options entity-name="ProductCategory" key-field-name="productCategoryId" description="${categoryName}">
+                	<entity-constraint name="productCategoryTypeId" value="ZUCZUG_SEASON"/>
+                	<entity-order-by field-name="productCategoryId"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}"><submit/></field>
+    </form>
+    
+    <form name="lookupOrderYarn" target="lookupOrderYarn" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
+        
+        <field name="orderId" title="订单号"><hidden/></field> 
+        <field name="" title="供应商：" position="1"><display default-value="${agentSupplier.groupName} [${agentSupplier.partyId}]"/></field>
+		<!-- 采购商： -->
+		<!-- <field name="supplierName" title="供应商：" position="2"><display default-value="${supplier.groupName} [${supplier.partyId}]"/></field>-->
+		<field name="supplierName" title="供应商名称"><hidden value="${agentSupplier.groupName}"/></field>
+		<field name="partyId" title="供应商名称"><hidden value="${agentSupplier.partyId}"/></field>
+        
+        <field name="productId" title="纱线编号"><text-find ignore-case="true"/></field>
+        <field name="internalName" title="纱线名称"><text-find/></field>
+        <field name="description" title="规格"><text-find/></field>
+        
+        <field name="groupName" title="组名"><text-find/></field>
+        <field name="seasonId" title="季节">
+            <drop-down no-current-selected-key="${seasonId}" allow-empty="true">
+                <entity-options entity-name="ProductCategory" key-field-name="productCategoryId" description="${categoryName}">
+                	<entity-constraint name="productCategoryTypeId" value="ZUCZUG_SEASON"/>
+                	<entity-order-by field-name="productCategoryId"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}"><submit/></field>
+    </form>
+    
+    <form name="listLookupOrderFabric" list-name="listIt" title="" type="list" paginate-target="lookupOrderFabric"
+        odd-row-style="alternate-row" default-table-style="basic-table" view-size="20">
+        <actions>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="FabricSeasonGroupVariantView"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+                <field-map field-name="distinct" value="Y"/>
+            </service>
+        </actions>
+
+        <field name="productId" title="内部编号" widget-style="buttontext">
+            <hyperlink also-hidden="false" target-type="plain" description="${productId}" target="javascript:set_value('${productId}')"/>
+        </field>
+        <field name="supplierProductId" title="供应商物料编号"><display></display></field>
+        <field name="internalName" title="供应商物料名称"><display/></field>
+        <field name="description" title="规格"><display/></field>
+        <field name="groupDescription" title="组名"><display/></field>
+        <field name="seasonId" title="季节"><display/></field>
+        <field name="partyId" title="供应商编号"><display/></field>
+        <field name="supplierName" title="供应商名称"><display/></field>
+        <!-- <field name="idCode" title="色号"><display/></field>
+        <field name="colorDescription" title="颜色描述"><display/></field> -->
+    </form>
+    
+    <form name="LookupFabricNoVariant" target="LookupFabricNoVariant" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
+       	<field name="isVariant"><hidden value="N"/></field>
+        <field name="productId" title="面料编号"><text-find ignore-case="true"/></field>
+        <field name="internalName" title="面料名称"><text-find/></field>
+        <field name="description" title="规格"><text-find/></field>
+        <field name="partyId" title="供应商编号"><text-find ignore-case="true"/></field>
+        <field name="supplierName" title="供应商名称"><text-find/></field>
+        <field name="groupName" title="组名"><text-find/></field>
+        <field name="seasonId" title="季节">
+            <drop-down no-current-selected-key="${seasonId}" allow-empty="true">
+                <entity-options entity-name="ProductCategory" key-field-name="productCategoryId" description="${categoryName}">
+                	<entity-constraint name="productCategoryTypeId" value="ZUCZUG_SEASON"/>
+                	<entity-order-by field-name="productCategoryId"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}" tooltip="精确的查询条件可以更快的检索出结果"><submit/></field>
+    </form>
+    
+    <form name="LookupFabricNoVirtual" target="LookupFabricNoVirtual" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <field name="noConditionFind"><hidden value="Y"/></field>
+        <field name="partyId" title="供应商编号"><text-find default-value="${supplierId}"/></field>
+        <field name="supplierName" title="供应商名称"><text-find default-value="${partyName.groupName}"/></field>
+        <field name="productId" title="面料编号"><text-find ignore-case="true"/></field>
+        <field name="internalName" title="面料名称"><text-find/></field>
+        <field name="description" title="规格"><text-find/></field>
+        <field name="groupName" title="组名"><text-find/></field>
+        <field name="seasonId" title="季节">
+            <drop-down no-current-selected-key="${seasonId}" allow-empty="true">
+                <entity-options entity-name="ProductCategory" key-field-name="productCategoryId" description="${categoryName}">
+                	<entity-constraint name="productCategoryTypeId" value="ZUCZUG_SEASON"/>
+                	<entity-order-by field-name="productCategoryId"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}"><submit/></field>
+    </form>
+    
+    <form name="ListLookupFabricNoVirtual" list-name="listIt" title="" type="list" paginate-target="LookupFabricNoVirtual"
+        odd-row-style="alternate-row" default-table-style="basic-table" view-size="20">
+        <actions>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="FabricSeasonGroupVariantView"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+                <field-map field-name="distinct" value="Y"/>
+                <field-map field-name="filterByDate" value="Y"/>
+            </service>
+        </actions>
+        <field name="productId" title="内部编号" widget-style="buttontext">
+            <hyperlink also-hidden="false" target-type="plain" description="${productId}" target="javascript:set_value('${productId}')"/>
+        </field>
+        <field name="supplierProductId" title="供应商物料编号"><display></display></field>
+        <field name="internalName" title="供应商物料名称"><display/></field>
+        <field name="description" title="规格"><display/></field>
+        <field name="groupName" title="组名"><display/></field>
+        <field name="seasonName" title="季节"><display/></field>
+        <field name="partyId" title="供应商编号"><display/></field>
+        <field name="supplierName" title="供应商名称"><display/></field>
+        <field name="idCode" title="色号"><display/></field>
+        <field name="colorDescription" title="颜色描述"><display/></field>
+    </form>
+    
+    
+    
+    <form name="lookupSupplier" target="LookupSupplier" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <!--auto-fields-entity entity-name="SupplierView" default-field-type="find"/-->
+        <field name="partyId" title="供应商标识"><text-find/></field>
+        <field name="groupName" title="供应商名称"><text-find/></field>
+        <field name="description" title="供应商描述"><text-find/></field>
+        <field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}" widget-style="smallSubmit"><submit button-type="button"/></field>
+    </form>
+    
+    <form name="listLookupSupplier" list-name="listIt" title="" type="list" paginate-target="LookupSupplier"
+        odd-row-style="alternate-row" default-table-style="basic-table" view-size="20">
+        <actions>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="SupplierView"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+            </service>
+        </actions>
+        <!--auto-fields-entity entity-name="SupplierView" default-field-type="display"/-->
+        <field name="partyId" title="供应商标识" widget-style="buttontext">
+            <hyperlink also-hidden="false" target-type="plain" description="${partyId}" target="javascript:set_value('${partyId}')"/>
+        </field>
+        <field name="groupName" title="供应商名称"><display/></field>
+        <field name="description" title="供应商描述"><display/></field>
+    </form>
+    
+    <form name="lookupProductColor" target="LookupColor" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <!--auto-fields-entity entity-name="ProductColorView" default-field-type="find"/-->
+        <field name="idCode" title="色号"><text-find></text-find></field>
+        <field name="abbrev" title="颜色缩写"><text-find></text-find></field>
+        <field name="description" title="颜色"><text-find></text-find></field>
+        <field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}" widget-style="smallSubmit"><submit button-type="button"/></field>
+    </form>
+    <form name="listLookupProductColor" list-name="listIt" title="" type="list" paginate-target="LookupColor"
+        odd-row-style="alternate-row" default-table-style="basic-table" view-size="20">
+        <actions>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="ProductColorView"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+            </service>
+        </actions>
+
+        <field name="productFeatureId" title="${uiLabelMap.CommonEmptyHeader}" widget-style="buttontext">
+            <hyperlink also-hidden="false" target-type="plain" description="${productFeatureId}" target="javascript:set_value('${productFeatureId}')"/>
+        </field>
+        <field name="idCode" title="色号"><display></display></field>
+        <field name="abbrev" title="颜色缩写"><display></display></field>
+        <field name="description" title="颜色"><display></display></field>
+    </form>	
+
+
+	<form name="lookupProductFeature" target="lookupProductFeatureWithType" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <field name="productFeatureTypeId"><hidden value="${parameters.productFeatureTypeId}"/> </field>
+        <field name="productFeatureId">
+        	<text-find></text-find>
+        </field>
+        <field name="description">
+        	<text-find></text-find>
+        </field>
+        <field name="idCode">
+        	<text-find></text-find>
+        </field>
+        <field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}" widget-style="smallSubmit"><submit button-type="button"/></field>
+    </form>
+    <form name="listLookupProductFeature" list-name="listIt" title="" type="list" paginate-target="lookupProductFeatureWithType"
+        odd-row-style="alternate-row" default-table-style="basic-table" view-size="20">
+        <actions>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="ProductFeature"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+            </service>
+        </actions>
+        <auto-fields-entity entity-name="ProductColorView" default-field-type="display"/>
+        <field name="productFeatureId" title="${uiLabelMap.CommonEmptyHeader}" widget-style="buttontext">
+            <hyperlink also-hidden="false" target-type="plain" description="${productFeatureId}" target="javascript:set_value('${productFeatureId}')"/>
+        </field>
+    </form>
+	
+	<form name="lookupIdentification" target="lookupIdentification" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <field name="identificationTypeId"><hidden value="${parameters.identificationTypeId}"/></field>    
+        <field name="isUser"><hidden value="N"/></field>    
+        <field name="idValue">
+        	<text-find></text-find>
+        </field>
+        <field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}" widget-style="smallSubmit"><submit button-type="button"/></field>
+    </form>
+    <form name="listLookupIdentification" list-name="listIt" title="" type="list" paginate-target="lookupIdentification"
+        odd-row-style="alternate-row" default-table-style="basic-table" view-size="20">
+        <actions>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="Identification"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+            </service>
+        </actions>
+        <field name="idValue" title="数值" widget-style="buttontext"><hyperlink also-hidden="false" target-type="plain" description="${idValue}" target="javascript:set_value('${idValue}')"/></field>
+        <field name="identificationTypeId" title="数值类型"><display/></field>
+        <field name="isUser" title="是否使用"><display/></field>
+    </form>
+
+	
+	<form name="LookupProductFeatureByGroup" target="LookupProductFeatureByGroup" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <field name="productFeatureTypeId"><hidden value="${parameters.productFeatureTypeId}"/> </field>
+        <field name="productFeatureGroupId"><hidden value="${parameters.productFeatureGroupId}"/> </field>
+        <field name="productFeatureId">
+        	<text-find></text-find>
+        </field>
+        <field name="description">
+        	<text-find></text-find>
+        </field>
+        <field name="idCode">
+        	<text-find></text-find>
+        </field>
+        <field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}" widget-style="smallSubmit"><submit button-type="button"/></field>
+    </form>
+    
+    <form name="ListLookupProductFeatureByGroup" list-name="listIt" title="" type="list" paginate-target="LookupProductFeatureByGroup"
+        odd-row-style="alternate-row" default-table-style="basic-table" view-size="20">
+        <actions>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="ProductFeatureAndGroupView"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+            </service>
+        </actions>
+        <auto-fields-entity entity-name="ProductFeatureAndGroupView" default-field-type="display"/>
+        <field name="productFeatureId" title="${uiLabelMap.CommonEmptyHeader}" widget-style="buttontext">
+            <hyperlink also-hidden="false" target-type="plain" description="${productFeatureId}" target="javascript:set_value('${productFeatureId}')"/>
+        </field>
+    </form>
+    
+    <form name="LookupProductIngredient" target="LookupProductIngredient" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <field name="ingredientId">
+        	<text-find></text-find>
+        </field>
+        <field name="description">
+        	<text-find></text-find>
+        </field>
+        <field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}" widget-style="smallSubmit"><submit button-type="button"/></field>
+    </form>
+    
+    <form name="ListLookupProductIngredient" list-name="listIt" title="" type="list" paginate-target="LookupProductIngredient"
+        odd-row-style="alternate-row" default-table-style="basic-table" view-size="20">
+        <actions>
+        	<set field="parameters.noConditionFind" value="Y"/>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="Ingredient"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+            </service>
+        </actions>
+        <auto-fields-entity entity-name="Ingredient" default-field-type="display"/>
+        <field name="ingredientId" title="${uiLabelMap.CommonEmptyHeader}" widget-style="buttontext">
+            <hyperlink also-hidden="false" target-type="plain" description="${ingredientId}" target="javascript:set_value('${ingredientId}')"/>
+        </field>
+    </form>
+    
+    <form name="lookupProduct" target="LookupProduct" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <!-- <auto-fields-entity entity-name="Product" default-field-type="hidden"/> -->
+        <field name="productId" title="${uiLabelMap.ProductProductId}"><text-find/></field>
+        <!-- <field name="brandName" title="${uiLabelMap.ProductBrandName}"><text-find/></field> -->
+        <field name="internalName" title="${uiLabelMap.ProductInternalName}"><text-find/></field>
+        <!-- <field name="productTypeId" title="${uiLabelMap.ProductProductType}">
+            <drop-down allow-empty="true">
+                <entity-options entity-name="ProductType" description="${description}">
+                    <entity-order-by field-name="description"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field name="primaryProductCategoryId" title="${uiLabelMap.ProductPrimaryCategory}">
+            <drop-down allow-empty="true">
+                <entity-options description="${description}" entity-name="ProductCategory" key-field-name="productCategoryId">
+                    <entity-order-by field-name="description"/>
+                </entity-options>
+            </drop-down>
+        </field> -->
+        <field name="noConditionFind"><hidden value="Y"/></field>
+        <!-- NOTE DEJ20070829 not sure why this is here, but it doesn't seem applicable for a general product lookup, also doesn't handle case where isVariant is null <field name="isVariant"><hidden value="N"/></field> -->
+        <field name="submitButton" title="${uiLabelMap.CommonFind}" widget-style="smallSubmit"><submit button-type="button"/></field>
+    </form>
+    <form name="listLookupProduct" list-name="listIt" title="" type="list" paginate-target="LookupProduct"
+        odd-row-style="alternate-row" default-table-style="basic-table" view-size="20">
+        <actions>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="Product"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+            </service>
+            
+        </actions>
+        <row-actions>            
+            <set field="hasVariants" value="${groovy: org.ofbiz.entity.util.EntityUtil.filterByDate(delegator.findByAndCache('ProductAssoc', org.ofbiz.base.util.UtilMisc.toMap('productId', productId, 'productAssocTypeId', 'PRODUCT_VARIANT'))).size() > 0}" type="Boolean"/>
+        	<set field="typeId" value="${groovy:com.zuczug.product.ZuczugProductUtils.getProductFabricAccessoriesType(delegator,productId)}"/>
+        </row-actions>
+        <field name="productId" title="${uiLabelMap.ProductProductId}" widget-style="buttontext">
+            <hyperlink also-hidden="false" target-type="plain" description="${productId}" target="javascript:set_value('${productId}')"/>
+        </field>
+        <field name="comment" title="备注1"><display/></field>
+        <field name="longDescription" title="备注2"><display/></field>
+        <field name="internalName" title="${uiLabelMap.ProductInternalName}"><display/></field>
+        <field name="typeId" title="${uiLabelMap.ProductProductType}">
+        	<display></display>
+        </field>
+        <!-- <field name="searchVariants" title="${uiLabelMap.CommonEmptyHeader}" widget-style="buttontext" use-when="hasVariants">
+            <hyperlink also-hidden="false" target-type="plain" description="${uiLabelMap.ProductVariants}" target="LookupVariantProduct">
+                <parameter param-name="productId"/>
+            </hyperlink>
+        </field> -->
+    </form>
+    
+    
+    <form name="lookupProdGroupName" target="lookupProdGroupName" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <field name="groupId" title="组别标识"><text-find/></field>
+        <field name="groupName" title="组别名"><text-find/></field>
+        <field name="seriesId" title="系列">
+            <drop-down no-current-selected-key="${seriesId}" allow-empty="true">
+                <entity-options entity-name="ProductFeature" key-field-name="productFeatureId" description="${description}">
+                	<entity-constraint name="productFeatureTypeId" value="SERIES"/>
+                    <entity-order-by field-name="description"/>
+                </entity-options>
+            </drop-down>
+        </field>  
+        <field name="subSeriesId" title="子系列">
+            <drop-down no-current-selected-key="${seasonId}" allow-empty="true">
+                <entity-options entity-name="ProductCategory" key-field-name="productCategoryId" description="${categoryName}">
+                	<entity-constraint name="productCategoryTypeId" value="Subseries"/>
+                	<entity-order-by field-name="productCategoryId"/>
+                </entity-options>
+            </drop-down>
+        </field>
+		<field name="seasonId" title="季节">
+            <drop-down no-current-selected-key="${seasonId}">
+                <entity-options entity-name="ProductCategory" key-field-name="productCategoryId" description="${categoryName}">
+                	<entity-constraint name="productCategoryTypeId" value="ZUCZUG_SEASON"/>
+                	<entity-order-by field-name="productCategoryId"/>
+                </entity-options>
+            </drop-down>
+        </field>   
+            
+        <field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}" widget-style="smallSubmit"><submit button-type="button"/></field>
+    </form>
+    
+    <form name="listLookupProdGroupName" list-name="listIt" title="" type="list" paginate-target="lookupProdGroupName"
+        odd-row-style="alternate-row" default-table-style="basic-table" view-size="20">
+        <actions>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="ProductCategoryGroupView"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+            </service>
+        </actions>
+        <!-- <auto-fields-entity entity-name="ProductGroupView" default-field-type="display"/> -->
+        <field name="groupId" title="组别标识"><display/></field>
+        <field name="groupName" title="组别名" widget-style="buttontext">
+            <hyperlink also-hidden="false" target-type="plain" description="${groupName}" target="javascript:set_value('${groupId}')"/>
+        </field>
+        <field name="seasonName" title="季节"><display/></field>
+        <field name="seriesName" title="系列名"><display/></field>
+        <field name="subSeriesName" title="子系列"><display/></field>
+        
+    </form>	
+    
+    
+    <form name="LookupFindFacility" target="LookupFacility" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <field name="facilityId" title="仓库编号"><text-find/></field>
+        <field name="facilityName" title="仓库名称"><text-find/></field>
+		<field name="facilityTypeId" title="类型">
+			<drop-down>
+				<option key="" description=""/>
+				<entity-options description="${description}" entity-name="FacilityType" key-field-name="facilityTypeId"></entity-options>
+			</drop-down>
+		</field>        	
+        <field name="noConditionFind"><hidden value="Y"/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}" widget-style="smallSubmit"><submit button-type="button"/></field>
+    </form>
+    
+    <form name="LookupFindWareHouseAndPlantFacility" target="LookupWareHouseAndPlantFacility" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <field name="facilityId" title="仓库编号"><text-find/></field>
+        <field name="facilityName" title="仓库名称"><text-find/></field>
+		<field name="facilityTypeId" title="类型">
+			<drop-down>
+				<option key="WAREHOUSE" description="仓库"/>
+				<option key="PLANT" description="工厂"/>
+			</drop-down>
+		</field>        	
+        <field name="noConditionFind"><hidden value="Y"/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}" widget-style="smallSubmit"><submit button-type="button"/></field>
+    </form>
+    
+    <form name="LookupFacilityList" list-name="listIt" title="" type="list" paginate-target="LookupFacility"
+        odd-row-style="alternate-row" default-table-style="basic-table" view-size="20">
+        <actions>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="Facility"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+            </service>
+        </actions>
+        <field name="facilityId" title="编号"><display/></field>
+        <field name="facilityName" title="名称" widget-style="buttontext">
+            <hyperlink also-hidden="false" target-type="plain" description="${facilityName}" target="javascript:set_value('${facilityId}')"/>
+        </field>
+        <field name="facilityTypeId" title="类型">
+        	<display-entity entity-name="FacilityType" description="${description}"></display-entity>
+        </field>
+    </form>	
+    
+    
+    <form name="FindProductMatch" target="LookupProductMatch" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <field name="productId" title="商品款号${context.description}"><text-find/></field>
+        <field name="productName" title="商品名称"><text-find/></field>
+        <field name="noConditionFind"><hidden value="N"/></field>
+        <field name="tishi" title=" " tooltip="至少填写其中一项来搜索">
+        	<display></display>
+        </field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}" widget-style="smallSubmit"><submit button-type="button"/></field>
+    </form>
+    
+    <form name="ListProductMatch" list-name="listIt" title="" type="list" paginate-target="LookupProductMatch"
+        odd-row-style="alternate-row" default-table-style="basic-table" view-size="20">
+        <actions>
+            
+        </actions>
+        <field name="productId" title="商品编号" widget-style="buttontext">
+        	<hyperlink also-hidden="false" target-type="plain" description="${productId}" target="javascript:set_value('${productId}')"/>
+        </field>
+        <field name="productName" title="名称">
+        	<display></display>
+        </field>
+        <field name="smallImageUrl" title="图片" >
+            <image></image>
+        </field>
+    </form>
+    
+    
+    <form name="FindRealProductNoVirtual" target="LookupRealProductNoVirtual" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <field name="noConditionFind"><hidden value="Y"/></field>
+        <field name="productId" title="款号商品编码"><text-find/></field>
+        <field name="productName" title="款号名称"><text-find/></field>
+        <field name="seasonId" title="季">
+        	<drop-down current="selected">
+        		<option key="" description=""/>
+        		<entity-options description="${categoryName}" entity-name="ProductCategory" key-field-name="productCategoryId">
+        			<entity-constraint name="productCategoryTypeId" operator="equals" value="ZUCZUG_SEASON"/>
+        		</entity-options>
+        	</drop-down>
+        </field>
+        <field name="seriesId" title="系列" id-name="seriesId">
+        	<drop-down current="selected">
+        		<option key="" description=""/>
+        		<entity-options description="${categoryName}" entity-name="ProductCategory" key-field-name="productCategoryId">
+        			<entity-constraint name="productCategoryTypeId" operator="equals" value="SERIES"/>
+        		</entity-options>
+        	</drop-down>
+        </field>
+        <field name="subSeriesId" title="子系列" id-name="subSeriesId">
+        	<drop-down current="selected">
+        		<option key="" description=""/>
+        		<entity-options description="${categoryName}" entity-name="ProductCategory" key-field-name="productCategoryId">
+        			<entity-constraint name="productCategoryTypeId" operator="equals" value="SUBSERIES"/>
+        			<entity-order-by field-name="categoryName"/>
+        		</entity-options>
+        	</drop-down>
+        </field>
+        <field name="waveId" title="波段">
+        	<drop-down current="selected">
+        		<option key="" description=""/>
+        		<entity-options description="${categoryName}" entity-name="ProductCategory" key-field-name="productCategoryId">
+        			<entity-constraint name="productCategoryTypeId" operator="equals" value="WAVE"/>
+        			<entity-order-by field-name="categoryName"/>
+        		</entity-options>
+        	</drop-down>
+        </field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}" tooltip="精确的查询条件可以更快的展现结果"><submit/></field>
+    </form>
+    
+    <form name="ListRealProductNoVirtual" target="LookupRealProductNoVirtual" title="" type="list" list-name="listIt"
+        paginate-target="LookupRealProductNoVirtual" paginate="true" paginate-style="nav-pager"
+        odd-row-style="alternate-row" header-row-style="header-row-2" default-table-style="basic-table hover-bar">
+        <actions>
+        	<set field="productType" from-field="parameters.productType" default-value="KH"/>
+        	<set field="parameters.isVirtual" value="N"/>
+        	<set field="parameters.isVariant" value="Y"/>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="orderBy" from-field="parameters.sortField"/>
+                <field-map field-name="entityName" value="ProductRealView"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+                <field-map field-name="noConditionFind" from-field="parameters.noConditionFind"/>
+            </service>
+        </actions>
+        <row-actions>
+        	<entity-and entity-name="ProductAssoc" list="assocList">
+        		<field-map field-name="productIdTo" from-field="productId"/>
+        		<field-map field-name="productAssocTypeId" value="PRODUCT_VARIANT"/>
+        	</entity-and>
+        	
+        	<set field="groupProductId" from-field="assocList[0].productId"/>
+        	
+        	<set field="groupInfo" type="Object" value="${groovy:com.zuczug.product.ZuczugProductUtils.getVariantGroupCategorys(delegator,groupProductId)}"/>
+        	
+        	<!-- 吊牌价 
+        	<entity-and entity-name="ProductPrice" list="priceList">
+        		<field-map field-name="productId" from-field="productId"/>
+        		<field-map field-name="productPriceTypeId" value="LIST_PRICE"/>
+        	</entity-and>
+        	<set field="listPrice" from-field="priceList[0].price"/>
+        	
+        	 供货价 
+        	<entity-and entity-name="ProductPrice" list="wholeSalesList">
+        		<field-map field-name="productId" from-field="productId"/>
+        		<field-map field-name="productPriceTypeId" value="WHOLESALE_PRICE"/>
+        	</entity-and>
+        	<set field="wholeSalesPrice" from-field="wholeSalesList[0].price"/>
+        	-->
+        	<entity-and list="waves" entity-name="ProductCategoryMemberView">
+				<field-map field-name="productId" from-field="productId"/>
+				<field-map field-name="productCategoryTypeId" value="WAVE"/>
+			</entity-and>
+			<set field="wave.waveId" from-field="waves[0].productCategoryId"/>
+        	
+        	<!-- 查看是否有过期的待定商品的关联 
+        	<entity-and entity-name="ProductAssoc" list="paList">
+        		<field-map field-name="productAssocTypeId" value="UNIQUE_ITEM"/>
+        		<field-map field-name="productIdTo" from-field="productId"/>
+        	</entity-and>
+        	<entity-and entity-name="ProductAssoc" list="paListFilter" filter-by-date="true">
+        		<field-map field-name="productAssocTypeId" value="UNIQUE_ITEM"/>
+        		<field-map field-name="productIdTo" from-field="productId"/>
+        	</entity-and>
+        	<entity-one value-field="productDes" entity-name="Product">
+				<field-map field-name="productId" from-field="paListFilter[0].productId"/>
+			</entity-one>
+        	<set field="isThru" value="${groovy:
+        		if(paList.size() &lt;= 0)return(&quot;无&quot;);
+        		if(paList.size() &gt; 0 &amp;&amp; paListFilter.size() &lt;=0)return(&quot;已解除关联&quot;);
+        		if(paList.size() &gt; 0 &amp;&amp; paListFilter.size() &gt; 0)return(productDes.productId);
+        	}"/>
+        	-->
+        </row-actions>
+        <field name="productId" title="编号" sort-field="true" widget-style="buttontext">
+            <hyperlink also-hidden="false" target-type="plain" description="${productId}" target="javascript:set_value('${productId}')"/>
+        </field>
+        <field name="productName" title="商品名称"><display/></field>
+        <field name="groupId" title="组别" map-name="groupInfo">
+        	<display-entity entity-name="ProductCategory" description="${categoryName}" key-field-name="productCategoryId" cache="true"></display-entity>
+        </field>
+        <field name="seasonName" title="季">
+        	<display></display>
+        </field>
+        <field name="seriesName" title="系列">
+        	<display></display>
+        </field>
+        <!-- <field name="isThru" title="待定商品">
+        	<display></display>
+        </field>
+        <field name="listPrice" title="吊牌价" >
+        	<display currency="CNY" type="currency"></display>
+        </field>
+        <field name="wholeSalesPrice" title="供货价" >
+        	<display currency="CNY" type="currency"></display>
+        </field> -->
+        <field name="releaseDate" title="上市时间" >
+        	<display type="date"></display>
+        </field>
+        <field name="waveId" title="上货波段" map-name="wave">
+        	<display-entity entity-name="ProductCategory" cache="true" description="${categoryName}" key-field-name="productCategoryId"></display-entity>
+        </field>
+        
+        <!-- <field name="infoProduct" title="操作" widget-style="buttontext" use-when="${productType=='KH'}">
+        	<hyperlink target="EditProductVirtual" also-hidden="false" description="编辑" target-window="_blank">
+        		<parameter param-name="productId" from-field="productId"/>
+        	</hyperlink>
+        </field>
+        <field name="infoProduct" title="操作" widget-style="buttontext" use-when="${productType=='BX'}">
+        	<hyperlink target="EditProductVariant" also-hidden="false" description="编辑" target-window="_blank">
+        		<parameter param-name="productId" from-field="assocList[0].productId"/>
+        		<parameter param-name="variantProductId" from-field="productId"/>
+        	</hyperlink>
+        </field> -->
+    </form>
+    
+
+    <form name="FindMaterialsAndClothsNoVirtual" target="LookupMaterialsAndClothsNoVirtual" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <field name="tip" title=" " tooltip="提示：精确的查询条件可以更快的检索出结果"><display></display></field>
+        <field name="productId" title="物料（成衣）编号"><text-find ignore-case="true"/></field>
+        <field name="internalName" title="物料（成衣）名称"><text-find/></field>
+        <field name="productTypeId" title="类型">
+        	<drop-down>
+        		<option key="RAW_MATERIAL" description="面辅料"/>
+        		<option key="FINISHED_GOOD" description="成衣"/>
+        	</drop-down>
+        </field>
+        <field name="description" title="规格"><text-find/></field>
+        <field name="groupName" title="组名"><text-find/></field>
+        <field name="seasonId" title="季节">
+            <drop-down>
+            	<option key="" description="全部"/>
+                <entity-options entity-name="ProductCategory" key-field-name="productCategoryId" description="${categoryName}">
+                	<entity-constraint name="productCategoryTypeId" value="ZUCZUG_SEASON"/>
+                	<entity-order-by field-name="productCategoryId"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field name="seriesId" title="系列">
+            <drop-down>
+            	<option key="" description="全部"/>
+                <entity-options entity-name="ProductCategory" key-field-name="productCategoryId" description="${categoryName}">
+                	<entity-constraint name="productCategoryTypeId" value="SERIES"/>
+                	<entity-order-by field-name="productCategoryId"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}"><submit/></field>
+    </form>
+    
+    <form name="ListMaterialsAndClothsNoVirtual" list-name="listIt" title="" type="list" paginate-target="LookupMaterialsAndClothsNoVirtual"
+        odd-row-style="alternate-row" default-table-style="basic-table" view-size="20">
+        <actions>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="MaterialsAndClothsNoVirtualView"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+                <field-map field-name="distinct" value="Y"/>
+                <field-map field-name="noConditionFind" value="N"/>
+            </service>
+        </actions>
+        <field name="productId" title="内部编号" widget-style="buttontext">
+            <hyperlink also-hidden="false" target-type="plain" description="${productId}" target="javascript:set_value('${productId}')"/>
+        </field>
+        <field name="supplierProductId" title="供应商物料编号"><display></display></field>
+        <field name="internalName" title="物料名称"><display/></field>
+        <field name="description" title="规格"><display/></field>
+        <field name="groupName" title="组名"><display/></field>
+        <field name="seasonName" title="季节"><display/></field>
+        <field name="partyId" title="供应商编号"><display/></field>
+        <field name="supplierName" title="供应商名称"><display/></field>
+        <field name="idCode" title="色号"><display/></field>
+        <field name="colorDescription" title="颜色描述"><display/></field>
+    </form>
+    
+    
+    <form name="FindRealProductNoVirtualForSku" target="LookupRealProductNoVirtualForSkuNoAjex" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <field name="noConditionFind"><hidden value="Y"/></field>
+        <field name="productId" title="款号商品编码"><text-find/></field>
+        <field name="productName" title="款号名称"><text-find/></field>
+        <field name="seasonId" title="季">
+        	<drop-down current="selected">
+        		<option key="" description=""/>
+        		<entity-options description="${categoryName}" entity-name="ProductCategory" key-field-name="productCategoryId">
+        			<entity-constraint name="productCategoryTypeId" operator="equals" value="ZUCZUG_SEASON"/>
+        		</entity-options>
+        	</drop-down>
+        </field>
+        <field name="seriesId" title="系列" id-name="seriesId">
+        	<drop-down current="selected">
+        		<option key="" description=""/>
+        		<entity-options description="${categoryName}" entity-name="ProductCategory" key-field-name="productCategoryId">
+        			<entity-constraint name="productCategoryTypeId" operator="equals" value="SERIES"/>
+        		</entity-options>
+        	</drop-down>
+        </field>
+        <field name="subSeriesId" title="子系列" id-name="subSeriesId">
+        	<drop-down current="selected">
+        		<option key="" description=""/>
+        		<entity-options description="${categoryName}" entity-name="ProductCategory" key-field-name="productCategoryId">
+        			<entity-constraint name="productCategoryTypeId" operator="equals" value="SUBSERIES"/>
+        			<entity-order-by field-name="categoryName"/>
+        		</entity-options>
+        	</drop-down>
+        </field>
+        <field name="waveId" title="波段">
+        	<drop-down current="selected">
+        		<option key="" description=""/>
+        		<entity-options description="${categoryName}" entity-name="ProductCategory" key-field-name="productCategoryId">
+        			<entity-constraint name="productCategoryTypeId" operator="equals" value="WAVE"/>
+        			<entity-order-by field-name="categoryName"/>
+        		</entity-options>
+        	</drop-down>
+        </field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}" tooltip="精确的查询条件可以更快的展现结果"><submit/></field>
+    </form>
+    
+    <form name="ListRealProductNoVirtualForSku" target="LookupRealProductNoVirtualForSku" title="" type="list" list-name="listIt"
+        paginate-target="LookupRealProductNoVirtualForSku" paginate="true" paginate-style="nav-pager"
+        odd-row-style="alternate-row" header-row-style="header-row-2" default-table-style="basic-table hover-bar">
+        <actions>
+        	<set field="productType" from-field="parameters.productType" default-value="KH"/>
+        	<set field="parameters.isVirtual" value="N"/>
+        	<set field="parameters.isVariant" value="Y"/>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="orderBy" from-field="parameters.sortField"/>
+                <field-map field-name="entityName" value="ProductRealSkuView"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+                <field-map field-name="noConditionFind" from-field="N"/>
+            </service>
+        </actions>
+        <row-actions>
+        	<entity-and entity-name="ProductAssoc" list="assocList">
+        		<field-map field-name="productIdTo" from-field="productId"/>
+        		<field-map field-name="productAssocTypeId" value="PRODUCT_VARIANT"/>
+        	</entity-and>
+        	
+        	<set field="groupProductId" from-field="assocList[0].productId"/>
+        	
+        	<set field="groupInfo" type="Object" value="${groovy:com.zuczug.product.ZuczugProductUtils.getVariantGroupCategorys(delegator,groupProductId)}"/>
+        	
+        	<!-- 吊牌价 
+        	<entity-and entity-name="ProductPrice" list="priceList">
+        		<field-map field-name="productId" from-field="productId"/>
+        		<field-map field-name="productPriceTypeId" value="LIST_PRICE"/>
+        	</entity-and>
+        	<set field="listPrice" from-field="priceList[0].price"/>
+        	
+        	 供货价 
+        	<entity-and entity-name="ProductPrice" list="wholeSalesList">
+        		<field-map field-name="productId" from-field="productId"/>
+        		<field-map field-name="productPriceTypeId" value="WHOLESALE_PRICE"/>
+        	</entity-and>
+        	<set field="wholeSalesPrice" from-field="wholeSalesList[0].price"/>
+        	-->
+        	<entity-and list="waves" entity-name="ProductCategoryMemberView">
+				<field-map field-name="productId" from-field="productId"/>
+				<field-map field-name="productCategoryTypeId" value="WAVE"/>
+			</entity-and>
+			<set field="wave.waveId" from-field="waves[0].productCategoryId"/>
+        	
+        	<!-- 查看是否有过期的待定商品的关联 
+        	<entity-and entity-name="ProductAssoc" list="paList">
+        		<field-map field-name="productAssocTypeId" value="UNIQUE_ITEM"/>
+        		<field-map field-name="productIdTo" from-field="productId"/>
+        	</entity-and>
+        	<entity-and entity-name="ProductAssoc" list="paListFilter" filter-by-date="true">
+        		<field-map field-name="productAssocTypeId" value="UNIQUE_ITEM"/>
+        		<field-map field-name="productIdTo" from-field="productId"/>
+        	</entity-and>
+        	<entity-one value-field="productDes" entity-name="Product">
+				<field-map field-name="productId" from-field="paListFilter[0].productId"/>
+			</entity-one>
+        	<set field="isThru" value="${groovy:
+        		if(paList.size() &lt;= 0)return(&quot;无&quot;);
+        		if(paList.size() &gt; 0 &amp;&amp; paListFilter.size() &lt;=0)return(&quot;已解除关联&quot;);
+        		if(paList.size() &gt; 0 &amp;&amp; paListFilter.size() &gt; 0)return(productDes.productId);
+        	}"/>
+        	-->
+        </row-actions>
+        <field name="productId" title="编号" sort-field="true" widget-style="buttontext">
+            <hyperlink also-hidden="false" target-type="plain" description="${productId}" target="javascript:set_value('${productId}')"/>
+        </field>
+        <field name="productName" title="商品名称"><display/></field>
+        <field name="groupId" title="组别" map-name="groupInfo">
+        	<display-entity entity-name="ProductCategory" description="${categoryName}" key-field-name="productCategoryId" cache="true"></display-entity>
+        </field>
+        <field name="seasonName" title="季">
+        	<display></display>
+        </field>
+        <field name="seriesName" title="系列">
+        	<display></display>
+        </field>
+        <!-- <field name="isThru" title="待定商品">
+        	<display></display>
+        </field>
+        <field name="listPrice" title="吊牌价" >
+        	<display currency="CNY" type="currency"></display>
+        </field>
+        <field name="wholeSalesPrice" title="供货价" >
+        	<display currency="CNY" type="currency"></display>
+        </field> -->
+        <field name="releaseDate" title="上市时间" >
+        	<display type="date"></display>
+        </field>
+        <field name="waveId" title="上货波段" map-name="wave">
+        	<display-entity entity-name="ProductCategory" cache="true" description="${categoryName}" key-field-name="productCategoryId"></display-entity>
+        </field>
+        
+        <!-- <field name="infoProduct" title="操作" widget-style="buttontext" use-when="${productType=='KH'}">
+        	<hyperlink target="EditProductVirtual" also-hidden="false" description="编辑" target-window="_blank">
+        		<parameter param-name="productId" from-field="productId"/>
+        	</hyperlink>
+        </field>
+        <field name="infoProduct" title="操作" widget-style="buttontext" use-when="${productType=='BX'}">
+        	<hyperlink target="EditProductVariant" also-hidden="false" description="编辑" target-window="_blank">
+        		<parameter param-name="productId" from-field="assocList[0].productId"/>
+        		<parameter param-name="variantProductId" from-field="productId"/>
+        	</hyperlink>
+        </field> -->
+    </form>
+	
+	<form name="lookupAccessoryByOther" target="lookupAccessoryByOther" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <actions>
+        </actions>
+        <field name="isVariant"><hidden value="${parameters.isVariant}"/> </field>
+        <field name="isVariant"><hidden value="N"/> </field>
+        <field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
+        <!--  <field name="partyId" title="供应商编号"><text-find ignore-case="true"/></field>-->
+        <field name="groupName" title="供应商名称"><display/></field>
+        
+        <field name="productId" title="辅料编号"><text-find ignore-case="true"/></field>
+        <field name="internalName" title="辅料名称"><text-find/></field>
+        <field name="primaryProductCategoryId" title="辅料类别">
+			<drop-down>
+				<entity-options description="${categoryName}" entity-name="ProdCatalogCategoryDetlView" key-field-name="productCategoryId">
+					<entity-constraint name="prodCatalogId" operator="equals" value="ACCESSORIES"/>
+					<entity-constraint name="productCategoryId" operator="not-equals" value="ACCE_FABRIC"/>
+					<entity-constraint name="productCategoryId" operator="not-equals" value="ACCE_FASTENER"/>
+					<entity-constraint name="productCategoryId" operator="not-equals" value="ACCE_LINING"/>
+					<entity-constraint name="productCategoryId" operator="not-equals" value="ACCE_METAL"/>
+					<entity-constraint name="productCategoryId" operator="not-equals" value="ACCE_NYLON"/>
+					<entity-constraint name="productCategoryId" operator="not-equals" value="ACCE_RIBBON"/>
+					<entity-constraint name="productCategoryId" operator="not-equals" value="ACCE_RUBBER"/>
+					<entity-constraint name="productCategoryId" operator="not-equals" value="ACCE_THREAD"/>
+					<entity-constraint name="productCategoryId" operator="not-equals" value="ACCE_ZIPPER"/>
+					<entity-constraint name="productCategoryId" operator="not-equals" value="ACCE_HOODIE_ROPE"/>
+					<entity-constraint name="productCategoryId" operator="not-equals" value="ACCE_RIBBON_HOODIE_ROPE"/>
+					<entity-constraint name="productCategoryId" operator="not-equals" value="ACCE_ROLL_CODE_TAPE"/>
+					<entity-constraint name="productCategoryId" operator="not-equals" value="ACCE_ZIPPER_HEAD"/>
+				</entity-options>
+			</drop-down>        
+        </field>
+        <field name="description" title="规格"><text-find/></field>
+        <field name="groupDescription" title="组名"><text-find/></field>
+        <field name="seasonId" title="季节">
+            <drop-down no-current-selected-key="${seasonId}" allow-empty="true">
+                <entity-options entity-name="ProductCategory" key-field-name="productCategoryId" description="${categoryName}">
+                	<entity-constraint name="productCategoryTypeId" value="ZUCZUG_SEASON"/>
+                	<entity-order-by field-name="productCategoryId"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}"><submit/></field>
+    </form>
+    
+    <form name="listLookupAccessoryByOther" list-name="listIt" title="" type="list" paginate-target="lookupAccessory"
+        odd-row-style="alternate-row" default-table-style="basic-table" view-size="20">
+        
+        <actions>        	     	
+        	<set field="parameters.noConditionFind" value="N"/>       	   
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="AccessoriesSeasonGroupNoVirtualView"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+                <field-map field-name="distinct" value="Y"/>
+            </service>
+        </actions>
+
+        <field name="productId" title="内部编号" widget-style="buttontext">
+            <hyperlink also-hidden="false" target-type="plain" description="${productId}" target="javascript:set_value('${productId}')"/>
+        </field>
+        <field name="supplierProductId" title="供应商物料编号"><display></display></field>
+        <field name="internalName" title="供应商物料名称"><display/></field>
+        <field name="description" title="物料规格"><display/></field>
+        <field name="groupName" title="组名"><display/></field>
+        <field name="seasonId" title="季节"><display/></field>
+        <field name="partyId" title="供应商编号"><display/></field>
+        <field name="supplierName" title="供应商名称"><display/></field>
+    </form>	
+    
+    <form name="lookupAccessoryByMetal" target="lookupAccessoryByMetal" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <actions>
+        </actions>
+        <field name="isVariant"><hidden value="N"/> </field>
+        <field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
+        
+        <!--  <field name="partyId" title="供应商编号"><text-find ignore-case="true"/></field>-->
+        <field name="groupName" title="供应商名称"><display/></field>
+        
+        <field name="productId" title="辅料编号"><text-find ignore-case="true"/></field>
+        <field name="internalName" title="辅料名称"><text-find/></field>
+        <field name="primaryProductCategoryId" title="辅料类别">
+			<drop-down>
+				<entity-options description="${categoryName}" entity-name="ProdCatalogCategoryDetlView" key-field-name="productCategoryId">
+					<entity-constraint name="prodCatalogId" operator="equals" value="ACCESSORIES"/>
+					<entity-constraint name="productCategoryId" operator="not-equals" value="ACCE_FABRIC"/>
+					<entity-constraint name="productCategoryId" operator="not-equals" value="ACCE_FASTENER"/>
+					<entity-constraint name="productCategoryId" operator="not-equals" value="ACCE_LINING"/>
+					<entity-constraint name="productCategoryId" operator="not-equals" value="ACCE_BRAND_DROP"/>
+					<entity-constraint name="productCategoryId" operator="not-equals" value="ACCE_RIBBON"/>
+					<entity-constraint name="productCategoryId" operator="not-equals" value="ACCE_RUBBER"/>
+					<entity-constraint name="productCategoryId" operator="not-equals" value="ACCE_THREAD"/>
+					<entity-constraint name="productCategoryId" operator="not-equals" value="ACCE_ZIPPER"/>
+					<entity-constraint name="productCategoryId" operator="not-equals" value="ACCE_HOODIE_ROPE"/>
+					<entity-constraint name="productCategoryId" operator="not-equals" value="ACCE_RIBBON_HOODIE_ROPE"/>
+					<entity-constraint name="productCategoryId" operator="not-equals" value="ACCE_ROLL_CODE_TAPE"/>
+					<entity-constraint name="productCategoryId" operator="not-equals" value="ACCE_ZIPPER_HEAD"/>	
+					<entity-constraint name="productCategoryId" operator="not-equals" value="ACCE_OTHER"/>
+					<entity-constraint name="productCategoryId" operator="not-equals" value="SPEC_PROC_DUOMEITI"/>
+					<entity-constraint name="productCategoryId" operator="not-equals" value="SPEC_PROC_ERONG"/>
+					<entity-constraint name="productCategoryId" operator="not-equals" value="SPEC_PROC_JIAOYIN"/>
+					<entity-constraint name="productCategoryId" operator="not-equals" value="SPEC_PROC_XIUHUA"/>	
+					<entity-constraint name="productCategoryId" operator="not-equals" value="SPEC_PROC_YAMO"/>
+					<entity-constraint name="productCategoryId" operator="not-equals" value="SPEC_PROC_YINHUA"/>	
+				</entity-options>
+			</drop-down>        
+        </field>
+        <field name="description" title="规格"><text-find/></field>
+        <field name="groupDescription" title="组名"><text-find/></field>
+        <field name="seasonId" title="季节">
+            <drop-down no-current-selected-key="${seasonId}" allow-empty="true">
+                <entity-options entity-name="ProductCategory" key-field-name="productCategoryId" description="${categoryName}">
+                	<entity-constraint name="productCategoryTypeId" value="ZUCZUG_SEASON"/>
+                	<entity-order-by field-name="productCategoryId"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}"><submit/></field>
+    </form>
+    
+    <form name="listLookupAccessoryByMetal" list-name="listIt" title="" type="list" paginate-target="lookupAccessoryByMetal"
+        odd-row-style="alternate-row" default-table-style="basic-table" view-size="20">
+        
+        <actions>
+        	<set field="parameters.noConditionFind" value="N"/>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="AccessoriesSeasonGroupNoVirtualView"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+            </service>
+        </actions>
+
+        <field name="productId" title="内部编号" widget-style="buttontext">
+            <hyperlink also-hidden="false" target-type="plain" description="${productId}" target="javascript:set_value('${productId}')"/>
+        </field>
+        <field name="supplierProductId" title="供应商物料编号"><display></display></field>
+        <field name="internalName" title="供应商物料名称"><display/></field>
+        <field name="description" title="物料规格"><display/></field>
+        <field name="groupName" title="组名"><display/></field>
+        <field name="seasonId" title="季节"><display/></field>
+        <field name="partyId" title="供应商编号"><display/></field>
+        <field name="supplierName" title="供应商名称"><display/></field>
+    </form>	
+    
+    
+    <form name="FindRealProductNoVariantForSku" target="LookupRealProductNoVariantForSku" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <field name="noConditionFind"><hidden value="Y"/></field>
+        <field name="productId" title="款号商品编码"><text-find/></field>
+        <field name="productName" title="款号名称"><text-find/></field>
+        <field name="seasonId" title="季">
+        	<drop-down current="selected">
+        		<option key="" description=""/>
+        		<entity-options description="${categoryName}" entity-name="ProductCategory" key-field-name="productCategoryId">
+        			<entity-constraint name="productCategoryTypeId" operator="equals" value="ZUCZUG_SEASON"/>
+        		</entity-options>
+        	</drop-down>
+        </field>
+        <field name="seriesId" title="系列" id-name="seriesId">
+        	<drop-down current="selected">
+        		<option key="" description=""/>
+        		<entity-options description="${categoryName}" entity-name="ProductCategory" key-field-name="productCategoryId">
+        			<entity-constraint name="productCategoryTypeId" operator="equals" value="SERIES"/>
+        		</entity-options>
+        	</drop-down>
+        </field>
+        <field name="subSeriesId" title="子系列" id-name="subSeriesId">
+        	<drop-down current="selected">
+        		<option key="" description=""/>
+        		<entity-options description="${categoryName}" entity-name="ProductCategory" key-field-name="productCategoryId">
+        			<entity-constraint name="productCategoryTypeId" operator="equals" value="SUBSERIES"/>
+        			<entity-order-by field-name="categoryName"/>
+        		</entity-options>
+        	</drop-down>
+        </field>
+        <field name="waveId" title="波段">
+        	<drop-down current="selected">
+        		<option key="" description=""/>
+        		<entity-options description="${categoryName}" entity-name="ProductCategory" key-field-name="productCategoryId">
+        			<entity-constraint name="productCategoryTypeId" operator="equals" value="WAVE"/>
+        			<entity-order-by field-name="categoryName"/>
+        		</entity-options>
+        	</drop-down>
+        </field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}" tooltip="精确的查询条件可以更快的展现结果"><submit/></field>
+    </form>
+    
+    <form name="ListRealProductNoVariantForSku" target="LookupRealProductNoVariantForSku" title="" type="list" list-name="listIt"
+        paginate-target="LookupRealProductNoVariantForSku" paginate="true" paginate-style="nav-pager"
+        odd-row-style="alternate-row" header-row-style="header-row-2" default-table-style="basic-table hover-bar">
+        <actions>
+        	<set field="productType" from-field="parameters.productType" default-value="KH"/>
+        	<set field="parameters.isVariant" value="N"/>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="orderBy" from-field="parameters.sortField"/>
+                <field-map field-name="entityName" value="Product"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+                <field-map field-name="noConditionFind" from-field="N"/>
+            </service>
+        </actions>
+        <row-actions>
+        	<entity-and entity-name="ProductAssoc" list="assocList">
+        		<field-map field-name="productIdTo" from-field="productId"/>
+        		<field-map field-name="productAssocTypeId" value="PRODUCT_VARIANT"/>
+        	</entity-and>
+        	
+        	<set field="groupProductId" from-field="assocList[0].productId"/>
+        	
+        	<set field="groupInfo" type="Object" value="${groovy:com.zuczug.product.ZuczugProductUtils.getVariantGroupCategorys(delegator,groupProductId)}"/>
+        	
+        	<!-- 吊牌价 
+        	<entity-and entity-name="ProductPrice" list="priceList">
+        		<field-map field-name="productId" from-field="productId"/>
+        		<field-map field-name="productPriceTypeId" value="LIST_PRICE"/>
+        	</entity-and>
+        	<set field="listPrice" from-field="priceList[0].price"/>
+        	
+        	 供货价 
+        	<entity-and entity-name="ProductPrice" list="wholeSalesList">
+        		<field-map field-name="productId" from-field="productId"/>
+        		<field-map field-name="productPriceTypeId" value="WHOLESALE_PRICE"/>
+        	</entity-and>
+        	<set field="wholeSalesPrice" from-field="wholeSalesList[0].price"/>
+        	-->
+        	<entity-and list="waves" entity-name="ProductCategoryMemberView">
+				<field-map field-name="productId" from-field="productId"/>
+				<field-map field-name="productCategoryTypeId" value="WAVE"/>
+			</entity-and>
+			<set field="wave.waveId" from-field="waves[0].productCategoryId"/>
+        	
+        	<!-- 查看是否有过期的待定商品的关联 
+        	<entity-and entity-name="ProductAssoc" list="paList">
+        		<field-map field-name="productAssocTypeId" value="UNIQUE_ITEM"/>
+        		<field-map field-name="productIdTo" from-field="productId"/>
+        	</entity-and>
+        	<entity-and entity-name="ProductAssoc" list="paListFilter" filter-by-date="true">
+        		<field-map field-name="productAssocTypeId" value="UNIQUE_ITEM"/>
+        		<field-map field-name="productIdTo" from-field="productId"/>
+        	</entity-and>
+        	<entity-one value-field="productDes" entity-name="Product">
+				<field-map field-name="productId" from-field="paListFilter[0].productId"/>
+			</entity-one>
+        	<set field="isThru" value="${groovy:
+        		if(paList.size() &lt;= 0)return(&quot;无&quot;);
+        		if(paList.size() &gt; 0 &amp;&amp; paListFilter.size() &lt;=0)return(&quot;已解除关联&quot;);
+        		if(paList.size() &gt; 0 &amp;&amp; paListFilter.size() &gt; 0)return(productDes.productId);
+        	}"/>
+        	-->
+        </row-actions>
+        <field name="productId" title="编号" sort-field="true" widget-style="buttontext">
+            <hyperlink also-hidden="false" target-type="plain" description="${productId}" target="javascript:set_value('${productId}')"/>
+        </field>
+        <field name="productName" title="商品名称"><display/></field>
+        <field name="groupId" title="组别" map-name="groupInfo">
+        	<display-entity entity-name="ProductCategory" description="${categoryName}" key-field-name="productCategoryId" cache="true"></display-entity>
+        </field>
+        <field name="seasonName" title="季">
+        	<display></display>
+        </field>
+        <field name="seriesName" title="系列">
+        	<display></display>
+        </field>
+        <!-- <field name="isThru" title="待定商品">
+        	<display></display>
+        </field>
+        <field name="listPrice" title="吊牌价" >
+        	<display currency="CNY" type="currency"></display>
+        </field>
+        <field name="wholeSalesPrice" title="供货价" >
+        	<display currency="CNY" type="currency"></display>
+        </field> -->
+        <field name="releaseDate" title="上市时间" >
+        	<display type="date"></display>
+        </field>
+        <field name="waveId" title="上货波段" map-name="wave">
+        	<display-entity entity-name="ProductCategory" cache="true" description="${categoryName}" key-field-name="productCategoryId"></display-entity>
+        </field>
+        
+        <!-- <field name="infoProduct" title="操作" widget-style="buttontext" use-when="${productType=='KH'}">
+        	<hyperlink target="EditProductVirtual" also-hidden="false" description="编辑" target-window="_blank">
+        		<parameter param-name="productId" from-field="productId"/>
+        	</hyperlink>
+        </field>
+        <field name="infoProduct" title="操作" widget-style="buttontext" use-when="${productType=='BX'}">
+        	<hyperlink target="EditProductVariant" also-hidden="false" description="编辑" target-window="_blank">
+        		<parameter param-name="productId" from-field="assocList[0].productId"/>
+        		<parameter param-name="variantProductId" from-field="productId"/>
+        	</hyperlink>
+        </field> -->
+    </form>
+    
+    <form name="lookupShipmentContactMech" target="LookupShipmentContactMech" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <field name="contactMechPurposeTypeId"><hidden value="SHIPPING_LOCATION"/></field>
+        <field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
+        <field name="facilityId" title="${uiLabelMap.ProductDestinationFacility}">
+			<lookup target-form-name="LookupFacility" ></lookup>
+        </field>
+        <field name="storeName" title="店铺名称"><text-find/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}"><submit button-type="button"/></field>
+    </form>
+
+    <form name="listLookupShipmentContactMech" type="list" list-name="listIt" paginate-target="LookupShipmentContactMech"
+        odd-row-style="alternate-row" default-table-style="basic-table hover-bar">
+        <actions>
+
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="orderBy" from-field="parameters.sortField"/>
+                <field-map field-name="entityName" value="FindFacilityContactMech"/>
+            </service>
+        </actions>
+		<field name="contactMechId" title="地址编号"  widget-style="buttontext">
+			<hyperlink also-hidden="false" target-type="plain" description="${contactMechId}" target="javascript:set_value('${contactMechId}')"/>
+		</field>
+		<field name="storeName" title="店铺名称"><display></display></field>
+		<field name="address1" title="送货地址"><display></display></field>
+	</form>
+	
+	<form name="LookupFindFacilityForShipment" target="LookupFacilityForShipment" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <field name="facilityId" title="仓库编号"><text-find/></field>
+        <field name="facilityName" title="仓库名称"><text-find/></field>
+		<field name="facilityTypeId" title="类型">
+			<drop-down>
+				<option key="" description=""/>
+				<entity-options description="${description}" entity-name="FacilityType" key-field-name="facilityTypeId"></entity-options>
+			</drop-down>
+		</field>        	
+        <field name="noConditionFind"><hidden value="Y"/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}" widget-style="smallSubmit"><submit button-type="button"/></field>
+    </form>
+    
+    <form name="LookupFacilityListForShipment" list-name="listIt" title="" type="list" paginate-target="LookupFacilityForShipment"
+        odd-row-style="alternate-row" default-table-style="basic-table" view-size="20">
+        <actions>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="Facility"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+            </service>
+        </actions>
+        <field name="facilityId" title="编号" widget-style="buttontext"><hyperlink also-hidden="false" target-type="plain" description="${facilityName}" target="javascript:set_values('${facilityId}','${facilityId}')"/></field>
+        <field name="facilityName" title="名称" >
+            <display/>
+        </field>
+        <field name="facilityTypeId" title="类型">
+        	<display-entity entity-name="FacilityType" description="${description}"></display-entity>
+        </field>
+    </form>	
+    
+    
+    <form name="LookupFindInventoryItem" target="LookupInventoryItem" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <field name="facilityId" title="仓库编号" tooltip="不要分配其他仓库的库存明细"><text-find/></field>
+        <field name="productId" title="内部编号"><text-find/></field>
+        <field name="idValue" title="素然物料编号"><text-find/></field>
+        <field name="lotId" title="批次号"><text-find/></field>
+        <field name="locationSeqId" title="库存">
+        	<lookup target-form-name="LookupFacilityLocation"></lookup>
+        </field>
+        <field name="noConditionFind"><hidden value="Y"/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}" widget-style="smallSubmit"><submit button-type="button"/></field>
+    </form>
+    
+    <form name="LookupListInventoryItem" list-name="listIt" title="" type="list" paginate-target="LookupInventoryItem"
+        odd-row-style="alternate-row" default-table-style="basic-table" view-size="20">
+        <actions>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="InventoryAndLocationAndZuczugCode"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+            </service>
+        </actions>
+        <row-actions>
+        	<entity-one value-field="product" entity-name="Product">
+        		<field-map field-name="productId" from-field="productId"/>
+        	</entity-one>
+        </row-actions>
+        <field name="inventoryItemId" title="库存明细编号" widget-style="buttontext">
+            <hyperlink also-hidden="false" target-type="plain" description="${inventoryItemId}" target="javascript:set_value('${inventoryItemId}')"/>
+        </field>
+        <field name="productId" title="内部编号">
+        	<display></display>
+        </field>
+        <field name="idValue" title="素然物料编号">
+        	<display></display>
+        </field>
+        <field name="description" title="规格" entry-name="product.description">
+        	<display></display>
+        </field>
+        <field name="facilityId" title="仓库">
+        	<display-entity entity-name="Facility" description="${facilityName}" key-field-name="facilityId"></display-entity>
+        </field>
+        <field name="lotId" title="批号">
+        	<display></display>
+        </field>
+        <field name="locationSeqId" title="位置">
+        	<display></display>
+        </field>
+        <field name="statusId" title="状态">
+        	<display-entity entity-name="StatusItem" description="${description}" key-field-name="statusId"></display-entity>
+        </field>
+        <field name="availableToPromiseTotal" title="承诺有效">
+        	<display-entity entity-name="StatusItem" description="${description}" key-field-name="statusId"></display-entity>
+        </field>
+        <field name="quantityOnHandTotal" title="物理库存">
+        	<display></display>
+        </field>
+    </form>	
+    
+    <form name="lookupProductByType" target="lookupProductByType" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <actions>
+        </actions>
+        <field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
+        <field name="productTypeId"><hidden value="${parameters.productTypeId}"/></field>
+        <field name="idValue" title="物料编号"><text-find ignore-case="true"/></field>
+        <field name="internalName" title="物料名称"><text-find/></field>
+        <field name="description" title="规格"><text-find/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}"><submit/></field>
+    </form>
+    
+    <form name="listLookupProductByType" list-name="listIt" title="" type="list" paginate-target="lookupProductByType"
+        odd-row-style="alternate-row" default-table-style="basic-table" view-size="20">
+        <actions>
+        	<set field="parameters.isVariant" value="N"/>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="findAllProductView"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+            </service>
+        </actions>
+
+        <field name="idValue" title="素然物料编号" widget-style="buttontext" use-when="${parameters.productTypeId=='RAW_MATERIAL'}">
+            <hyperlink also-hidden="false" target-type="plain" description="${idValue}" target="javascript:set_value('${idValue}')"/>
+        </field>
+        <field name="productId" title="物料编号" widget-style="buttontext" use-when="${parameters.productTypeId=='FINISHED_GOOD'}">
+            <hyperlink also-hidden="false" target-type="plain" description="${productId}" target="javascript:set_value('${productId}')"/>
+        </field>
+        <field name="productTypeId" title="物料类型"><display/></field>
+        <field name="internalName" title="物料名称"><display/></field>
+        <field name="description" title="物料规格"><display/></field>
+        <field name="isVirtual" title="虚拟"><display/></field>
+        <field name="isVariant" title="变形"><display/></field>
+    </form>	
+    
+    <form name="lookupProductCatalogCategory" target="LookupProductCatalogCategory" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <field name="productCategoryId" title="分类标识"><text-find></text-find></field>
+        <field name="categoryName" title="分类名"><text-find></text-find></field>
+        <field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}" widget-style="smallSubmit"><submit button-type="button"/></field>
+    </form>
+    
+    <form name="listLookupProductCatalogCategory" list-name="listIt" title="" type="list"
+        paginate-target="LookupProductCatalogCategory" odd-row-style="alternate-row" default-table-style="basic-table" view-size="20">
+        <actions>
+        	<set field="parameters.productCategoryTypeId" value="CATALOG_CATEGORY"/>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="ProductCategory"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+            </service>
+        </actions>
+        <auto-fields-entity entity-name="ProductCategory" default-field-type="display"/>
+        <field name="productCategoryTypeId"><display-entity entity-name="ProductCategoryType"/></field>
+        <field name="productCategoryId" title="${uiLabelMap.CommonEmptyHeader}" widget-style="buttontext">
+            <hyperlink also-hidden="false" target-type="plain" description="${productCategoryId}" target="javascript:set_value('${productCategoryId}')"/>
+        </field>
+        <field name="longDescription"><ignored/></field>
+        <field name="categoryImageUrl"><ignored/></field>
+        <field name="linkOneImageUrl"><ignored/></field>
+        <field name="linkTwoImageUrl"><ignored/></field>
+        <field name="detailScreen"><ignored/></field>
+    </form>
+    
+    
+    <form name="lookupVirtualAccessoryProduct" target="lookupVirtualAccessoryProduct" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <actions>
+        </actions>
+        <field name="isFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
+        <field name="primaryProductCategoryId" title="物料分类" >
+            <drop-down>
+                <entity-options entity-name="ProdCatalogCategoryDetlView" key-field-name="productCategoryId" description="${categoryName}">
+                	<entity-constraint name="prodCatalogId" value="MATERIAL_CATALOG"/>
+                	<entity-constraint name="productCategoryTypeId" value="CATALOG_CATEGORY"/>
+                    <entity-order-by field-name="categoryName"/>
+                </entity-options>
+            </drop-down>
+        </field> 
+        <field name="idValue" title="物料编号"><text-find ignore-case="true"/></field>
+        <field name="internalName" title="物料名称"><text-find/></field>  
+        <field name="comments" title="物料描述"><text-find/></field>      
+        <field name="description" title="规格"><text-find/></field>
+        <field name="keyword" title="关键字"><text-find/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}"><submit/></field>
+    </form>
+    
+    <form name="listLookupVirtualAccessoryProduct" list-name="listIt" title="" type="list" paginate-target="lookupVirtualAccessoryProduct"
+        odd-row-style="alternate-row" default-table-style="basic-table" view-size="20">
+        <actions>
+        	<set field="parameters.productTypeId" value="RAW_MATERIAL"/>
+        	<set field="parameters.isVirtual" value="N"/>
+            <service service-name="queryNoVirtualProduct" result-map="result" result-map-list="listIt">
+                <field-map field-name="idValue" from-field="parameters.idValue"/>
+                <field-map field-name="internalName" from-field="parameters.internalName"/>
+                <field-map field-name="description" from-field="parameters.description"/> 
+                <field-map field-name="comments" from-field="parameters.comments"/>
+                <field-map field-name="keyword" from-field="parameters.keyword"/>      
+                <field-map field-name="productCategoryId" from-field="parameters.primaryProductCategoryId"/>
+                <field-map field-name="isFind" from-field="parameters.isFind"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>              				
+            </service>
+        </actions>
+        <field name="idValue" title="物料编号" widget-style="buttontext">
+            <hyperlink also-hidden="false" target-type="plain" description="${idValue}" target="javascript:set_value('${idValue}')"/>
+        </field>
+        <field name="internalName" title="物料名称"><display/></field>
+        <field name="description" title="物料规格"><display/></field>
+        <field name="comments" title="物料描述"><display/></field>
+    </form>	
+    
+        <form name="lookupAccessoryProductInCatalog" target="lookupAccessoryProductInCatalog" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <actions>
+        </actions>
+        <field name="isFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
+        <field name="primaryProductCategoryId" title="物料分类" >
+            <drop-down>
+                <entity-options entity-name="ProdCatalogCategoryDetlView" key-field-name="productCategoryId" description="${categoryName}">
+                	<entity-constraint name="prodCatalogId" value="MATERIAL_CATALOG"/>
+                	<entity-constraint name="productCategoryTypeId" value="CATALOG_CATEGORY"/>
+                    <entity-order-by field-name="categoryName"/>
+                </entity-options>
+            </drop-down>
+        </field> 
+        <field name="idValue" title="物料编号"><text-find ignore-case="true"/></field>
+        <field name="internalName" title="物料名称"><text-find/></field>  
+        <field name="comments" title="物料描述"><text-find/></field>      
+        <field name="description" title="规格"><text-find/></field>
+        <field name="keyword" title="关键字"><text-find/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}"><submit/></field>
+    </form>
+    
+    <form name="listLookupAccessoryProductInCatalog" list-name="listIt" title="" type="list" paginate-target="lookupAccessoryProductInCatalog"
+        odd-row-style="alternate-row" default-table-style="basic-table" view-size="20">
+        <actions>
+        	<set field="parameters.productTypeId" value="RAW_MATERIAL"/>
+            <service service-name="queryProductInCatalog" result-map="result" result-map-list="listIt">
+                <field-map field-name="idValue" from-field="parameters.idValue"/>
+                <field-map field-name="internalName" from-field="parameters.internalName"/>
+                <field-map field-name="description" from-field="parameters.description"/> 
+                <field-map field-name="comments" from-field="parameters.comments"/>
+                <field-map field-name="keyword" from-field="parameters.keyword"/>      
+                <field-map field-name="productCategoryId" from-field="parameters.primaryProductCategoryId"/>
+                <field-map field-name="isFind" from-field="parameters.isFind"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>              				
+            </service>
+        </actions>
+        <field name="idValue" title="物料编号" widget-style="buttontext">
+            <hyperlink also-hidden="false" target-type="plain" description="${idValue}" target="javascript:set_value('${idValue}')"/>
+        </field>
+        <field name="internalName" title="物料名称"><display/></field>
+        <field name="isVirtual" title="是否虚拟"><display/></field>
+        <field name="description" title="物料规格"><display/></field>
+        
+        <field name="comments" title="物料描述"><display/></field>
+    </form>	
+    
+    
+    
+    <form name="lookupAccessoryProductNotVirtual" target="lookupAccessoryProductNotVirtual" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+       
+        <field name="noConditionFind"><hidden value="Y"/></field>
+       	<field name="partyId" title="供应商编号"><text-find default-value="${supplierId}"/></field>
+        <field name="groupName" title="供应商名称"><text-find default-value="${partyName.groupName}"/></field>
+        <field name="productId" title="商品编号"><text-find ignore-case="true"/></field>
+        <field name="internalName" title="商品名称"><text-find/></field>
+        <field name="description" title="规格"><text-find/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}" tooltip="精确的查询条件可以检索的更快"><submit/></field>
+    </form>
+    
+    
+    <form name="listAccessoryProductNotVirtual" list-name="listIt" title="" type="list" paginate-target="lookupAccessoryProductNotVirtual"
+        odd-row-style="alternate-row" default-table-style="basic-table" view-size="20">
+        <actions>
+        	<set field="parameters.isVirtual" value="N"/>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="AccessoryProductCategorySupplierView"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>                
+            </service>
+        </actions>
+        <field name="idValue" title="素然物料编号" widget-style="buttontext">
+            <hyperlink also-hidden="false" target-type="plain" description="${idValue}" target="javascript:set_value('${idValue}')"/>
+        </field>
+        <field name="internalName" title="供应商物料名称"><display/></field>
+        <field name="description" title="物料规格"><display/></field>
+        <field name="groupName" title="组名"><display/></field>
+        <field name="seasonName" title="季节"><display/></field>
+        <field name="partyId" title="供应商编号"><display/></field>
+        <field name="groupName" title="供应商名称"><display/></field>
+    </form>	
+    
+    <form name="lookupSupplierProductNotVirtual" target="lookupSupplierProductNotVirtual" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+       
+        <field name="noConditionFind"><hidden value="Y"/></field>
+       	<field name="partyIdView" title="供应商编号"><display default-value="${partyId}"/></field>
+        <field name="groupNameView" title="供应商名称"><display default-value="${partyName.groupName}"/></field>
+        <field name="partyId" title="供应商编号"><hidden value="${partyId}"/></field>
+        <field name="groupName" title="供应商名称"><hidden value="${partyName.groupName}"/></field>
+        <field name="productId" title="商品编号"><text-find ignore-case="true"/></field>
+        <field name="internalName" title="商品名称"><text-find/></field>
+        <field name="description" title="规格"><text-find/></field>
+        <field name="isVirtual"><hidden value="N"/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}" tooltip="精确的查询条件可以检索的更快"><submit/></field>
+    </form>
+    
+    
+    <form name="listSupplierProductNotVirtual" list-name="listIt" title="" type="list" paginate-target="lookupSupplierProductNotVirtual"
+        odd-row-style="alternate-row" default-table-style="basic-table" view-size="20">
+        <actions>
+        	<set field="parameters.isVirtual" value="N"/>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="SupplierProductCategoryView"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/> 
+            </service>
+        </actions>
+        <field name="idValue" title="素然物料编号" widget-style="buttontext">
+           <hyperlink also-hidden="false" target-type="plain" description="${idValue}" target="javascript:set_values('${idValue}', '${productId}')"/>
+        </field>
+        <field name="internalName" title="供应商物料名称"><display/></field>
+        <field name="description" title="物料规格"><display/></field>
+        <field name="groupName" title="组名"><display/></field>
+        <field name="seasonName" title="季节"><display/></field>
+        <field name="partyId" title="供应商编号"><display/></field>
+        <field name="groupName" title="供应商名称"><display/></field>
+    </form>	
+    
+    <form name="lookupVirtualProductByParty" target="lookupVirtualProductByParty" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <actions>
+        </actions>
+        <field name="noFind"><hidden value="N"/></field>        
+        <field name="partyId" title="供应商编号"><text-find ignore-case="true" default-value="${supplierId}"/></field>
+        <field name="groupName" title="供应商名称"><text-find default-value="${partyName.groupName}"/></field>                
+        <field name="idValue" title="物料编号"><text-find ignore-case="true"/></field>
+        <field name="internalName" title="物料名称"><text-find/></field>        
+        <field name="description" title="规格"><text-find/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}"><submit/></field>
+    </form>
+    
+    <form name="listLookupVirtualProductByParty" list-name="listIt" title="" type="list" paginate-target="lookupVirtualProductByParty"
+        odd-row-style="alternate-row" default-table-style="basic-table" view-size="20">
+        <actions>
+        	
+            <service service-name="queryNoVirtualProductByParty" result-map="result" result-map-list="listIt">
+                <field-map field-name="idValue" from-field="parameters.idValue"/>
+                <field-map field-name="internalName" from-field="parameters.internalName"/>
+                <field-map field-name="description" from-field="parameters.description"/> 
+                <field-map field-name="partyId" from-field="parameters.partyId"/>      
+                <field-map field-name="groupName" from-field="parameters.groupName"/>
+                <field-map field-name="prodCatalogId" value="MATERIAL_CATALOG"/>
+                <field-map field-name="productTypeId" value="RAW_MATERIAL"/>                
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>  
+                <field-map field-name="noFind" from-field="parameters.noFind"/>               				
+            </service>
+        </actions>
+        <field name="idValue" title="物料编号" widget-style="buttontext">
+            <hyperlink also-hidden="false" target-type="plain" description="${idValue}" target="javascript:set_values('${idValue}', '${productId}')"/>
+        </field>
+        <field name="internalName" title="物料名称"><display/></field>
+        <field name="description" title="物料规格"><display/></field>
+    </form>	
+    
+    <form name="lookupRealProductNotVirtual" target="lookupRealProductNotVirtual" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+               <field name="noFind"><hidden value="N"/></field>        
+       
+        <field name="noConditionFind"><hidden value="Y"/></field>
+       	<field name="partyId" title="供应商编号"><text-find default-value="${supplierId}"/></field>
+        <field name="groupName" title="供应商名称"><text-find default-value="${partyName.groupName}"/></field>
+        <field name="productId" title="商品编号"><text-find ignore-case="true"/></field>
+        <field name="internalName" title="商品名称"><text-find/></field>
+        <field name="description" title="规格"><text-find/></field>
+        <field name="isVirtual"><hidden value="N"/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}" tooltip="精确的查询条件可以检索的更快"><submit/></field>
+    </form>
+    
+    
+    <form name="listLookupRealProductNotVirtual" list-name="listIt" title="" type="list" paginate-target="lookupRealProductNotVirtual"
+        odd-row-style="alternate-row" default-table-style="basic-table" view-size="20">
+        <actions>
+            <set field="parameters.productTypeId" value="FINISHED_GOOD"/>
+        	<set field="parameters.isVirtual" value="N"/>
+            <service service-name="queryNoVirtualRealProductByParty" result-map="result" result-map-list="listIt">
+                <field-map field-name="idValue" from-field="parameters.idValue"/>
+                <field-map field-name="internalName" from-field="parameters.internalName"/>
+                <field-map field-name="description" from-field="parameters.description"/> 
+                <field-map field-name="partyId" from-field="parameters.partyId"/>      
+                <field-map field-name="groupName" from-field="parameters.groupName"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>  
+                <field-map field-name="noFind" from-field="parameters.noFind"/>               				
+            </service>
+        </actions>
+        <field name="productId" title="内部编号" widget-style="buttontext">
+            <hyperlink also-hidden="false" target-type="plain" description="${productId}" target="javascript:set_value('${productId}')"/>
+        </field>
+        <field name="internalName" title="供应商物料名称"><display/></field>
+        <field name="description" title="物料规格"><display/></field>
+        <field name="groupName" title="组名"><display/></field>
+        <field name="seasonName" title="季节"><display/></field>
+        <field name="partyId" title="供应商编号"><display/></field>
+        <field name="groupName" title="供应商名称"><display/></field>
+    </form>	
+    
+    <form name="LookupDesignProduct" target="LookupDesignProduct" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <field name="noConditionFind"><hidden value="Y"/> </field>
+        <field name="isVirtual"><hidden value="${parameters.isVirtual}"/></field>
+        <field name="productCategoryId"><hidden/> </field>
+        <field name="productId" title="款标识"><text-find/></field>
+        <field name="internalName" title="款内部名称"><text-find/></field>
+        <field name="seasonId" title="季">
+        	<drop-down current="selected">
+        		<option key="" description=""/>
+        		<entity-options description="${categoryName}" entity-name="ProductCategory" key-field-name="productCategoryId">
+        			<entity-constraint name="productCategoryTypeId" operator="equals" value="ZUCZUG_SEASON"/>
+        		</entity-options>
+        	</drop-down>
+        </field>
+        <field name="seriesId" title="系列" id-name="seriesId">
+        	<drop-down current="selected">
+        		<option key="" description=""/>
+        		<entity-options description="${categoryName}" entity-name="ProductCategory" key-field-name="productCategoryId">
+        			<entity-constraint name="productCategoryTypeId" operator="equals" value="SERIES"/>
+        		</entity-options>
+        	</drop-down>
+        </field>
+        <field name="subSeriesId" title="子系列" id-name="subSeriesId">
+        	<drop-down current="selected">
+        		<option key="" description=""/>
+        		<entity-options description="${categoryName}" entity-name="ProductCategory" key-field-name="productCategoryId">
+        			<entity-constraint name="productCategoryTypeId" operator="equals" value="SUBSERIES"/>
+        			<entity-order-by field-name="categoryName"/>
+        		</entity-options>
+        	</drop-down>
+        </field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}" tooltip="精确的查询条件可以更快的展现结果"><submit/></field>
+    </form>
+    
+    <form name="ListLookupDesignProduct" target="LookupDesignProduct" title="" type="list" list-name="listIt"
+        paginate-target="LookupDesignProduct" paginate="true" paginate-style="nav-pager"
+        odd-row-style="alternate-row" header-row-style="header-row-2" default-table-style="basic-table hover-bar">
+        <actions>    	
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="orderBy" from-field="parameters.sortField"/>
+                <field-map field-name="entityName" value="AllProductDesignView"/>
+                <field-map field-name="noConditionFind" from-field="parameters.noConditionFind"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+            </service>
+        </actions>
+        <row-actions>
+        	<set field="groupInfo" type="Object" value="${groovy:com.zuczug.product.ZuczugProductUtils.getVariantGroupCategorys(delegator,productId)}"/>
+        	
+        	<entity-and entity-name="ProductAssoc" list="paList" filter-by-date="true">
+        		<field-map field-name="productId" from-field="productId"/>
+        		<field-map field-name="productAssocTypeId" value="UNIQUE_ITEM"/>
+        	</entity-and>
+        	
+        	<set field="zsProductId" from-field="paList[0].productIdTo"/>
+        	<entity-one value-field="zsProduct" entity-name="Product">
+        		<field-map field-name="productId" from-field="zsProductId"/>
+        	</entity-one>
+        </row-actions>
+        <field name="productId" title="款标识" sort-field="true">
+            <display></display>
+        </field>
+        <field name="internalName" title="款号名称"><display/></field>
+        <field name="quantityUomId" title="数量单位">
+        	<display-entity entity-name="Uom" description="${description}" key-field-name="uomId">
+        	</display-entity>
+        </field>
+        <field name="seasonName" title="季"><display/></field>
+        <field name="seriesName" title="系列"><display/></field>
+        <field name="groupId" title="组别" map-name="groupInfo">
+        	<display-entity entity-name="ProductCategory" description="${categoryName}" key-field-name="productCategoryId">
+        	</display-entity>
+        </field>
+        <field name="zsProductId" title="正式商品">
+        	<hyperlink target="EditProductVirtual" description="${zsProductId}" target-window="_blank">
+        		<parameter param-name="productId" value="${zsProductId}"/>
+        		<parameter param-name="productCategoryId" value="${zsProduct.primaryProductCategoryId}"/>
+        	</hyperlink>
+        </field>
+        <field name="copyProduct" title="操作" widget-style="buttontext" use-when="zsProductId==null" >
+        	<hyperlink also-hidden="false" target-type="plain" description="关联此BOM" target="javascript:set_value('${productId}')"/>        	
+        </field>            
+    </form>
+</forms>

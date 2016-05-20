@@ -1,0 +1,814 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-form.xsd">
+
+	<form name="lookupPartyName" target="LookupPartyName" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <!--<auto-fields-entity entity-name="PartyNameView" default-field-type="find"/>-->
+        <field name="partyId" title="${uiLabelMap.PartyPartyId}"><text-find/></field>
+        <field name="partyTypeId" title="${uiLabelMap.PartyTypeId}">
+            <drop-down allow-empty="true">
+                <entity-options description="${description}" entity-name="PartyType"/>
+            </drop-down>
+        </field>
+        <field name="firstName" title="${uiLabelMap.PartyFirstName}"><text-find/></field>
+        <field name="lastName"  title="${uiLabelMap.PartyLastName}"><text-find/></field>
+        <field name="groupName" title="${uiLabelMap.PartyGroupName}"><text-find/></field>
+        <field name="roleTypeId"><hidden value="BULK_CUSTOMER"/></field>
+        <field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}"><submit button-type="button"/></field>        
+    </form>
+
+    <form name="listLookupPartyName" type="list" list-name="listIt" paginate-target="LookupPartyName"
+        odd-row-style="alternate-row" default-table-style="basic-table hover-bar">
+        <actions>
+            <set field="inputFields" from-field="parameters"/>
+            <set field="orderBy" value="partyId"/>
+            <set field="entityName" value="PartyNameRoleView"/>
+            <script location="component://salesmanager/webapp/salesmanager/WEB-INF/actions/find/FindDealersParty.groovy"/>
+        </actions>
+        <!--<auto-fields-entity entity-name="PartyNameView" default-field-type="display"/>-->
+        <field name="partyId" title="${uiLabelMap.PartyPartyId}"  widget-style="smallSubmit">
+            <hyperlink also-hidden="false" target-type="plain" description="${partyId}" target="javascript:set_value('${partyId}')"/>
+        </field>
+        <field name="partyTypeId" title="${uiLabelMap.PartyTypeId}">
+            <display-entity also-hidden="false" entity-name="PartyType" description="${description}"/>
+        </field>
+        <field name="firstName" title="${uiLabelMap.PartyFirstName}"><display/></field>
+        <field name="lastName"  title="${uiLabelMap.PartyLastName}"><display/></field>
+        <field name="groupName" title="${uiLabelMap.PartyGroupName}"><display/></field>
+    </form>
+    
+    <form name="lookupPartyForRegionManager" target="LookupPartyForRegionManager" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <!--<auto-fields-entity entity-name="PartyNameView" default-field-type="find"/>-->
+        <field name="partyId" title="${uiLabelMap.PartyPartyId}"><text-find/></field>
+        <field name="partyTypeId" title="${uiLabelMap.PartyTypeId}">
+            <drop-down allow-empty="true">
+                <entity-options description="${description}" entity-name="PartyType"/>
+            </drop-down>
+        </field>
+        <field name="firstName" title="${uiLabelMap.PartyFirstName}"><text-find/></field>
+        <field name="lastName"  title="${uiLabelMap.PartyLastName}"><text-find/></field>
+        <field name="groupName" title="${uiLabelMap.PartyGroupName}"><text-find/></field>
+        <field name="roleTypeId"><hidden value="REGION_MANAGER"/></field>
+        <field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}"><submit button-type="button"/></field>        
+    </form>
+
+    <form name="listLookupPartyForRegionManager" type="list" list-name="listIt" paginate-target="LookupPartyForRegionManager"
+        odd-row-style="alternate-row" default-table-style="basic-table hover-bar">
+        <actions>
+            <set field="inputFields" from-field="parameters"/>
+            <set field="orderBy" value="partyId"/>
+            <set field="entityName" value="PartyNameRoleView"/>
+            <script location="component://salesmanager/webapp/salesmanager/WEB-INF/actions/find/FindDealersParty.groovy"/>
+        </actions>
+        <!--<auto-fields-entity entity-name="PartyNameView" default-field-type="display"/>-->
+        <field name="partyId" title="${uiLabelMap.PartyPartyId}"  widget-style="smallSubmit">
+            <hyperlink also-hidden="false" target-type="plain" description="${partyId}" target="javascript:set_value('${partyId}')"/>
+        </field>
+        <field name="partyTypeId" title="${uiLabelMap.PartyTypeId}">
+            <display-entity also-hidden="false" entity-name="PartyType" description="${description}"/>
+        </field>
+        <field name="firstName" title="${uiLabelMap.PartyFirstName}"><display/></field>
+        <field name="lastName"  title="${uiLabelMap.PartyLastName}"><display/></field>
+        <field name="groupName" title="${uiLabelMap.PartyGroupName}"><display/></field>
+    </form>
+
+<!-- CustRequst SearchCondition -->
+    <form name="SearchCustRequestForm" type="single" target="FindCustRequest" title=""
+          default-map-name="parameters" header-row-style="header-row" default-table-style="basic-table">
+        <!--Fields -->
+        <field name="fromPartyId" title="${uiLabelMap.CustomerParty}"><lookup target-form-name="LookupPartyName"/></field>
+
+        <field name="statusId">
+            <drop-down allow-empty="true">
+                <entity-options entity-name="StatusItem" description="${description}">
+                    <entity-constraint name="statusTypeId" operator="equals" value="CUSTREQ_STTS"/>
+                    <entity-order-by field-name="sequenceId"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
+        <field name="submitButton" title="${uiLabelMap.Search}" widget-style="smallSubmit"><submit button-type="button"/></field>
+
+    </form>
+
+
+
+<!-- This Is Cust Requst ResutInfo -->
+    <form name="ListRequestList" type="list" use-row-submit="true" list-name="listIt" title="List of customer requests"
+          odd-row-style="alternate-row" header-row-style="header-row-2" default-table-style="basic-table hover-bar">
+        <actions>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="CustRequest"/>
+            </service>
+        </actions>
+        <field name="custRequestId" title="${uiLabelMap.CustRequestId}" sort-field="true">
+        <hyperlink description="${custRequestId}" target="ViewRequest">
+        <parameter param-name="custRequestId"/>
+        </hyperlink>
+        </field>
+        <field name="custRequestName" title="${uiLabelMap.CustRequestName}" sort-field="true"><display/></field>
+        <field name="priority" title="${uiLabelMap.Priority}" sort-field="true"><display/></field>
+        <field name="responseRequiredDate" title="${uiLabelMap.ResponseRequiredDate}" sort-field="true"><display/></field>
+        <field name="fromPartyId" title="${uiLabelMap.CustomerParty}" sort-field="true">
+        <display-entity entity-name="PartyNameView" key-field-name="partyId" description="${firstName} ${middleName} ${lastName} ${groupName}">
+        <sub-hyperlink description="[${fromPartyId}]" target="/partymgr/control/viewprofile" target-type="inter-app">
+        <parameter param-name="partyId" from-field="fromPartyId"/>
+        </sub-hyperlink>
+        </display-entity>
+        </field>
+        <field name="statusId" sort-field="true">
+        <display-entity also-hidden="false" entity-name="StatusItem"/>
+        </field>
+        <field name="lastModifiedDate" sort-field="true"><display/></field>
+        <!--field name="statusId"><hidden value="CRQ_REJECTED"/></field-->
+        <field name="rejectButton">
+        <hyperlink target="setCustRequestStatus" description="${uiLabelMap.FormFieldTitle_rejectButton}">
+        <parameter param-name="custRequestId"/>
+        <parameter param-name="statusId" value="CRQ_REJECTED"/>
+        </hyperlink>
+        </field>
+
+    </form>
+    
+    <form name="SearchOrderByB2BForm" type="single" title=""
+    	 header-row-style="header-row" default-table-style="basic-table">
+    	<field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
+		<field name="orderId" title="${uiLabelMap.OrderOrderNumber}"><text-find ignore-case="true"/></field>
+		<field name="primaryStoreGroupId"><hidden value="B2B_GROUP"/></field>   			
+        <field name="submitButton" title="${uiLabelMap.CommonSearch}"><submit button-type="button"/></field>
+    </form>
+    
+    <form name="ListOrderByB2BList" type="list" list-name="listIt" odd-row-style="alternate-row"
+        default-table-style="basic-table hover-bar" header-row-style="header-row-2">
+        <actions>       	
+            <service service-name="performFind" result-map="result" result-map-list="listIt">            	
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="orderBy" from-field="parameters.sortField"/>
+                <field-map field-name="entityName" value="ProductStoreGroupFacilityByOrder"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+                <field-map field-name="filterByDate" from-field="Y"/>
+            </service>
+        </actions>
+        <field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
+        <field name="orderId" title="${uiLabelMap.OrderOrderNumber}" widget-style="buttontext" sort-field="true">
+            <hyperlink target="salesorderview" description="${orderId}">
+                <parameter param-name="orderId"/>
+            </hyperlink>
+        </field>
+    </form>
+
+ 	<form name="FindDealers" target="FindDealers" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
+        <field name="partyId" title="${uiLabelMap.DealerId}"><text-find/></field>
+        <field name="groupName" title="${uiLabelMap.DealerName}"><text-find/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}"><submit/></field>
+    </form>
+    
+    <form name="ListFindDealers" target="ListFindDealers" title="" type="list" list-name="listIt"
+        paginate-target="FindDealers" paginate="true" paginate-style="nav-pager"
+        odd-row-style="alternate-row" header-row-style="header-row-2" default-table-style="basic-table hover-bar">
+        <actions>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="orderBy" from-field="parameters.sortField"/>
+                <field-map field-name="entityName" value="DealerView"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+            </service>
+        </actions>
+        <field name="partyId" title="${uiLabelMap.DealerId}" sort-field="true">
+            <hyperlink description="${partyId}" target="EditDealerInfo" target-window="_blank">
+                <parameter param-name="partyId"/>
+            </hyperlink>
+        </field>
+        <field name="groupName" title="${uiLabelMap.DealerName}"><display/></field>
+        <field name="descriptionRank" title="${uiLabelMap.DealerLevel}"><display/></field>
+        <field name="delDealer" title="  " widget-style="buttontext" use-when="${statusIdAlias!='PARTY_DISABLED'}">
+			<hyperlink target="delDealer" description="${uiLabelMap.DealerLogout}" also-hidden="false" >
+                <parameter param-name="partyId" from-field="partyId"/>
+                <parameter param-name="groupName" from-field="groupName"/>
+				<parameter param-name="statusIdDisabled"  value="PARTY_DISABLED"/>
+            </hyperlink>
+		</field>
+    </form>
+    
+  	<form name="AddDealerInfo" type="single" target="createDealerInfo" title="" default-map-name="partyGroup"
+        header-row-style="header-row" default-table-style="basic-table"> 
+        <actions>  
+	        <entity-and entity-name="PartyAddress" list="addressList" filter-by-date="true">
+		        <field-map field-name="partyId" from-field="partyId"/>
+		        <field-map field-name="contactMechPurposeTypeId" value="PRIMARY_LOCATION"/>
+	        </entity-and> 
+	        <set field="cityId" from-field="addressList[0].geoId"/>
+	        <set field="city" from-field="addressList[0].geoName"/>
+	        <set field="address1" from-field="addressList[0].address1"/>       
+        	<set field="addressMechId" from-field="addressList[0].contactMechId"/>
+	        <entity-and entity-name="PartyContactInfo" list="faxList" filter-by-date="true">
+		        <field-map field-name="partyId" from-field="partyId"/>
+		        <field-map field-name="contactMechPurposeTypeId"  value="FAX_NUMBER"/>
+	        </entity-and> 
+	        <set field="fax" from-field="faxList[0].contactNumber"/>
+        	<set field="faxMechId" from-field="faxList[0].contactMechId"/>
+        	<entity-and entity-name="PartyClassification" list="dealerList" >
+		        <field-map field-name="partyId" from-field="partyId"/>
+	        </entity-and>
+	        <set field="dealerRankGroupId" from-field="dealerList[0].partyClassificationGroupId"/>
+	        <entity-and entity-name="PartyClassificationGroup" list="dealerGroupList">
+		        <field-map field-name="partyClassificationGroupId" from-field="dealerRankGroupId"/>
+	        </entity-and>
+	        <set field="dealerRankGroupId" from-field="dealerList[0].partyClassificationGroupId"/>
+	        <entity-and entity-name="PartyContactInfo" list="mobileList" filter-by-date="true">
+		        <field-map field-name="partyId" from-field="partyId"/>
+		        <field-map field-name="contactMechPurposeTypeId" value="PHONE_MOBILE"/>
+	        </entity-and> 
+	        <set field="mobile" from-field="mobileList[0].contactNumber"/>
+	        <set field="mobileMechId" from-field="mobileList[0].contactMechId"/>
+	        <entity-and entity-name="PartyContactInfo" list="phoneList" filter-by-date="true">
+		        <field-map field-name="partyId" from-field="partyId"/>
+		        <field-map field-name="contactMechPurposeTypeId" value="PHONE_WORK"/>
+	        </entity-and> 
+	        <set field="phone" from-field="phoneList[0].contactNumber"/>
+	        <set field="askForName" from-field="phoneList[0].askForName"/>
+	        <set field="phoneMechId" from-field="phoneList[0].contactMechId"/>
+	        <entity-and entity-name="PartyEmail" list="emailList" filter-by-date="true">
+		        <field-map field-name="partyId" from-field="partyId"/>
+		        <field-map field-name="contactMechPurposeTypeId" value="PRIMARY_EMAIL"/>
+	        </entity-and> 
+	        <set field="email" from-field="emailList[0].infoString"/>
+	        <set field="emailMechId" from-field="emailList[0].contactMechId"/>
+	       	<entity-and entity-name="FinAccount" list="finaccountlist">
+		        <field-map field-name="finAccountId" from-field="partyId"/>
+	        </entity-and>
+	        <set field="finAccountName" from-field="finaccountlist[0].finAccountName"/>
+	        <set field="finAccountCode" from-field="finaccountlist[0].finAccountCode"/>
+	        <entity-and entity-name="PartyIdentification" list="partyIdentificationList">
+		        <field-map field-name="partyId" from-field="partyId"/>
+	        </entity-and>
+	        <set field="idValue" from-field="partyIdentificationList[0].idValue"/>
+        </actions>
+        <field name="idValue" title="${uiLabelMap.BusinessLicenseRegistrationNumber}" required-field="true"><text size="30" maxlength="255" default-value="${idValue}"/></field>
+		<field name="groupName" title="${uiLabelMap.DealerName}" required-field="true"><text size="30" maxlength="255"/></field>
+		<field name="preferredCurrencyUomId" title="${uiLabelMap.Currency}">
+        	<drop-down allow-empty="false" no-current-selected-key="CNY">
+        		<option key="CNY" description="${uiLabelMap.CNY}"/>
+        		<option key="JPY" description="${uiLabelMap.JPY}"/>
+        		<option key="USD" description="${uiLabelMap.USD}"/>
+        		<option key="EUR" description="${uiLabelMap.EUR}"/>
+            </drop-down>
+        </field>
+        <field name="description" title="${uiLabelMap.DealerDesc}"><text/></field>
+        <field name="partyClassificationGroupId" title="${uiLabelMap.DealerLevel}">
+        	<drop-down allow-empty="false" no-current-selected-key="${partyClassificationGroupId}">
+        		<option key="DEALERRANK1" description="${uiLabelMap.DealerLevel1}"/>
+        		<option key="DEALERRANK2" description="${uiLabelMap.DealerLevel2}"/>
+        		<option key="DEALERRANK3" description="${uiLabelMap.DealerLevel3}"/>
+            </drop-down>
+        </field>
+        <field name="countryGeoId"><hidden value="CHN"/></field> 
+        <field name="city" title="${uiLabelMap.City}" required-field="true"><lookup target-form-name="LookupCity" default-value="${city}"></lookup></field>
+		<!--field name="city" title="${uiLabelMap.City}" >
+            <drop-down no-current-selected-key="${cityId}">
+                <entity-options entity-name="Geo" key-field-name="geoId" description="${geoName}">
+                	<entity-constraint name="geoTypeId" value="CITY"/>
+                    <entity-order-by field-name="geoName"/>
+                </entity-options>
+            </drop-down>
+        </field-->
+		<field name="address1" title="${uiLabelMap.Address}"><text size="30" maxlength="250" default-value="${address1}"/></field> 
+		<field name="askForName" title="${uiLabelMap.ContactPerson}"><text size="30" maxlength="100" default-value="${askForName}"/></field> 
+		<field name="fax" title="${uiLabelMap.Fax}"><text size="30" maxlength="60" default-value="${fax}"/></field>    
+		<field name="phone" title="${uiLabelMap.Phone}"><text size="30" maxlength="60" default-value="${phone}"/></field>  
+		<field name="mobile" title="${uiLabelMap.ContactPersonPhone}"><text size="30" maxlength="60" default-value="${mobile}"/></field> 
+		<field name="email" title="${uiLabelMap.Email}"><text size="30" maxlength="100" default-value="${email}"/></field> 
+		<field name="finAccountName" title="${uiLabelMap.FinAccountName}"><text size="20" default-value="${finAccountName}"/></field>
+		<field name="finAccountCode" title="${uiLabelMap.FinAccountCode}"><text size="30" default-value="${finAccountCode}"/></field> 
+
+        <field name="submitButton" title="${uiLabelMap.Submit}" widget-style="smallSubmit"><submit button-type="button"/></field>
+    </form>
+    
+    <form name="EditDealerInfo" type="single" target="updateDealerInfo" title="" default-map-name="partyGroup"
+        header-row-style="header-row" default-table-style="basic-table">
+        <actions>  
+	        <entity-and entity-name="PartyAddress" list="addressList" filter-by-date="true">
+		        <field-map field-name="partyId" from-field="partyId"/>
+		        <field-map field-name="contactMechPurposeTypeId" value="PRIMARY_LOCATION"/>
+	        </entity-and> 
+	        <entity-and entity-name="PartyClassification" list="dealerList" >
+		        <field-map field-name="partyId" from-field="partyId"/>
+	        </entity-and>
+	        <set field="partyClassificationGroupOldId" from-field="dealerList[0].partyClassificationGroupId"/>
+	        <set field="partyClassificationGroupId" from-field="dealerList[0].partyClassificationGroupId"/>
+	        <set field="partyClassificationfromDate" from-field="dealerList[0].fromDate"/>
+	        <set field="cityId" from-field="addressList[0].geoId"/>
+	        <set field="city" from-field="addressList[0].geoName"/>
+	        <set field="address1" from-field="addressList[0].address1"/>       
+        	<set field="addressMechId" from-field="addressList[0].contactMechId"/>
+	        <entity-and entity-name="PartyContactInfo" list="faxList" filter-by-date="true">
+		        <field-map field-name="partyId" from-field="partyId"/>
+		        <field-map field-name="contactMechPurposeTypeId"  value="FAX_NUMBER"/>
+	        </entity-and> 
+	        <set field="fax" from-field="faxList[0].contactNumber"/>
+        	<set field="faxMechId" from-field="faxList[0].contactMechId"/>
+	        <entity-and entity-name="PartyContactInfo" list="mobileList" filter-by-date="true">
+		        <field-map field-name="partyId" from-field="partyId"/>
+		        <field-map field-name="contactMechPurposeTypeId" value="PHONE_MOBILE"/>
+	        </entity-and> 
+	        <set field="mobile" from-field="mobileList[0].contactNumber"/>
+	        <set field="mobileMechId" from-field="mobileList[0].contactMechId"/>
+	        <entity-and entity-name="PartyContactInfo" list="phoneList" filter-by-date="true">
+		        <field-map field-name="partyId" from-field="partyId"/>
+		        <field-map field-name="contactMechPurposeTypeId" value="PHONE_WORK"/>
+	        </entity-and> 
+	        <set field="phone" from-field="phoneList[0].contactNumber"/>
+	        <set field="askForName" from-field="phoneList[0].askForName"/>
+	        <set field="phoneMechId" from-field="phoneList[0].contactMechId"/>
+	        <entity-and entity-name="PartyEmail" list="emailList" filter-by-date="true">
+		        <field-map field-name="partyId" from-field="partyId"/>
+		        <field-map field-name="contactMechPurposeTypeId" value="PRIMARY_EMAIL"/>
+	        </entity-and> 
+	        <set field="email" from-field="emailList[0].infoString"/>
+	        <set field="emailMechId" from-field="emailList[0].contactMechId"/>
+	       	<entity-and entity-name="FinAccount" list="finaccountlist">
+		        <field-map field-name="finAccountId" from-field="partyId"/>
+	        </entity-and>
+	        <set field="finAccountName" from-field="finaccountlist[0].finAccountName"/>
+	        <set field="finAccountCode" from-field="finaccountlist[0].finAccountCode"/>
+	        <entity-and entity-name="PartyIdentification" list="partyIdentificationList">
+		        <field-map field-name="partyId" from-field="partyId"/>
+	        </entity-and>
+	        <set field="idValue" from-field="partyIdentificationList[0].idValue"/>
+        </actions>
+        
+		<field name="addressMechId"><hidden value="${addressMechId}"/></field>  
+		<field name="faxMechId"><hidden value="${faxMechId}"/></field>  
+		<field name="mobileMechId"><hidden value="${mobileMechId}"/></field>  
+		<field name="phoneMechId"><hidden value="${phoneMechId}"/></field>  
+		<field name="emailMechId"><hidden value="${emailMechId}"/></field>  
+		<field name="partyClassificationfromDate"><hidden value="${partyClassificationfromDate}"/></field>  
+		<field name="partyClassificationGroupOldId"><hidden value="${partyClassificationGroupOldId}"/></field> 
+		<field name="partyId" title="${uiLabelMap.DealerId}"><display/></field>
+		<field name="idValue" title="${uiLabelMap.BusinessLicenseRegistrationNumber}"><display  default-value="${idValue}"/></field>
+		<field name="groupName" title="${uiLabelMap.DealerName}" required-field="true"><text size="30" maxlength="255"/></field>
+		<field name="preferredCurrencyUomId" title="${uiLabelMap.Currency}">
+            <!--drop-down allow-empty="true" no-current-selected-key="CNY">
+                <entity-options key-field-name="uomId" description="${description} - ${abbreviation}" entity-name="Uom">
+                    <entity-constraint name="uomTypeId" operator="equals" value="CURRENCY_MEASURE"/>
+                    <entity-order-by field-name="description"/>
+                </entity-options>
+            </drop-down-->
+        	<drop-down allow-empty="false" no-current-selected-key="CNY">
+      			<option key="CNY" description="${uiLabelMap.CNY}"/>
+        		<option key="JPY" description="${uiLabelMap.JPY}"/>
+        		<option key="USD" description="${uiLabelMap.USD}"/>
+        		<option key="EUR" description="${uiLabelMap.EUR}"/>
+            </drop-down>
+        </field>
+        <field name="description" title="${uiLabelMap.DealerDesc}"><text/></field>
+        <field name="partyClassificationGroupId" title="${uiLabelMap.DealerLevel}">
+			<drop-down allow-empty="false" no-current-selected-key="${partyClassificationGroupId}">
+        		<option key="DEALERRANK1" description="${uiLabelMap.DealerLevel1}"/>
+        		<option key="DEALERRANK2" description="${uiLabelMap.DealerLevel2}"/>
+        		<option key="DEALERRANK3" description="${uiLabelMap.DealerLevel3}"/>
+            </drop-down>
+        </field>
+        <field name="countryGeoId"><hidden value="CHN"/></field> 
+        <field name="city" title="${uiLabelMap.City}" required-field="true"><lookup target-form-name="LookupCity" default-value="${city}"></lookup></field>
+		<!--field name="city" title="${uiLabelMap.City}" >
+            <drop-down no-current-selected-key="${cityId}">
+                <entity-options entity-name="Geo" key-field-name="geoId" description="${geoName}">
+                	<entity-constraint name="geoTypeId" value="CITY"/>
+                    <entity-order-by field-name="geoName"/>
+                </entity-options>
+            </drop-down>
+        </field-->
+		<field name="address1" title="${uiLabelMap.Address}"><text size="30" maxlength="250" default-value="${address1}"/></field> 
+		<field name="askForName" title="${uiLabelMap.ContactPerson}"><text size="30" maxlength="100" default-value="${askForName}"/></field> 
+		<field name="fax" title="${uiLabelMap.Fax}"><text size="30" maxlength="60" default-value="${fax}"/></field>    
+		<field name="phone" title="${uiLabelMap.Phone}"><text size="30" maxlength="60" default-value="${phone}"/></field>  
+		<field name="mobile" title="${uiLabelMap.ContactPersonPhone}"><text size="30" maxlength="60" default-value="${mobile}"/></field> 
+		<field name="email" title="${uiLabelMap.Email}"><text size="30" maxlength="100" default-value="${email}"/></field> 
+
+		<field name="finAccountName" title="${uiLabelMap.FinAccountName}"><text size="20" default-value="${finAccountName}"/></field>
+		<field name="finAccountCode" title="${uiLabelMap.FinAccountCode}"><text size="30" default-value="${finAccountCode}"/></field> 
+		
+        <field name="submitButton" title="${uiLabelMap.Submit}" widget-style="smallSubmit"><submit button-type="button"/></field>
+
+        <!--field use-when="partyGroup!=null" name="lastUpdatedByText" title="${uiLabelMap.ProductLastModifiedBy}:">
+            <display description="[${product.lastModifiedByUserLogin}] ${uiLabelMap.CommonOn} ${product.lastModifiedDate}" also-hidden="false"/>
+        </field>
+        <field use-when="partyGroup!=null" name="createdByText" title="${uiLabelMap.CommonCreatedBy}:">
+            <display description="[${product.createdByUserLogin}] ${uiLabelMap.CommonOn} ${product.createdDate}" also-hidden="false"/>
+        </field-->
+    </form>
+    
+    <form name="lookupCity" target="LookupCity" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <auto-fields-entity entity-name="GeoProvinceAndCity" default-field-type="find"/>
+        <field name="cityId" title="${uiLabelMap.CityId}"><text-find/></field>
+        <field name="cityName" title="${uiLabelMap.CityName}"><text-find/></field>
+        <field name="provinceId" title="${uiLabelMap.ProvinceId}"><text-find/></field>
+        <field name="proviceName" title="${uiLabelMap.ProviceName}"><text-find/></field>
+        <field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}" widget-style="smallSubmit"><submit button-type="button"/></field>
+    </form>
+    
+    <form name="FindProductStore" type="single" title=""
+    	 header-row-style="header-row" default-table-style="basic-table">
+    	 <field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
+    	 <field name="productStoreId" title="${uiLabelMap.ProductStoreId}">
+			<text-find ignore-case="true"/>
+		</field>
+		<field name="storeName" title="${uiLabelMap.StoreName}">
+			<text-find ignore-case="true"/>
+		</field>
+        <field name="payToPartyId" title="${uiLabelMap.PayToPartyId}"><lookup target-form-name="LookupPartyName"></lookup></field>
+        <field name="submitButton" title="${uiLabelMap.CommonSearch}"><submit button-type="button"/></field>
+    </form>
+    
+    <form name="ListProductStore" type="list" list-name="listIt" odd-row-style="alternate-row"
+        default-table-style="basic-table hover-bar" header-row-style="header-row-2">
+        <actions>       	
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+            	
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="orderBy" from-field="parameters.sortField"/>
+                <field-map field-name="entityName" value="ProductStore"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+                <field-map field-name="filterByDate" from-field="Y"/>
+            </service>
+        </actions>
+        <field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
+        <field name="productStoreId" title="${uiLabelMap.ProductStoreId}" widget-style="buttontext" sort-field="true">
+            <hyperlink target="EditProductStore" description="${productStoreId}">
+                <parameter param-name="productStoreId"/>
+            </hyperlink>
+        </field>
+        <field name="storeName" title="${uiLabelMap.ProductStoreName}" sort-field="true"><display/></field>
+    </form>
+    
+    <!-- 新增门店表单 -->
+    <form name="AddProductStore" type="single" target="createSaleStore" title="" default-map-name="productStore"
+        header-row-style="header-row" default-table-style="basic-table">       
+        <actions>
+        	<!-- 通过商店Id查询场所Id -->
+        	<entity-and entity-name="ProductStoreFacility" list="productStoreFacility">
+        		<field-map field-name="productStoreId" from-field="productStore.productStoreId"/>
+        	</entity-and>
+        	<entity-and entity-name="Facility" list="facilityList">
+		        <field-map field-name="facilityId" from-field="productStoreFacility[0].facilityId"/>
+	        </entity-and>
+	        <set field="openedDate" from-field="facilityList[0].openedDate"/>
+	        <set field="closedDate" from-field="facilityList[0].closedDate"/>
+	        <set field="area" from-field="facilityList[0].facilitySize"/>
+	        <entity-and entity-name="StoreGroupType" list="storeTypeList">
+		        <field-map field-name="productStoreId" from-field="productStore.productStoreId"/>
+		        <field-map field-name="productStoreGroupTypeId" value="STORETYPE"/>
+	        </entity-and>
+	        <set field="storeTypeId" from-field="storeTypeList[0].productStoreGroupId"/>
+	        <entity-and entity-name="StoreGroupType" list="storeStyleList">
+		        <field-map field-name="productStoreId" from-field="productStore.productStoreId"/>
+		        <field-map field-name="productStoreGroupTypeId" value="STORESTYLE"/>
+	        </entity-and>
+	        <set field="storeStyleId" from-field="storeStyleList[0].productStoreGroupId"/>
+	        <entity-and entity-name="StoreGroupType" list="storeLevelList">
+		        <field-map field-name="productStoreId" from-field="productStore.productStoreId"/>
+		        <field-map field-name="productStoreGroupTypeId" value="STORELEVEL"/>
+	        </entity-and>
+	        <set field="storeLevelId" from-field="storeLevelList[0].productStoreGroupId"/>
+	        <entity-and entity-name="StoreGroupType" list="storeFeatureList">
+		        <field-map field-name="productStoreId" from-field="productStore.productStoreId"/>
+		        <field-map field-name="productStoreGroupTypeId" value="STOREFEATURE"/>
+	        </entity-and>
+	        <set field="storeFeatureId" from-field="storeFeatureList[0].productStoreGroupId"/>
+	        <entity-and entity-name="StoreGroupType" list="storeOwnerRegionList">
+		        <field-map field-name="productStoreId" from-field="productStore.productStoreId"/>
+		        <field-map field-name="productStoreGroupTypeId" value="OWNERREGION"/>
+	        </entity-and>
+	        <set field="storeOwnerRegionId" from-field="storeOwnerRegionList[0].productStoreGroupId"/>
+	        <entity-and entity-name="StoreGroupType" list="storeBusinessModelList">
+		        <field-map field-name="productStoreId" from-field="productStore.productStoreId"/>
+		        <field-map field-name="productStoreGroupTypeId" value="BUSINESSMODEL"/>
+	        </entity-and>
+	        <set field="storeBusinessModelId" from-field="storeBusinessModelList[0].productStoreGroupId"/>
+			<entity-and entity-name="ProductStoreRole" list="productStoreRoleList">
+		        <field-map field-name="productStoreId" from-field="productStore.productStoreId"/>
+		        <field-map field-name="roleTypeId" value="REGION_MANAGER"/>
+	        </entity-and>
+	        <set field="regionManager" from-field="productStoreRoleList[0].partyId"/>
+        	<entity-and entity-name="FacilityAddress" list="addressList" filter-by-date="true">
+		        <field-map field-name="facilityId" from-field="productStoreFacility[0].facilityId"/>
+		        <field-map field-name="contactMechPurposeTypeId" value="PRIMARY_LOCATION"/>
+	        </entity-and> 
+	        <set field="cityId" from-field="addressList[0].geoId"/>
+	        <set field="city" from-field="addressList[0].geoName"/>
+	        <set field="address1" from-field="addressList[0].address1"/>
+        	<set field="addressMechId" from-field="addressList[0].contactMechId"/>
+        	<entity-and entity-name="FacilityAddress" list="shippingAddressList" filter-by-date="true">
+		        <field-map field-name="facilityId" from-field="productStoreFacility[0].facilityId"/>
+		        <field-map field-name="contactMechPurposeTypeId" value="SHIPPING_LOCATION"/>
+	        </entity-and>
+	        <set field="shippingAddress" from-field="shippingAddressList[0].address1"/>
+        	<set field="shippingAddressMechId" from-field="shippingAddressList[0].contactMechId"/>
+	        <entity-and entity-name="FacilityContactInfo" list="faxList" filter-by-date="true">
+		        <field-map field-name="facilityId" from-field="productStoreFacility[0].facilityId"/>
+		        <field-map field-name="contactMechPurposeTypeId"  value="FAX_NUMBER"/>
+	        </entity-and> 
+	        <set field="fax" from-field="faxList[0].contactNumber"/>
+        	<set field="faxMechId" from-field="faxList[0].contactMechId"/>
+	        <entity-and entity-name="FacilityContactInfo" list="mobileList" filter-by-date="true">
+		        <field-map field-name="facilityId" from-field="productStoreFacility[0].facilityId"/>
+		        <field-map field-name="contactMechPurposeTypeId" value="PHONE_MOBILE"/>
+	        </entity-and> 
+	        <set field="mobile" from-field="mobileList[0].contactNumber"/>
+	        <set field="mobileMechId" from-field="mobileList[0].contactMechId"/>
+	        <entity-and entity-name="FacilityContactInfo" list="phoneList" filter-by-date="true">
+		        <field-map field-name="facilityId" from-field="productStoreFacility[0].facilityId"/>
+		        <field-map field-name="contactMechPurposeTypeId" value="PHONE_WORK"/>
+	        </entity-and> 
+	        <set field="phone" from-field="phoneList[0].contactNumber"/>
+	        <set field="askForName" from-field="phoneList[0].askForName"/>
+	        <set field="phoneMechId" from-field="phoneList[0].contactMechId"/>
+	        <entity-and entity-name="FacilityEmail" list="emailList" filter-by-date="true">
+		        <field-map field-name="facilityId" from-field="productStoreFacility[0].facilityId"/>
+		        <field-map field-name="contactMechPurposeTypeId" value="PRIMARY_EMAIL"/>
+	        </entity-and> 
+	        <set field="email" from-field="emailList[0].infoString"/>
+	        <set field="emailMechId" from-field="emailList[0].contactMechId"/>
+        </actions>
+		<field name="addressMechId"><hidden value="${addressMechId}"/></field>  
+		<field name="faxMechId"><hidden value="${faxMechId}"/></field>  
+		<field name="mobileMechId"><hidden value="${mobileMechId}"/></field>  
+		<field name="phoneMechId"><hidden value="${phoneMechId}"/></field>  
+		<field name="emailMechId"><hidden value="${emailMechId}"/></field>  
+		<field name="shippingAddressMechId"><hidden value="${shippingAddressMechId}"/></field>  
+        
+        <field name="facilityId" map-name="productStoreFacility[0]"><hidden/></field>
+
+        <field position="1" name="productStoreId" title="${uiLabelMap.ProductStoreId}" tooltip="${uiLabelMap.CommonRequired}" widget-style="required"><text size="30" maxlength="50"/></field>    
+		<field position="2" name="storeName" title="${uiLabelMap.ProductStoreName}" tooltip="${uiLabelMap.CommonRequired}" widget-style="required"><text size="30" maxlength="100"/></field>		
+		<field position="3" name="payToPartyId" title="${uiLabelMap.PayToPartyId}" widget-style="required" tooltip="${uiLabelMap.CommonRequired}"><lookup target-form-name="LookupPartyName"/></field>
+		<field position="1" name="city" title="${uiLabelMap.City}" widget-style="required" tooltip="${uiLabelMap.CommonRequired}"><lookup target-form-name="LookupCity" default-value="${city}" ></lookup></field>
+		<!--field name="city" title="${uiLabelMap.City}" >
+            <drop-down no-current-selected-key="${cityId}">
+                <entity-options entity-name="Geo" key-field-name="geoId" description="${geoName}">
+                	<entity-constraint name="geoTypeId" value="CITY"/>
+                    <entity-order-by field-name="geoName"/>
+                </entity-options>
+            </drop-down>
+        </field-->
+		<field position="2" name="address1" title="${uiLabelMap.Address}" widget-style="required" tooltip="${uiLabelMap.CommonRequired}"><text size="30" maxlength="250" default-value="${address1}" /></field> 
+		<field position="3" name="shippingAddress" title="${uiLabelMap.ShippingAddress}" widget-style="required" tooltip="${uiLabelMap.CommonRequired}"><text size="30" maxlength="250" default-value="${shippingAddress}" /></field> 
+		<field position="1" name="askForName" title="${uiLabelMap.AskForName}"><text size="30" maxlength="100" default-value="${askForName}"/></field> 
+		<field position="2" name="fax" title="${uiLabelMap.Fax}"><text size="30" maxlength="60" default-value="${fax}"/></field>    
+		<field position="3" name="phone" title="${uiLabelMap.Phone}"><text size="30" maxlength="60" default-value="${phone}"/></field>  
+		<field position="1" name="mobile" title="${uiLabelMap.ContactPersonPhone}"><text size="30" maxlength="60" default-value="${mobile}"/></field> 
+		<field position="2" name="email" title="${uiLabelMap.Email}"><text size="30" maxlength="100" default-value="${email}"/></field>
+		<field position="3" name="area" title="${uiLabelMap.StroeArea}" tooltip="${uiLabelMap.SQM}"><text size="30" maxlength="100" default-value="${area}"/></field>   
+				
+		<field position="1" name="storeTypeId" title="${uiLabelMap.StoreType}">
+            <drop-down no-current-selected-key="${storeTypeId}">
+                <entity-options entity-name="StoreType" description="${description}">
+                	<entity-constraint name="productStoreGroupTypeId" value="STORETYPE"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field position="2" name="storeStyleId" title="${uiLabelMap.StoreStyle}">
+            <drop-down no-current-selected-key="${storeStyleId}">
+                <entity-options entity-name="StoreStyle" description="${description}">
+                	<entity-constraint name="productStoreGroupTypeId" value="STORESTYLE"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field position="3" name="storeLevelId" title="${uiLabelMap.StoreLevel}">
+            <drop-down no-current-selected-key="${storeLevelId}">
+                <entity-options entity-name="StoreLevel" description="${description}">
+                	<entity-constraint name="productStoreGroupTypeId" value="STORELEVEL"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field position="1" name="storeFeatureId" title="${uiLabelMap.StoreFeature}">
+            <drop-down no-current-selected-key="${storeFeatureId}">
+                <entity-options entity-name="StoreFeature" description="${description}">
+                	<entity-constraint name="productStoreGroupTypeId" value="STOREFEATURE"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field position="2" name="storeOwnerRegionId" title="${uiLabelMap.StoreOwnerRegion}">
+            <drop-down no-current-selected-key="${storeOwnerRegionId}">
+                <entity-options entity-name="StoreOwnerRegion" description="${description}">
+                	<entity-constraint name="productStoreGroupTypeId" value="OWNERREGION"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field position="3" name="storeBusinessModelId" title="${uiLabelMap.StoreBusinessModel}">
+            <drop-down no-current-selected-key="${storeBusinessModelId}">
+                <entity-options entity-name="StoreBusinessModel" description="${description}">
+                	<entity-constraint name="productStoreGroupTypeId" value="BUSINESSMODEL"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field position="1" name="regionManager" title="${uiLabelMap.RegionManager}" widget-style="required" tooltip="${uiLabelMap.CommonRequired}"><lookup target-form-name="LookupPartyForRegionManager" default-value="${regionManager}"/></field>
+		<field position="2" name="openedDate" title="${uiLabelMap.OpenedDate}" ><date-time default-value="${openedDate}"/></field>
+        <field position="3" name="closedDate" title="${uiLabelMap.ClosedDate}"><date-time default-value="${closedDate}"/></field>
+		<field name="submitButton" title="提交"><submit button-type="button"/></field>
+    </form>
+    
+    <!-- 修改门店表单 -->
+    <form name="EditProductStore" type="single" target="updateSaleStore" title="" default-map-name="productStore"
+        header-row-style="header-row" default-table-style="basic-table">       
+        <actions>
+            <!-- 通过商店Id查询场所Id -->
+        	<entity-and entity-name="ProductStoreFacility" list="productStoreFacility">
+        		<field-map field-name="productStoreId" from-field="productStore.productStoreId"/>
+        	</entity-and>
+        	<entity-and entity-name="Facility" list="facilityList">
+		        <field-map field-name="facilityId" from-field="productStoreFacility[0].facilityId"/>
+	        </entity-and>
+	        <set field="openedDate" from-field="facilityList[0].openedDate"/>
+	        <set field="closedDate" from-field="facilityList[0].closedDate"/>
+	        <set field="area" from-field="facilityList[0].facilitySize"/>
+	        <entity-and entity-name="StoreGroupType" list="storeTypeList">
+		        <field-map field-name="productStoreId" from-field="productStore.productStoreId"/>
+		        <field-map field-name="productStoreGroupTypeId" value="STORETYPE"/>
+	        </entity-and>
+	        <set field="oldStoreTypeId" from-field="storeTypeList[0].productStoreGroupId"/>
+	        <set field="oldTypeFromDate" from-field="storeTypeList[0].fromDate"/>
+	        <entity-and entity-name="StoreGroupType" list="storeStyleList">
+		        <field-map field-name="productStoreId" from-field="productStore.productStoreId"/>
+		        <field-map field-name="productStoreGroupTypeId" value="STORESTYLE"/>
+	        </entity-and>
+	        <set field="oldStoreStyleId" from-field="storeStyleList[0].productStoreGroupId"/>
+	        <set field="oldStyleFromDate" from-field="storeStyleList[0].fromDate"/>
+	        <entity-and entity-name="StoreGroupType" list="storeLevelList">
+		        <field-map field-name="productStoreId" from-field="productStore.productStoreId"/>
+		        <field-map field-name="productStoreGroupTypeId" value="STORELEVEL"/>
+	        </entity-and>
+	        <set field="oldStoreLevelId" from-field="storeLevelList[0].productStoreGroupId"/>
+	        <set field="oldLevelFromDate" from-field="storeLevelList[0].fromDate"/>
+	        <entity-and entity-name="StoreGroupType" list="storeFeatureList">
+		        <field-map field-name="productStoreId" from-field="productStore.productStoreId"/>
+		        <field-map field-name="productStoreGroupTypeId" value="STOREFEATURE"/>
+	        </entity-and>
+	        <set field="oldStoreFeatureId" from-field="storeFeatureList[0].productStoreGroupId"/>
+	        <set field="oldFeatureFromDate" from-field="storeFeatureList[0].fromDate"/>
+	        <entity-and entity-name="StoreGroupType" list="storeOwnerRegionList">
+		        <field-map field-name="productStoreId" from-field="productStore.productStoreId"/>
+		        <field-map field-name="productStoreGroupTypeId" value="OWNERREGION"/>
+	        </entity-and>
+	        <set field="oldStoreOwnerRegionId" from-field="storeOwnerRegionList[0].productStoreGroupId"/>
+	        <set field="oldOwnerRegionFromDate" from-field="storeOwnerRegionList[0].fromDate"/>
+	        <entity-and entity-name="StoreGroupType" list="storeBusinessModelList">
+		        <field-map field-name="productStoreId" from-field="productStore.productStoreId"/>
+		        <field-map field-name="productStoreGroupTypeId" value="BUSINESSMODEL"/>
+	        </entity-and>
+	        <set field="oldStoreBusinessModelId" from-field="storeBusinessModelList[0].productStoreGroupId"/>
+	        <set field="oldBusinessModelFromDate" from-field="storeBusinessModelList[0].fromDate"/>
+	        <entity-and entity-name="ProductStoreRole" list="productStoreRoleList">
+		        <field-map field-name="productStoreId" from-field="productStore.productStoreId"/>
+		        <field-map field-name="roleTypeId" value="REGION_MANAGER"/>
+	        </entity-and>
+	        <set field="oldRegionManager" from-field="productStoreRoleList[0].partyId"/>
+	        <set field="oldStoreRoleFromDate" from-field="productStoreRoleList[0].fromDate"/>
+        	<entity-and entity-name="FacilityAddress" list="addressList" filter-by-date="true">
+		        <field-map field-name="facilityId" from-field="productStoreFacility[0].facilityId"/>
+		        <field-map field-name="contactMechPurposeTypeId" value="PRIMARY_LOCATION"/>
+	        </entity-and>
+	        <set field="cityId" from-field="addressList[0].geoId"/>
+	        <set field="city" from-field="addressList[0].geoName"/>
+	        <set field="address1" from-field="addressList[0].address1"/>
+        	<set field="addressMechId" from-field="addressList[0].contactMechId"/>
+        	<entity-and entity-name="FacilityAddress" list="shippingAddressList" filter-by-date="true">
+		        <field-map field-name="facilityId" from-field="productStoreFacility[0].facilityId"/>
+		        <field-map field-name="contactMechPurposeTypeId" value="SHIPPING_LOCATION"/>
+	        </entity-and>
+	        <set field="shippingAddress" from-field="shippingAddressList[0].address1"/>
+        	<set field="shippingAddressMechId" from-field="shippingAddressList[0].contactMechId"/>
+	        <entity-and entity-name="FacilityContactInfo" list="faxList" filter-by-date="true">
+		        <field-map field-name="facilityId" from-field="productStoreFacility[0].facilityId"/>
+		        <field-map field-name="contactMechPurposeTypeId"  value="FAX_NUMBER"/>
+	        </entity-and> 
+	        <set field="fax" from-field="faxList[0].contactNumber"/>
+        	<set field="faxMechId" from-field="faxList[0].contactMechId"/>
+	        <entity-and entity-name="FacilityContactInfo" list="mobileList" filter-by-date="true">
+		        <field-map field-name="facilityId" from-field="productStoreFacility[0].facilityId"/>
+		        <field-map field-name="contactMechPurposeTypeId" value="PHONE_MOBILE"/>
+	        </entity-and> 
+	        <set field="mobile" from-field="mobileList[0].contactNumber"/>
+	        <set field="mobileMechId" from-field="mobileList[0].contactMechId"/>
+	        <entity-and entity-name="FacilityContactInfo" list="phoneList" filter-by-date="true">
+		        <field-map field-name="facilityId" from-field="productStoreFacility[0].facilityId"/>
+		        <field-map field-name="contactMechPurposeTypeId" value="PHONE_WORK"/>
+	        </entity-and> 
+	        <set field="phone" from-field="phoneList[0].contactNumber"/>
+	        <set field="askForName" from-field="phoneList[0].askForName"/>
+	        <set field="phoneMechId" from-field="phoneList[0].contactMechId"/>
+	        <entity-and entity-name="FacilityEmail" list="emailList" filter-by-date="true">
+		        <field-map field-name="facilityId" from-field="productStoreFacility[0].facilityId"/>
+		        <field-map field-name="contactMechPurposeTypeId" value="PRIMARY_EMAIL"/>
+	        </entity-and> 
+	        <set field="email" from-field="emailList[0].infoString"/>
+	        <set field="emailMechId" from-field="emailList[0].contactMechId"/>
+        </actions>
+		<field name="addressMechId"><hidden value="${addressMechId}"/></field>  
+		<field name="faxMechId"><hidden value="${faxMechId}"/></field>  
+		<field name="mobileMechId"><hidden value="${mobileMechId}"/></field>  
+		<field name="phoneMechId"><hidden value="${phoneMechId}"/></field>  
+		<field name="emailMechId"><hidden value="${emailMechId}"/></field>
+		<field name="shippingAddressMechId"><hidden value="${shippingAddressMechId}"/></field>
+		
+		<field name="oldStoreTypeId"><hidden value="${oldStoreTypeId}"/></field>
+		<field name="oldTypeFromDate"><hidden value="${oldTypeFromDate}"/></field>
+		<field name="oldStoreStyleId"><hidden value="${oldStoreStyleId}"/></field>
+		<field name="oldStyleFromDate"><hidden value="${oldStyleFromDate}"/></field>
+		<field name="oldStoreLevelId"><hidden value="${oldStoreLevelId}"/></field>
+		<field name="oldLevelFromDate"><hidden value="${oldLevelFromDate}"/></field>
+		<field name="oldStoreFeatureId"><hidden value="${oldStoreFeatureId}"/></field>
+		<field name="oldFeatureFromDate"><hidden value="${oldFeatureFromDate}"/></field>
+		<field name="oldStoreOwnerRegionId"><hidden value="${oldStoreOwnerRegionId}"/></field>
+		<field name="oldOwnerRegionFromDate"><hidden value="${oldOwnerRegionFromDate}"/></field>
+		<field name="oldStoreBusinessModelId"><hidden value="${oldStoreBusinessModelId}"/></field>
+		<field name="oldBusinessModelFromDate"><hidden value="${oldBusinessModelFromDate}"/></field>
+		<field name="oldRegionManager"><hidden value="${oldRegionManager}"/></field>
+		<field name="oldStoreRoleFromDate"><hidden value="${oldStoreRoleFromDate}"/></field>
+		
+
+        <field name="facilityId" map-name="productStoreFacility[0]"><hidden/></field>
+        <field position="1" name="productStoreId" title="${uiLabelMap.ProductStoreId}"><display></display></field>    
+		<field position="2" name="storeName" title="${uiLabelMap.ProductStoreName}" tooltip="${uiLabelMap.CommonRequired}" widget-style="required"><text size="30" maxlength="100"/></field>		
+		<field position="3" name="payToPartyId" title="${uiLabelMap.PayToPartyId}" widget-style="required" tooltip="${uiLabelMap.CommonRequired}"><lookup target-form-name="LookupPartyName"/></field>
+		<field position="1" name="city" title="${uiLabelMap.City}" widget-style="required" tooltip="${uiLabelMap.CommonRequired}"><lookup target-form-name="LookupCity" default-value="${city}"></lookup></field>
+		<!--field name="city" title="${uiLabelMap.City}" >
+            <drop-down no-current-selected-key="${cityId}">
+                <entity-options entity-name="Geo" key-field-name="geoId" description="${geoName}">
+                	<entity-constraint name="geoTypeId" value="CITY"/>
+                    <entity-order-by field-name="geoName"/>
+                </entity-options>
+            </drop-down>
+        </field-->
+		<field position="2" name="address1" title="${uiLabelMap.Address}" widget-style="required" tooltip="${uiLabelMap.CommonRequired}"><text size="30" maxlength="250" default-value="${address1}"/></field> 
+		<field position="3" name="shippingAddress" title="${uiLabelMap.ShippingAddress}" widget-style="required" tooltip="${uiLabelMap.CommonRequired}"><text size="30" maxlength="250" default-value="${shippingAddress}"/></field> 
+		<field position="1" name="askForName" title="${uiLabelMap.AskForName}"><text size="30" maxlength="100" default-value="${askForName}"/></field> 
+		<field position="2" name="fax" title="${uiLabelMap.Fax}"><text size="30" maxlength="60" default-value="${fax}"/></field>
+		<field position="3" name="phone" title="${uiLabelMap.Phone}"><text size="30" maxlength="60" default-value="${phone}"/></field>
+		<field position="1" name="mobile" title="${uiLabelMap.ContactPersonPhone}"><text size="30" maxlength="60" default-value="${mobile}"/></field>
+		<field position="2" name="email" title="${uiLabelMap.Email}"><text size="30" maxlength="100" default-value="${email}"/></field>
+		<field position="3" name="area" title="${uiLabelMap.StroeArea}" tooltip="${uiLabelMap.SQM}"><text size="30" maxlength="100" default-value="${area}"/></field>
+		
+		<field position="1" name="storeTypeId" title="${uiLabelMap.StoreType}">
+            <drop-down no-current-selected-key="${oldStoreTypeId}">
+                <entity-options entity-name="StoreType" description="${description}">
+                	<entity-constraint name="productStoreGroupTypeId" value="STORETYPE"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field position="2" name="storeStyleId" title="${uiLabelMap.StoreStyle}">
+            <drop-down no-current-selected-key="${oldStoreStyleId}">
+                <entity-options entity-name="StoreStyle" description="${description}">
+                	<entity-constraint name="productStoreGroupTypeId" value="STORESTYLE"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field position="3" name="storeLevelId" title="${uiLabelMap.StoreLevel}">
+            <drop-down no-current-selected-key="${oldStoreLevelId}">
+                <entity-options entity-name="StoreLevel" description="${description}">
+                	<entity-constraint name="productStoreGroupTypeId" value="STORELEVEL"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field position="1" name="storeFeatureId" title="${uiLabelMap.StoreFeature}">
+            <drop-down no-current-selected-key="${oldStoreFeatureId}">
+                <entity-options entity-name="StoreFeature" description="${description}">
+                	<entity-constraint name="productStoreGroupTypeId" value="STOREFEATURE"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field position="2" name="storeOwnerRegionId" title="${uiLabelMap.StoreOwnerRegion}">
+            <drop-down no-current-selected-key="${oldStoreOwnerRegionId}">
+                <entity-options entity-name="StoreOwnerRegion" description="${description}">
+                	<entity-constraint name="productStoreGroupTypeId" value="OWNERREGION"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field position="3" name="storeBusinessModelId" title="${uiLabelMap.StoreBusinessModel}">
+            <drop-down no-current-selected-key="${oldStoreBusinessModelId}">
+                <entity-options entity-name="StoreBusinessModel" description="${description}">
+                	<entity-constraint name="productStoreGroupTypeId" value="BUSINESSMODEL"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field position="1" name="regionManager" title="${uiLabelMap.RegionManager}" widget-style="required" tooltip="${uiLabelMap.CommonRequired}"><lookup target-form-name="LookupPartyForRegionManager" default-value="${oldRegionManager}"/></field>
+		<field position="2" name="openedDate" title="${uiLabelMap.OpenedDate}" ><date-time default-value="${openedDate}"/></field>
+        <field position="3" name="closedDate" title="${uiLabelMap.ClosedDate}"><date-time default-value="${closedDate}"/></field>
+		
+		<field name="submitButton" title="${uiLabelMap.Submit}"><submit button-type="button"/></field>
+    </form>
+    
+</forms>

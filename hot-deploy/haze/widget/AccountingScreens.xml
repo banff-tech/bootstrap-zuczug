@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+    <screen name="AccountingManageCommonDecorator">
+        <section>
+            <actions>
+                <set field="headerItem" value="AccountingManage"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="HazeCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                    	<include-menu location="component://haze/widget/HazeMenus.xml" name="AccountingManageTabBar"/>
+                    	<section>
+                            <widgets>
+                                <decorator-section-include name="body"/>
+                            </widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <screen name="FindPayments">
+        <section>
+            <actions>
+                <set field="tabButtonItem" value="FindPayments"/>
+                <set field="titleProperty" value="${groovy:org.ofbiz.base.util.StringUtil.wrapString('销售请求列表')}" />
+            </actions>
+            <widgets>
+                <decorator-screen name="AccountingManageCommonDecorator">
+                    <decorator-section name="body">
+                        <decorator-screen name="FindScreenDecorator" location="component://common/widget/CommonScreens.xml">
+                            <decorator-section name="menu-bar">
+                                <container style="button-bar"><link target="CreateProductBom" text="${uiLabelMap.AccountingCreatePayment}" style="buttontext"/></container>
+                            </decorator-section>
+                            <decorator-section name="search-options">
+                                <include-form name="FindPayments" location="component://haze/widget/AccountingForms.xml"/>
+                            </decorator-section>
+                            <decorator-section name="search-results">
+                                <include-form name="ListPayments" location="component://haze/widget/AccountingForms.xml"/>
+                            </decorator-section>
+                        </decorator-screen>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <screen name="FindInvoices">
+        <section>
+            <actions>
+                <set field="tabButtonItem" value="FindInvoices"/>
+                <set field="titleProperty" value="${groovy:org.ofbiz.base.util.StringUtil.wrapString('销售请求列表')}" />
+            </actions>
+            <widgets>
+                <decorator-screen name="AccountingManageCommonDecorator">
+                    <decorator-section name="body">
+                        <decorator-screen name="FindScreenDecorator" location="component://common/widget/CommonScreens.xml">
+                            <decorator-section name="menu-bar">
+                                <container style="button-bar"><link target="CreateProductBom" text="${uiLabelMap.AccountingCreateInvoice}" style="buttontext"/></container>
+                            </decorator-section>
+                            <decorator-section name="search-options">
+                                <include-form name="FindInvoices" location="component://haze/widget/AccountingForms.xml"/>
+                            </decorator-section>
+                            <decorator-section name="search-results">
+                                <include-form name="ListInvoices" location="component://haze/widget/AccountingForms.xml"/>
+                            </decorator-section>
+                        </decorator-screen>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+</screens>

@@ -63,7 +63,7 @@
 			<div id="logo-group">
 
 				<!-- PLACE YOUR LOGO HERE -->
-				<span id="logo"> <img src="/smartadmin/img/logo.png" alt="SmartAdmin"> </span>
+				<span id="logo"> <img src="/smartadmin/img/111.png" alt="SmartAdmin"> </span>
 				<!-- END LOGO PLACEHOLDER -->
 
 				<!-- Note: The activity badge color changes when clicked and resets the number to 0
@@ -266,7 +266,7 @@
 
 				<!-- logout button -->
 				<div id="logout" class="btn-header transparent pull-right">
-					<span> <a href="<@ofbizUrl>logout</@ofbizUrl>" title="Sign Out" data-action="userLogout" data-logout-msg="You can improve your security further after logging out by closing this opened browser"><i class="fa fa-sign-out"></i></a> </span>
+					<span> <a href="<@ofbizUrl>logout</@ofbizUrl>" title="注销" data-action="userLogout" data-logout-msg=""><i class="fa fa-sign-out"></i></a> </span>
 				</div>
 				<!-- end logout button -->
 
@@ -278,7 +278,7 @@
 				
 				<!-- #SEARCH -->
 				<!-- input: search field -->
-				<form action="#ajax/search.html" class="header-search pull-right">
+				<#-- <form action="#ajax/search.html" class="header-search pull-right">
 					<input id="search-fld" type="text" name="param" placeholder="Find reports and more">
 					<button type="submit">
 						<i class="fa fa-search"></i>
@@ -371,6 +371,23 @@
 		<!-- #NAVIGATION -->
 		<!-- Left panel : Navigation area -->
 		<!-- Note: This width of the aside area can be adjusted through LESS/SASS variables -->
+
+
+		<#if person?has_content>
+			<#assign userName = person.firstName?if_exists + " " + person.middleName?if_exists + " " + person.lastName?if_exists>
+		<#elseif partyGroup?has_content>
+			<#assign userName = partyGroup.groupName?if_exists>
+		<#elseif userLogin?exists>
+			<#assign userName = userLogin.userLoginId>
+		<#else>
+			<#assign userName = "">
+		</#if>
+		<#if defaultOrganizationPartyGroupName?has_content>
+			<#assign orgName = " - " + defaultOrganizationPartyGroupName?if_exists>
+		<#else>
+			<#assign orgName = "">
+		</#if>
+
 		<aside id="left-panel">
 
 			<!-- User info -->
@@ -380,7 +397,7 @@
 					<a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
 						<img src="/smartadmin/img/avatars/sunny.png" alt="me" class="online" /> 
 						<span>
-							john.doe 
+							${(userName)!}
 						</span>
 						<i class="fa fa-angle-down"></i>
 					</a> 

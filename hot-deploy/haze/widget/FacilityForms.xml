@@ -1,0 +1,722 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-form.xsd">
+
+    <form name="FindFacility" type="list" list-name="listIt" paginate-target="FindFacility"
+        odd-row-style="alternate-row" header-row-style="header-row-2" default-table-style="basic-table hover-bar">
+        <actions>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="Facility"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+            </service>
+        </actions>
+        <field name="facilityId">
+            <hyperlink target="EditFacility" description="${facilityId}">
+                <parameter param-name="facilityId"/>
+            </hyperlink>
+        </field>
+        <field name="facilityName"><display/></field>
+        <field name="facilityTypeId" title="${uiLabelMap.ProductFacilityType}">
+            <display-entity entity-name="FacilityType" description="${description}"/>
+        </field>
+        <field name="ownerPartyId" title="${uiLabelMap.ProductFacilityOwner}"><display/></field>
+        <field name="FacilitySize" title="${uiLabelMap.ProductFacilitySize}"><display/></field>
+        <field name="description"><display/></field>
+        <on-event-update-area event-type="paginate" area-id="search-results" area-target="FacilitySearchResults"/>
+    </form>
+
+    <form name="FindFacilityOptions" extends="lookupFacility" extends-resource="component://product/widget/facility/FieldLookupForms.xml" target="FindFacility">
+        <field name="submitButton" title="${uiLabelMap.CommonFind}"><submit button-type="button"/></field>
+    </form>
+
+    <form name="FindInventoryItemSearchParams" type="single" target="FindInventoryItem"
+        header-row-style="header-row" default-table-style="basic-table">
+        <field name="facilityId">
+            <drop-down allow-empty="false">
+                <entity-options entity-name="Facility" key-field-name="facilityId" description="${facilityName} [${facilityId}]">
+                    <entity-order-by field-name="facilityName"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field name="productId"><text-find/></field>
+        <field name="productName" title="${uiLabelMap.ProductName}"><text-find/></field>
+        <field name="internalName"><text-find/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}">
+            <submit button-type="button"/>
+        </field>
+    </form>
+    <form name="FindInventoryItemList" type="list" list-name="listIt" header-row-style="header-row-2"
+        paginate-target="FindInventoryItem" odd-row-style="alternate-row" default-table-style="basic-table hover-bar">
+        <actions>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="InventoryItemAndLocation"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+            </service>
+        </actions>
+        <field name="inventoryItemId"><display/></field>
+        <field name="productId"><display/></field>
+        <field name="internalName"><display/></field>
+        <field name="datetimeReceived"><display/></field>
+        <field name="quantityOnHandTotal"><display description="${availableToPromiseTotal} / ${quantityOnHandTotal}"/></field>
+        <on-event-update-area event-type="paginate" area-id="search-results" area-target="InventoryItemSearchResults"/>
+    </form>
+
+    <form name="FindFacilityInventoryByProduct" type="single" target="${facilityInventoryByProductScreen}" title=""
+        header-row-style="header-row" default-table-style="basic-table">
+        <field name="facilityId">
+            <drop-down allow-empty="false">
+                <entity-options entity-name="Facility" key-field-name="facilityId" description="${facilityName} [${facilityId}]">
+                    <entity-order-by field-name="facilityName"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field name="action"><hidden value="SEARCH"/></field>
+        <field name="productId" title="${uiLabelMap.ProductProductId}">
+            <text/>
+        </field>
+        <field name="internalName" title="${uiLabelMap.ProductInternalName}">
+            <text/>
+        </field>
+        <field name="productTypeId" title="${uiLabelMap.ProductProductType}">
+            <drop-down allow-empty="true" no-current-selected-key="FINISHED_GOOD">
+                <entity-options entity-name="ProductType" description="${description}"> <!-- [${productTypeId}] -->
+                    <entity-constraint name="isPhysical"  value="Y" operator="equals"/>
+                    <entity-constraint name="parentTypeId"  value="GOOD" operator="equals"/>
+                    <entity-order-by field-name="description"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field name="searchInProductCategoryId" title="${uiLabelMap.ProductCategory}"><lookup target-form-name="LookupProductCategory"></lookup></field>
+        <field name="productSupplierId" title="${uiLabelMap.ProductSupplier}">
+            <drop-down allow-empty="true">
+                <entity-options entity-name="PartyRoleAndPartyDetail" key-field-name="partyId" description="${groupName} [${partyId}]">
+                    <entity-constraint name="roleTypeId" value="SUPPLIER" operator="equals"/>
+                    <entity-order-by field-name="partyId"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field name="statusId">
+            <drop-down allow-empty="true">
+                <entity-options entity-name="StatusItem" description="${description}" key-field-name="statusId">
+                    <entity-constraint name="statusTypeId" operator="equals" value="INV_NON_SER_STTS"/>
+                </entity-options>
+                <entity-options entity-name="StatusItem" description="${description}" key-field-name="statusId">
+                    <entity-constraint name="statusTypeId" operator="equals" value="INV_SERIALIZED_STTS"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field name="offsetQOHQty" title="${uiLabelMap.ProductQtyOffsetQOHBelow}"><text/></field>
+        <field name="offsetATPQty" title="${uiLabelMap.ProductQtyOffsetATPBelow}"><text/></field>
+        <!-- 
+        <field name="productsSoldThruTimestamp" title="${uiLabelMap.ProductShowProductsSoldThruTimestamp}">
+            <date-time default-value="${groovy: org.ofbiz.base.util.UtilDateTime.nowTimestamp()}"/>
+        </field>
+         -->
+        <field name="VIEW_SIZE" entry-name="viewSize" title="${uiLabelMap.ProductShowProductsPerPage}"><text/></field>
+        <field name="monthsInPastLimit" entry-name="monthsInPastLimit"><text/></field>
+        <!-- no idea what is sellthrough
+        <field name="fromDateSellThrough"><date-time/></field>
+        <field name="thruDateSellThrough"><date-time/></field>
+        -->
+        <field name="submitButton" title="${uiLabelMap.CommonFind}" widget-style="smallSubmit">
+            <submit button-type="button"/>
+        </field>
+    </form>
+    <form name="ListFacilityInventoryByProduct" type="list" target="" title="" list-name="inventoryByProduct"
+        odd-row-style="alternate-row" header-row-style="header-row-2" default-table-style="basic-table hover-bar"
+        paginate-target="${facilityInventoryByProductScreen}" override-list-size="${overrideListSize}">
+        <row-actions>
+            <script location="component://product/webapp/facility/WEB-INF/actions/facility/ComputeProductSellThroughData.groovy"/>
+            <script location="component://haze/webapp/haze/WEB-INF/actions/GetProductZuczugCode.groovy"/>
+        </row-actions>
+        <field name="items" title="${uiLabelMap.ProductProductId}" widget-style="buttontext">
+            <hyperlink target="FindInventoryItem" description="${productId}">
+                <parameter param-name="productId"/>
+                <parameter param-name="facilityId"/>
+            </hyperlink>
+        </field>
+        <field name="productId" title="${uiLabelMap.ProductInternalName}">
+            <display-entity entity-name="Product" description="${internalName}">
+            </display-entity>
+        </field>
+        <field name="zuczugCode"><display/></field>
+        <field name="totalAvailableToPromise" title="${uiLabelMap.CommonTotal} ${uiLabelMap.ProductAtp}"><display/></field>
+        <field name="totalQuantityOnHand" title="${uiLabelMap.CommonTotal} ${uiLabelMap.ProductQoh}"><display/></field>
+        <field name="quantityOnOrder" title="${uiLabelMap.ProductOrderedQuantity}"><display/></field>
+        <field name="minimumStock" title="${uiLabelMap.ProductMinimumStock}"><display/></field>
+        <field name="reorderQuantity" title="${uiLabelMap.ProductReorderQuantity}"><display/></field>
+        <field name="daysToShip" title="${uiLabelMap.ProductDaysToShip}"><display/></field>
+        <field name="offsetQOHQtyAvailable" title="${uiLabelMap.ProductQtyOffsetQOH}"><display/></field>
+        <field name="offsetATPQtyAvailable" title="${uiLabelMap.ProductQtyOffsetATP}"><display/></field>
+        <field name="usageQuantity" title="${uiLabelMap.ProductUsage}"><display/></field>
+        <field name="defultPrice" title="${uiLabelMap.ProductDefaultPrice}"><display/></field>
+        <field name="listPrice" title="${uiLabelMap.ProductListPrice}"><display/></field>
+        <field name="wholeSalePrice" title="${uiLabelMap.ProductWholeSalePrice}"><display/></field>
+        <!-- no idea what is sellthrough
+        <field name="fromDateSellThrough" entry-name="parameters.fromDateSellThrough"><display/></field>
+        <field name="sellThroughInitialInventory"><display/></field>
+        <field name="sellThroughInventorySold"><display/></field>
+        <field name="sellThroughPercentage"><display/></field>
+         -->
+    </form>
+    
+    
+    <form name="SearchPurchaseOrder" type="single" target="FindPurchaseOrderList" title="" default-map-name="supplierProduct"
+        header-row-style="header-row" default-table-style="basic-table">
+        <field name="facilityId" title="${uiLabelMap.InFacilitySelect}">
+        	<lookup target-form-name="LookupFacility"></lookup>
+        </field>
+        <field name="statusId" title="${uiLabelMap.PurchaseOrderStatus}">
+			<drop-down>
+				<option key="ORDER_APPROVED" description="${uiLabelMap.Approve}"/>
+				<option key="ORDER_COMPLETED" description="${uiLabelMap.Completed}"/>
+			</drop-down>
+		</field>
+		<field name="orderId" title="${uiLabelMap.PurchaseOrderId}">
+			<text-find></text-find>
+		</field>
+		<field name="externalId" title="${uiLabelMap.CustomeOrderId}">
+			<text-find></text-find>
+		</field>
+		<field name="partyId" title="${uiLabelMap.PageTitleListSupplierProduct}">
+            <lookup target-form-name="LookupSupplier" ></lookup>
+        </field>
+        <field name="orderDate" title="${uiLabelMap.OrderDate}">
+        	<date-find />
+        </field>    
+        <field name="orderTypeId"><hidden value="PURCHASE_ORDER"/></field>
+        <field name="roleTypeId"><hidden value="SUPPLIER_AGENT"/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonSearch}"><submit button-type="button"/></field>
+    </form>
+    
+    
+    <form name="ListPurchaseOrder" type="multi" target="FindPurchaseOrderList" list-name="listIt" 
+		odd-row-style="odd" default-table-style="basic-table" paginate-target="FindPurchaseOrderList"
+		paginate="true" paginate-style="nav-pager">
+		<actions>
+			<service service-name="performFind" result-map="result" result-map-list="listIt">
+			    <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="OrderHeaderAndRoles"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+                <field-map field-name="orderBy" value="-orderDate"/>
+			</service>
+		</actions>
+		<row-actions>
+			<entity-and entity-name="OrderRole" list="orList">
+				<field-map field-name="orderId" from-field="orderId"/>
+				<field-map field-name="roleTypeId" value="BILL_FROM_VENDOR"/>
+			</entity-and>
+			
+			<entity-and entity-name="OrderItemShipGroup" list="oisg">
+				<field-map field-name="orderId" from-field="orderId"/>
+			</entity-and>
+			<set field="estimateDate" from-field="oisg[0].estimatedShipDate"/>
+			<set field="facilityId" value="${groovy:oisg[0].facilityId==null?originFacilityId:oisg[0].facilityId}"/>
+			
+			<set field="remarks" value="${groovy:com.zuczug.order.ZuczugOrderUtils.getOrderNoteByName(delegator,orderId,'ORDER_REMARKE')}"/>
+			<entity-and entity-name="OrderShipment" list="osList">
+				<field-map field-name="orderId" from-field="orderId"/>
+			</entity-and>
+		</row-actions>
+        <field name="_rowSubmit" title="${uiLabelMap.PurchaseOrderId}">
+        	<check all-checked="false">
+        		<option key="${orderId}"/>
+        	</check>
+        </field>
+		<field name="productId"><hidden/></field>
+        <field name="partyId" title="${uiLabelMap.PageTitleListSupplierProduct}">
+        	<display-entity entity-name="PartyGroup" description="${groupName}" key-field-name="partyId"></display-entity>
+        </field>
+        <field name="orderDate" title="${uiLabelMap.OrderDate}"><display type="date"/></field>
+        <field name="estimateDate" title="${uiLabelMap.estimatedReceiveDate}"><display type="date"/></field>
+        <field name="remarks" title="${uiLabelMap.Description}">
+        	<display></display>
+        </field>
+        <field name="originFacilityId" title="${uiLabelMap.Warehouse}">
+        	<display-entity entity-name="Facility" description="${facilityName}" key-field-name="facilityId"></display-entity>
+        </field>
+        <field name="statusId" title="${uiLabelMap.CommonStatus}">
+        	<display-entity entity-name="StatusItem" description="${description}" key-field-name="statusId"></display-entity>
+        </field>
+        <field name="receiveShip" title=" " widget-style="buttontext" use-when="${statusId=='ORDER_APPROVED'}">
+        	<hyperlink target="FindReceivePurchaseItem" description="${uiLabelMap.CommonReceive}" target-window="_blank">
+        		<parameter param-name="orderId"/>
+        	</hyperlink>
+        </field>
+        <field name="ForcedCompleteBtn" title=" " widget-style="buttontext" use-when="osList!=null &amp;&amp; osList.size()&gt;0 &amp;&amp; &quot;ORDER_APPROVED&quot;.equals(statusId)">
+        	<hyperlink target="facility.completePurchaseOrder" description="${uiLabelMap.ProductCompleteForce}" confirmation-message="您确定这个采购单已经入库完成？结束后将无法再对这个采购单做入库。">
+        		<parameter param-name="orderId"/>
+        		<parameter param-name="facilityId" from-field="oisg[0].facilityId"/>
+        	</hyperlink>
+        </field>
+        <field name="viewDetail" title=" " widget-style="buttontext" use-when="${statusId=='ORDER_COMPLETED'}">
+        	<hyperlink target="ShowClothPurchaseItem" description="${uiLabelMap.CommonDetail}" target-window="_blank">
+        		<parameter param-name="orderId"/>
+        	</hyperlink>
+        </field>
+	</form>
+	
+	
+	<form name="SearchSalesOrderHeader" type="single" target="FindSalesOrders" title=""
+        header-row-style="header-row" default-table-style="basic-table">
+        <field name="orderTypeId"><hidden value="SALES_ORDER"/></field>
+        <field name="roleTypeId"><hidden value="BILL_TO_CUSTOMER"/></field>
+        <field name="facilityId" title="${uiLabelMap.InFacilitySelect}" required-field="true">
+        	<lookup target-form-name="LookupFacility"></lookup>
+        </field>
+        <field name="orderId" title="${uiLabelMap.OrderId}"><text-find></text-find></field>
+        <field name="productId" title="${uiLabelMap.includeProductId}"><text-find></text-find></field>
+        <field name="orderStatusId" title="${uiLabelMap.OrderStatus}">
+			<drop-down>
+				<option key="" description="${uiLabelMap.PleaseSelectOne}"/>
+				<option key="ORDER_APPROVED" description="${uiLabelMap.Approve}"/>
+				<option key="ORDER_COMPLETED" description="${uiLabelMap.Completed}"/>
+			</drop-down>
+		</field>
+		<field name="partyId" title="${uiLabelMap['PartyRelationshipType.partyRelationshipName.CUSTOMER_REL']}">
+			<lookup target-form-name="LookupPartyName"></lookup>
+		</field>
+        <field name="submitButton" title="${uiLabelMap.CommonSearch}"><submit button-type="button"/></field>
+    </form>
+    
+    <form name="ListSalesOrderHeader" type="multi" target="FindSalesOrders" list-name="listIt" 
+		odd-row-style="odd" default-table-style="basic-table" paginate-target="FindSalesOrders"
+		paginate="true" paginate-style="nav-pager" override-list-size="${listSize}">
+		<actions>
+		</actions>
+		<row-actions>
+			<entity-one value-field="oh" entity-name="OrderHeader"></entity-one>
+			<set field="orh" value="${groovy: org.ofbiz.order.order.OrderReadHelper.getHelper(oh)}" type="Object" />
+			<set field="billToPartyName" value="${groovy:org.ofbiz.party.party.PartyHelper.getPartyName(orh.getBillToParty())}"/>
+			<set field="allItemTotal" value="${groovy:orh.getTotalOrderItemsQuantity()}"/>
+			<set field="shipmentId" value="${groovy:com.zuczug.shipment.ZuczugShipmentUtil.getOrderPrimaryShipmentId(delegator,orderId,request,response)}"/>
+			
+			<entity-and entity-name="OrderAttribute" list="oaList">
+				<field-map field-name="orderId" from-field="orderId"/>
+				<field-map field-name="attrName" value="PRINT_STATUS"/>
+			</entity-and>
+			<set field="printedFalg" from-field="oaList[0].attrValue"/>
+		</row-actions>
+        <field name="_rowSubmit" title="${uiLabelMap.OrderId}" widget-style="buttontext">
+        	<!-- <hyperlink description="${orderId}" target-window="_blank" url-mode="plain" target-type="plain" target="FindClothSalesOrderItem" >
+        		<parameter param-name="orderId"/>
+        	</hyperlink> -->
+        	<check all-checked="false">
+				<option key="${orderId}"/>
+			</check>
+        </field>
+        <field name="productStoreId" entry-name="oh.productStoreId">
+        	<display-entity entity-name="ProductStore" description="${storeName}" key-field-name="productStoreId"></display-entity>
+        </field>
+        <field name="orderDate" title="${uiLabelMap.OrderDate}"><display type="date-time" /></field>
+        <field name="coustmer" title="${uiLabelMap['PartyRelationshipType.partyRelationshipName.CUSTOMER_REL']}">
+        	<display default-value="${billToPartyName}" description="" />
+        </field>
+        <field name="allItemTotal" title="${uiLabelMap.ShipAllItemTotal}">
+        	<display></display>
+        </field>
+        <field name="statusId" title="${uiLabelMap.CommonStatus}">
+        	<display-entity entity-name="StatusItem" description="${description}" key-field-name="statusId"></display-entity>
+        </field>
+        <field name="printedFalg" title="${uiLabelMap.ShiFouDaYinJianHuoDan}">
+        	<display></display>
+        </field>
+        <field name="detailBtn" title="${uiLabelMap.CommonDetail}" widget-style="buttontext">
+        	<hyperlink description="${uiLabelMap.CommonDetail}" target-window="_blank" target-type="plain" target="Facility.FindSalesOrderItem" >
+        		<parameter param-name="orderId"/>
+        	</hyperlink>
+        </field>
+	</form>
+
+    <form name="EditFacility" type="single" target="CreateFacility" title="" default-map-name="facility"
+          header-row-style="header-row" default-table-style="basic-table">
+		<alt-target use-when="facility!=null" target="UpdateFacility"/>
+        <field name="facilityId" use-when="facility!=null"><display></display></field>
+        <field name="facilityName" >
+        	<text></text>
+        </field>
+        <field name="facilityTypeId">
+        	<drop-down>
+        		<entity-options entity-name="FacilityType" key-field-name="facilityTypeId" description="${description}"></entity-options>
+        	</drop-down>
+        </field>
+        <field name="defaultInventoryItemTypeId" title="${uiLabelMap.DefInventoryStatus}">
+        	<drop-down>
+        		<option key="NON_SERIAL_INV_ITEM" description="${uiLabelMap['InventoryItemType.description.NON_SERIAL_INV_ITEM']}"/>
+        		<option key="SERIALIZED_INV_ITEM" description="${uiLabelMap['InventoryItemType.description.SERIALIZED_INV_ITEM']}"/>
+        	</drop-down>
+        </field>
+        <field name="parentFacilityId">
+        	<lookup target-form-name="LookupFacility"></lookup>
+        </field>
+        <field name="ownerPartyId">
+        	<lookup target-form-name="LookupPartyName"></lookup>
+        </field>
+        <field name="facilitySize" title="${uiLabelMap.ZhanDiMianJi}" tooltip="${uiLabelMap.ManufacturingQtyM2}">
+        	<text size="5"></text>
+        </field>
+        <field name="facilitySizeUomId"><hidden value="AREA_m2"/> </field>
+        <field name="description">
+        	<text size="50"></text>
+        </field>
+        <field name="submitButton" title="${uiLabelMap.CommonSave}"><submit button-type="button"/></field>
+    </form>
+
+	<form name="EditFacilityLocation" type="single" target="CreateFacilityLocation" title="" default-map-name="facilityLocation"
+          header-row-style="header-row" default-table-style="basic-table">
+		<alt-target use-when="facilityLocation!=null" target="UpdateFacilityLocation"/>
+        <field name="locationSeqId" use-when="facilityLocation!=null"><display></display></field>
+        <field name="facilityId"><hidden/> </field>
+        <field name="areaId" >
+        	<text></text>
+        </field>
+        <field name="aisleId" >
+        	<text></text>
+        </field>
+        <field name="sectionId" >
+        	<text></text>
+        </field>
+        <field name="levelId" >
+        	<text></text>
+        </field>
+        <field name="positionId" >
+        	<text></text>
+        </field>
+        <field name="submitButton" title="${uiLabelMap.CommonSave}"><submit button-type="button"/></field>
+    </form>
+	
+	<form name="FacilityLocationList" type="list" list-name="listIt" paginate-target="FindFacility"
+        odd-row-style="alternate-row" header-row-style="header-row-2" default-table-style="basic-table hover-bar">
+        <actions>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="FacilityLocation"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+            </service>
+        </actions>
+        <field name="locationSeqId" widget-style="buttontext">
+        	<hyperlink description="${locationSeqId}" target="EditFacilityLocation">
+        		<parameter param-name="locationSeqId"/>
+        		<parameter param-name="facilityId"/>
+        	</hyperlink>
+        </field>
+        <field name="facilityId"><hidden/></field>
+        <field name="areaId" >
+        	<display/>
+        </field>
+        <field name="aisleId" >
+        	<display/>
+        </field>
+        <field name="sectionId" >
+        	<display/>
+        </field>
+        <field name="levelId" >
+        	<display/>
+        </field>
+        <field name="positionId" >
+        	<display/>
+        </field>
+    </form>
+    
+    
+    <form name="SearchInTransferShipment" type="single" target="FindInTransferShipment" title="" 
+        header-row-style="header-row" default-table-style="basic-table">
+        <field name="destinationFacilityId" title="转入仓库">
+        	<hidden value="${parameters.facilityId}"/>
+        </field>
+        <field name="facilityId">
+        	<hidden/>
+        </field>
+        <field name="originFacilityId" title="转出仓库">
+        	<lookup target-form-name="LookupFacility"></lookup>
+        </field>
+        <field name="statusId" title="转仓状态">
+			<drop-down>
+				<option key="SHIPMENT_SHIPPED" description="已发出"/>
+				<option key="SHIPMENT_DELIVERED" description="已接收"/>
+			</drop-down>
+		</field>
+		<field name="createdDate" title="录入时间">
+			<date-find/>
+		</field>
+		<field name="handlingInstructions" title="备注" tooltip="生产计划名称、计划编号等">
+			<text-find></text-find>
+		</field>
+		<field name="shipmentTypeId"><hidden value="TRANSFER"/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonSearch}"><submit button-type="button"/></field>
+    </form>
+    
+    
+    <form name="ListInTransferShipment" type="multi" target="FindInTransferShipment" list-name="listIt" 
+		odd-row-style="odd" default-table-style="basic-table" paginate-target="FindInTransferShipment"
+		paginate="true" paginate-style="nav-pager">
+		<actions>
+			<service service-name="performFind" result-map="result" result-map-list="listIt">
+			    <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="Shipment"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+                <field-map field-name="orderBy" value="-shipmentId"/>
+			</service>
+		</actions>
+		<row-actions>
+			<entity-and entity-name="ShipmentTransferTotalReceipt" list="sttrList">
+        		<field-map field-name="shipmentId" from-field="shipmentId"/>
+        	</entity-and>
+		</row-actions>
+		<field name="destinationFacilityId"><hidden/></field>
+		<field name="facilityId"><hidden value="${parameters.facilityId}"/></field>
+        <field name="_rowSubmit" title="转运编号">
+        	<check>
+        		<option key="${shipmentId}"/>
+        	</check>
+        </field>
+        <field name="originFacilityId" title="转出仓库">
+			<display-entity entity-name="Facility" description="${facilityName}" key-field-name="facilityId"></display-entity>
+        </field>
+        <field name="createdDate" title="录入时间">
+        	<display type="date-time"></display>
+        </field>
+        <field name="handlingInstructions" title="说明备注">
+        	<display></display>
+        </field>
+		<field name="statusId" title="状态">
+			<display-entity entity-name="StatusItem" description="${description}" key-field-name="statusId"></display-entity>
+		</field>
+        <field name="submitBtm" title="接收" widget-style="buttontext">
+        	<hyperlink description="接收" target-window="_blank" target="ReceiveInTransferShipment?shipmentId=${shipmentId}&amp;facilityId=${parameters.facilityId}">
+        	</hyperlink>
+        </field>
+	</form>
+	
+	
+	<form name="ReceiveInTransferShipment" type="multi" list-name="shipmentAndItems" target="saveInTransferShipment" group-columns="false" 
+        header-row-style="header-row" default-table-style="basic-table">
+        <actions>
+        	<entity-and entity-name="ShipmentAndItem" list="shipmentAndItems">
+        		<field-map field-name="shipmentId" from-field="parameters.shipmentId"/>
+        	</entity-and>
+        	<!-- <set field="shipmentAndItem" from-field="shipmentAndItems[0]" type="Object"/> -->
+        </actions>
+        <row-actions>
+        	<entity-and entity-name="ShipmentTransferTotalReceipt" list="sttrList">
+        		<field-map field-name="shipmentId" from-field="shipmentId"/>
+        		<field-map field-name="shipmentItemSeqId" from-field="shipmentItemSeqId"/>
+        	</entity-and>
+        </row-actions>
+        <field name="shipmentId" title="转运编号">
+        	<display></display>
+        </field>
+        <field name="shipmentItemSeqId"><hidden/></field>
+        <field name="originFacilityId" title="转出仓库">
+        	<display-entity entity-name="Facility" key-field-name="facilityId" description="${facilityName}"></display-entity>
+        </field>
+        <field name="shipmentStatusId" entry-name="statusId" title="转仓状态">
+			<display-entity entity-name="StatusItem" description="${description}" key-field-name="statusId"></display-entity>
+		</field>
+		<field name="productId" title="商品编号">
+			<display-entity entity-name="Product" description="${productName}（${productId}）" key-field-name="productId"></display-entity>
+		</field>
+		<field name="quantity" title="发出数量">
+			<display></display>
+		</field>
+		<field name="quantityed" title="已接收数量">
+			<display default-value="${sttrList[0].quantityAccepted}"></display>
+		</field>
+		<field name="receivedQuantity" title="此次接收数量">
+			<text size="7"></text>
+		</field>
+		<field name="lotId" title="批号">
+			<text size="10"></text>
+		</field>
+		<field name="locationSeqId" title="库位">
+			<lookup target-form-name="LookupFacilityLocation?facilityId=${parameters.facilityId}"></lookup>
+		</field>
+		<!-- <field name="statusId" entry-name="a" title="库存状态" tooltip="">
+			<drop-down no-current-selected-key="" >
+				<option key="" description="正品"/>
+				<option key="INV_NS_CP" description="次品"/>
+				<option key="INV_NS_CC" description="厂次"/>
+				<option key="INV_NS_BP" description="B品"/>
+			</drop-down>
+		</field> -->
+		<field name="comments" title="备注">
+			<text></text>
+		</field>
+        <field name="submitButton" title="接收"><submit button-type="button"/></field>
+    </form>
+    
+    <form name="SearchOutTransferShipment" type="single" target="FindOutTransferShipment" title="" 
+        header-row-style="header-row" default-table-style="basic-table">
+        <field name="originFacilityId" title="转出仓库">
+        	<hidden value="${parameters.facilityId}"/>
+        </field>
+        <field name="facilityId">
+        	<hidden value="${parameters.facilityId}"/>
+        </field>
+        <field name="destinationFacilityId" title="转入仓库">
+        	<lookup target-form-name="LookupFacility"></lookup>
+        </field>
+        <field name="statusId" title="转仓状态">
+			<drop-down>
+				<option key="SHIPMENT_SCHEDULED" description="计划中"/>
+				<option key="SHIPMENT_SHIPPED" description="已发出"/>
+				<option key="SHIPMENT_DELIVERED" description="已送达"/>
+				<option key="SHIPMENT_CANCELLED" description="已取消"/>
+				<option key="SHIPMENT_INPUT" description="编辑中"/>
+			</drop-down>
+		</field>
+		<field name="handlingInstructions" title="说明备注">
+			<text-find></text-find>
+		</field>
+		<field name="shipmentTypeId"><hidden value="TRANSFER"/></field>
+		<!-- <field name="originFacilityId"><hidden value="ZUCZUG_CLOTHESFACILITY"/></field> -->
+        <field name="submitButton" title="${uiLabelMap.CommonSearch}"><submit button-type="button"/></field>
+    </form>
+    
+    <form name="ListOutTransferShipment" type="multi" target="sendShipmentForTransfer" list-name="listIt" 
+		odd-row-style="odd" default-table-style="basic-table" paginate-target="FindOutTransferShipment"
+		paginate="true" paginate-style="nav-pager">
+		<actions>
+			<service service-name="performFind" result-map="result" result-map-list="listIt">
+			    <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="Shipment"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+				<field-map field-name="noConditionFind" value="N"/>
+			</service>
+		</actions>
+		<row-actions>
+			<entity-and entity-name="ShipmentTransferTotalReceipt" list="sttrList">
+        		<field-map field-name="shipmentId" from-field="shipmentId"/>
+        	</entity-and>
+        	
+        	<!-- 获取打印状态 -->
+        	<entity-and entity-name="ShipmentAttribute" list="saList">
+        		<field-map field-name="shipmentId" from-field="shipmentId"/>
+        		<field-map field-name="attrName" value="PRINT_STATUS"/>
+        	</entity-and>
+        	<set field="saPrinted" from-field="saList[0].attrValue"/>
+		</row-actions>
+        <field name="_rowSubmit" title="转运编号">
+        	<check all-checked="false">
+        		<option key="${shipmentId}"/>
+        	</check>
+        </field>
+        <field name="destinationFacilityId" title="转入仓库">
+			<display-entity entity-name="Facility" description="${facilityName}" key-field-name="facilityId"></display-entity>
+        </field>
+        <field name="handlingInstructions" title="说明备注">
+        	<display></display>
+        </field>
+        <field name="createdDate" title="创建时间">
+        	<display type="date-time"></display>
+        </field>
+		<field name="statusId" title="状态">
+			<display-entity entity-name="StatusItem" description="${description}" key-field-name="statusId"></display-entity>
+		</field>
+		<field name="saPrinted" title="是否打印拣货单">
+			<display></display>
+		</field>
+        <field name="packageBtn" title="打包" widget-style="buttontext" use-when="(&quot;SHIPMENT_SCHEDULED&quot;).equals(statusId)">
+        	<hyperlink description="打包" target-window="_blank" target="ShowShipmentPacking?shipmentId=${shipmentId}">
+        	</hyperlink>
+        </field>
+        <field name="pickBtn" title="拣货单" widget-style="buttontext" use-when="(&quot;SHIPMENT_SCHEDULED&quot;).equals(statusId)">
+        	<hyperlink description="拣货单" target-window="_blank" target="ShipmentPickList.pdf?shipmentId=${shipmentId}">
+        	</hyperlink>
+        </field>
+        <field name="sendBtm" title="发货" widget-style="buttontext" use-when="(&quot;SHIPMENT_SCHEDULED&quot;).equals(statusId)">
+        	<hyperlink description="发货" confirmation-message="您确定这个发货单已经全部打包并且发出了吗？一旦操作无法修改" target="Facility.sendShipmentForTransfer?shipmentId=${shipmentId}&amp;facilityId=${parameters.facilityId}">
+        	</hyperlink>
+        </field>
+        <field name="editBtn" title="编辑" widget-style="buttontext" use-when="(&quot;SHIPMENT_INPUT&quot;).equals(statusId)">
+        	<hyperlink description="编辑" target-type="plain" target="Facility.NewShipmentOut?shipmentId=${shipmentId}&amp;facilityId=${parameters.facilityId}">
+        	</hyperlink>
+        </field>
+	</form>
+	
+	<form name="NewShipmentOutHeaderEdit" type="single" target="Facility.CreateShipmentTransfer" title="" 
+        header-row-style="header-row" default-table-style="basic-table" default-map-name="shipment">
+        <alt-target use-when="shipment!=null" target="Facility.UpdateShipmentTransfer"/>
+        <field name="shipmentId" title="发货单编号：" use-when="shipment!=null">
+        	<display></display>
+        </field>
+        <field name="originFacilityId">
+        	<hidden value="${parameters.facilityId}"/>
+        </field>
+        <field name="facilityId">
+        	<hidden value="${parameters.facilityId}"/>
+        </field>
+        <field name="destinationFacilityId" title="${uiLabelMap.InWarehouse}：">
+        	<lookup target-form-name="LookupFacility"></lookup>
+        </field>
+		<field name="handlingInstructions" title="说明备注：">
+			<text></text>
+		</field>
+		<field name="statusId" use-when="shipment==null"><hidden value="SHIPMENT_INPUT"/></field>
+		<field name="originContactMechId" use-when="shipment!=null"><hidden /></field>
+		<field name="destinationContactMechId" use-when="shipment!=null"><hidden /></field>
+		<field name="statusId" title="转仓状态：" use-when="shipment!=null">
+			<display-entity entity-name="StatusItem" description="${description}" key-field-name="statusId"></display-entity>
+		</field>
+		<field name="shipmentTypeId"><hidden value="TRANSFER"/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonAdd}" use-when="shipment==null"><submit button-type="button"/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonSave}" use-when="shipment!=null"><submit button-type="button"/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonEmptyHeader}" use-when="shipment!=null &amp;&amp; &quot;SHIPMENT_INPUT&quot;.equals(shipmentStatusId)" tooltip="只有确认的发货单才可以打包" widget-style="buttontext">
+        	<hyperlink target="Facility.ConfirmShipment?facilityId=${parameters.facilityId}&amp;shipmentId=${parameters.shipmentId}" target-type="plain" description="确认发货单">
+        	</hyperlink>
+        </field>
+    </form>
+    
+    <form name="NewShipmentOutAddItem" type="single" target="Facility.AddShipmentOutItem" title="" 
+        header-row-style="header-row" default-table-style="basic-table" default-map-name="shipment">
+        <field name="shipmentId">
+        	<hidden/>
+        </field>
+        <field name="facilityId">
+        	<hidden value="${parameters.facilityId}"/>
+        </field>
+        <field name="productId" title="${uiLabelMap.ProductId}" tooltip="此处不会检查库存，在确认发货单的时候会检查库存情况">
+        	<lookup target-form-name="LookupProduct"></lookup>
+        </field>
+        <field name="quantity" title="${uiLabelMap.Quantity}">
+			<text></text>
+		</field>
+        <field name="submitButton" title="${uiLabelMap.CommonAdd}"><submit button-type="button"/></field>
+    </form>
+	
+	<form name="NewShipmentOutItemList" type="list" target="Facility.DeleteShipmentItem" list-name="shipmentItemList" 
+		odd-row-style="odd" default-table-style="basic-table" paginate-target="FindOutTransferShipment"
+		paginate="true" paginate-style="nav-pager">
+        <field name="shipmentId">
+        	<hidden/>
+        </field>
+        <field name="shipmentItemSeqId">
+        	<display></display>
+        </field>
+        <field name="facilityId">
+        	<hidden value="${parameters.facilityId}"/>
+        </field>
+        <field name="productId">
+        	<display></display>
+        </field>
+        <field name="productName" entry-name="productId" title="商品名称">
+        	<display-entity entity-name="Product" description="${internalName}" key-field-name="productId"></display-entity>
+        </field>
+        <field name="quantity">
+        	<display></display>
+        </field>
+        <field name="removeBtn" title="${uiLabelMap.CommonDelete}" widget-style="buttontext" use-when="&quot;SHIPMENT_INPUT&quot;.equals(shipmentStatusId)">
+        	<submit/>
+        </field>
+	</form>
+	
+</forms>

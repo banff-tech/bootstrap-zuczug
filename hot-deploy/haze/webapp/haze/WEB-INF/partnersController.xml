@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site-conf xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/site-conf.xsd">
+    
+    
+    <request-map uri="PartnersList">
+    	<description>合作伙伴列表</description>
+    	<security auth="true" https="false"/>
+    	<response name="success" type="view" value="PartnersList"></response>
+    	<response name="error" type="view" value="PartnersList"></response>
+    </request-map>
+    <request-map uri="EditPartner">
+    	<description>合作伙伴详情和编辑</description>
+    	<security auth="true" https="false"/>
+    	<response name="success" type="view" value="EditPartner"></response>
+    	<response name="error" type="view" value="EditPartner"></response>
+    </request-map>
+    <request-map uri="EditPartnerRoles">
+    	<description>查看人员角色</description>
+    	<security auth="true" https="false"/>
+    	<response name="success" type="view" value="EditPartnerRoles"></response>
+    	<response name="error" type="view" value="EditPartnerRoles"></response>
+    </request-map>
+    <request-map uri="deleterole">
+    	<description>删除一个角色</description>
+        <security https="false" auth="true"/>
+        <event type="service" path="" invoke="deletePartyRole"/>
+        <response name="success" type="view" value="EditPartnerRoles"/>
+        <response name="error" type="view" value="EditPartnerRoles"/>
+    </request-map>
+    <request-map uri="addrole">
+    	<description>增加一个用户角色</description>
+        <security https="false" auth="true"/>
+        <event type="service" path="" invoke="createPartyRole"/>
+        <response name="success" type="view" value="EditPartnerRoles"/>
+        <response name="error" type="view" value="EditPartnerRoles"/>
+    </request-map>
+    <request-map uri="EditPartnerContactMech">
+    	<description>浏览联系方式</description>
+        <security https="false" auth="true"/>
+        <response name="success" type="view" value="EditPartnerContactMech"/>
+        <response name="error" type="view" value="EditPartnerContactMech"/>
+    </request-map>
+    
+    <request-map uri="editcontactmech">
+    	<description>编辑联系方式</description>
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="editcontactmech" save-current-view="true"/>
+    </request-map>
+    <request-map uri="createPostalAddress">
+    	<description>创建联系方式</description>
+        <security https="false" auth="true"/>
+        <event type="service" invoke="createPartyPostalAddress"/>
+        <response name="success" type="view" value="EditPartnerContactMech"/>
+        <response name="error" type="view" value="editcontactmech"/>
+    </request-map>
+    <request-map uri="createPartyContactMechPurpose">
+    	<description>为party的地址添加一个目的</description>
+        <security https="false" auth="true"/>
+        <event type="service" invoke="createPartyContactMechPurpose"/>
+        <response name="success" type="view" value="editcontactmech"/>
+        <response name="error" type="view" value="editcontactmech"/>
+    </request-map>
+    <request-map uri="updatePostalAddress">
+    	<description>更新一个地址</description>
+        <security https="false" auth="true"/>
+        <event type="service" invoke="updatePartyPostalAddress"/>
+        <response name="success" type="view" value="editcontactmech"/>
+        <response name="error" type="view" value="editcontactmech"/>
+    </request-map>
+    <request-map uri="deletePartyContactMechPurpose">
+    	<description>删除一个联系方式的目的</description>
+        <security https="false" auth="true"/>
+        <event type="service" invoke="deletePartyContactMechPurpose"/>
+        <response name="success" type="view" value="editcontactmech"/>
+        <response name="error" type="view" value="editcontactmech"/>
+    </request-map>
+    <request-map uri="updatePostalAddress">
+    	<description>更新一个邮政地址</description>
+        <security https="false" auth="true"/>
+        <event type="service" invoke="updatePartyPostalAddress"/>
+        <response name="success" type="view" value="editcontactmech"/>
+        <response name="error" type="view" value="editcontactmech"/>
+    </request-map>
+    <request-map uri="deleteContactMech">
+    	<description>删除一个联系方式</description>
+        <security https="false" auth="true"/>
+        <event type="service" invoke="deletePartyContactMech"/>
+        <response name="success" type="view" value="EditPartnerContactMech"/>
+        <response name="error" type="view" value="EditPartnerContactMech"/>
+    </request-map>
+    <request-map uri="createContactMech">
+    	<description>更新一个网址</description>
+        <security https="false" auth="true"/>
+        <event type="service" invoke="createPartyContactMech"/>
+        <response name="success" type="view" value="editcontactmech"/>
+        <response name="error" type="view" value="editcontactmech"/>
+    </request-map>
+    <request-map uri="updateContactMech">
+    	<description>更新一个联系方式</description>
+        <security https="false" auth="true"/>
+        <event type="service" invoke="updatePartyContactMech"/>
+        <response name="success" type="view" value="editcontactmech"/>
+        <response name="error" type="view" value="editcontactmech"/>
+    </request-map>
+    <request-map uri="updateTelecomNumber">
+    	<description>更新一个电话号码</description>
+        <security https="false" auth="true"/>
+        <event type="service" invoke="updatePartyTelecomNumber"/>
+        <response name="success" type="view" value="EditPartnerContactMech"/>
+        <response name="error" type="view" value="EditPartnerContactMech"/>
+    </request-map>
+    <request-map uri="createTelecomNumber">
+    	<description>创建一个联系电话</description>
+        <security https="false" auth="true"/>
+        <event type="service" invoke="createPartyTelecomNumber"/>
+        <response name="success" type="view" value="editcontactmech"/>
+        <response name="error" type="view" value="editcontactmech"/>
+    </request-map>
+    <request-map uri="createEmailAddress">
+        <security https="false" auth="true"/>
+        <event type="service" invoke="createPartyEmailAddress"/>
+        <response name="success" type="view" value="editcontactmech"/>
+        <response name="error" type="view" value="editcontactmech"/>
+    </request-map>
+    <request-map uri="updateEmailAddress">
+        <security https="false" auth="true"/>
+        <event type="service" invoke="updatePartyEmailAddress"/>
+        <response name="success" type="view" value="editcontactmech"/>
+        <response name="error" type="view" value="editcontactmech"/>
+    </request-map>
+    <request-map uri="createNewPartner">
+        <security https="false" auth="true"/>
+        <event type="service" invoke="createNewPartner"/>
+        <response name="success" type="request-redirect" value="EditPartner">
+        	<redirect-parameter name="partyId"/>
+        </response>
+        <response name="error" type="view" value="EditPartner"/>
+    </request-map>
+    <request-map uri="updatePartner">
+        <security https="false" auth="true"/>
+        <event type="service" invoke="updatePartner"/>
+        <response name="success" type="request-redirect" value="EditPartner">
+        	<redirect-parameter name="partyId"/>
+        </response>
+        <response name="error" type="view" value="EditPartner"/>
+    </request-map>
+    <request-map uri="FindPartnerNotes">
+    	<description>查询partyNote</description>
+        <security https="false" auth="true"/>
+        <response name="success" type="view" value="FindPartnerNotes"/>
+        <response name="error" type="view" value="FindPartnerNotes"/>
+    </request-map>
+    <request-map uri="AddPartyNote">
+    	<description>编辑partynote</description>
+    	<security https="false" auth="true"/>
+    	<response name="success" type="view" value="AddPartyNote"/>
+	</request-map>
+    <request-map uri="createPartyNote">
+    	<description>保存partynote</description>
+        <security https="false" auth="true"/>
+        <event type="service" invoke="createPartyNote"/>
+        <response name="success" type="view" value="FindPartnerNotes"/>
+        <response name="error" type="view" value="AddPartyNote"/>
+    </request-map>
+    <request-map uri="FindPartnerAccounting">
+    	<description>查询账户列表</description>
+        <security https="false" auth="true"/>
+        <response name="success" type="view" value="FindPartnerAccounting"/>
+        <response name="error" type="view" value="FindPartnerAccounting"/>
+    </request-map>
+    <request-map uri="EditFinAccount">
+    	<description>编辑finAccount账户</description>
+        <security https="false" auth="true"/>
+        <response name="success" type="view" value="EditFinAccount"/>
+        <response name="error" type="view" value="EditFinAccount"/>
+    </request-map>
+    <request-map uri="createFinAccount">
+    	<description>创建一个账户</description>
+        <security https="false" auth="true"/>
+        <event type="service" path="" invoke="createFinAccount"/>
+        <response name="success" type="request-redirect" value="FindPartnerAccounting">
+        	<redirect-parameter name="partyId"/>
+        </response>
+        <response name="error" type="view" value="EditFinAccount"/>
+    </request-map>
+    <request-map uri="deleteFinAccount">
+    	<description>删除一个账户</description>
+        <security https="false" auth="true"/>
+        <event type="service" path="" invoke="deleteFinAccount"/>
+        <response name="success" type="request-redirect" value="FindPartnerAccounting">
+        	<redirect-parameter name="partyId"/>
+        </response>
+        <response name="error" type="view" value="FindPartnerAccounting"/>
+    </request-map>
+ 	<request-map uri="updateFinAccount">
+ 		<description>更新一个finAccount</description>
+        <security https="false" auth="true"/>
+        <event type="service" path="" invoke="updateFinAccount"/>
+        <response name="success" type="request-redirect" value="FindPartnerAccounting">
+        	<redirect-parameter name="partyId"/>
+        </response>
+        <response name="error" type="view" value="EditFinAccount"/>
+    </request-map>
+    
+    <request-map uri="FindPartnerBillingAccount">
+    	<description>billaccount列表</description>
+        <security https="false" auth="true"/>
+        <response name="success" type="view" value="FindPartnerBillingAccount"/>
+        <response name="error" type="view" value="FindPartnerBillingAccount"/>
+    </request-map>
+    <request-map uri="EditBillingAccount">
+    	<description>编辑账单账户</description>
+        <security https="false" auth="true"/>
+        <response name="success" type="view" value="EditBillingAccount"/>
+        <response name="error" type="view" value="EditBillingAccount"/>
+    </request-map>
+    <request-map uri="createBillingAccount">
+    	<description>创建账单账户</description>
+        <security https="false" auth="true"/>
+        <event type="service" invoke="createBillingAccount"/>
+        <response name="success" type="request-redirect" value="FindPartnerBillingAccount">
+        	<redirect-parameter name="partyId"/>
+        </response>
+        <response name="error" type="view" value="EditBillingAccount"/>
+    </request-map>
+    <request-map uri="updateBillingAccount">
+    	<description>创建账单账户</description>
+        <security https="false" auth="true"/>
+        <event type="service" invoke="updateBillingAccount"/>
+        <response name="success" type="view" value="EditBillingAccount"/>
+        <response name="error" type="view" value="EditBillingAccount"/>
+    </request-map>
+    
+    
+    <view-map name="PartnersList" type="screen" page="component://haze/widget/PartnersScreens.xml#PartnersList"/>
+    <view-map name="EditPartner" type="screen" page="component://haze/widget/PartnersScreens.xml#EditPartner"/>
+    <view-map name="EditPartnerRoles" type="screen" page="component://haze/widget/PartnersScreens.xml#EditPartnerRoles"/>
+    <view-map name="viewroles" type="screen" page="component://haze/widget/PartnersScreens.xml#EditPartnerRoles"/>
+    <view-map name="EditPartnerContactMech" type="screen" page="component://haze/widget/PartnersScreens.xml#EditPartnerContactMech"/>
+    <view-map name="editcontactmech" type="screen" page="component://haze/widget/PartnersScreens.xml#editcontactmech"/>
+    <view-map name="FindPartnerNotes" type="screen" page="component://haze/widget/PartnersScreens.xml#FindPartnerNotes"/>
+    <view-map name="AddPartyNote" type="screen" page="component://haze/widget/PartnersScreens.xml#AddPartyNote"/>
+    <view-map name="FindPartnerAccounting" type="screen" page="component://haze/widget/PartnersScreens.xml#FindPartnerAccounting"/>
+    <view-map name="EditFinAccount" type="screen" page="component://haze/widget/PartnersScreens.xml#EditFinAccount"/>
+    <view-map name="FindPartnerBillingAccount" type="screen" page="component://haze/widget/PartnersScreens.xml#FindPartnerBillingAccount"/>
+    <view-map name="EditBillingAccount" type="screen" page="component://haze/widget/PartnersScreens.xml#EditBillingAccount"/>
+</site-conf>

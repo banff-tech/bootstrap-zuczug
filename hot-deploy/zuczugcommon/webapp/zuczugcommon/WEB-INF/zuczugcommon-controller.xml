@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site-conf xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/site-conf.xsd">
+
+    <description>公共部分</description>
+    
+    <handler name="simplecontent" type="view" class="org.ofbiz.content.view.SimpleContentViewHandler"/>
+	
+	<request-map uri="downloadFile">
+    	<description>下载文件</description>
+    	<response name="success" type="view" value="downloadFile"></response>
+    </request-map>
+    
+    
+    
+    <view-map name="downloadFile" type="simplecontent" />
+</site-conf>

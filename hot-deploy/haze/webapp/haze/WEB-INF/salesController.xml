@@ -1,0 +1,930 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site-conf xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/site-conf.xsd">
+    <!-- The controller elements that are common to all OFBiz components
+         can be found in the following xml file. A component can override the
+         elements found in the common-controller.xml file. -->
+    <include location="component://order/webapp/ordermgr/WEB-INF/controller.xml"/>
+    
+   <request-map uri="ViewRequest">
+   		<security https="true" auth="true"/>
+   		<response name="success" type="view" value="ViewRequest"/>
+   </request-map>
+   <request-map uri="requestitems">
+   		<security https="true" auth="true"/>
+   		<response name="success" type="view" value="RequestItems"/>
+   </request-map>
+   <request-map uri="FindCustRequest">
+        <security https="true" auth="true" />
+        <response name="success" type="view" value="findCustRequest" />
+    </request-map>
+    
+    <request-map uri="appendItemToOrder">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="appendOrderItem"/>
+        <response name="success" type="view" value="salesorderview"/>
+        <response name="error" type="view" value="salesorderview"/>
+    </request-map>
+   
+    <!-- ================ Product Store Requests ============= -->
+    <request-map uri="FindProductStore">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="FindProductStore"/>
+    </request-map>
+    <request-map uri="AddProductStore">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="AddProductStore"/>
+    </request-map>
+    <request-map uri="EditProductStore">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="EditProductStore"/>
+    </request-map>
+    <request-map uri="createProductStore">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="createProductStore"/>
+        <response name="success" type="view" value="EditProductStore"/>
+        <response name="error" type="view" value="EditProductStore"/>
+    </request-map>
+    <request-map uri="updateProductStore">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updateProductStore"/>
+        <response name="success" type="view" value="EditProductStore"/>
+        <response name="error" type="view" value="EditProductStore"/>
+    </request-map>
+    <request-map uri="createSaleStore">
+        <security auth="true"/>
+        <event type="service" invoke="createSaleStore"/>
+        <response name="success" type="view" value="EditProductStore"/>
+        <response name="error" type="view" value="EditProductStore"/>
+    </request-map>
+    <request-map uri="updateSaleStore">
+        <security auth="true"/>
+        <event type="service" invoke="updateSaleStore"/>
+        <response name="success" type="view" value="EditProductStore"/>
+        <response name="error" type="view" value="EditProductStore"/>
+    </request-map>
+    <request-map uri="updateSalesOrderItems">
+        <security auth="true"/>
+        <event type="service" invoke="updateSalesOrderItems"/>
+        <response name="success" type="view" value="salesorderview"/>
+        <response name="error" type="view" value="salesorderview"/>
+    </request-map>
+    
+
+    
+    <!-- start of dealer mappings -->
+    <request-map uri="FindDealers">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="FindDealers"/>
+    </request-map>
+    <request-map uri="AddDealerInfo">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="AddDealerInfo"/>
+    </request-map>
+    <request-map uri="EditDealerInfo">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="EditDealerInfo"/>
+    </request-map>
+    <request-map uri="LookupCity">
+	    <security auth="true"/>
+	    <response name="success" type="view" value="LookupCity"/>
+    </request-map>
+    <request-map uri="createDealerInfo">
+        <security auth="true"/>
+        <event type="service" invoke="createDealerInfo"/>
+        <response name="success" type="view" value="AddDealerInfo"/>
+        <response name="error" type="view" value="AddDealerInfo"/>
+    </request-map> 
+    <request-map uri="updateDealerInfo">
+        <security auth="true"/>
+        <event type="service" invoke="updateDealerInfo"/>
+        <response name="success" type="view" value="EditDealerInfo"/>
+        <response name="error" type="view" value="EditDealerInfo"/>
+    </request-map> 
+    <request-map uri="delDealer">
+        <security auth="true"/>
+        <event type="service" invoke="updateDealerInfo"/>
+        <response name="success" type="view" value="FindDealers"/>
+        <response name="error" type="view" value="FindDealers"/>
+    </request-map> 
+
+	<!-- end of dealer mappings -->
+	
+	<!-- Quote request -->    
+    <request-map uri="FindQuote"><security https="true" auth="true"/><response name="success" type="view" value="FindQuote"/></request-map>
+    <request-map uri="ViewQuote"><security https="true" auth="true"/><response name="success" type="view" value="ViewQuote"/></request-map>
+    <request-map uri="ViewQuoteNoSales"><security https="true" auth="true"/><response name="success" type="view" value="ViewQuoteNoSales"/></request-map>
+    <request-map uri="ChoiceSalesOrderOptions"><security https="true" auth="true"/><response name="success" type="view" value="ChoiceSalesOrderOptions"/></request-map>
+    <request-map uri="EditQuote"><security https="true" auth="true"/><response name="success" type="view" value="EditQuote"/></request-map>
+    <request-map uri="ListQuoteNotes">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="ListQuoteNotes"/>
+    </request-map>
+    <request-map uri="ViewQuoteProfit"><security https="true" auth="true"/><response name="success" type="view" value="ViewQuoteProfit"/></request-map>
+    <!-- End Quote Request -->
+    
+    <request-map uri="updateQuoteQuantityAjax">
+        <security auth="true"/>
+        <event type="service" invoke="updateQuoteQuantityAjax"/>
+        <response name="success" type="view" value="FindQuote"/>
+        <response name="error" type="view" value="FindQuote"/>
+    </request-map> 
+    <!-- end of dealer mappings -->
+
+	<request-map uri="cancelStoreGroup">
+        <security auth="true"/>
+        <event type="java" path="com.zuczug.haze.UpdateSaleStoreServices" invoke="cancelStoreGroup"/>
+        <response name="success" type="view" value="FindProductStore"/>
+        <response name="error" type="view" value="FindProductStore"/>
+    </request-map> 
+    
+    <request-map uri="SalesProductsView">
+    	<security auth="true"/>
+    	<response name="success" type="view" value="SalesProductsView"></response>
+    </request-map>
+    
+    <request-map uri="EditProductVirtual">
+    	<security auth="true"/>
+    	<response name="success" type="view" value="EditProductVirtual"/>
+    </request-map>
+    
+    <request-map uri="EditProductVariant">
+    	<security auth="true"/>
+    	<response name="success" type="view" value="EditProductVariant"/>
+    </request-map>
+    
+    <!-- 销售订单 start -->
+    <request-map uri="FindSalesOrder">
+        <security auth="true"/>
+        <response name="success" type="view" value="FindSalesOrder"/>
+        <response name="error" type="view" value="FindSalesOrder"/>
+    </request-map>
+    
+    <request-map uri="FindSalesOrderItem">
+        <security auth="true"/>
+        <response name="success" type="view" value="FindSalesOrderItem"/>
+        <response name="error" type="view" value="FindSalesOrderItem"/>
+    </request-map>
+    <!-- 取消订单 -->
+    <request-map uri="cancelSalesOrder">
+        <security auth="true"/>
+        <event type="service" invoke="changeOrderStatus"/>
+        <response name="success" type="request-redirect" value="FindSalesOrder"/>
+        <response name="error" type="view" value="FindSalesOrder"/>
+    </request-map>
+	<!-- 新建订单 -->
+    <request-map uri="AddSalesOrder">
+        <security https="false" auth="true"/>
+        <response name="success" type="view" value="AddSalesOrder"/>
+    </request-map>
+    <!-- 设置销售订单头数据 -->
+    <request-map uri="addSalesOrderData">
+        <security https="false" auth="true"/>
+        <event type="java" path="com.zuczug.haze.SalesOrderServices" invoke="addSalesOrderData"/>
+        <response name="success" type="request-redirect" value="AddSalesOrder"/>
+        <response name="error" type="request-redirect" value="AddSalesOrder"/>
+        <response name="successToList" type="request-redirect" value="FindSalesOrder"/>
+    </request-map>
+    <!-- 重新计算 -->
+    <request-map uri="RecalculatedSalesOrder">
+        <security https="false" auth="true"/>
+        <event type="java" path="com.zuczug.haze.SalesOrderServices" invoke="recalculatedSalesOrder"/>
+        <response name="success" type="request-redirect" value="AddSalesOrder"/>
+        <response name="error" type="request-redirect" value="AddSalesOrder"/>
+    </request-map>
+    <!-- 保存订单 -->
+    <request-map uri="saveSalesOrder">
+        <security https="false" auth="true"/>
+        <event type="java" path="com.zuczug.haze.SalesOrderServices" invoke="saveSalesOrder"/>
+        <response name="success" type="request-redirect" value="FindSalesOrder"/>
+        <response name="error" type="view" value="AddSalesOrder"/>
+    </request-map>
+    
+    <request-map uri="updateOrderItems">
+    	<description>保存订单项目</description>
+        <security https="false" auth="true"/>
+        <event type="simple" path="component://salesmanager/script/SalesOrderServices.xml" invoke="updateFabricPurchaseItemsAndShipgroup"></event>
+        <response name="success" type="request-redirect" value="FindSalesOrderItem">
+        	<redirect-parameter name="orderId"/>
+        </response>
+        <response name="error" type="view" value="FindSalesOrderItem"/>
+    </request-map>
+    
+    <request-map uri="updateFabricPurchaseOrderHeader">
+        <security https="false" auth="true"/>
+        <event type="simple" path="component://salesmanager/script/SalesOrderServices.xml" invoke="updateFabricPurchaseOrderHeader"></event>
+        <response name="success" type="view" value="FindSalesOrderItem"/>
+        <response name="error" type="view" value="FindSalesOrderItem"/>
+    </request-map>
+
+    <request-map uri="emptycart">
+        <security https="false" auth="true"/>
+        <event type="java" path="org.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="destroyCart"/>
+        <response name="success" type="request-redirect" value="AddSalesOrder"/>
+        <response name="error" type="request-redirect" value="AddSalesOrder"/>
+    </request-map>
+    <request-map uri="cancelFabricPurchase">
+        <security auth="true"/>
+        <event type="service" invoke="changeOrderStatus"/>
+        <response name="success" type="view" value="FindSalesOrder"/>
+        <response name="error" type="view" value="FindSalesOrder"/>
+    </request-map>
+    <request-map uri="approveFabricPurchase">
+        <security auth="true"/>
+        <event type="service" invoke="approveProofing"/>
+        <response name="success" type="view" value="FindSalesOrder"/>
+        <response name="error" type="view" value="FindSalesOrder"/>
+    </request-map>
+    <request-map uri="changeOrderStatus">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.zuczug.haze.SalesOrderServices" invoke="changeOrderStatus"/>
+        <response name="success" type="view" value="FindSalesOrderItem"/>
+        <response name="error" type="view" value="FindSalesOrderItem"/>
+    </request-map>
+    
+    <request-map uri="updateSalesOrderHeader">
+    	<description>保存订单项目</description>
+        <security https="false" auth="true"/>
+        <event type="simple" path="component://salesmanager/script/SalesOrderServices.xml" invoke="updateSalesOrderHeader"></event>
+        <response name="success" type="view" value="FindSalesOrderItem"/>
+        <response name="error" type="view" value="FindSalesOrderItem"/>
+    </request-map>
+    
+    <request-map uri="appendItemToSalesOrder">
+    	<security https="false" auth="true"/>
+        <event type="service" path="" invoke="appendOrderItem"/>
+        <response name="success" type="view" value="FindSalesOrderItem"/>
+        <response name="error" type="view" value="FindSalesOrderItem"/>
+    </request-map>
+    
+    <!-- 取消订单项 -->
+    <request-map uri="cancelOrderItem">
+        <security https="false" auth="true"/>
+        <event type="service" invoke="cancelOrderItem"/>
+        <response name="success" type="view" value="FindSalesOrderItem"/>
+        <response name="error" type="view" value="FindSalesOrderItem"/>
+    </request-map>
+        
+    <!-- 销售订单 end -->
+    
+    <!-- 销售订单货运组  start-->
+	
+	<request-map uri="EditOrderShipmentGroups">
+    	<description>编辑货运组界面</description>
+        <security https="false" auth="true"/>
+        <response name="success" type="view" value="EditOrderShipmentGroups"/>
+        <response name="error" type="view" value="EditOrderShipmentGroups"/>
+    </request-map>
+    <request-map uri="updateOrderShipGroupAssoc">
+    	<description>修改订单的货运组信息</description>
+        <security https="false" auth="true"/>
+        <event type="service" invoke="zuczug.updateOrderShipGroupAssoc"></event>
+        <response name="success" type="request-redirect" value="EditOrderShipmentGroups">
+        	<redirect-parameter name="orderId"/>
+        </response>
+        <response name="error" type="view" value="EditOrderShipmentGroups"/>
+    </request-map>
+    <request-map uri="createOrderShipmentGroups">
+    	<description>创建一个新的货运组</description>
+        <security https="false" auth="true"/>
+        <event type="simple" path="component://salesmanager/script/SalesOrderServices.xml" invoke="createOrderShipmentGroups"></event>
+        <response name="success" type="request-redirect" value="FindSalesOrderItem">
+        	<redirect-parameter name="orderId"/>
+        </response>
+        <response name="error" type="view" value="FindSalesOrderItem"/>
+    </request-map>
+    
+    <!-- 销售订单货运组  end-->
+    
+    <!-- 销售发货 start -->
+    <request-map uri="FindShipment">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="FindShipment"/>
+    </request-map>
+    <request-map uri="ViewShipment">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="ViewShipment"/>
+    </request-map>
+    <request-map uri="EditShipment">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="EditShipment"/>
+    </request-map>
+
+    <request-map uri="LookupOrderHeader">
+    	<security https="true" auth="true"/>
+    	<response name="success" type="view" value="LookupOrderHeader"/>
+    </request-map>
+    
+    <request-map uri="createShipment">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="createShipmentAndAttribute"/>
+        <response name="success" type="request-redirect" value="EditShipment">
+            <redirect-parameter name="shipmentId"/>
+        </response>
+        <response name="error" type="view" value="EditShipment"/>
+    </request-map>
+    
+    <request-map uri="createDirectShipment">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="createShipmentAndAttribute"/>
+        <response name="success" type="request-redirect" value="EditDirectShipment">
+            <redirect-parameter name="shipmentId"/>
+        </response>
+        <response name="error" type="view" value="EditDirectShipment"/>
+    </request-map>
+    
+    <request-map uri="updateShipment">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="updateShipment"/>
+        <response name="success" type="view" value="EditShipment"/>
+        <response name="error" type="view" value="EditShipment"/>
+    </request-map>
+    <request-map uri="updateDirectShipment">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="updateShipment"/>
+        <response name="success" type="view" value="EditDirectShipment"/>
+        <response name="error" type="view" value="EditDirectShipment"/>
+    </request-map>
+    
+    <request-map uri="EditShipmentPlan">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="EditShipmentPlan"/>
+    </request-map>
+    <request-map uri="removeOrderShipmentFromShipment">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="removeOrderShipmentFromShipment"/>
+        <response name="success" type="view" value="EditShipmentPlan"/>
+    </request-map>
+    <request-map uri="addToShipmentPlan">
+        <security https="true" auth="true"/>
+        <event type="service-multi" path="" invoke="addOrderShipmentToShipment"/>
+        <response name="success" type="view" value="EditShipmentPlan"/>
+        <response name="error" type="view" value="EditShipmentPlan"/>
+    </request-map>
+   
+    <request-map uri="ViewShipmentReceipts">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="ViewShipmentReceipts"/>
+    </request-map>
+    
+    <request-map uri="AddItemsFromOrder">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="AddItemsFromOrder"/>
+    </request-map>
+    <request-map uri="issueOrderItemToShipment">
+        <security https="true" auth="true"/>
+        <event type="service-multi" path="" invoke="issueOrderItemToShipment"/>
+        <response name="success" type="view" value="AddItemsFromOrder"/>
+        <response name="error" type="view" value="AddItemsFromOrder"/>
+    </request-map>
+    <request-map uri="issueOrderItemShipGrpInvResToShipment">
+        <security https="true" auth="true"/>
+        <event type="service-multi" path="" invoke="issueOrderItemShipGrpInvResToShipment"/>
+        <response name="success" type="view" value="AddItemsFromOrder"/>
+        <response name="error" type="view" value="AddItemsFromOrder"/>
+    </request-map>
+    <request-map uri="ReceiveInventoryAgainstPurchaseOrder">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="ReceiveInventoryAgainstPurchaseOrder"/>
+    </request-map>
+    <request-map uri="issueOrderItemToShipmentAndReceiveAgainstPO">
+        <security https="true" auth="true"/>
+        <event type="service-multi" path="" invoke="issueOrderItemToShipmentAndReceiveAgainstPO"/>
+        <response name="success" type="view" value="ReceiveInventoryAgainstPurchaseOrder"/>
+        <response name="error" type="view" value="ReceiveInventoryAgainstPurchaseOrder"/>
+    </request-map>
+    <request-map uri="completePurchaseOrder">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="completePurchaseOrder"/>
+        <response name="success" type="view" value="ReceiveInventoryAgainstPurchaseOrder"/>
+        <response name="error" type="view" value="ReceiveInventoryAgainstPurchaseOrder"/>
+    </request-map>
+    <request-map uri="AddItemsFromInventory">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="AddItemsFromInventory"/>
+    </request-map>
+    <request-map uri="issueInventoryItemToShipment">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="issueInventoryItemToShipment"/>
+        <response name="success" type="view" value="AddItemsFromInventory"/>
+        <response name="error" type="view" value="AddItemsFromInventory"/>
+    </request-map>
+    
+    <request-map uri="CustDataAnalysis">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="CustDataAnalysis"/>
+    </request-map>
+    
+    <!-- 销售发货 end -->
+    
+    <!-- 从报价导入到销售订单 start -->
+    <request-map uri="importSalesOrder">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.zuczug.haze.SalesOrderServices" invoke="importSalesOrder"/>
+        <response name="success" type="view" value="FindQuote"/>
+        <response name="error" type="view" value="FindQuote"/>
+    </request-map>
+
+    <request-map uri="FindQuoteSalesOrder">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="FindQuoteSalesOrder"/>
+    </request-map>
+    <!-- 从报价导入到销售订单 end -->
+    
+    <!-- 计算报价中商品数量 -->
+    <request-map uri="calcQuoteQuantity">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.zuczug.haze.QuoteServices" invoke="calcQuoteQuantity"/>
+        <response name="success" type="request-redirect" value="ViewQuote">
+            <redirect-parameter name="quoteId"/>
+        </response>
+        <response name="error" type="view" value="ViewQuote"/>
+    </request-map>
+
+    <request-map uri="quoteImportSalesOrder">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.zuczug.haze.QuoteServices" invoke="quoteImportSalesOrder"/>
+        <response name="success" type="request-redirect" value="ViewQuoteNoSales">
+        	<redirect-parameter name="quoteId"/>
+        </response>
+        <response name="error" type="view" value="ViewQuoteNoSales"/>
+    </request-map>
+    
+    <request-map uri="ViewQuoteSalesOrders">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="ViewQuoteSalesOrders"/>
+    </request-map>
+
+    <!-- quote中以sku查找 -->
+    <request-map uri="FindSkuQuotes">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="FindSkuQuotes"/>
+    </request-map>
+    
+    <request-map uri="EditSkuQuoteItem">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="EditSkuQuoteItem"/>
+    </request-map>
+    
+    <request-map uri="UpdateSkuQuoteQuantity">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.zuczug.haze.QuoteServices" invoke="updateQuoteQuantity"/>
+        <response name="success" type="view" value="EditSkuQuoteItem"/>
+        <response name="error" type="view" value="EditSkuQuoteItem"/>
+    </request-map>
+    
+    <!-- 计算报价中SKU粒度的商品数量 -->
+    <request-map uri="calcSkuQuoteQuantity">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.zuczug.haze.QuoteServices" invoke="calcSkuQuoteQuantity"/>
+        <response name="success" type="request-redirect" value="FindSkuQuotes">
+            <redirect-parameter name="productId"/>
+        </response>
+        <response name="error" type="view" value="EditSkuQuoteItem"/>
+    </request-map>
+    
+    <request-map uri="EditDirectShipment">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="EditDirectShipment"/>
+    </request-map>
+    
+    <request-map uri="EditShipmentItems">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="EditShipmentItems"/>
+    </request-map>
+    
+    <request-map uri="createShipmentItem">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.zuczug.haze.SalesShipmentServices" invoke="createShipmentItem"/>
+        <response name="success" type="view" value="EditShipmentItems"/>
+        <response name="error" type="view" value="EditShipmentItems"/>
+    </request-map>
+    <request-map uri="deleteShipmentItem">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="deleteShipmentItem"/>
+        <response name="success" type="view" value="EditShipmentItems"/>
+        <response name="error" type="view" value="EditShipmentItems"/>
+    </request-map>
+    
+    <!-- QuoteItem 增删改查-->
+    <request-map uri="ListQuoteItems"><security https="true" auth="true"/><response name="success" type="view" value="ListQuoteItems"/></request-map>
+    <request-map uri="EditQuoteItem"><security https="true" auth="true"/><response name="success" type="view" value="EditQuoteItem"/></request-map>
+    <request-map uri="createQuoteItem">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="createQuoteItem"/>
+        <response name="success" type="request-redirect" value="ListQuoteItems">
+            <redirect-parameter name="quoteId"/>
+        </response>
+    </request-map>
+    <request-map uri="updateQuoteItem">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="updateQuoteItem"/>
+        <response name="success" type="view" value="ListQuoteItems"/>
+        <response name="error" type="view" value="EditQuoteItem"/>
+    </request-map>
+    <request-map uri="removeQuoteItem">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="removeQuoteItem"/>
+        <response name="success" type="view" value="ListQuoteItems"/>
+    </request-map>
+    
+    <!-- 更新送货状态为已计划并检查库存 -->
+    <request-map uri="updateShipmentStatusToPlane">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.zuczug.haze.SalesShipmentServices" invoke="updateShipmentStatusToPlane"/>
+        <response name="success" type="view" value="FindShipment"/>
+        <response name="error" type="view" value="FindShipment"/>
+    </request-map>
+    
+    <request-map uri="FactoryWarehouseTransfer">
+        <security https="false" auth="true"/>
+        <response name="success" type="view" value="FactoryWarehouseTransfer"/>
+    </request-map>
+    <request-map uri="FactoryWarehouseReceive">
+        <security https="false" auth="true"/>
+        <response name="success" type="view" value="FactoryWarehouseReceive"/>
+    </request-map>
+    
+    <request-map uri="FindProductVirtualList">
+    	<security auth="true"/>
+    	<response name="success" type="view" value="FindProductVirtualList"></response>
+    </request-map>
+    
+    <request-map uri="queryProductRealView">
+    	<security auth="true"/>
+    		<event type="java" path="com.zuczug.haze.SalesShipmentServices" invoke="queryProductRealView"/>
+        <response name="success" type="view" value="EditShipmentItems"/>
+        <response name="error" type="view" value="EditShipmentItems"/>
+    </request-map>
+    
+   	<request-map uri="TransferThisInventoryItem">
+        <security auth="true"/>
+        <response name="success" type="view" value="TransferThisInventoryItem"/>
+    </request-map>
+    
+    <request-map uri="createRequirementTransfer">
+        <security https="false" auth="true"/>
+        <event type="simple" path="component://fabricfacility/script/FabricFacilityServices.xml" invoke="createShipmentForTransfer"/>
+        <!--  <response name="success" type="view" value="TransferThisInventoryItem"/>-->
+        <response name="success" type="request-redirect" value="FactoryWarehouseTransfer">
+        	<redirect-parameter name="facilityId"/>
+        	<redirect-parameter name="activeOnly" value="true"/>
+        </response>
+        <response name="error" type="view" value="FactoryWarehouseTransfer"/>
+    </request-map>
+    
+    <request-map uri="LookupRealProductNoVariantForSku">
+	    <security auth="true"/>
+	    <response name="success" type="view" value="LookupRealProductNoVariantForSku"/>
+    </request-map>
+    
+    <request-map uri="LookupRealProductNoVirtualForSku">
+	    <security auth="true"/>
+	    <response name="success" type="view" value="LookupRealProductNoVirtualForSku"/>
+    </request-map>
+    
+    <request-map uri="LookupRealProductNoVirtualForSkuNoAjex">
+    	<description>查询商品非虚拟</description>
+	    <security auth="true"/>
+	    <response name="success" type="view" value="LookupRealProductNoVirtualForSkuNoAjex"/>
+    </request-map>
+    
+    <request-map uri="FindInventoryItemQuantity">
+	    <security auth="true"/>
+	    <response name="success" type="view" value="FindInventoryItemQuantity"/>
+    </request-map>
+    
+    <request-map uri="LookupShipmentContactMech">
+	    <security https="true" auth="true"/>
+	    <response name="success" type="view" value="LookupShipmentContactMech"/>
+    </request-map>
+    
+    <request-map uri="findShipAddressList">
+    	<description>通过目的地查询送货地址</description>
+    	<security https="false" auth="false"/>
+    	<event type="simple" path="component://salesmanager/script/OrderShipmentServices.xml" invoke="findShipAddressList"/>
+        <response name="success" type="request" value="json" />
+        <response name="error" type="request" value="json" />
+    </request-map>
+    
+    <request-map uri="queryQuoteProductRealView">
+    	<security auth="true"/>
+    		<event type="java" path="com.zuczug.haze.SalesShipmentServices" invoke="queryProductRealView"/>
+        <response name="success" type="view" value="EditQuoteItem"/>
+        <response name="error" type="view" value="EditQuoteItem"/>
+    </request-map>
+    
+    <request-map uri="createQuoteItem">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.zuczug.haze.QuoteServices" invoke="createQuoteItem"/>
+        <response name="success" type="view" value="ListQuoteItems"/>
+        <response name="error" type="view" value="ListQuoteItems"/>
+    </request-map>
+    
+    <request-map uri="updateQuoteApprovedStatus">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.zuczug.haze.QuoteServices" invoke="updateQuoteApprovedStatus"/>
+        <response name="success" type="view" value="FindQuote"/>
+        <response name="error" type="view" value="FindQuote"/>
+    </request-map>
+    
+    <request-map uri="cancelShipment">
+        <security https="true" auth="true"/>
+        <event type="simple" path="component://fabricfacility/script/FabricFacilityServices.xml" invoke="cancelShipmentForTransfer"/>
+        <response name="success" type="view" value="FindShipment"/>
+        <response name="error" type="view" value="FindShipment"/>
+    </request-map>
+    
+    <request-map uri="LookupFacilityForShipment">
+    	<security https="false" auth="true"/>
+    	<response name="success" type="view" value="LookupFacilityForShipment"/>
+    </request-map>
+    
+    <request-map uri="UpdateShipmentAddress">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="updateShipment"/>
+        <response name="success" type="view" value="EditShipmentItems"/>
+        <response name="error" type="view" value="EditShipmentItems"/>
+    </request-map>
+    
+    
+    <!-- Order Return Requests Start-->
+    <request-map uri="findreturn">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="findreturn"/>
+    </request-map>
+    <request-map uri="returnlist">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="returnlist"/>
+    </request-map>
+    <request-map uri="quickreturn">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="quickReturn"/>
+    </request-map>
+    <request-map uri="makeQuickReturn">
+        <security https="true" auth="true"/>
+        <event type="service-multi" invoke="createReturnAndItemOrAdjustment"/>
+        <response name="success" type="request-redirect" value="returnItems"><redirect-parameter name="returnId"/></response>
+        <response name="error" type="view" value="orderview"/>
+    </request-map>
+    <request-map uri="quickRefundOrder">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="quickReturnOrder"/>
+        <response name="success" type="view" value="orderview"/>
+        <response name="error" type="view" value="orderview"/>
+    </request-map>
+
+    <request-map uri="returnMain">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="returnhead"/>
+    </request-map>
+    <request-map uri="returnItems">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="returnitems"/>
+    </request-map>
+    <request-map uri="createReturn">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="createSalesReturnHeader"/>
+        <response name="success" type="view" value="returnhead"/>
+    </request-map>
+    <request-map uri="updateReturn">
+        <security https="true" auth="true"/>
+		<event type="service"  invoke="updateReturnHeader"/> 
+        <response name="success" type="view" value="returnhead"/>
+    </request-map>
+    <request-map uri="createReturnItems">
+        <security https="true" auth="true"/>
+        <event type="service-multi" invoke="createReturnItemOrAdjustment"/>
+        <response name="success" type="view" value="returnitems"/>
+    </request-map>
+    <request-map uri="updateReturnItems">
+        <security https="true" auth="true"/>
+        <event type="service-multi" invoke="updateReturnItemOrAdjustment"/>
+        <response name="success" type="view" value="returnitems"/>
+    </request-map>
+    <request-map uri="removeReturnItem">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="removeReturnItem"/>
+        <response name="success" type="view" value="returnitems"/>
+    </request-map>
+    <request-map uri="removeReturnAdjustment">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="removeReturnAdjustment"/>
+        <response name="success" type="view" value="returnitems"/>
+    </request-map>
+
+    <request-map uri="getStatusItemsForReturn">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="getStatusItemsForReturn"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    
+    <request-map uri="ReturnHistory">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="ReturnHistory"/>
+    </request-map>
+
+	<request-map uri="LookupOrderHeaderForOrderReturn">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="LookupOrderHeaderForOrderReturn"/>
+    </request-map>
+    
+    
+       	
+   	<request-map uri="deleteContactMech">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="deleteFacilityContactMech"/>
+        <response name="success" type="view" value="EditContactMech"/>
+        <response name="error" type="view" value="EditContactMech"/>
+    </request-map>
+    <request-map uri="updateContactMech">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updateFacilityContactMech"/>
+        <response name="success" type="view" value="EditContactMech"/>
+        <response name="error" type="view" value="EditContactMech"/>
+    </request-map>
+    <request-map uri="createContactMech">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="createFacilityContactMech"/>
+        <response name="success" type="view" value="EditContactMech"/>
+        <response name="error" type="view" value="EditContactMech"/>
+    </request-map>
+    <request-map uri="createEmailAddress">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="createFacilityEmailAddress"/>
+        <response name="success" type="view" value="EditContactMech"/>
+        <response name="error" type="view" value="EditContactMech"/>
+    </request-map>
+    <request-map uri="updateEmailAddress">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updateFacilityEmailAddress"/>
+        <response name="success" type="view" value="EditContactMech"/>
+        <response name="error" type="view" value="EditContactMech"/>
+    </request-map>
+    <request-map uri="createPostalAddress">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="createFacilityPostalAddress"/>
+        <response name="success" type="view" value="EditContactMech"/>
+        <response name="error" type="view" value="EditContactMech"/>
+    </request-map>
+    <request-map uri="updatePostalAddress">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updateFacilityPostalAddress"/>
+        <response name="success" type="view" value="EditContactMech"/>
+        <response name="error" type="view" value="EditContactMech"/>
+    </request-map>
+    <request-map uri="createTelecomNumber">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="createFacilityTelecomNumber"/>
+        <response name="success" type="view" value="EditContactMech"/>
+        <response name="error" type="view" value="EditContactMech"/>
+    </request-map>
+    <request-map uri="updateTelecomNumber">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updateFacilityTelecomNumber"/>
+        <response name="success" type="view" value="EditContactMech"/>
+        <response name="error" type="view" value="EditContactMech"/>
+    </request-map>
+    <request-map uri="createFacilityContactMechPurpose">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="createFacilityContactMechPurpose"/>
+        <response name="success" type="view" value="EditContactMech"/>
+        <response name="error" type="view" value="EditContactMech"/>
+    </request-map>
+    <request-map uri="deleteFacilityContactMechPurpose">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="deleteFacilityContactMechPurpose"/>
+        <response name="success" type="view" value="EditContactMech"/>
+        <response name="error" type="view" value="EditContactMech"/>
+    </request-map>
+    <request-map uri="ViewContactMechs">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="ViewContactMechs"/>
+    </request-map>
+    <request-map uri="EditContactMech">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="EditContactMech"/>
+    </request-map>
+    <!-- Order Return Requests End-->
+    
+    
+    <!-- FacilityInventoryItem Start -->   
+    <request-map uri="FacilityInventoryItem">
+    	<security auth="true" https="true"/>
+    	<response name="success" type="view" value="FacilityInventoryItem"/>
+    </request-map>
+        
+    <request-map uri="ListFacilityInventoryItemGroupFacility">
+    	<security auth="true" https="true"/>
+    	<response name="success" type="view" value="ListFacilityInventoryItemGroupFacility"/>
+    </request-map>
+    
+    <request-map uri="ListFacilityInventoryItemDetail">
+    	<security auth="true" https="true"/>
+    	<response name="success" type="view" value="ListFacilityInventoryItemDetail"/>
+    </request-map>
+    
+    <!-- FacilityInventoryItem End -->
+    
+    <!-- View Mappings -->
+
+	<!-- CustRequest Screens -->
+    <view-map name="findCustRequest" type="screen" page="component://haze/widget/CustRequestScreens.xml#FindCustRequest"/>
+    <view-map name="ViewRequest" type="screen" page="component://haze/widget/CustRequestScreens.xml#ViewRequest"/>
+    <view-map name="editorderitems" type="screen" page="component://haze/widget/OrderViewScreens.xml#OrderItemEdit"/>
+    <view-map name="RequestItems" type="screen" page="component://haze/widget/CustRequestScreens.xml#RequestItems"/>
+    <!-- End of CustRequest Screens -->
+    
+    <!-- Quote screens -->
+    <view-map name="FindQuote" type="screen" page="component://haze/widget/QuoteScreens.xml#FindQuote"/>
+    <view-map name="ViewQuote" type="screen" page="component://haze/widget/QuoteScreens.xml#ViewQuote"/>
+    <view-map name="ViewQuoteNoSales" type="screen" page="component://haze/widget/QuoteScreens.xml#ViewQuoteNoSales"/>
+    <view-map name="ChoiceSalesOrderOptions" type="screen" page="component://haze/widget/QuoteScreens.xml#ViewQuoteNoSales"/>
+    <view-map name="EditQuote" type="screen" page="component://haze/widget/QuoteScreens.xml#EditQuote"/>
+    <view-map name="ListQuoteNotes" type="screen" page="component://haze/widget/QuoteScreens.xml#ListQuoteNotes"/>
+    <view-map name="ViewQuoteProfit" type="screen" page="component://haze/widget/QuoteScreens.xml#ViewQuoteProfit"/>
+    <!-- End quote screens -->
+    
+    <view-map name="FindDealers" type="screen" page="component://haze/widget/SalesManagerScreens.xml#FindDealers"/>
+   	<view-map name="AddDealerInfo" type="screen" page="component://haze/widget/SalesManagerScreens.xml#AddDealerInfo"/>
+   	<view-map name="EditDealerInfo" type="screen" page="component://haze/widget/SalesManagerScreens.xml#EditDealerInfo"/>
+    <view-map name="LookupCity" type="screen" page="component://accessorydevelopment/widget/LookupScreens.xml#LookupCity"/>
+    <!-- end of Dealers screens --> 
+    
+    <view-map name="CustDataAnalysis" type="screen" page="component://haze/widget/CustRequestScreens.xml#CustDataAnalysis"/>
+    
+    <view-map name="SalesProductsView" type="screen" page="component://haze/widget/SalesProductsScreens.xml#SalesProductsView"/>
+    <view-map name="EditProductVirtual" type="screen" page="component://haze/widget/SalesProductsScreens.xml#EditProductVirtual"/>
+    <view-map name="EditProductVariant" type="screen" page="component://haze/widget/SalesProductsScreens.xml#EditProductVariant"/>
+    
+    <view-map name="FindSalesOrder" type="screen" page="component://haze/widget/SalesOrderScreens.xml#FindSalesOrder"/>
+    <view-map name="AddSalesOrder" type="screen" page="component://haze/widget/SalesOrderScreens.xml#AddSalesOrder"/>
+	
+	<view-map name="FindSalesOrderItem" type="screen" page="component://haze/widget/SalesOrderScreens.xml#FindSalesOrderItem"/>
+	
+	<view-map name="EditOrderShipmentGroups" type="screen" page="component://haze/widget/SalesOrderScreens.xml#EditOrderShipmentGroups"/>
+	
+	<view-map name="FindShipment" type="screen" page="component://haze/widget/ShipmentScreens.xml#FindShipment"/>
+    <view-map name="ViewShipment" type="screen" page="component://haze/widget/ShipmentScreens.xml#ViewShipment"/>
+    <view-map name="EditShipment" type="screen" page="component://haze/widget/ShipmentScreens.xml#EditShipment"/>
+    <view-map name="EditDirectShipment" type="screen" page="component://haze/widget/ShipmentScreens.xml#EditDirectShipment"/>
+    <view-map name="LookupOrderHeader" type="screen" page="component://haze/widget/ShipmentScreens.xml#LookupOrderHeader"/>
+    
+    <view-map name="EditShipmentPlan" type="screen" page="component://haze/widget/ShipmentScreens.xml#EditShipmentPlan"/>
+    <view-map name="ViewShipmentReceipts" type="screen" page="component://haze/widget/ShipmentScreens.xml#ViewShipmentReceipts"/>
+    <view-map name="AddItemsFromOrder" type="screen" page="component://haze/widget/ShipmentScreens.xml#AddItemsFromOrder"/>
+    <view-map name="AddItemsFromInventory" type="screen" page="component://haze/widget/ShipmentScreens.xml#AddItemsFromInventory"/>
+    <view-map name="ReceiveInventoryAgainstPurchaseOrder" type="screen" page="component://haze/widget/ShipmentScreens.xml#ReceiveInventoryAgainstPurchaseOrder"/>
+	<view-map name="FindQuoteSalesOrder" type="screen" page="component://haze/widget/ShipmentScreens.xml#FindQuoteSalesOrder"/>
+	
+	<view-map name="ViewQuoteSalesOrders" type="screen" page="component://haze/widget/QuoteScreens.xml#ViewQuoteSalesOrders"/>
+	
+	
+	
+	<view-map name="FindSkuQuotes" type="screen" page="component://haze/widget/QuoteScreens.xml#FindSkuQuotes"/>
+	<view-map name="EditSkuQuoteItem" type="screen" page="component://haze/widget/QuoteScreens.xml#EditSkuQuoteItem"/>
+	
+	<view-map name="EditShipmentItems" type="screen" page="component://haze/widget/ShipmentScreens.xml#EditShipmentItems"/>
+	
+	<view-map name="ListQuoteItems" type="screen" page="component://haze/widget/QuoteScreens.xml#ListQuoteItems"/>
+    <view-map name="EditQuoteItem" type="screen" page="component://haze/widget/QuoteScreens.xml#EditQuoteItem"/>
+    
+    <view-map name="FactoryWarehouseTransfer" page="component://manufact/widget/ManufactScreens.xml#FactoryWarehouseTransfer" type="screen"/>
+    <view-map name="FactoryWarehouseReceive" page="component://manufact/widget/ManufactScreens.xml#FactoryWarehouseReceive" type="screen"/>
+    
+    <view-map name="FindProductVirtualList" type="screen" page="component://haze/widget/ShipmentScreens.xml#EditShipmentItems"/>
+    <view-map name="LookupRealProductNoVariantForSku" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#LookupRealProductNoVariantForSku"/>
+    
+    <view-map name="TransferThisInventoryItem" page="component://manufact/widget/ManufactScreens.xml#TransferThisInventoryItem" type="screen"/>
+    
+    <view-map name="FindInventoryItemQuantity" page="component://haze/widget/ShipmentScreens.xml#FindInventoryItemQuantity" type="screen"/>
+    
+    <view-map name="LookupShipmentContactMech" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#LookupShipmentContactMech"/>
+    
+    <view-map name="LookupRealProductNoVirtualForSkuNoAjex" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#LookupRealProductNoVirtualForSkuNoAjex"/>
+    
+    <view-map name="LookupFacilityForShipment" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#LookupFacilityForShipment"/>
+    
+    <view-map name="findreturn" type="screen" page="component://haze/widget/SalesOrderReturnScreens.xml#OrderFindReturn"/>
+    <view-map name="returnlist" type="screen" page="component://haze/widget/SalesOrderReturnScreens.xml#OrderReturnList"/>
+    <view-map name="returnhead" type="screen" page="component://haze/widget/SalesOrderReturnScreens.xml#OrderReturnHeader"/>
+    <view-map name="returnitems" type="screen" page="component://haze/widget/SalesOrderReturnScreens.xml#OrderReturnItems"/>
+    <view-map name="quickReturn" type="screen" page="component://haze/widget/SalesOrderReturnScreens.xml#OrderQuickReturn"/>
+    <view-map name="ReturnHistory" type="screen" page="component://haze/widget/SalesOrderReturnScreens.xml#OrderReturnHistory"/>
+    <view-map name="LookupOrderHeaderForOrderReturn" type="screen" page="component://haze/widget/SalesOrderReturnScreens.xml#LookupOrderHeaderForOrderReturn"/>
+	
+    <view-map name="LookupProductCategory" type="screen" page="component://product/widget/catalog/LookupScreens.xml#LookupProductCategory"/>
+    
+   	<view-map name="ViewContactMechs" type="screen" page="component://haze/widget/SalesManagerScreens.xml#ViewContactMechs"/>
+    <view-map name="EditContactMech" type="screen" page="component://haze/widget/SalesManagerScreens.xml#EditContactMech"/>
+    
+    <view-map name="FacilityInventoryItem" type="screen" page="component://haze/widget/SalesFacilityInventoryItemScreens.xml#FacilityInventoryItem"/>
+    <view-map name="ListFacilityInventoryItemGroupFacility" type="screen" page="component://haze/widget/SalesFacilityInventoryItemScreens.xml#ListFacilityInventoryItemGroupFacility"/>
+    <view-map name="ListFacilityInventoryItemDetail" type="screen" page="component://haze/widget/SalesFacilityInventoryItemScreens.xml#ListFacilityInventoryItemDetail"/>
+    
+    <view-map name="FindProductStore" type="screen" page="component://haze/widget/SalesManagerScreens.xml#FindProductStore"/>
+    <view-map name="AddProductStore" type="screen" page="component://haze/widget/SalesManagerScreens.xml#AddProductStore"/>
+    <view-map name="EditProductStore" type="screen" page="component://haze/widget/SalesManagerScreens.xml#EditProductStore"/>
+    
+</site-conf>

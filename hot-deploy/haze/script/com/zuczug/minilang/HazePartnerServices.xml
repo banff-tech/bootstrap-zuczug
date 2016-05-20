@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simple-methods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/simple-methods.xsd">
+
+    
+    <simple-method method-name="createNewPartner"  short-description="create Account Group">
+    	<if-not-empty field="parameters.address1">
+	        <set field="parameters.postalAddContactMechPurpTypeId" value="PRIMARY_LOCATION"/>
+    	</if-not-empty>
+        <call-simple-method method-name="createPartyGroupRoleAndContactMechs" xml-resource="component://party/script/org/ofbiz/party/party/PartySimpleMethods.xml"/>
+        <field-to-result field="partyId"/>
+        
+        <!-- 默认角色 -->
+        <clear-field field="inMap"/>
+		<set field="inMap.partyId" from-field="partyId"/>
+		<set field="inMap.roleTypeId" value="ORGANIZATION_ROLE"/>
+		<call-service service-name="createPartyRole" in-map-name="inMap"></call-service>
+		<!-- 默认角色 -->
+		<clear-field field="inMap"/>
+		<set field="inMap.partyId" from-field="partyId"/>
+		<set field="inMap.roleTypeId" value="ACCOUNT"/>
+		<call-service service-name="createPartyRole" in-map-name="inMap"></call-service>
+        
+		<call-simple-method method-name="createOrUpdateCorporateParty"/>
+		<if-not-empty field="parameters.taxpayer">
+			<clear-field field="inMap"/>
+			<set field="inMap.partyId" from-field="partyId"/>
+			<set field="inMap.attrName" value="TAXINFO"/>
+			<set field="inMap.attrValue" from-field="parameters.taxpayer"/>
+			<call-service service-name="createPartyAttribute" in-map-name="inMap"></call-service>
+		</if-not-empty>  
+		
+		<if-not-empty field="parameters.registeredCapital">
+			<clear-field field="inMap"/>
+			<set field="inMap.partyId" from-field="partyId"/>
+			<set field="inMap.attrName" value="REG_CAPITAL"/>
+			<set field="inMap.attrValue" from-field="parameters.registeredCapital"/>
+			<call-service service-name="createPartyAttribute" in-map-name="inMap"></call-service>
+		</if-not-empty>  
+		
+		<if-not-empty field="parameters.businessScope">
+			<clear-field field="inMap"/>
+			<set field="inMap.partyId" from-field="partyId"/>
+			<set field="inMap.attrName" value="BUSINESS_SCOPE"/>
+			<set field="inMap.attrValue" from-field="parameters.businessScope"/>
+			<call-service service-name="createPartyAttribute" in-map-name="inMap"></call-service>
+		</if-not-empty>   
+		
+		<if-not-empty field="parameters.businessLicense">
+			<clear-field field="inMap"/>
+			<set field="inMap.partyId" from-field="partyId"/>
+			<set field="inMap.attrName" value="BUSINESS_LICENSE"/>
+			<set field="inMap.attrValue" from-field="parameters.businessLicense"/>
+			<call-service service-name="createPartyAttribute" in-map-name="inMap"></call-service>
+		</if-not-empty>   
+		
+		<if-not-empty field="parameters.taxNumber">
+			<clear-field field="inMap"/>
+			<set field="inMap.partyId" from-field="partyId"/>
+			<set field="inMap.attrName" value="TAX_NUM"/>
+			<set field="inMap.attrValue" from-field="parameters.taxNumber"/>
+			<call-service service-name="createPartyAttribute" in-map-name="inMap"></call-service>
+		</if-not-empty>   
+		
+		<set field="successMessage" value="操作成功"/>
+		<field-to-request field="successMessage"/>
+    </simple-method>
+
+	<simple-method method-name="createOrUpdateCorporateParty" short-description="">
+		<if-not-empty field="parameters.corporatePartyId">
+			<entity-one value-field="corporateParty" entity-name="Party">
+				<field-map field-name="partyId" from-field="parameters.corporatePartyId"/>
+			</entity-one>
+			<if-empty field="corporateParty">
+				<if-empty field="parameters.newCorporatePartyId">
+					<add-error><fail-message message="找不到编号为${parameters.corporatePartyId}的人员"/> </add-error>
+					<check-errors></check-errors>
+				<else>
+					<set field="newPerson.lastName" from-field="parameters.corporatePartyId"/>
+					<set field="newPerson.firstName" value=""/>
+					<call-service service-name="createPerson" in-map-name="newPerson">
+						<result-to-field result-name="partyId" field="parameters.corporatePartyId"/>
+					</call-service>
+				</else>
+				</if-empty>			
+			</if-empty>
+			
+			<entity-one value-field="corporateRole" entity-name="PartyRole">
+				<field-map field-name="partyId" from-field="parameters.corporatePartyId"/>
+				<field-map field-name="roleTypeId" value="LEGAL_PERSON"/>
+			</entity-one>
+			<if-empty field="corporateRole">
+				<clear-field field="inMap"/>
+				<set field="inMap.partyId" from-field="parameters.corporatePartyId"/>
+				<set field="inMap.roleTypeId" value="LEGAL_PERSON"/>
+				<call-service service-name="createPartyRole" in-map-name="inMap"></call-service>
+			</if-empty>
+			
+			
+			<set field="removeMap.partyIdFrom" from-field="partyId"/>
+			<set field="removeMap.roleTypeIdTo" value="LEGAL_PERSON"/>
+			<set field="removeMap.roleTypeIdFrom" value="ORGANIZATION_ROLE"/>
+			<set field="removeMap.partyRelationshipTypeId" value="LEGAL_PERSON"/>
+			<remove-by-and map="removeMap" entity-name="PartyRelationship"/>
+			
+			<now-timestamp field="now"/>
+			<set field="removeMap.partyIdTo" from-field="parameters.corporatePartyId"/>
+			<set field="removeMap.fromDate" from-field="now" />
+			<call-service service-name="createPartyRelationship" in-map-name="removeMap">
+			</call-service>
+			
+		</if-not-empty>
+	</simple-method>
+
+	<simple-method method-name="updatePartner" short-description="updatePartner">
+		<set field="partyId" from-field="parameters.partyId"/>
+		<entity-one value-field="partyGroup" entity-name="PartyGroup">
+			<field-map field-name="partyId" from-field="partyId"/>
+		</entity-one>
+		<set field="partyGroup.groupName" from-field="parameters.groupName"/>
+		<store-value value-field="partyGroup"/>
+		
+		<call-simple-method method-name="createOrUpdateCorporateParty"/>
+		
+		<clear-field field="inMap"/>
+		<set field="inMap.partyId" from-field="partyId"/>
+		<set field="inMap.attrName" value="TAXINFO"/>
+		<remove-by-and map="inMap" entity-name="PartyAttribute"/>
+		<set field="inMap.attrValue" from-field="parameters.taxpayer"/>
+		<call-service service-name="createPartyAttribute" in-map-name="inMap"></call-service>
+		
+		<clear-field field="inMap"/>
+		<set field="inMap.partyId" from-field="partyId"/>
+		<set field="inMap.attrName" value="REG_CAPITAL"/>
+		<remove-by-and map="inMap" entity-name="PartyAttribute"/>
+		<set field="inMap.attrValue" from-field="parameters.registeredCapital"/>
+		<call-service service-name="createPartyAttribute" in-map-name="inMap"></call-service>
+		
+		<clear-field field="inMap"/>
+		<set field="inMap.partyId" from-field="partyId"/>
+		<set field="inMap.attrName" value="BUSINESS_SCOPE"/>
+		<remove-by-and map="inMap" entity-name="PartyAttribute"/>
+		<set field="inMap.attrValue" from-field="parameters.businessScope"/>
+		<call-service service-name="createPartyAttribute" in-map-name="inMap"></call-service>
+		
+		<clear-field field="inMap"/>
+		<set field="inMap.partyId" from-field="partyId"/>
+		<set field="inMap.attrName" value="BUSINESS_LICENSE"/>
+		<remove-by-and map="inMap" entity-name="PartyAttribute"/>
+		<set field="inMap.attrValue" from-field="parameters.businessLicense"/>
+		<call-service service-name="createPartyAttribute" in-map-name="inMap"></call-service>
+		
+		<clear-field field="inMap"/>
+		<set field="inMap.partyId" from-field="partyId"/>
+		<set field="inMap.attrName" value="TAX_NUM"/>
+		<remove-by-and map="inMap" entity-name="PartyAttribute"/>
+		<set field="inMap.attrValue" from-field="parameters.taxNumber"/>
+		<call-service service-name="createPartyAttribute" in-map-name="inMap"></call-service>
+		
+		<field-to-result field="partyId"/>
+	</simple-method>
+	
+	<simple-method method-name="deleteFinAccount" short-description="deleteFinAccount">
+		<set field="removeMap.finAccountId" from-field="parameters.finAccountId"/>
+		<remove-by-and map="removeMap" entity-name="FinAccountRole"/>
+		<remove-by-and map="removeMap" entity-name="FinAccountStatus"/>
+		<remove-by-and map="removeMap" entity-name="FinAccountTrans"/>
+		<remove-by-and map="removeMap" entity-name="FinAccount"/>
+	</simple-method>
+	
+</simple-methods>

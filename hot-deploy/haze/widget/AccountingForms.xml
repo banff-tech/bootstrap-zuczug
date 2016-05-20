@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-form.xsd">
+
+    <form name="FindPayments" type="single" target="FindPayments"
+        header-row-style="header-row" default-table-style="basic-table">
+        <field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
+        <field name="paymentId"><text-find ignore-case="true"/></field>
+        <field name="comments"><text-find ignore-case="true"/></field>
+        <field name="paymentTypeId" title="${uiLabelMap.AccountingPaymentType}" position="1">
+            <drop-down allow-empty="true">
+                <entity-options description="${description}" entity-name="PaymentType">
+                    <entity-order-by field-name="description"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field name="statusId" title="${uiLabelMap.CommonStatus}" position="2">
+            <drop-down allow-empty="true">
+                <entity-options description="${description}" entity-name="StatusItem">
+                    <entity-constraint name="statusTypeId" operator="equals" value="PMNT_STATUS"/>
+                    <entity-order-by field-name="description"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field position="1" name="partyIdFrom"><lookup target-form-name="LookupPartyName"/></field>
+        <field position="2" name="partyIdTo"><lookup target-form-name="LookupPartyName"/></field>
+        <field position="1" name="amount"><text/></field>
+        <!-- 
+        <field name="paymentRefNum"><text-find ignore-case="true"/></field>
+        <field name="paymentGatewayResponseId"><text/></field>
+         -->
+        <field name="searchButton" title="${uiLabelMap.CommonFind}" widget-style="smallSubmit"><submit button-type="button"/></field>
+    </form>
+    <form name="ListPayments" type="list" separate-columns="true" default-entity-name="Payment" list-name="listIt" paginate-target="FindPayments" paginate="true"
+        odd-row-style="alternate-row" default-table-style="basic-table hover-bar">
+        <actions>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="PaymentAndTypeAndCreditCard"/>
+                <field-map field-name="orderBy" value="effectiveDate DESC"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+            </service>
+        </actions>
+        <row-actions>
+            <set field="amountToApply" value="${bsh:org.ofbiz.accounting.payment.PaymentWorker.getPaymentNotApplied(delegator,paymentId);}"/>
+        </row-actions>
+        <field name="paymentId" widget-style="buttontext">
+            <hyperlink description="${paymentId}" target="paymentOverview">
+                <parameter param-name="paymentId"/>
+            </hyperlink>
+        </field>
+        <field name="paymentTypeId" title="${uiLabelMap.AccountingPaymentType}"><display-entity entity-name="PaymentType"/></field>
+        <field name="statusId" title="${uiLabelMap.CommonStatus}"><display-entity entity-name="StatusItem"/></field>
+        <field name="comments"><display/></field>
+        <field name="partyIdFrom" title="${uiLabelMap.AccountingFromParty}">
+            <display-entity entity-name="PartyNameView" key-field-name="partyId" description="${groupName}${lastName},${firstName}">
+                <sub-hyperlink target="/partymgr/control/viewprofile" target-type="inter-app" description="[${partyIdFrom}]" >
+                    <parameter param-name="partyId" from-field="partyIdFrom"/>
+                </sub-hyperlink>
+            </display-entity>
+        </field>
+        <field name="partyIdTo" title="${uiLabelMap.AccountingToParty}">
+            <display-entity entity-name="PartyNameView" key-field-name="partyId" description="${groupName}${lastName},${firstName}">
+                <sub-hyperlink target="/partymgr/control/viewprofile" target-type="inter-app" description="[${partyIdTo}]" >
+                    <parameter param-name="partyId" from-field="partyIdTo"/>
+                </sub-hyperlink>
+            </display-entity>
+        </field>
+        <field name="effectiveDate"><display/></field>
+        <field name="currencyUomId"><hidden/></field>
+        <field name="amount"><display also-hidden="false" type="currency" currency="${currencyUomId}"/></field>
+        <field name="amountToApply"><display also-hidden="false" type="currency" currency="${currencyUomId}"/></field>
+    </form>
+    <form name="FindInvoices" type="single" target="FindInvoices" title="Find and list invoices"
+        header-row-style="header-row" default-table-style="basic-table">
+        <field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
+        <field name="invoiceId"><text-find ignore-case="true"/></field>
+        <field name="description"><text-find ignore-case="true"/></field>
+        <field position="1" name="invoiceTypeId">
+            <drop-down allow-empty="true">
+                <entity-options description="${description}" entity-name="InvoiceType"/>
+            </drop-down>
+        </field>
+        <field name="statusId" title="${uiLabelMap.CommonStatus}" position="2">
+            <drop-down allow-empty="true">
+                <entity-options description="${description}" entity-name="StatusItem">
+                    <entity-constraint name="statusTypeId" operator="equals" value="INVOICE_STATUS"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field position="1" name="partyIdFrom"><lookup target-form-name="LookupPartyName"/></field>
+        <field position="2" name="partyIdTo" parameter-name="partyId"><lookup target-form-name="LookupPartyName"/></field>
+        <field name="billingAccountId"><lookup target-form-name="LookupBillingAccount"/></field>
+        <field name="invoiceDate"><date-find type="date"/></field>
+        <field name="referenceNumber"><text-find/></field>
+        <field name="searchButton" title="${uiLabelMap.CommonFind}" widget-style="smallSubmit"><submit button-type="button"/></field>
+    </form>
+
+    <form name="ListInvoices" type="list" separate-columns="true" title="Invoice List" list-name="listIt" target="" default-entity-name="Invoice" paginate-target="FindInvoices"
+        odd-row-style="alternate-row" header-row-style="header-row-2" default-table-style="basic-table hover-bar">
+        <actions>
+            <set field="parameters.sortField" from-field="parameters.sortField" default-value="-invoiceDate"/>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="InvoiceAndType"/>
+                <field-map field-name="orderBy" from-field="parameters.sortField"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+            </service>
+        </actions>
+        <row-actions>
+            <service service-name="getPartyNameForDate" result-map="partyNameResultFrom">
+                <field-map field-name="partyId" from-field="partyIdFrom"/>
+                <field-map field-name="compareDate" from-field="invoiceDate"/>
+                <field-map field-name="lastNameFirst" value="Y"/>
+            </service>
+            <service service-name="getPartyNameForDate" result-map="partyNameResultTo">
+                <field-map field-name="partyId" from-field="partyId"/>
+                <field-map field-name="compareDate" from-field="invoiceDate"/>
+                <field-map field-name="lastNameFirst" value="Y"/>
+            </service>
+            <set field="amountToApply" value="${bsh:org.ofbiz.accounting.invoice.InvoiceWorker.getInvoiceNotApplied(delegator,invoiceId)
+                .multiply(org.ofbiz.accounting.invoice.InvoiceWorker.getInvoiceCurrencyConversionRate(delegator,invoiceId))}"/>
+            <set field="total" value="${bsh:org.ofbiz.accounting.invoice.InvoiceWorker.getInvoiceTotal(delegator,invoiceId)
+                .multiply(org.ofbiz.accounting.invoice.InvoiceWorker.getInvoiceCurrencyConversionRate(delegator,invoiceId))}"/>
+            <set field="currencyUomId" from-field="defaultOrganizationPartyCurrencyUomId"/>
+        </row-actions>
+
+        <field name="invoiceId" widget-style="buttontext" sort-field="true">
+            <hyperlink description="${invoiceId}" target="invoiceOverview">
+                <parameter param-name="invoiceId"/>
+            </hyperlink>
+        </field>
+        <field name="invoiceTypeId" sort-field="true"><display-entity entity-name="InvoiceType"/></field>
+        <field name="invoiceDate" sort-field="true"><display type="date"/></field>
+        <field name="statusId" title="${uiLabelMap.CommonStatus}" sort-field="true"><display-entity entity-name="StatusItem"/></field>
+        <field name="description" sort-field="true" encode-output="false"><display/></field>
+        <field name="partyIdFrom" title="${uiLabelMap.AccountingFromParty}" sort-field="true">
+            <hyperlink target="/partymgr/control/PartyFinancialHistory" target-type="inter-app" description="${partyNameResultFrom.fullName} [${partyIdFrom}]">
+                <parameter param-name="partyId" from-field="partyIdFrom"/>
+            </hyperlink>
+        </field>
+        <field name="partyIdTo" title="${uiLabelMap.AccountingToParty}" parameter-name="partyId">
+            <hyperlink target="/partymgr/control/PartyFinancialHistory" target-type="inter-app" description="${partyNameResultTo.fullName} [${partyId}]">
+                <parameter param-name="partyId"/>
+            </hyperlink>
+        </field>
+        <field name="total" widget-area-style="align-text"><display type="currency" currency="${currencyUomId}"/></field>
+        <field name="amountToApply" widget-area-style="align-text"><display type="currency" currency="${currencyUomId}"/></field>
+    </form>
+
+</forms>

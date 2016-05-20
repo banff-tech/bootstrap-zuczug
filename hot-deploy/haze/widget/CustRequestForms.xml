@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-form.xsd">
+
+<!-- CustRequst SearchCondition -->
+    <form name="SearchCustRequestForm" type="single" target="FindCustRequest" title=""
+          default-map-name="parameters" header-row-style="header-row" default-table-style="basic-table">
+        <!--Fields -->
+        <field name="fromPartyId" title="${uiLabelMap.CustomerParty}"><lookup target-form-name="LookupPartyName"/></field>
+
+        <field name="statusId">
+            <drop-down allow-empty="true">
+                <entity-options entity-name="StatusItem" description="${description}">
+                    <entity-constraint name="statusTypeId" operator="equals" value="CUSTREQ_STTS"/>
+                    <entity-order-by field-name="sequenceId"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
+        <field name="submitButton" title="${uiLabelMap.Search}" widget-style="smallSubmit"><submit button-type="button"/></field>
+
+    </form>
+
+
+
+<!-- This Is Cust Requst ResutInfo -->
+    <form name="ListRequestList" type="list" use-row-submit="true" list-name="listIt" title="List of customer requests"
+          odd-row-style="alternate-row" header-row-style="header-row-2" default-table-style="basic-table hover-bar">
+        <actions>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="CustRequest"/>
+            </service>
+        </actions>
+        <field name="custRequestId" title="${uiLabelMap.CustRequestId}" sort-field="true">
+        <hyperlink description="${custRequestId}" target="ViewRequest">
+        <parameter param-name="custRequestId"/>
+        </hyperlink>
+        </field>
+        <field name="custRequestName" title="${uiLabelMap.CustRequestName}" sort-field="true"><display/></field>
+        <field name="priority" title="${uiLabelMap.Priority}" sort-field="true"><display/></field>
+        <field name="responseRequiredDate" title="${uiLabelMap.ResponseRequiredDate}" sort-field="true"><display/></field>
+        <field name="fromPartyId" title="${uiLabelMap.CustomerParty}" sort-field="true">
+        <display-entity entity-name="PartyNameView" key-field-name="partyId" description="${firstName} ${middleName} ${lastName} ${groupName}">
+        <sub-hyperlink description="[${fromPartyId}]" target="/partymgr/control/viewprofile" target-type="inter-app">
+        <parameter param-name="partyId" from-field="fromPartyId"/>
+        </sub-hyperlink>
+        </display-entity>
+        </field>
+        <field name="statusId" sort-field="true">
+        <display-entity also-hidden="false" entity-name="StatusItem"/>
+        </field>
+        <field name="lastModifiedDate" sort-field="true"><display/></field>
+        <!--field name="statusId"><hidden value="CRQ_REJECTED"/></field-->
+        <field name="rejectButton">
+        <hyperlink target="setCustRequestStatus" description="${uiLabelMap.FormFieldTitle_rejectButton}">
+        <parameter param-name="custRequestId"/>
+        <parameter param-name="statusId" value="CRQ_REJECTED"/>
+        </hyperlink>
+        </field>
+
+    </form>
+
+    <form name="ListRequestItems" type="list" use-row-submit="true"  title="" list-name="custRequestItems"
+        odd-row-style="alternate-row" default-table-style="basic-table hover-bar" paginate-target="ViewRequest">
+        <field name="custRequestId"><hidden/></field>
+        <field name="custRequestItemSeqId" widget-style="buttontext">
+            <hyperlink description="${custRequestItemSeqId}" target="requestitem">
+                <parameter param-name="custRequestId"/>
+                <parameter param-name="custRequestItemSeqId"/>
+            </hyperlink>
+        </field>
+        <field name="sequenceNum"><display/></field>
+        <field name="productId" title="${uiLabelMap.ProductProductId}">
+            <display-entity entity-name="Product" key-field-name="productId" description="${productId} - ${internalName}"/>
+        </field>
+        <field name="quantity" id-name="quantity">
+            <display>
+                <in-place-editor url="/example/control/updateExample" cancel-control="button" saving-text="Updating..." text-between-controls=" ">
+                    <simple-editor/>
+                    <field-map field-name="exampleId" from-field="exampleId"/>
+                    <field-map field-name="statusId"  from-field="statusId"/>
+                </in-place-editor>
+            </display>
+        </field>
+        <!-- <field name="productPercent" title="${uiLabelMap.ProductPercent}"><display/></field>
+        <field name="quantityPercent" title="${uiLabelMap.QuantityPercent}"><display/></field> -->
+        <field name="statusId">
+            <display-entity also-hidden="false" entity-name="StatusItem"/>
+        </field>
+    </form>
+
+    <form name="ListRequestItemsHeng" type="list" use-row-submit="true"  title="" list-name="custRequestItems"
+        odd-row-style="alternate-row" default-table-style="basic-table hover-bar" paginate-target="requestitems">
+        <field name="productColorId" title="${uiLabelMap.ProductProductId}">
+            <display/>
+        </field>
+        <field name="internalName" title="${uiLabelMap.ProductInternalName}">
+            <display/>
+        </field>
+        <field name="SIZE0" title="${uiLabelMap.HengSize0}" id-name="SIZE0">
+            <display>
+                <in-place-editor url="/example/control/updateExample" cancel-control="button" saving-text="Updating..." text-between-controls=" ">
+                    <simple-editor/>
+                    <field-map field-name="exampleId" from-field="exampleId"/>
+                    <field-map field-name="statusId"  from-field="statusId"/>
+                </in-place-editor>
+            </display>
+        </field>
+        <field name="SIZE2" title="${uiLabelMap.HengSize2}" id-name="SIZE2">
+            <display>
+                <in-place-editor url="/example/control/updateExample" cancel-control="button" saving-text="Updating..." text-between-controls=" ">
+                    <simple-editor/>
+                    <field-map field-name="exampleId" from-field="exampleId"/>
+                    <field-map field-name="statusId"  from-field="statusId"/>
+                </in-place-editor>
+            </display>
+        </field>
+        <field name="SIZE4" title="${uiLabelMap.HengSize4}" id-name="SIZE4">
+            <display>
+                <in-place-editor url="/example/control/updateExample" cancel-control="button" saving-text="Updating..." text-between-controls=" ">
+                    <simple-editor/>
+                    <field-map field-name="exampleId" from-field="exampleId"/>
+                    <field-map field-name="statusId"  from-field="statusId"/>
+                </in-place-editor>
+            </display>
+        </field>
+        <field name="SIZE6" title="${uiLabelMap.HengSize6}" id-name="SIZE6">
+            <display>
+                <in-place-editor url="/example/control/updateExample" cancel-control="button" saving-text="Updating..." text-between-controls=" ">
+                    <simple-editor/>
+                    <field-map field-name="exampleId" from-field="exampleId"/>
+                    <field-map field-name="statusId"  from-field="statusId"/>
+                </in-place-editor>
+            </display>
+        </field>
+        <field name="SIZE8" title="${uiLabelMap.HengSize8}" id-name="SIZE8">
+            <display>
+                <in-place-editor url="/example/control/updateExample" cancel-control="button" saving-text="Updating..." text-between-controls=" ">
+                    <simple-editor/>
+                    <field-map field-name="exampleId" from-field="exampleId"/>
+                    <field-map field-name="statusId"  from-field="statusId"/>
+                </in-place-editor>
+            </display>
+        </field>
+        <field name="quantity" title="${uiLabelMap.Quantity}"><display/></field>
+        <field name="listPriceSum" title="${uiLabelMap.ProductListPriceSum}"><display/></field>
+        <field name="listPrice" title="${uiLabelMap.ProductListPrice}"><display/></field>
+    </form>
+
+    <form name="requestInfo" type="single" title="request information" default-map-name="custRequest"
+        header-row-style="header-row" default-table-style="basic-table">
+        <actions>
+            <set field="lookupPartyId" from-field="custRequest.fromPartyId" default-value="_NA_"/>
+            <service service-name="getPartyNameForDate" result-map="partyNameResultTo">
+                <field-map field-name="partyId" from-field="lookupPartyId"/>
+                <field-map field-name="compareDate" from-field="custRequest.custRequestDate"/>
+                <field-map field-name="lastNameFirst" value="Y"/>
+            </service>
+        </actions>
+        <field name="custRequestId"><hidden/></field>
+        <field name="custRequestTypeId" title="${uiLabelMap.CommonType}" position="1"><display-entity entity-name="CustRequestType" description="${description}"/></field>
+        <field name="statusId" title="${uiLabelMap.CommonStatus}" position="2"><display-entity entity-name="StatusItem" description="${description}"/></field>
+        <field name="fromPartyId" title="${uiLabelMap.PartyPartyId}" position="3">
+            <hyperlink target="/partymgr/control/viewprofile" target-type="inter-app" description="${partyNameResultTo.fullName} [${custRequest.fromPartyId}]">
+                <parameter param-name="partyId" from-field="custRequest.fromPartyId"/>
+            </hyperlink>
+        </field>
+        <field name="custRequestName" title="${uiLabelMap.CommonName}" encode-output="false" position="1"><display/></field>
+        <field name="description" title="${uiLabelMap.CommonDescription}" position="2"><display/></field>
+        <field name="internalComment" title="${uiLabelMap.CommonInternalComment}" position="3"><display/></field>
+        <field name="reason" title="${uiLabelMap.CommonReason}" position="1"><display/></field>
+        <field name="custRequestDate" title="${uiLabelMap.OrderRequestDate}" position="1"><display/></field>
+        <field name="createdDate" title="${uiLabelMap.OrderRequestCreatedDate}" position="2"><display/></field>
+        <field name="lastModifiedDate" title="${uiLabelMap.OrderRequestLastModifiedDate}" position="3"><display/></field>
+    </form>
+</forms>

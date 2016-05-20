@@ -1,0 +1,2 @@
+把ProductFeatureType中创建时间在2014年12月27日之前的数据更新为2016年1月2日
+UPDATE product_feature_type set CREATED_STAMP='2016-01-02 00:00:00' WHERE CREATED_STAMP < '2014-12-27 00:00:00';

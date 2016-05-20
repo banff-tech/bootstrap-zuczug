@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-form.xsd">
+
+    <form name="findBom" type="single" target="FindBom" title="">
+        <field name="productId"><lookup target-form-name="LookupProduct"/></field>
+        <field name="productIdTo" title="${uiLabelMap.ProductProductIdTo}"><lookup target-form-name="LookupProduct"/></field>
+        <field name="productAssocTypeId"  title="${uiLabelMap.ManufacturingBomType}">
+            <drop-down allow-empty="true">
+                <option key="MANUF_COMPONENT" description="${uiLabelMap.ManufacturingBillOfMaterials}"/>
+                <option key="ENGINEER_COMPONENT" description="${uiLabelMap.ManufacturingEngineeringBillOfMaterials}"/>
+            </drop-down>
+        </field>
+        <field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
+        <field name="submit" title="${uiLabelMap.CommonFind}"><submit/></field>
+    </form>
+    <form name="ListBom"  type="list" list-name="ListProductBom" odd-row-style="alternate-row"
+        default-table-style="basic-table hover-bar"  paginate-target="FindBom">
+        <field name="productId" title="${uiLabelMap.ProductProductId}" use-when="">
+            <hyperlink target="EditProductBom" description="${productId}">
+                <parameter param-name="productId"/>
+                <parameter param-name="productAssocTypeId"/>
+            </hyperlink>
+        </field>
+        <field name="internalName" title="${uiLabelMap.ProductProductName}"><display/></field>
+        <field name="productAssocTypeId" title="${uiLabelMap.ManufacturingBomType}">
+            <display-entity entity-name="ProductAssocType" key-field-name="productAssocTypeId" description="${description}"/>
+        </field>
+    </form>
+
+</forms>

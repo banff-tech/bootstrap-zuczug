@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-form.xsd">
+    <form name="SearchAccessoryPurchaseOrder" type="single" target="FindAccessoryPurchase" title="" default-map-name="supplierProduct"
+        header-row-style="header-row" default-table-style="basic-table">
+        <field name="purchaseType"><hidden value="${purchaseType}"/></field>
+        <field name="orderId" title="采购单编号">
+        	<text-find></text-find>
+        </field>
+        <field name="externalId" title="自定义订单号">
+        	<text-find></text-find>
+        </field>
+        <field name="searchStatusId" title="采购单状态">
+			<drop-down>
+				<option key="" description="全部"/>
+				<option key="ORDER_CANCELLED" description="已取消"/>
+				<option key="ORDER_CREATED" description="待批准"/>
+				<option key="ORDER_APPROVED" description="已批准"/>
+				<option key="ORDER_COMPLETED" description="已完成"/>
+			</drop-down>
+		</field>
+		<field name="partyId" title="${uiLabelMap.FabricSupplier}">
+            <lookup target-form-name="LookupSupplier" ></lookup>
+        </field>
+        <field name="orderDate" title="${uiLabelMap.PurchaseOrderDate}">
+        	<date-find />
+        </field>    
+        <field name="submitButton" title="${uiLabelMap.CommonSearch}"><submit button-type="button"/></field>
+    </form>
+    
+    <form name="ListAccessoryPurchaseOrder" type="list" target="FindAccessoryPurchase" list-name="listIt" 
+		odd-row-style="odd" default-table-style="basic-table" paginate-target="FindAccessoryPurchase"
+		paginate="true" paginate-style="nav-pager">
+		<actions>
+			<set field="pcx.partyId" from-field="parameters.partyId"/>
+			<set field="pcx.orderId_op" from-field="parameters.orderId_op"/>
+			<set field="pcx.orderId_value" from-field="parameters.orderId"/>
+			<set field="pcx.externalId_op" from-field="parameters.externalId_op"/>
+			<set field="pcx.externalId_value" from-field="parameters.externalId"/>
+			<set field="pcx.attrValue" from-field="purchaseType"/>
+			<set field="pcx.statusId" value="${parameters.searchStatusId}"/>			
+			<set field="pcx.orderDate_fld0_value" from-field="parameters.orderDate_fld0_value"/>
+			<set field="pcx.orderDate_fld0_op" from-field="parameters.orderDate_fld0_op"/>
+			<set field="pcx.orderDate_fld1_value" from-field="parameters.orderDate_fld1_value"/>
+			<set field="pcx.orderDate_fld1_op" from-field="parameters.orderDate_fld1_op"/>
+			<set field="viewIndex" from-field="parameters.viewIndex" default-value="0" type="Integer"/>
+			<set field="viewSize" from-field="parameters.viewSize"  type="Integer"/>
+			<service service-name="performFind" result-map="result" result-map-list="listIt">
+			    <field-map field-name="inputFields" from-field="pcx"/>
+                <field-map field-name="entityName" value="FindPurchaseOrderWithTypeView"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+			</service>
+		</actions>
+		<row-actions>
+			<entity-and entity-name="OrderRole" list="orList">
+				<field-map field-name="orderId" from-field="orderId"/>
+				<field-map field-name="roleTypeId" value="BILL_FROM_VENDOR"/>
+			</entity-and>
+			
+			<entity-and entity-name="OrderItemShipGroup" list="oisg">
+				<field-map field-name="orderId" from-field="orderId"/>
+			</entity-and>
+			<set field="estimateDate" from-field="oisg[0].estimatedShipDate"/>
+			<set field="facilityId" from-field="oisg[0].facilityId"/>
+			
+			<!-- 组别 -->
+			<entity-one value-field="groupNameAttr" entity-name="OrderAttribute">
+				<field-map field-name="orderId" from-field="orderId"/>
+				<field-map field-name="attrName" value="GROUP_NAME"/>
+			</entity-one>
+			<set field="groupName" from-field="groupNameAttr.attrValue"/>
+			
+			<!-- 查看是否有收货，否则不能取消 -->
+			<entity-and entity-name="ShipmentReceipt" list="srList">
+				<field-map field-name="orderId" from-field="orderId"/>
+			</entity-and>
+			
+			<set field="remarks" value="${groovy:com.zuczug.order.ZuczugOrderUtils.getOrderNoteByName(delegator,orderId,'ORDER_REMARKE')}"/>
+		</row-actions>
+		<field name="productId"><hidden/></field>
+        <field name="orderId" title="${uiLabelMap.FabricPurchaseId}"><display/></field>
+        <field name="externalId" title="自定义订单号"><display/></field>
+        <field name="partyId" title="${uiLabelMap.FabricSupplier}">
+        	<display-entity entity-name="PartyGroup" description="${groupName}" key-field-name="partyId"></display-entity>
+        </field>
+        <field name="orderDate" title="${uiLabelMap.PurchaseOrderDate}"><display/></field>
+        <field name="estimateDate" title="${uiLabelMap.EstimateDate}"><display/></field>
+        <field name="groupName" title="组别"><display /></field>
+        <field name="remarks" title="描述">
+        	<display></display>
+        </field>
+        <field name="originFacilityId" title="${uiLabelMap.OriginFacility}">
+        	<display-entity entity-name="Facility" description="${facilityName}" key-field-name="facilityId"></display-entity>
+        </field>
+        <field name="statusId" title="${uiLabelMap.OrderStatus}">
+        	<display-entity entity-name="StatusItem" description="${description}" key-field-name="statusId"></display-entity>
+        </field>
+        <field name="detailBtn" title=" " widget-style="buttontext">
+        	<hyperlink target="FindFabricPurchaseItem" description="详情" target-window="_blank">
+        		<parameter param-name="orderId"/>
+        		<parameter param-name="purchaseType"/>
+        	</hyperlink>
+        </field>
+        <field name="cancelBtn" title=" " widget-style="buttontext" use-when="srList.size()==0 &amp;&amp; ((&quot;ORDER_CREATED&quot;).equals(statusId) || (&quot;ORDER_APPROVED&quot;).equals(statusId) )">
+        	<hyperlink target="cancelPurchaseOrder?statusId=ORDER_CANCELLED" description="取消订单" confirmation-message="您确定要取消这个订单？已经收货的不能取消">
+        		<parameter param-name="orderId"/>
+        		<parameter param-name="setItemStatus" value="Y"/>
+        		<parameter param-name="purchaseType"/>
+        		
+        	</hyperlink>
+        </field>
+        <field name="createFileBtn" title=" " widget-style="buttontext">
+        	<hyperlink target="accessoryPurchaseItem.pdf" description="生成订单文件" target-window="_blank">
+        		<parameter param-name="orderId"/>
+        	</hyperlink>
+        </field>
+	</form>
+	
+	<form name="purchaseOrderHeader" type="single" target="updateFabricPurchaseOrderHeader" title="" default-map-name="orderHeader"
+        header-row-style="header-row" default-table-style="basic-table">
+		<actions>
+			<entity-one value-field="orderHeader" entity-name="OrderHeader">
+				<field-map field-name="orderId" from-field="parameters.orderId"/>
+			</entity-one>
+			<set field="agentSupplier" value="${groovy:orh.getPartyFromRole('SUPPLIER_AGENT')}" type="Object"/>
+			<set field="supplier" value="${groovy:orh.getPartyFromRole('SUPPLIER')}" type="Object"/>
+			<set field="groupName" value="${groovy:orh.getOrderAttribute('GROUP_NAME')}"/>
+			<set field="keyword" value="${groovy:orh.getOrderAttribute('KEYWORD')}"/>
+			<set field="noteInfo" value="${groovy:com.zuczug.order.ZuczugOrderUtils.getOrderNoteByName(delegator,parameters.orderId,'ORDER_REMARKE')}"/>
+			<set field="statusId" from-field="orderHeader.statusId"/>
+		</actions>
+		<field name="purchaseType"><hidden value="${purchaseType}"/></field>
+		<field name="orderId" title="订单号：" position="1"><display /></field>
+		<field name="entryDate" title="录入日期：" position="2"><display /> </field>
+		<field name="agentSupplierName" title="采购商：" position="1"><display default-value="${agentSupplier.groupName} [${agentSupplier.partyId}]"/></field>
+		<field name="supplierName" title="供应商：" position="2"><display default-value="${supplier.groupName} [${supplier.partyId}]"/></field>
+		<field name="externalId" title="自定义订单号："><display/></field>
+		<field name="createdBy" title="制单人：" position="2"><display/></field>
+		<field name="keyword" title="关键字：" position="1">
+			<text default-value="${keyword}"></text>
+		</field>
+		<field name="groupName" title="组别：" position="1">
+			<text default-value="${groupName}"></text>
+		</field>
+		<field name="description" title="描述：" position="1">
+			<textarea default-value="${noteInfo}"/>
+		</field>
+		<field name="statusId" title="状态：">
+			<display-entity entity-name="StatusItem" description="${description}" key-field-name="statusId"></display-entity>
+		</field>
+		<field name="submitBtn" title="保存" use-when="&quot;ORDER_CREATED&quot;.equals(statusId) || &quot;ORDER_APPROVED&quot;.equals(statusId) || &quot;ORDER_COMPLETED&quot;.equals(statusId)">
+			<submit/>
+		</field>
+	</form>
+	
+	<form name="FindOrderByProduct" target="FindOrderByProduct" title="" type="single"
+        header-row-style="header-row" default-table-style="basic-table">
+        <field name="noConditionFind"><hidden value="Y"/></field>
+        <field name="idValue" title="${uiLabelMap.idValue}"><text-find/></field>
+        <field name="purchaseType"><hidden value="${purchaseType}"/></field>
+        <field name="statusId" title="采购单状态">
+			<drop-down>
+				<option key="" description="全部"/>
+				<option key="ORDER_CANCELLED" description="已取消"/>
+				<option key="ORDER_CREATED" description="待批准"/>
+				<option key="ORDER_APPROVED" description="已批准"/>
+				<option key="ORDER_COMPLETED" description="已完成"/>
+			</drop-down>
+		</field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}"><submit/></field>
+    </form>
+
+    <form name="ListOrderByProduct" target="FindOrderByProduct" title="" type="list" list-name="listIt"
+        paginate-target="FindOrderByProduct" paginate="true" paginate-style="nav-pager"
+        odd-row-style="odd" header-row-style="header-row-2" default-table-style="basic-table hover-bar">
+        <actions>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="orderBy" from-field="parameters.sortField"/>
+                <field-map field-name="entityName" value="ZuczugOrderItem"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+            </service>
+        </actions>
+        <row-actions>
+        	<entity-and entity-name="OrderRole" list="orList">
+				<field-map field-name="orderId" from-field="orderId"/>
+				<field-map field-name="roleTypeId" value="BILL_FROM_VENDOR"/>
+			</entity-and>
+			
+			<set field="partyId" from-field="orList[0].partyId"/>
+			
+			<entity-and entity-name="OrderItemShipGroup" list="oisg">
+				<field-map field-name="orderId" from-field="orderId"/>
+			</entity-and>
+			<set field="estimateDate" from-field="oisg[0].estimatedShipDate"/>
+			<set field="facilityId" from-field="oisg[0].facilityId"/>
+			
+			<!-- 组别 -->
+			<entity-one value-field="groupNameAttr" entity-name="OrderAttribute">
+				<field-map field-name="orderId" from-field="orderId"/>
+				<field-map field-name="attrName" value="GROUP_NAME"/>
+			</entity-one>
+			<set field="groupName" from-field="groupNameAttr.attrValue"/>
+			
+			<!-- 查看是否有收货，否则不能取消 -->
+			<entity-and entity-name="ShipmentReceipt" list="srList">
+				<field-map field-name="orderId" from-field="orderId"/>
+			</entity-and>
+			
+			<set field="remarks" value="${groovy:com.zuczug.order.ZuczugOrderUtils.getOrderNoteByName(delegator,orderId,'ORDER_REMARKE')}"/>
+        </row-actions>
+        <field name="productId"><hidden/></field>
+        <field name="orderId" title="${uiLabelMap.FabricPurchaseId}"><display/></field>
+        <field name="externalId" title="自定义订单号"><display/></field>
+        <field name="partyId" title="${uiLabelMap.FabricSupplier}">
+        	<display-entity entity-name="PartyGroup" description="${groupName}" key-field-name="partyId"></display-entity>
+        </field>
+        <field name="orderDate" title="${uiLabelMap.PurchaseOrderDate}"><display/></field>
+        <field name="estimateDate" title="${uiLabelMap.EstimateDate}"><display/></field>
+        <field name="groupName" title="组别"><display /></field>
+        <field name="remarks" title="描述">
+        	<display></display>
+        </field>
+        <field name="originFacilityId" title="${uiLabelMap.OriginFacility}">
+        	<display-entity entity-name="Facility" description="${facilityName}" key-field-name="facilityId"></display-entity>
+        </field>
+        <field name="statusId" title="${uiLabelMap.OrderStatus}">
+        	<display-entity entity-name="StatusItem" description="${description}" key-field-name="statusId"></display-entity>
+        </field>
+        <field name="detailBtn" title="详情" widget-style="buttontext">
+        	<hyperlink target="FindFabricPurchaseItem" description="详情" target-window="_blank">
+        		<parameter param-name="orderId"/>
+        		<parameter param-name="purchaseType"/>
+        		
+        	</hyperlink>
+        </field>
+        <field name="cancelBtn" title="取消订单" widget-style="buttontext" use-when="srList.size()==0 &amp;&amp; ((&quot;ORDER_CREATED&quot;).equals(statusId) || (&quot;ORDER_APPROVED&quot;).equals(statusId) )">
+        	<hyperlink target="cancelPurchaseOrder?statusId=ORDER_CANCELLED" description="取消订单" confirmation-message="您确定要取消这个订单？已经收货的不能取消">
+        		<parameter param-name="orderId"/>
+        		<parameter param-name="setItemStatus" value="Y"/>
+        		<parameter param-name="purchaseType"/>
+        	</hyperlink>
+        </field>
+        <field name="createFileBtn" title="生成PDF" widget-style="buttontext">
+        	<hyperlink target="accessoryPurchaseItem.pdf" description="生成订单文件" target-window="_blank">
+        		<parameter param-name="orderId"/>
+        		
+        	</hyperlink>
+        </field>
+
+    </form>
+</forms>

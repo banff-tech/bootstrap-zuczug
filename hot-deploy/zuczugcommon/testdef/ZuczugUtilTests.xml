@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test-suite suite-name="ZuczugCommontests"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/test-suite.xsd">
+
+    <!-- <test-case case-name="loadZuczugestData">
+        <entity-xml action="load" entity-xml-url="component://zuczugcommon/testdef/data/ZuczugTestData.xml"/>
+    </test-case>
+
+    <test-case case-name="zuczugUtil-test">
+        <junit-test-suite class-name="com.zuczug.util.test.ZuczugCommonTest"/>
+    </test-case>-->
+    
+    <test-case case-name="loadZuczugestData">
+        <entity-xml action="load" entity-xml-url="component://zuczugcommon/testdef/data/ZuczugTestBomData.xml"/>
+    </test-case>
+
+    <test-case case-name="zuczugUtil-test">
+        <junit-test-suite class-name="com.zuczug.util.test.ZuczugCommonTestBom"/>
+    </test-case>
+
+
+</test-suite>

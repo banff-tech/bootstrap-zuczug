@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simple-methods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/simple-methods.xsd">
+    
+    <simple-method method-name="createShipmentAndAttribute" short-description="Create ShipmentAndAttribute">
+        <make-value value-field="newEntity" entity-name="Shipment"/>
+        <set-nonpk-fields map="parameters" value-field="newEntity"/>
+
+        <if-not-empty field="parameters.shipmentId">
+            <set-pk-fields map="parameters" value-field="newEntity"/>
+        <else>
+            <sequenced-id sequence-name="Shipment" field="newEntity.shipmentId"/>
+        </else>
+        </if-not-empty>
+        <field-to-result field="newEntity.shipmentId" result-name="shipmentId"/>
+
+        <!-- set the created and lastModified info -->
+        <now-timestamp field="newEntity.createdDate"/>
+        <set from-field="userLogin.userLoginId" field="newEntity.createdByUserLogin"/>
+        <now-timestamp field="newEntity.lastModifiedDate"/>
+        <set from-field="userLogin.userLoginId" field="newEntity.lastModifiedByUserLogin"/>
+
+        <!-- if needed create some WorkEfforts and remember their IDs:
+            estimatedShipDate: estimatedShipWorkEffId
+            estimatedArrivalDate: estimatedArrivalWorkEffId
+        -->
+        <if-not-empty field="parameters.estimatedShipDate">
+            <set value="Shipment #${newEntity.shipmentId} ${newEntity.primaryOrderId} Ship" field="shipWorkEffortMap.workEffortName"/>
+            <set value="EVENT" field="shipWorkEffortMap.workEffortTypeId"/>
+            <set value="CAL_TENTATIVE" field="shipWorkEffortMap.currentStatusId"/>
+            <set from-field="parameters.estimatedShipDate" field="shipWorkEffortMap.estimatedStartDate"/>
+            <set from-field="parameters.estimatedShipDate" field="shipWorkEffortMap.estimatedCompletionDate"/>
+            <set from-field="parameters.originFacilityId" field="shipWorkEffortMap.facilityId"/>
+            <set from-field="userLogin.partyId" field="shipWorkEffortMap.quickAssignPartyId"/>
+            <call-service service-name="createWorkEffort" in-map-name="shipWorkEffortMap">
+                <result-to-field result-name="workEffortId" field="newEntity.estimatedShipWorkEffId"/>
+            </call-service>
+            <if-not-empty field="newEntity.partyIdFrom">
+                <set from-field="newEntity.estimatedShipWorkEffId" field="assignPartyToWorkEffortShip.workEffortId"/>
+                <set from-field="newEntity.partyIdFrom" field="assignPartyToWorkEffortShip.partyId"/>
+                <set value="CAL_ATTENDEE" field="assignPartyToWorkEffortShip.roleTypeId"/>
+                <set value="CAL_SENT" field="assignPartyToWorkEffortShip.statusId"/>
+                <call-service service-name="assignPartyToWorkEffort" in-map-name="assignPartyToWorkEffortShip"/>
+            </if-not-empty>
+        </if-not-empty>
+        <if-not-empty field="parameters.estimatedArrivalDate">
+            <set value="Shipment #${newEntity.shipmentId} ${newEntity.primaryOrderId} Arrival" field="arrivalWorkEffortMap.workEffortName"/>
+            <set value="EVENT" field="arrivalWorkEffortMap.workEffortTypeId"/>
+            <set value="CAL_TENTATIVE" field="arrivalWorkEffortMap.currentStatusId"/>
+            <set from-field="parameters.estimatedArrivalDate" field="arrivalWorkEffortMap.estimatedStartDate"/>
+            <set from-field="parameters.estimatedArrivalDate" field="arrivalWorkEffortMap.estimatedCompletionDate"/>
+            <set from-field="parameters.destinationFacilityId" field="arrivalWorkEffortMap.facilityId"/>
+            <set from-field="userLogin.partyId" field="arrivalWorkEffortMap.quickAssignPartyId"/>
+            <call-service service-name="createWorkEffort" in-map-name="arrivalWorkEffortMap">
+                <result-to-field result-name="workEffortId" field="newEntity.estimatedArrivalWorkEffId"/>
+            </call-service>
+            <if-not-empty field="newEntity.partyIdTo">
+                <set from-field="newEntity.estimatedArrivalWorkEffId" field="assignPartyToWorkEffortArrival.workEffortId"/>
+                <set from-field="newEntity.partyIdTo" field="assignPartyToWorkEffortArrival.partyId"/>
+                <set value="CAL_ATTENDEE" field="assignPartyToWorkEffortArrival.roleTypeId"/>
+                <set value="CAL_SENT" field="assignPartyToWorkEffortArrival.statusId"/>
+                <call-service service-name="assignPartyToWorkEffort" in-map-name="assignPartyToWorkEffortArrival"/>
+            </if-not-empty>
+        </if-not-empty>
+
+        <create-value value-field="newEntity"/>
+		
+		<if-not-empty field="parameters.shipmentAttribute">
+    		<call-class-method method-name="createOrUpdateShipmentAttribute" class-name="com.zuczug.shipment.ZuczugShipmentUtil">
+    			<field field="delegator" type="org.ofbiz.entity.Delegator"/>
+    			<string value="QUERY_TYPE"></string>
+    			<field field="parameters.shipmentAttribute"/>
+    			<field field="newEntity.shipmentId"/>
+    		</call-class-method>
+        </if-not-empty>
+        
+        <!-- get the ShipmentStatus history started -->
+        <if-not-empty field="newEntity.statusId">
+            <make-value entity-name="ShipmentStatus" value-field="newStatusValue"/>
+            <set from-field="newEntity.statusId" field="newStatusValue.statusId"/>
+            <set from-field="newEntity.shipmentId" field="newStatusValue.shipmentId"/>
+            <now-timestamp field="newStatusValue.statusDate"/>
+            <create-value value-field="newStatusValue"/>
+        </if-not-empty>
+    </simple-method>
+
+</simple-methods>

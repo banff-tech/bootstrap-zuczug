@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-engine-xml>
+
+	<RoleType roleTypeId="LEGAL_PERSON" parentTypeId="" hasTable="N" description="法人" />
+	<PartyRelationshipType partyRelationshipTypeId="LEGAL_PERSON" parentTypeId="" hasTable="N" partyRelationshipName="法人" />
+
+</entity-engine-xml>

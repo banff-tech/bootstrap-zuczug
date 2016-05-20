@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+    <screen name="main-decorator">
+        <section>
+            <actions>
+            	<property-map resource="ZuczugCommonUiLabels" map-name="uiLabelMap" global="true"/> 
+                <property-map resource="AccountingUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="PartyUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="OrderUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="WorkEffortUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="ManufacturingUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="ManufacturingReportsUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="CommonUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="HazeUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="CommonUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="CommonEntityLabels" map-name="uiLabelMap" global="true"/>
+				<property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+				<property-map resource="ProductEntityLabels" map-name="uiLabelMap" global="true"/>
+				<property-map resource="PartyEntityLabels" map-name="uiLabelMap" global="true"/>
+				<property-map resource="ProductEntityLabels" map-name="uiLabelMap" global="true"/>
+				<property-map resource="HumanResUiLabels" map-name="uiLabelMap" global="true"/>
+				<property-map resource="ZuczugCommonUiLabels" map-name="uiLabelMap" global="true"/>
+				<property-map resource="FabricFacilityUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="layoutSettings.companyName" from-field="uiLabelMap.HazeCompanyName" global="true"/>
+                <set field="layoutSettings.companySubtitle" from-field="uiLabelMap.HazeCompanySubtitle" global="true"/>
+
+                <set field="activeApp" value="haze" global="true"/>
+                <set field="applicationMenuName" value="MainAppBar" global="true"/>
+                <set field="applicationMenuLocation" value="component://haze/widget/HazeMenus.xml" global="true"/>
+                <set field="applicationTitle" value="${uiLabelMap.HazeApplication}" global="true"/>
+                
+                <set field="layoutSettings.javaScripts[+0]" value="/images/jquery/ui/development-bundle/external/jquery.cookie.js" global="true"/>
+                <set field="layoutSettings.javaScripts[+0]" value="/images/jquery/plugins/jsTree/jquery.jstree.js" global="true"/>
+                <set field="layoutSettings.javaScripts[]" value="/zuczugcommon/upload/plugins/validate/additional-methods.js" global="true"/>
+            </actions>
+            <widgets>
+                <include-screen name="ApplicationDecorator" location="component://commonext/widget/CommonScreens.xml"/>
+            </widgets>
+        </section>
+    </screen>
+
+    <screen name="HazeCommonDecorator">
+        <section>
+            <actions>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="HAZE" action="_VIEW"/>
+                            </condition>
+                            <widgets>
+                                <decorator-section-include name="body"/>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3">${uiLabelMap.HazeViewPermissionError}</label>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+	
+	<screen name="ProdCatalogCommonDecorator">
+        <section>
+            <actions>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="HAZE" action="_VIEW"/>
+                            </condition>
+                            <widgets>
+                            	<include-menu location="component://haze/widget/HazeMenus.xml" name="ProductManageTabBar"/>                            	                    	
+                                <decorator-section-include name="body"/>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3">${uiLabelMap.HazeViewPermissionError}</label>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="ProductEditCommonDecorator">
+        <section>
+            <actions>
+            	<property-map resource="ZuczugCommonUiLabels" map-name="uiLabelMap" global="true"/> 
+            	<set field="productId" from-field="parameters.productId" global="true"/>
+            	<entity-one value-field="product" entity-name="Product">
+            		<field-map field-name="productId" from-field="productId"/>
+            	</entity-one>
+            	<set field="product" from-field="product" global="true"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+						<include-menu location="component://haze/widget/HazeMenus.xml" name="ProductManageTabBar"/>
+						<section>
+                    		<condition>
+                    			<not><if-empty field="product"/></not>
+                    		</condition>
+                    		<widgets>
+		                    	<!-- <include-menu location="component://haze/widget/HazeMenus.xml" name="ProductManageSubMenu"/> -->
+
+		                    	<include-menu name="ProductTabBar" location="component://zuczugcommon/widget/ZuczugCommonMenus.xml"/>
+		                    	<image src="${product.smallImageUrl}" url-mode="content" alt="${product.internalName}" style="cssImgSmall"/>
+                                <label style="h1">名称 ${uiLabelMap.CommonFor}: ${product.internalName} [${uiLabelMap.CommonId}:${productId}]  ${${extraFunctionName}}</label>        
+                    		</widgets>
+                    	</section>
+						<decorator-section-include name="body"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+	
+	<screen name="ProdCatalogTreeCommonDecorator">
+        <section>
+            <actions>
+            </actions>
+            <widgets>            	
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                	<decorator-section name="left-column">
+                        <include-screen name="treeLeftbar"/>
+                    </decorator-section>
+                    <decorator-section name="body">  
+                  		<include-menu name="ProductManageTabBar" location="component://haze/widget/HazeMenus.xml"/>                	                                 	                	                	
+                    	                  	
+                        <section>
+                            <widgets>                           	
+                                <decorator-section-include name="body"/>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3">${uiLabelMap.HazeViewPermissionError}</label>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>                    
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="treeLeftbar">
+        <section>
+            <widgets>             
+                <include-screen name="productCategoryTree"/>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="productCategoryTree">
+        <section>
+            <actions>
+                <script location="component://product/webapp/catalog/WEB-INF/actions/category/CategoryTree.groovy"/>
+            </actions>
+            <widgets>
+                <screenlet id="ProductBrowseCategoriesPanel" title="物料分类列表" collapsible="true">
+                    <container id="EditDocumentTree"/>
+                    <platform-specific>
+                   		<html>
+                   			<html-template location="component://haze/webapp/haze/html/product/CategoryTree.ftl"/>
+                   		</html>
+                   	</platform-specific>
+                </screenlet>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="CommonRequestDecorator">
+        <section>
+            <actions>
+                <set field="custRequestId" from-field="parameters.custRequestId"/>
+                <entity-one entity-name="CustRequest" value-field="custRequest"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="pre-body">
+                        <section>
+                            <condition>
+                                <not><if-empty field="custRequest"/></not>
+                            </condition>
+                            <widgets>
+                                <include-menu name="RequestTabBar" location="component://haze/widget/CustRequestMenus.xml"/>
+                            </widgets>
+                        </section>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <include-menu name="RequestSubTabBar" location="component://order/widget/ordermgr/OrderMenus.xml"/>
+                        <container>
+                            <section>
+                                <condition>
+                                    <not><if-empty field="custRequest"/></not>
+                                </condition>
+                                <widgets>
+                                    <label style="h1">${custRequest.custRequestName} [${uiLabelMap.CommonId}:${custRequest.custRequestId}] </label>
+                                </widgets>
+                            </section>
+                        </container>
+                        <decorator-section-include name="body"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <screen name="SalesManagerCommonDecorator">
+        <section>
+            <actions>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="HAZE" action="_VIEW"/>
+                            </condition>
+                            <widgets>
+                                <decorator-section-include name="body"/>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3">${uiLabelMap.SalesManagerViewPermissionError}</label>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="CommonProductStoreDecorator">
+        <section>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                   <!--  <decorator-section name="left-column">
+                        <include-screen name="leftbar"/>
+                    </decorator-section> -->                    
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <or>
+                                    <if-has-permission permission="CATALOG" action="_ADMIN"/>
+                                    <if-has-permission permission="CATALOG" action="_CREATE"/>
+                                    <if-has-permission permission="CATALOG" action="_UPDATE"/>
+                                    <if-has-permission permission="CATALOG" action="_VIEW"/>
+                                </or>
+                            </condition>
+                            <actions>
+                            	<property-map resource="SalesManagerUiLabels" map-name="uiLabelMap" global="true"/>
+                                <set field="productStoreId" from-field="parameters.productStoreId"/>
+                                <entity-one entity-name="ProductStore" value-field="productStore"/>
+                            </actions>
+                            <widgets>
+                                <section>
+                                    <condition><not><if-empty field="productStore"/></not></condition>
+                                    <widgets>
+										<container style="button-bar button-style-2">
+                                        	<!-- <link target="EditProductStore"  text="${uiLabelMap.ProductNewProductStore}" style="buttontext create" url-mode="plain"/> -->
+                                     	</container>
+                                   	</widgets>
+                           		</section>
+                                <decorator-section-include name="body"/>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3">${uiLabelMap.ProductCatalogViewPermissionError}</label>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <!-- 查询框 -->
+    <screen name="keywordsearchbox">
+        <section>
+            <actions>
+                <script location="component://salesmanager/webapp/salesmanager/WEB-INF/actions/find/keywordsearchbox.groovy"/>
+            </actions>
+            <widgets>
+                <screenlet id="ProductKeywordsPanel" title="${uiLabelMap.ProductSearchProducts}" collapsible="true">
+                    <platform-specific><html><html-template location="component://salesmanager/webapp/salesmanager/find/keywordsearchbox.ftl"/></html></platform-specific>
+                </screenlet>
+            </widgets>
+        </section>
+    </screen>
+    <!-- 下拉框 -->
+    <screen name="categorytree">
+        <section>
+            <actions>
+                <script location="component://salesmanager/webapp/salesmanager/WEB-INF/actions/category/CategoryTree.groovy"/>
+            </actions>
+            <widgets>
+                <screenlet id="ProductBrowseCategoriesPanel" title="${uiLabelMap.ProductBrowseCatalogeAndCategories}" collapsible="true">
+                    <container id="EditDocumentTree"/>
+                    <platform-specific><html><html-template location="component://salesmanager/webapp/salesmanager/category/CategoryTree.ftl"/></html></platform-specific>
+                </screenlet>
+            </widgets>
+        </section>
+    </screen>
+    <!-- 下拉框 -->
+    <screen name="miniproductlist">
+        <section>
+            <actions>
+                <script location="component://salesmanager/webapp/salesmanager/WEB-INF/actions/find/miniproductlist.groovy"/>
+            </actions>
+            <widgets>
+                <screenlet id="ProductCategoryProductsPanel" title="${uiLabelMap.ProductCategoryProducts}" collapsible="true">
+                    <container id="miniproductlist">
+                        <platform-specific><html><html-template location="component://salesmanager/webapp/salesmanager/find/miniproductlist.ftl"/></html></platform-specific>
+                    </container>
+                </screenlet>
+            </widgets>
+        </section>
+    </screen>
+    <screen name="ProductStoreFacilities">
+        <section>
+            <actions>
+                <set field="productStoreId" from-field="parameters.productStoreId"/>
+                <entity-one entity-name="ProductStore" value-field="productStore"/>
+                <set field="tabButtonItem" value="EditProductStoreFacilities"/>
+                <set field="labelTitleProperty" value="ProductFacility"/>
+                <set field="headerItem" value="store"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator">
+                    <!-- <decorator-section name="left-column">
+                        <include-screen name="leftbar"/>
+                    </decorator-section> -->
+                    <decorator-section name="body">
+                        <section>
+                            <condition><not><if-empty field="productStore"/></not></condition>
+                            <widgets>
+                                <container>
+                                    <include-menu name="ProductStoreTabBar" location="component://salesmanager/widget/SalesManagerMenus.xml"/>
+                                    <include-menu name="ProductStoreSubTabBar" location="component://salesmanager/widget/SalesManagerMenus.xml"/>
+                                    <label style="h1">${uiLabelMap[labelTitleProperty]} ${uiLabelMap.CommonFor}: ${productStore.storeName} [${uiLabelMap.CommonId}:${productStoreId}]  ${${extraFunctionName}}</label>
+                                </container>
+                                <include-portal-page id="ProductStoreFacility"/>
+                            </widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="CommonCatalogDecorator">
+        <section>
+            <actions>
+                <set field="headerItem" value="catalogs"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- <decorator-section name="left-column">
+                        <include-screen name="leftbar"/>
+                    </decorator-section>  -->                   
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <or>
+                                    <if-has-permission permission="CATALOG" action="_ADMIN"/>
+                                    <if-has-permission permission="CATALOG" action="_CREATE"/>
+                                    <if-has-permission permission="CATALOG" action="_UPDATE"/>
+                                    <if-has-permission permission="CATALOG" action="_VIEW"/>
+                                </or>
+                            </condition>
+                            <actions>
+                                <set field="prodCatalogId" from-field="parameters.prodCatalogId"/>
+                                <entity-one entity-name="ProdCatalog" value-field="prodCatalog"/>
+                            </actions>
+                            <widgets>
+                                <section>
+                                    <condition>
+                                        <not><if-empty field="prodCatalog"/></not>
+                                    </condition>
+                                    <widgets>
+                                        <include-menu name="CatalogTabBar" location="component://salesmanager/widget/SalesManagerMenus.xml"/>
+                                        <!-- 
+                                        <label style="h1">${uiLabelMap.ProductCatalog} ${uiLabelMap.CommonFor} "${prodCatalog.catalogName}" [${prodCatalogId}]</label>
+                                     -->
+                                    </widgets>
+                                    <fail-widgets>
+                                        <section>
+                                            <condition>
+                                                <if-compare operator="not-equals" value="ProductCatalog" field="tabButtonItem"/>
+                                            </condition>
+                                            <widgets>
+                                                <include-menu name="CatalogSubTabBar" location="component://salesmanager/widget/SalesManagerMenus.xml"/>
+                                            </widgets>
+                                        </section>
+                                    </fail-widgets>
+                                </section>
+                                <decorator-section-include name="body"/>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3">${uiLabelMap.ProductCatalogViewPermissionError}</label>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="listMiniproduct">
+        <section>
+            <actions>
+                <property-map resource="SalesManagerUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="CommonUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="WorkEffortUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="PartyUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="AccountingUiLabels" map-name="uiLabelMap" global="true"/>
+                <script location="component://salesmanager/webapp/salesmanager/WEB-INF/actions/find/miniproductlist.groovy"/>
+            </actions>
+            <widgets>
+                    <platform-specific><html><html-template location="component://salesmanager/webapp/salesmanager/find/miniproductlist.ftl"/></html></platform-specific>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="CommonDealerDecorator">
+        <section>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <section>
+                            <widgets>
+                                <section>
+                                    <condition><not><if-empty field="requirement"/></not></condition>
+                                    <widgets>
+                                        <!--<include-menu name="RequirementTabBarSec" location="component://productmanage/widget/ProductManageMenus.xml"/>-->
+                                    </widgets>
+                                </section>
+                                <container>
+                                     <!--<label style="h1">${uiLabelMap.OrderRequirement} [${requirementId}]</label> -->
+                                </container>
+
+                                <decorator-section-include name="body"/>
+
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3">${uiLabelMap.OrderViewPermissionError}</label>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    
+    <screen name="DealerScreenDecorator">
+        <section>
+            <widgets>
+                <section>
+                    <condition>
+                        <if-empty field="titleProperty"/>
+                    </condition>
+                    <widgets>
+                        <container style="page-title"><label text="${title}"></label></container>
+                    </widgets>
+                    <fail-widgets>
+                        <container style="page-title"><label text="${uiLabelMap[titleProperty]}"></label></container>
+                    </fail-widgets>
+                </section>
+                <decorator-section-include name="menu-bar"/>
+                <container style="clear"/>
+                <screenlet id="searchOptions" name="findScreenlet" collapsible="true" title="${uiLabelMap.CommonSearchOptions}">
+                    <container id="search-options">
+                        <decorator-section-include name="search-options" />
+                    </container>
+                </screenlet>
+                <screenlet padded="false">
+                    <label style="h3" text="${uiLabelMap.CommonSearchResults}"/>
+                    <container id="search-results">
+                        <decorator-section-include name="search-results"/>
+                    </container>
+                </screenlet>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="FabricDevelopmentCommonDecorator">
+        <section>
+            <actions>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="HAZE" action="_VIEW"/>
+                            </condition>
+                            <widgets>
+                                <decorator-section-include name="body"/>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3">${uiLabelMap.FabricDevelopmentViewPermissionError}</label>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="ManufactCommonDecorator">
+        <section>
+            <actions>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="HAZE" action="_VIEW"/>
+                            </condition>
+                            <widgets>
+                                <decorator-section-include name="body"/>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3">${uiLabelMap.ManufactViewPermissionError}</label>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="SalesmanagerCommonDecorator">
+        <section>
+            <actions>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="HAZE" action="_VIEW"/>
+                            </condition>
+                            <widgets>
+                                <decorator-section-include name="body"/>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3">${uiLabelMap.HazeViewPermissionError}</label>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+</screens>

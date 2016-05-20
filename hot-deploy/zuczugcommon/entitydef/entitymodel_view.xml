@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+    <!-- ========================================================= -->
+    <!-- ======================== Defaults ======================= -->
+    <!-- ========================================================= -->
+    <title>Entity of ZuczugCommon Component</title>
+    <description>None</description>
+    <copyright></copyright>
+    <version></version>
+    
+    <view-entity entity-name="RequirementAndAttr" package-name="">
+    	<member-entity entity-alias="RE" entity-name="Requirement"></member-entity>
+    	<member-entity entity-alias="RA" entity-name="RequirementAttribute"></member-entity>
+    	<alias-all entity-alias="RE"></alias-all>
+    	<alias name="attrName" entity-alias="RA"></alias>
+    	<alias name="attrValue" entity-alias="RA"></alias>
+    	<view-link entity-alias="RE" rel-entity-alias="RA">
+    		<key-map field-name="requirementId"/>
+    	</view-link>
+    </view-entity>
+    
+    <view-entity entity-name="OrderHeaderAndNote" package-name="">
+    	<member-entity entity-alias="OH" entity-name="OrderHeader"></member-entity>
+    	<member-entity entity-alias="OHN" entity-name="OrderHeaderNote"></member-entity>
+    	<member-entity entity-alias="ND" entity-name="NoteData"></member-entity>
+    	<alias-all entity-alias="ND"></alias-all>
+    	<alias name="orderId" entity-alias="OH"></alias>
+    	<view-link entity-alias="OHN" rel-entity-alias="OH">
+    		<key-map field-name="orderId"/>
+    	</view-link>
+    	<view-link entity-alias="OHN" rel-entity-alias="ND">
+    		<key-map field-name="noteId"/>
+    	</view-link>
+    </view-entity>
+    
+    
+    <view-entity entity-name="AllAccessoryBom" package-name="">
+    	<member-entity entity-alias="PA" entity-name="ProductAssoc"></member-entity>
+    	<member-entity entity-alias="PROD" entity-name="Product"></member-entity>
+    	<member-entity entity-alias="PFA" entity-name="ProductFeatureAppl"></member-entity>
+    	
+    	<alias name="productIdTo" entity-alias="PA"></alias>
+    	<alias name="productId" entity-alias="PA"></alias>
+    	<alias name="estimateCalcMethod" entity-alias="PA"></alias>
+    	<alias name="productAssocTypeId" entity-alias="PA"></alias>
+    	<alias name="fromDate" entity-alias="PA"></alias>
+    	
+    	<view-link entity-alias="PA" rel-entity-alias="PFA">
+    		<key-map field-name="productIdTo" rel-field-name="productId"/>
+    	</view-link>
+    	<view-link entity-alias="PA" rel-entity-alias="PROD">
+    		<key-map field-name="productIdTo" rel-field-name="productId"/>
+    	</view-link>
+    	<entity-condition>
+    		<condition-list combine="and">
+    			<condition-list combine="or">
+	    			<condition-expr entity-alias="PFA" field-name="productFeatureId" operator="equals" value="ACCESSORIES"/>
+	    			<condition-expr entity-alias="PFA" field-name="productFeatureId" operator="equals" value="FABRIC"/>
+    			</condition-list>
+    			<condition-expr entity-alias="PROD" field-name="quantityUomId" operator="equals" value="LEN_m"/>
+    			<condition-list combine="or">
+	    			<condition-expr entity-alias="PA" field-name="productAssocTypeId" operator="equals" value="ENGINEER_COMPONENT"/>
+	    			<condition-expr entity-alias="PA" field-name="productAssocTypeId" operator="equals" value="MANUF_COMPONENT"/>
+    			</condition-list>
+    		</condition-list>
+    	</entity-condition>
+    </view-entity>
+    
+    <view-entity entity-name="QuoteAndItemView" package-name="">
+    	<description>Quote和QuoteItem</description>
+    	<member-entity entity-alias="QT" entity-name="Quote"></member-entity>
+		<member-entity entity-alias="QI" entity-name="QuoteItem"></member-entity>
+		<alias-all entity-alias="QI"></alias-all>
+		<alias name="quoteId" entity-alias="QT"></alias>
+		<alias name="quoteTypeId" entity-alias="QT"></alias>
+		<alias name="statusId" entity-alias="QT"></alias>
+		<alias name="productStoreId" entity-alias="QT"></alias>
+		<alias name="salesChannelEnumId" entity-alias="QT"></alias>
+    	<view-link entity-alias="QT" rel-entity-alias="QI">
+			<key-map field-name="quoteId"/>
+		</view-link>
+    </view-entity>
+    
+    
+    <view-entity entity-name="SupplierProductAndGroupView" package-name="">
+    	<description>Quote和QuoteItem</description>
+    	<member-entity entity-alias="SP" entity-name="SupplierProduct"></member-entity>
+		<member-entity entity-alias="PG" entity-name="PartyGroup"></member-entity>
+		<alias-all entity-alias="SP"></alias-all>
+		<alias name="groupName" entity-alias="PG"></alias>
+    	<view-link entity-alias="SP" rel-entity-alias="PG">
+			<key-map field-name="partyId"/>
+		</view-link>
+    </view-entity>
+    
+    
+    <view-entity entity-name="IncludeMateralsGoodStandards" package-name="">
+    	<description>包含某个面辅料的生产运行，包括状态</description>
+    	<member-entity entity-alias="WFGS" entity-name="WorkEffortGoodStandard"></member-entity>
+    	<member-entity entity-alias="WE" entity-name="WorkEffort"></member-entity>
+    	<alias-all entity-alias="WFGS"></alias-all>
+    	<alias entity-alias="WE" name="currentStatusId"></alias>
+    	<view-link entity-alias="WFGS" rel-entity-alias="WE">
+    		<key-map field-name="workEffortId"/>
+    	</view-link>
+    </view-entity>
+    
+    
+    <view-entity entity-name="DesignProductVariantAndFabirc" package-name="">
+    	<description>所有变型商品的面料BOM</description>
+    	<member-entity entity-alias="P" entity-name="Product"></member-entity>
+    	<member-entity entity-alias="PA" entity-name="ProductAssoc"></member-entity>
+    	<member-entity entity-alias="BOMPA" entity-name="ProductAssoc"></member-entity>
+    	<member-entity entity-alias="PFA" entity-name="ProductFeatureAppl"></member-entity>
+    	<member-entity entity-alias="COLORPFA" entity-name="AllColorFeatureView"></member-entity>
+    	<member-entity entity-alias="SIZEPFA" entity-name="AllSizeFeatureView"></member-entity>
+		<alias entity-alias="P" name="productId"></alias>
+		<alias entity-alias="COLORPFA" name="colorId" field="idCode"></alias>
+		<alias entity-alias="SIZEPFA" name="sizeId" field="idCode"></alias>
+		<alias entity-alias="PA" name="virtualProductId" field="productId"></alias>
+		<alias entity-alias="BOMPA" name="bomProductId" field="productIdTo"></alias>
+		<alias entity-alias="PFA" name="materalsTypeId" field="productFeatureId"></alias>
+    	<view-link entity-alias="P" rel-entity-alias="PA" rel-optional="true">
+    		<key-map field-name="productId" rel-field-name="productIdTo"/>
+    		<entity-condition>
+    			<condition-expr entity-alias="PA" field-name="productAssocTypeId" operator="equals" value="PRODUCT_VARIANT"/>
+    		</entity-condition>
+    	</view-link>
+    	<view-link entity-alias="P" rel-entity-alias="COLORPFA" rel-optional="true">
+    		<key-map field-name="productId" rel-field-name="productId"/>
+    	</view-link>
+    	<view-link entity-alias="P" rel-entity-alias="SIZEPFA" rel-optional="true">
+    		<key-map field-name="productId" rel-field-name="productId"/>
+    	</view-link>
+    	<view-link entity-alias="P" rel-entity-alias="BOMPA" rel-optional="true">
+    		<key-map field-name="productId" rel-field-name="productId"/>
+    		<entity-condition>
+    			<condition-expr entity-alias="BOMPA" field-name="productAssocTypeId" operator="equals" value="ENGINEER_COMPONENT"/>
+    		</entity-condition>
+    	</view-link>
+    	<view-link entity-alias="BOMPA" rel-entity-alias="PFA">
+    		<key-map field-name="productIdTo" rel-field-name="productId"/>
+    		<entity-condition>
+   				<condition-expr entity-alias="PFA" field-name="productFeatureId" operator="equals" value="FABRIC"/>
+    		</entity-condition>
+    	</view-link>
+    	<entity-condition>
+    		<condition-list combine="and">
+    			<condition-expr entity-alias="P" field-name="isVariant" operator="equals" value="Y"/>
+    			<condition-expr entity-alias="P" field-name="isVirtual" operator="equals" value="N"/>
+    			<condition-expr entity-alias="P" field-name="productTypeId" operator="equals" value="WIP"/>
+    		</condition-list>
+    	</entity-condition>
+    </view-entity>
+    
+    <view-entity entity-name="ProdFeaGrpAppAndProdFeaAppDetl"
+            package-name="org.ofbiz.product.feature"
+            title="ProductFeatureGroupAppl And ProductFeatureAppl View Entity">
+      <member-entity entity-alias="PFGA" entity-name="ProductFeatureGroupAppl"/>
+      <member-entity entity-alias="PFA" entity-name="ProductFeatureAppl"/>
+      <member-entity entity-alias="PF" entity-name="ProductFeature"/>
+      <alias entity-alias="PFGA" name="productFeatureGroupId"/>
+      <alias entity-alias="PFGA" name="productFeatureId"/>
+      <alias entity-alias="PFA" name="productId"/>
+      <alias entity-alias="PFA" name="productFeatureApplTypeId"/>
+      <alias entity-alias="PFA" name="fromDate"/>
+      <alias entity-alias="PFA" name="thruDate"/>
+      <alias entity-alias="PFA" name="sequenceNum"/>
+      <alias entity-alias="PFA" name="amount"/>
+      <alias entity-alias="PFA" name="recurringAmount"/>
+      <alias name="productFeatureTypeId" entity-alias="PF"></alias>
+      <alias name="productFeatureCategoryId" entity-alias="PF"></alias>
+      <alias name="description" entity-alias="PF"></alias>
+      <alias name="idCode" entity-alias="PF"></alias>
+      <alias name="abbrev" entity-alias="PF"></alias>
+      <view-link entity-alias="PFGA" rel-entity-alias="PFA">
+        <key-map field-name="productFeatureId"/>
+      </view-link>
+      <view-link entity-alias="PFA" rel-entity-alias="PF">
+           <key-map field-name="productFeatureId"/>
+      </view-link>
+    </view-entity>
+    
+	<view-entity entity-name="ProductDesignColorDetl"
+            package-name="org.ofbiz.product.feature">
+      <member-entity entity-alias="PFGA" entity-name="ProductFeatureGroupAppl"/>
+      <member-entity entity-alias="PFA" entity-name="ProductFeatureAppl"/>
+      <member-entity entity-alias="PF" entity-name="ProductFeature"/>
+      <member-entity entity-alias="PFAL" entity-name="ProductFeatureApplAttr"/>
+      <alias entity-alias="PFGA" name="productFeatureGroupId"/>
+      <alias entity-alias="PFGA" name="productFeatureId"/>
+      <alias entity-alias="PFA" name="productId"/>
+      <alias entity-alias="PFA" name="productFeatureApplTypeId"/>
+      <alias entity-alias="PFA" name="fromDate"/>
+      <alias entity-alias="PFA" name="thruDate"/>
+      <alias entity-alias="PFA" name="sequenceNum"/>
+      <alias entity-alias="PFA" name="amount"/>
+      <alias entity-alias="PFA" name="recurringAmount"/>
+      <alias entity-alias="PFAL" name="attrName"/>
+      <alias entity-alias="PFAL" name="attrValue"/>
+      <alias name="productFeatureTypeId" entity-alias="PF"></alias>
+      <alias name="productFeatureCategoryId" entity-alias="PF"></alias>
+      <alias name="description" entity-alias="PF"></alias>
+      <alias name="idCode" entity-alias="PF"></alias>
+      <alias name="abbrev" entity-alias="PF"></alias>
+      <view-link entity-alias="PFGA" rel-entity-alias="PFA">
+        <key-map field-name="productFeatureId"/>
+      </view-link>
+      <view-link entity-alias="PFA" rel-entity-alias="PFAL" rel-optional="true">
+        <key-map field-name="productFeatureId"/>
+        <key-map field-name="productId"/>
+        <key-map field-name="fromDate"/>
+		<entity-condition filter-by-date="true">
+			<condition-list combine="and">
+				<condition-expr entity-alias="PFAL" field-name="attrName" operator="equals" value="COLOR_DESCRIPTION"/>
+			</condition-list>
+		</entity-condition>
+      </view-link>
+      <view-link entity-alias="PFA" rel-entity-alias="PF">
+           <key-map field-name="productFeatureId"/>
+      </view-link>
+    </view-entity>
+    
+    <!-- 根据特征组查询特征 -->
+    <view-entity entity-name="ProductFeatureAndGroupView"
+			package-name="org.ofbiz.product.catalog"
+			title="ProductFeatureAndGroupView">
+      <member-entity entity-alias="PFGA" entity-name="ProductFeatureGroupAppl"/>
+      <member-entity entity-alias="PF" entity-name="ProductFeature"/>
+      <alias name="productFeatureId" entity-alias="PF"></alias>
+      <alias name="productFeatureTypeId" entity-alias="PF"></alias>
+      <alias name="description" entity-alias="PF"></alias>
+      <alias name="numberSpecified" entity-alias="PF"></alias>
+      <alias name="idCode" entity-alias="PF"></alias>
+      <alias name="abbrev" entity-alias="PF"></alias>
+      <alias name="productFeatureGroupId" entity-alias="PFGA"></alias>
+      <view-link entity-alias="PFGA" rel-entity-alias="PF">
+        <key-map field-name="productFeatureId"/>
+      </view-link>
+	</view-entity>
+	
+	<view-entity entity-name="DesignAndRealProdAssoc"
+			package-name="org.ofbiz.product.catalog"
+			title="Design prodcut and real product assoc">
+		<member-entity entity-alias="P" entity-name="Product"></member-entity>
+		<member-entity entity-alias="P1" entity-name="Product"></member-entity>
+		<member-entity entity-alias="PA" entity-name="ProductAssoc"></member-entity>
+		<alias field="productId" name="designProductId" entity-alias="P"></alias>
+		<alias field="productName" name="designProductName" entity-alias="P"></alias>
+		<alias field="productId" name="realProductId" entity-alias="P1"></alias>
+		<alias field="productName" name="realProductName" entity-alias="P1"></alias>
+		<view-link entity-alias="P" rel-entity-alias="PA">
+			<key-map field-name="productId"/>
+		</view-link>
+		<view-link entity-alias="PA" rel-entity-alias="P1">
+			<key-map field-name="productIdTo" rel-field-name="productId"/>
+		</view-link>
+		<entity-condition>
+			<condition-list combine="and">
+				<condition-expr entity-alias="P" field-name="productTypeId" operator="equals" value="WIP"/>
+				<condition-expr entity-alias="P1" field-name="productTypeId" operator="equals" value="FINISHED_GOOD"/>
+				<condition-expr entity-alias="PA" field-name="productAssocTypeId" operator="equals" value="UNIQUE_ITEM"/>
+				<condition-expr entity-alias="PA" field-name="thruDate" operator="equals" value="" />
+			</condition-list>
+		</entity-condition>
+	</view-entity>
+
+    <view-entity entity-name="ProductAndFeatureAndAppl"
+            package-name="org.ofbiz.product.feature"
+            title="Product And ProductFeature And ProductFeatureAppl View Entity">
+      <member-entity entity-alias="PRD" entity-name="Product"/>
+      <member-entity entity-alias="PF" entity-name="ProductFeature"/>
+      <member-entity entity-alias="PFA" entity-name="ProductFeatureAppl"/>
+      <alias entity-alias="PF" name="productFeatureId"/>
+      <alias entity-alias="PF" name="productFeatureTypeId"/>
+      <alias entity-alias="PF" name="productFeatureCategoryId"/>
+      <alias entity-alias="PF" name="description"/>
+      <alias entity-alias="PF" name="uomId"/>
+      <alias entity-alias="PF" name="numberSpecified"/>
+      <alias entity-alias="PF" name="defaultAmount"/>
+      <alias entity-alias="PF" name="defaultSequenceNum"/>
+      <alias entity-alias="PF" name="abbrev"/>
+      <alias entity-alias="PF" name="idCode"/>
+      <alias entity-alias="PFA" name="productId"/>
+      <alias entity-alias="PFA" name="productFeatureApplTypeId"/>
+      <alias entity-alias="PFA" name="fromDate"/>
+      <alias entity-alias="PFA" name="thruDate"/>
+      <alias entity-alias="PFA" name="sequenceNum"/>
+      <alias entity-alias="PFA" name="amount"/>
+      <alias entity-alias="PFA" name="recurringAmount"/>
+      <alias entity-alias="PRD" name="productTypeId"/>
+      <alias entity-alias="PRD" name="isVirtual"/>
+      <view-link entity-alias="PF" rel-entity-alias="PFA">
+        <key-map field-name="productFeatureId"/>
+      </view-link>
+      <view-link entity-alias="PFA" rel-entity-alias="PRD">
+        <key-map field-name="productId"/>
+      </view-link>
+      <relation type="one-nofk" rel-entity-name="ProductFeature">
+        <key-map field-name="productFeatureId"/>
+      </relation>
+      <relation type="one-nofk" rel-entity-name="ProductFeatureAppl">
+        <key-map field-name="productId"/>
+        <key-map field-name="productFeatureId"/>
+        <key-map field-name="fromDate"/>
+      </relation>
+      <relation type="one-nofk" rel-entity-name="ProductFeatureType">
+        <key-map field-name="productFeatureTypeId"/>
+      </relation>
+      <relation type="one-nofk" rel-entity-name="ProductFeatureApplType">
+        <key-map field-name="productFeatureApplTypeId"/>
+      </relation>
+      <relation type="one-nofk" rel-entity-name="ProductFeatureCategory">
+        <key-map field-name="productFeatureCategoryId"/>
+      </relation>
+      <relation type="many" rel-entity-name="SupplierProductFeature">
+        <key-map field-name="productFeatureId"/>
+      </relation>
+    </view-entity>
+    
+    <view-entity entity-name="ProductSameColorAllSize" package-name="org.ofbiz.product">
+      	<member-entity entity-alias="PA" entity-name="ProductAssoc"/>
+      	<member-entity entity-alias="PFA" entity-name="ProductFeatureAndAppl"/>
+      	<alias entity-alias="PA" name="productId"/>
+      	<alias entity-alias="PA" name="productIdTo"/>
+      	<alias entity-alias="PFA" name="productFeatureId"/>
+      	
+      	<view-link entity-alias="PA" rel-entity-alias="PFA">
+        	<key-map field-name="productIdTo" rel-field-name="productId"/>
+        	<entity-condition>
+        		<condition-expr entity-alias="PFA" field-name="productFeatureTypeId" operator="equals" value="COLOR"/>
+        	</entity-condition>
+      	</view-link>
+      	<entity-condition>
+			<condition-expr entity-alias="PA" field-name="productAssocTypeId" operator="equals" value="PRODUCT_VARIANT"/>
+		</entity-condition>
+    </view-entity>
+    
+<!--     <view-entity entity-name="RealProductSkuView" -->
+<!-- 			package-name="org.ofbiz.product.catalog" -->
+<!-- 			title="Product Design View"> -->
+<!-- 		<member-entity entity-alias="P" entity-name="Product"></member-entity> -->
+<!-- 		<member-entity entity-alias="PCG" entity-name="ProductCategoryGroupView"></member-entity> -->
+<!-- 		<member-entity entity-alias="PCM" entity-name="AllProductGroupMember"></member-entity> -->
+<!-- 		<member-entity entity-alias="PCM1" entity-name="AllProductWaveCategory"></member-entity> -->
+<!-- 		<alias-all entity-alias="PCG"> -->
+<!-- 			<exclude field="productId"/> -->
+<!-- 		</alias-all> -->
+<!-- 		<alias name="productId" entity-alias="P"></alias> -->
+<!-- 		<alias name="productTypeId" entity-alias="P"></alias> -->
+<!-- 		<alias name="internalName" entity-alias="P"></alias> -->
+<!-- 		<alias name="productName" entity-alias="P"></alias> -->
+<!-- 		<alias name="quantityUomId" entity-alias="P"></alias> -->
+<!-- 		<alias name="isVirtual" entity-alias="P"></alias> -->
+<!-- 		<alias name="isVariant" entity-alias="P"></alias> -->
+<!-- 		<alias name="releaseDate" entity-alias="P"></alias> -->
+<!-- 		<alias name="waveId" entity-alias="PCM1" field="productCategoryId"></alias> -->
+<!-- 		<alias name="waveName" entity-alias="PCM1" field="categoryName"></alias> -->
+		
+<!-- 		<view-link entity-alias="P" rel-entity-alias="PCM" rel-optional="true"> -->
+<!-- 			<key-map field-name="productId" rel-field-name="productId"/> -->
+<!-- 		</view-link> -->
+<!-- 		<view-link entity-alias="PCM" rel-entity-alias="PCG" rel-optional="true"> -->
+<!-- 			<key-map field-name="productCategoryId" rel-field-name="groupId"/> -->
+<!-- 		</view-link> -->
+		
+<!-- 		<view-link entity-alias="P" rel-entity-alias="PCM1" rel-optional="true"> -->
+<!-- 			<key-map field-name="productId" rel-field-name="productId"/> -->
+<!-- 		</view-link> -->
+<!-- 		<entity-condition> -->
+<!-- 			<condition-list combine="and"> -->
+<!-- 				<condition-expr entity-alias="P" field-name="productTypeId" operator="equals" value="FINISHED_GOOD"/> -->
+<!-- 			</condition-list> -->
+<!-- 		</entity-condition> -->
+<!-- 	</view-entity> -->
+	
+	<view-entity entity-name="SupplierProductCategoryView"
+			package-name="org.ofbiz.product.catalog"
+			title="Product Supplier View">
+		<member-entity entity-alias="P" entity-name="Product"></member-entity>
+		<member-entity entity-alias="DI" entity-name="GoodIdentification"></member-entity>			
+		<member-entity entity-alias="PCC" entity-name="ProdCatalogCategory"></member-entity>
+		<member-entity entity-alias="PCM" entity-name="ProductCategoryMember"></member-entity>
+        <member-entity entity-alias="SP" entity-name="SupplierProduct"/>
+		<alias-all entity-alias="SP"/>	
+		<alias entity-alias="P" name="productId"/>
+		<alias entity-alias="P" name="productTypeId"/>
+		<alias entity-alias="P" name="productName"/>
+		<alias entity-alias="P" name="internalName"/>
+		<alias entity-alias="P" name="description"/>
+		<alias entity-alias="P" name="comments"/>
+		<alias entity-alias="P" name="longDescription"/>
+		<alias entity-alias="P" name="widthUomId"/>
+		<alias entity-alias="P" name="productWidth"/>
+		<alias entity-alias="P" name="isVariant"/>
+		<alias entity-alias="P" name="isVirtual"/>
+		<alias entity-alias="P" name="createdByUserLogin"/>
+		<alias entity-alias="P" name="primaryProductCategoryId"/>
+		<alias entity-alias="P" name="createdStamp"/>
+		<alias entity-alias="P" name="lastUpdatedStamp"/>		
+		<alias entity-alias="DI" name="idValue"/>
+		<view-link entity-alias="SP" rel-entity-alias="P">
+	        <key-map field-name="productId"/>
+	        <entity-condition>
+				<condition-list>
+					<condition-expr entity-alias="SP" field-name="availableThruDate" operator="equals" value=""/>
+				</condition-list>
+			</entity-condition>
+	      </view-link>
+		<view-link entity-alias="P" rel-entity-alias="PCM" >
+			<key-map field-name="productId"/>
+			<entity-condition>
+				<condition-list>
+					<condition-expr entity-alias="P" field-name="primaryProductCategoryId" operator="equals" rel-entity-alias="PCM" rel-field-name="productCategoryId"/>
+				</condition-list>
+			</entity-condition>
+		</view-link>
+		<view-link entity-alias="PCM" rel-entity-alias="PCC">
+			<key-map field-name="productCategoryId"/>
+			<entity-condition>
+				<condition-expr entity-alias="PCC" field-name="prodCatalogId" operator="equals" value="MATERIAL_CATALOG"/>
+			</entity-condition>
+		</view-link>
+		<view-link entity-alias="P" rel-entity-alias="DI" rel-optional="true">
+			<key-map field-name="productId"/>
+			<entity-condition>
+				<condition-expr entity-alias="DI" field-name="goodIdentificationTypeId" operator="equals" value="ZUCZUG_CODE"/>
+			</entity-condition>
+		</view-link>
+		
+	</view-entity>
+	
+	<view-entity entity-name="ZuczugOrderItem" package-name="">
+    	<member-entity entity-alias="OH" entity-name="OrderHeader"></member-entity>
+    	<member-entity entity-alias="OI" entity-name="OrderItem"></member-entity>
+    	<member-entity entity-alias="P" entity-name="Product"></member-entity>
+    	<member-entity entity-alias="G" entity-name="GoodIdentification"></member-entity>
+    	<alias-all entity-alias="OH"></alias-all>
+    	<alias name="idValue" entity-alias="G"></alias>
+    	<alias name="productId" entity-alias="P"></alias>
+    	<alias name="internalName" entity-alias="P"></alias>
+		<view-link entity-alias="P" rel-entity-alias="G">
+			<key-map field-name="productId"/>
+			<entity-condition>
+				<condition-expr entity-alias="G" field-name="goodIdentificationTypeId" operator="equals" value="ZUCZUG_CODE"/>
+			</entity-condition>
+		</view-link>
+		<view-link entity-alias="P" rel-entity-alias="OI">
+    		<key-map field-name="productId" rel-field-name="productId"/>
+    	</view-link>
+    	<view-link entity-alias="OI" rel-entity-alias="OH">
+    		<key-map field-name="orderId" rel-field-name="orderId"/>
+    	</view-link>
+    	
+    	
+    </view-entity>
+</entitymodel>

@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>蓝山项目关于产品的公共服务</description>
+    <vendor></vendor>
+    <version>1.0</version>
+
+    <service name="copyProductIdValuesToVariant" engine="groovy" 
+        location="component://zuczugcommon/webapp/zuczugcommon/WEB-INF/actions/ZuczugProductServices.groovy" invoke="copyProductIdValuesToVariant">
+        <description>拷贝虚拟商品的idValues到变形商品</description>
+        <attribute name="virtualProductId" mode="IN" type="String" optional="false"></attribute>
+        <attribute name="variantProductId" mode="IN" type="String" optional="false"></attribute>
+        <attribute name="goodIdentificationTypeIds" mode="IN" type="List" optional="true"></attribute>
+    </service>
+    
+    <service name="checkProductRepeatByFeature" engine="java"
+            location="com.zuczug.product.ZuczugProductServices" invoke="checkProductRepeatByFeature">
+        <description>
+        	查询是否存在参数Feature的商品
+        </description>
+        <attribute mode="IN" name="productFeatures" optional="false" type="List"/>
+        <attribute mode="IN" name="productId" optional="false" type="String"/>
+        <attribute mode="OUT" name="checkProduct" optional="false" type="String"/>
+    </service>
+    
+    <service name="checkProductRepeatByFeatureInVirtual" engine="java"
+            location="com.zuczug.product.ZuczugProductServices" invoke="checkProductRepeatByFeatureInVirtual">
+        <description>
+			新逻辑下 查询某个虚拟物料中是否存在相同特征的物料        
+		</description>
+        <attribute mode="IN" name="productFeatures" optional="false" type="List"/>
+        <attribute mode="IN" name="viratualProductId" optional="false" type="String"/>
+        <attribute mode="OUT" name="checkProduct" optional="false" type="String"/>
+    </service>
+    
+    <service name="checkProductFeatureRepeatByCatagory" engine="java"
+            location="com.zuczug.product.ZuczugProductServices" invoke="checkProductFeatureRepeatByCatagory">
+        <description>
+        	查询是否存在参数Feature的商品
+        </description>
+        <attribute mode="IN" name="productFeatures" optional="false" type="List"/>
+        <attribute mode="IN" name="productCategoryId" optional="false" type="String"/>
+        <attribute mode="IN" name="productTypeId" optional="false" type="String"/>
+        <attribute mode="OUT" name="checkProduct" optional="false" type="List"/>
+    </service>
+    
+    <service name="findFeatureRepeatProduct" engine="java"
+            location="com.zuczug.product.ZuczugProductServices" invoke="findFeatureRepeatProduct">
+        <description>
+        	查询是否存在参数Feature的商品
+        </description>
+        <attribute mode="OUT" name="checkProduct" optional="true" type="Map"/>
+    </service>
+    
+    <service name="getFeatureToApplByGroupName" engine="java"
+            location="com.zuczug.product.ZuczugProductServices" invoke="getFeatureToApplByGroupName">
+        <description>
+        	按照productFeatureGroupId查询出的Feature，使其ProductFeatureId + newProductFeatureTitle 成为一个新的Feature 并且和targetProductFeatureGroupId绑定
+        </description>
+        <attribute mode="IN" name="productFeatureGroupId" optional="false" type="String"/>
+        <attribute mode="IN" name="targetProductFeatureGroupId" optional="false" type="String"/>
+        <attribute mode="IN" name="newProductFeatureTitle" optional="false" type="String"/>
+    </service>
+    
+    <service name="findProductVariantMiddleSize" engine="groovy"
+    	 location="component://zuczugcommon/webapp/zuczugcommon/WEB-INF/actions/ZuczugProductServices.groovy" invoke="findProductVariantMiddleSize">
+    	<description>按照商品中间码进行搜索，检索出来的结果只显示每个颜色的中间码，用作查询框的地方</description>
+    	<auto-attributes mode="IN" entity-name="Product" include="all" optional="true"></auto-attributes>
+    	<attribute name="searchValue" mode="IN" type="String" optional="true"></attribute>
+    	<attribute name="listIt" mode="OUT" type="List" optional="true"></attribute>
+    </service>
+    
+    <service name="createZuczugCodeGoodIdentification" engine="groovy"
+    	 location="component://zuczugcommon/webapp/zuczugcommon/WEB-INF/actions/ZuczugProductServices.groovy" invoke="createZuczugCodeGoodIdentification">
+    	<description>单独创建素然物料编号，会验证是否唯一</description>
+    	<auto-attributes mode="IN" entity-name="GoodIdentification" include="all" optional="true"></auto-attributes>
+    </service>
+    
+    <service name="updateZuczugCodeGoodIdentification" engine="groovy"
+    	 location="component://zuczugcommon/webapp/zuczugcommon/WEB-INF/actions/ZuczugProductServices.groovy" invoke="updateZuczugCodeGoodIdentification">
+    	<description>单独更新素然物料编号，会验证是否唯一</description>
+    	<auto-attributes mode="IN" entity-name="GoodIdentification" include="all" optional="true"></auto-attributes>
+    </service>
+    
+    <service name="copyProductAttributeToVariantNoCover" engine="groovy"
+    	 location="component://zuczugcommon/webapp/zuczugcommon/WEB-INF/actions/ZuczugProductServices.groovy" invoke="copyProductAttributeToVariantNoCover">
+    	<description>拷贝虚拟商品的所有属性到变形商品，但是，如果变形商品有了，不会覆盖，用在面料编辑的时候</description>
+    	<attribute name="virtualProductId" mode="IN" type="String" optional="true"></attribute>
+    </service>
+    
+    <service name="createOrUpdateProductAttribute" engine="groovy"
+    	 location="component://zuczugcommon/webapp/zuczugcommon/WEB-INF/actions/ZuczugProductServices.groovy" invoke="createOrUpdateProductAttribute">
+    	<description>创建或者更新一个attribute</description>
+    	<auto-attributes mode="IN" entity-name="ProductAttribute"  include="all" optional="true"/>
+    </service>
+    
+    <service name="createOrUpdateGoodIdentification" engine="groovy"
+    	 location="component://zuczugcommon/webapp/zuczugcommon/WEB-INF/actions/ZuczugProductServices.groovy" invoke="createOrUpdateGoodIdentification">
+    	<description>创建或者更新一个类型的编号</description>
+    	<auto-attributes mode="IN" entity-name="GoodIdentification" include="all" optional="true"/>
+    </service>
+
+    <service name="calculateProductPriceByProductId" engine="simple"
+                location="component://zuczugcommon/script/ZuczugProductServices.xml" invoke="calculateProductPriceByProductId" auth="true">
+        <description>Calculate a Product's Price from ProductPriceRules</description>
+        <attribute name="productId" type="String" mode="IN" optional="false"/>
+        <attribute name="partyId" type="String" mode="IN" optional="true"/>
+        <attribute name="prodCatalogId" type="String" mode="IN" optional="true"/>
+        <attribute name="productStoreId" type="String" mode="IN" optional="true"/>
+        <attribute name="productStoreGroupId" type="String" mode="IN" optional="true"/>
+        <attribute name="quantity" type="BigDecimal" mode="IN" optional="true"/>
+        <attribute name="basePrice" type="BigDecimal" mode="OUT" optional="false"><!-- will only be different from price if there is a display price adjustment, for example: checkIncludeVat=Y and a VAT amount was found --></attribute>
+        <attribute name="price" type="BigDecimal" mode="OUT" optional="false"/>
+        <attribute name="listPrice" type="BigDecimal" mode="OUT" optional="true"/>
+        <attribute name="defaultPrice" type="BigDecimal" mode="OUT" optional="true"/>
+    </service>
+    
+    <service name="getProductBomRealQuantity" engine="java"
+    	 location="com.zuczug.product.ZuczugProductServices" invoke="getProductBomRealQuantity">
+    	<description>获取一个商品BOM的真实数量，通过ProductAssoc中得estimateCalcMethod 字段计算</description>
+		<attribute name="productId" mode="IN" type="String" optional="false"></attribute>
+		<attribute name="productIdTo" mode="IN" type="String" optional="false"></attribute>
+		<attribute name="productAssocTypeId" mode="IN" type="String" optional="false"></attribute>
+		<attribute name="fromDate" type="Timestamp" mode="IN" optional="false"/>
+		<attribute name="realQuantity" type="BigDecimal" mode="OUT" optional="false"/>
+    </service>
+
+    <service name="replaceBomAssoc" engine="simple"
+                location="component://zuczugcommon/script/ZuczugProductServices.xml" invoke="replaceBomAssoc" auth="true">
+        <description>将某被BOM面辅料替换成另外一个面辅料。也就是将ProductAssoc中的productIdTo替换成另外一个product</description>
+        <attribute name="productId" type="String" mode="IN" optional="false"/>
+        <attribute name="productIdTo" type="String" mode="IN" optional="false"/>
+        <attribute name="changeToProductIdTo" type="String" mode="IN" optional="false"/>
+        <attribute name="changeToProductIdToOne" type="String" mode="IN" optional="true"/>
+    </service>
+    
+    <service name="replaceMaterialInAllBomAssoc" engine="simple"
+                location="component://zuczugcommon/script/ZuczugProductServices.xml" invoke="replaceMaterialInAllBomAssoc" auth="true">
+        <description>将所有的BOM数据的某个面辅料替换成另外一个面辅料。也就是找到包含某个面辅料的所有ProductAssoc，将productIdTo替换成另外一个product</description>
+        <attribute name="productIdTo" type="String" mode="IN" optional="false"/>
+        <attribute name="changeToProductIdTo" type="String" mode="IN" optional="false"/>
+        <attribute name="changeToProductIdToOne" type="String" mode="IN" optional="true"/>
+    </service>
+    <service name="replaceMaterialInAllBomAssocAndCategory" engine="simple"
+                location="component://zuczugcommon/script/ZuczugProductServices.xml" invoke="replaceMaterialInAllBomAssocAndCategory" auth="true">
+        <description>替换某个组别下面的所有商品的BOM为xxx</description>
+        <attribute name="productKeyWord" type="String" mode="IN" optional="true"/>
+        <attribute name="categoryName" mode="IN" type="String" optional="true"/>
+        <attribute name="productIdTo" type="String" mode="IN" optional="false"/>
+        <attribute name="changeToProductIdTo" type="String" mode="IN" optional="false"/>
+    </service>
+    
+    <service name="replaceMaterialInAllBomAssocBm" engine="simple"
+                location="component://zuczugcommon/script/ZuczugProductServices.xml" invoke="replaceMaterialInAllBomAssocBm" auth="true">
+        <description>将所有的BOM数据的某个面辅料替换成另外一个面辅料。也就是找到包含某个面辅料的所有ProductAssoc，将productIdTo替换成另外一个product</description>
+        <attribute name="productIdTo" type="String" mode="IN" optional="false"/>
+        <attribute name="changeToProductIdTo" type="String" mode="IN" optional="false"/>
+        <attribute name="changeToProductIdToOne" type="String" mode="IN" optional="true"/>
+        <attribute name="productKeyWord" type="String" mode="IN" optional="false"/>
+    </service>
+    
+    <service name="replaceMaterialInAllBomAssocAndManufactBom" engine="simple"
+                location="component://zuczugcommon/script/ZuczugProductServices.xml" invoke="replaceMaterialInAllBomAssocAndManufactBom" auth="true">
+        <description>在replaceMaterialInAllBomAssoc这个的基础上，再替换productIdTo这个物料在所有有效生产计划中的BOM</description>
+        <attribute name="productIdTo" type="String" mode="IN" optional="false"/>
+        <attribute name="changeToProductIdTo" type="String" mode="IN" optional="false"/>
+        <attribute name="isReplaceMaterialBom" type="String" mode="IN" optional="true" default-value="Y"/>
+        <attribute name="productKeyWord" type="String" mode="IN" optional="true" />
+    </service>
+    
+    <service name="findRealProduct" engine="java" location="com.zuczug.product.ZuczugProductUtils" invoke="findRealProduct" auth="true">
+           <description>查询所有的正式商品</description>
+           <attribute name="productIdKeyword" type="String" mode="IN" optional="true"/><!-- 商品ID：支持模糊查询 -->
+			<attribute name="product" type="List" mode="OUT" optional="true"/>
+           <!--<attribute name="queryStringMap" type="java.util.Map" mode="OUT" optional="true"/> 返回集合 -->
+    </service>
+    
+    <service name="queryNoVirtualProduct" engine="java" location="com.zuczug.product.ZuczugProductServices" invoke="queryNoVirtualProduct" auth="true">
+           <description>查询非虚拟物料</description>
+           <attribute name="productCategoryId" type="String" mode="IN" optional="true"/>
+           <attribute name="idValue" type="String" mode="IN" optional="true"/>
+           <attribute name="internalName" type="String" mode="IN" optional="true"/>
+           <attribute name="description" type="String" mode="IN" optional="true"/>
+           <attribute name="comments" type="String" mode="IN" optional="true"/>
+           <attribute name="keyword" type="String" mode="IN" optional="true"/>
+           <attribute name="isFind" type="String" mode="IN" optional="true"/>
+           <attribute name="viewIndex" type="Integer" mode="IN" optional="true"/>
+           <attribute name="viewSize" type="Integer" mode="IN" optional="true"/>
+		   <attribute name="listIt" type="List" mode="OUT" optional="true"/>
+    </service>
+    
+    <service name="queryProductInCatalog" engine="java" location="com.zuczug.product.ZuczugProductServices" invoke="queryProductInCatalog" auth="true">
+           <description>查询非虚拟物料</description>
+           <attribute name="productCategoryId" type="String" mode="IN" optional="true"/>
+           <attribute name="idValue" type="String" mode="IN" optional="true"/>
+           <attribute name="internalName" type="String" mode="IN" optional="true"/>
+           <attribute name="description" type="String" mode="IN" optional="true"/>
+           <attribute name="comments" type="String" mode="IN" optional="true"/>
+           <attribute name="keyword" type="String" mode="IN" optional="true"/>
+           <attribute name="isFind" type="String" mode="IN" optional="true"/>
+           <attribute name="viewIndex" type="Integer" mode="IN" optional="true"/>
+           <attribute name="viewSize" type="Integer" mode="IN" optional="true"/>
+		   <attribute name="listIt" type="List" mode="OUT" optional="true"/>
+    </service>
+    
+    <service name="queryNoVirtualProductByParty" engine="java" location="com.zuczug.product.ZuczugProductServices" invoke="queryNoVirtualProductByParty" auth="true">
+           <description>按照供应商查询非虚拟物料</description>
+           <attribute name="groupName" type="String" mode="IN" optional="true"/>
+           <attribute name="idValue" type="String" mode="IN" optional="true"/>
+           <attribute name="internalName" type="String" mode="IN" optional="true"/>
+           <attribute name="description" type="String" mode="IN" optional="true"/>
+           <attribute name="partyId" type="String" mode="IN" optional="true"/>
+           <attribute name="productTypeId" type="String" mode="IN" optional="true"/>           
+           <attribute name="prodCatalogId" type="String" mode="IN" optional="true"/>
+           <attribute name="productCategoryId" type="String" mode="IN" optional="true"/>
+           <attribute name="noFind" type="String" mode="IN" optional="true"/>           
+           <attribute name="viewIndex" type="Integer" mode="IN" optional="true"/>
+           <attribute name="viewSize" type="Integer" mode="IN" optional="true"/>
+           
+		   <attribute name="listIt" type="List" mode="OUT" optional="true"/>
+    </service>
+    
+    <service name="queryNoVirtualRealProductByParty" engine="java" location="com.zuczug.product.ZuczugProductServices" invoke="queryNoVirtualRealProductByParty" auth="true">
+           <description>按照供应商查询非虚拟物料</description>
+           <attribute name="groupName" type="String" mode="IN" optional="true"/>
+           <attribute name="idValue" type="String" mode="IN" optional="true"/>
+           <attribute name="internalName" type="String" mode="IN" optional="true"/>
+           <attribute name="description" type="String" mode="IN" optional="true"/>
+           <attribute name="partyId" type="String" mode="IN" optional="true"/>
+           <attribute name="noFind" type="String" mode="IN" optional="true"/>           
+           <attribute name="viewIndex" type="Integer" mode="IN" optional="true"/>
+           <attribute name="viewSize" type="Integer" mode="IN" optional="true"/>
+		   <attribute name="listIt" type="List" mode="OUT" optional="true"/>
+    </service>
+    
+    <service name="queryProductAllImage" engine="java" location="com.zuczug.product.ZuczugProductServices" invoke="queryProductAllImage" auth="true">
+           <description>按照虚拟商品查询全部图片</description>
+           <attribute name="productId" type="String" mode="IN" optional="true"/>
+           <attribute name="variantProductId" type="String" mode="IN" optional="true"/>
+           <attribute name="productContentTypeId" type="String" mode="IN" optional="true"/>
+		   <attribute name="productContentAndInfoList" type="List" mode="OUT" optional="true"/>
+    </service>
+    
+    <service name="queryAllVariantProductImage" engine="java" location="com.zuczug.product.ZuczugProductServices" invoke="queryAllVariantProductImage" auth="true">
+           <description>按照虚拟商品查询全部图片</description>
+           <attribute name="productId" type="String" mode="IN" optional="true"/>
+		   <attribute name="productContentAndInfoList" type="List" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="getMatSuppliersByProductCategory" engine="java" location="com.zuczug.product.ZuczugProductServices" invoke="getMatSuppliersByProductCategory" auth="true">
+           	<description>获取某个分类下所有商品的所有原料供应商，返回是供应商partyId的List</description>
+           	<attribute name="productCategoryId" type="String" mode="IN" optional="false"/>
+			<attribute name="partyIds" type="List" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="getSupplierMaterialByCat" engine="java" location="com.zuczug.product.ZuczugProductServices" invoke="getSupplierMaterialByCat" auth="true">
+           	<description>某个供应商为某个分类，提供的所有原材料，返回的信息包括某个sku以及这个供应商的所有原材料</description>
+           	<attribute name="partyId" type="String" mode="IN" optional="false"/>
+           	<attribute name="productCategoryId" type="String" mode="IN" optional="false"/>
+			<attribute name="skuMatMaps" type="List" mode="OUT" optional="true"/>
+    </service>
+    
+    <service name="findAllRealProduct" engine="java" location="com.zuczug.product.ZuczugProductServices" invoke="findAllRealProduct" auth="true">
+           	<description>查询所有正式商品的变形商品</description>
+           	<attribute name="productId" type="String" mode="IN" optional="true"/>
+           	<attribute name="waveId" type="String" mode="IN" optional="true"/>
+			<attribute name="listIt" type="List" mode="OUT" optional="true"/>
+    </service>
+     
+    <service name="repairProductSeries" engine="java" location="com.zuczug.product.ZuczugProductServices" invoke="repairProductSeries" auth="true">
+    		<description>修复产品数据，153有些数据没有关联到系列zhoulei</description>
+    		<attribute name="productId" mode="IN" type="String"></attribute>
+    </service>
+    
+    <service name="fixWhetherThereSeries" engine="simple"
+                location="component://zuczugcommon/script/ZuczugDataServices.xml" invoke="fixWhetherThereSeries" auth="true">
+        <description>检查所有商品是否有关联系列zhoulei</description>
+    </service>
+     <service name="copyProductInfoToProduct" engine="simple" location="component://zuczugcommon/script/ZuczugProductServices.xml"
+     invoke="copyProductInfoToProduct" auth="true">
+     	<attribute name="productIdFrom" mode="IN" type="String"></attribute>
+     	<attribute name="productIdTo" mode="IN" type="String"></attribute>
+     </service>
+     
+     <service name="classifyProductByCategory" engine="java" location="com.zuczug.product.ZuczugProductServices" invoke="classifyProductByCategory">
+     	<attribute name="fromProductList" type="List" mode="IN" optional="true"/>
+     	<attribute name="listIt" type="List" mode="OUT" optional="true"/>
+     </service>
+     
+</services>

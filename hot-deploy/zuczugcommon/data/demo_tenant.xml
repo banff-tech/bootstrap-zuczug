@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-engine-xml>
+
+	<Tenant tenantId="ZUCZUG_HAND" tenantName="手语系列"/>
+	<TenantDataSource tenantId="ZUCZUG_HAND" entityGroupName="org.ofbiz" jdbcUri="jdbc:mysql://rdsjymmrjjymmrj.mysql.rds.aliyuncs.com/ofbiz_zuczughand?autoReconnect=true&amp;characterEncoding=UTF-8" jdbcUsername="zuczug" jdbcPassword="zuczug" />
+	<TenantDataSource tenantId="ZUCZUG_HAND" entityGroupName="org.ofbiz.olap" jdbcUri="jdbc:mysql://rdsjymmrjjymmrj.mysql.rds.aliyuncs.com/ofbizolap_zuczughand?autoReconnect=true&amp;characterEncoding=UTF-8" jdbcUsername="zuczug" jdbcPassword="zuczug" />
+
+</entity-engine-xml>

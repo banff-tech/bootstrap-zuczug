@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-engine-xml>
+	
+	<Party partyId="zhuweiqun" partyTypeId="PERSON" statusId="PARTY_ENABLED" createdDate="2013-06-08 15:22:36.0" createdByUserLogin="admin" lastModifiedDate="2013-06-08 15:22:36.0" lastModifiedByUserLogin="admin" lastUpdatedStamp="2013-06-08 15:22:36.0" lastUpdatedTxStamp="2013-06-08 15:22:36.0" createdStamp="2013-06-08 15:22:36.0" createdTxStamp="2013-06-08 15:22:36.0"/>
+	<Person partyId="zhuweiqun" firstName="" lastName="朱卫群" personalTitle="" lastUpdatedStamp="2013-05-30 16:27:10.0" lastUpdatedTxStamp="2013-05-30 16:27:10.0" createdStamp="2013-05-16 10:24:30.0" createdTxStamp="2013-05-16 10:24:30.0"/>
+	<PartyRole partyId="zhuweiqun" roleTypeId="EMPLOYEE" /> 
+	<UserLogin partyId="zhuweiqun" userLoginId="zhuweiqun" currentPassword="{SHA}47ca69ebb4bdc9ae0adec130880165d2cc05db1a" requirePasswordChange="N" />
+    <UserLoginSecurityGroup userLoginId="zhuweiqun" groupId="PRODUCTMANAGE_ADMIN" fromDate="2001-05-13 00:00:00"/>
+	
+	<Party partyId="sunhuirong" partyTypeId="PERSON" statusId="PARTY_ENABLED" createdDate="2013-06-08 15:22:36.0" createdByUserLogin="admin" lastModifiedDate="2013-06-08 15:22:36.0" lastModifiedByUserLogin="admin" lastUpdatedStamp="2013-06-08 15:22:36.0" lastUpdatedTxStamp="2013-06-08 15:22:36.0" createdStamp="2013-06-08 15:22:36.0" createdTxStamp="2013-06-08 15:22:36.0"/>
+	<Person partyId="sunhuirong" firstName="" lastName="孙慧嵘" personalTitle="" lastUpdatedStamp="2013-05-30 16:27:10.0" lastUpdatedTxStamp="2013-05-30 16:27:10.0" createdStamp="2013-05-16 10:24:30.0" createdTxStamp="2013-05-16 10:24:30.0"/>
+	<PartyRole partyId="sunhuirong" roleTypeId="EMPLOYEE" /> 
+	<UserLogin partyId="sunhuirong" userLoginId="sunhuirong" currentPassword="{SHA}47ca69ebb4bdc9ae0adec130880165d2cc05db1a" requirePasswordChange="N" />
+    <UserLoginSecurityGroup userLoginId="sunhuirong" groupId="PRODUCTMANAGE_ADMIN" fromDate="2001-05-13 00:00:00"/>
+
+	<Party partyId="linjianhong" partyTypeId="PERSON" statusId="PARTY_ENABLED" createdDate="2013-06-08 15:22:36.0" createdByUserLogin="admin" lastModifiedDate="2013-06-08 15:22:36.0" lastModifiedByUserLogin="admin" lastUpdatedStamp="2013-06-08 15:22:36.0" lastUpdatedTxStamp="2013-06-08 15:22:36.0" createdStamp="2013-06-08 15:22:36.0" createdTxStamp="2013-06-08 15:22:36.0"/>
+	<Person partyId="linjianhong" firstName="" lastName="林剑虹" personalTitle="" lastUpdatedStamp="2013-05-30 16:27:10.0" lastUpdatedTxStamp="2013-05-30 16:27:10.0" createdStamp="2013-05-16 10:24:30.0" createdTxStamp="2013-05-16 10:24:30.0"/>
+	<PartyRole partyId="linjianhong" roleTypeId="EMPLOYEE" /> 
+	<UserLogin partyId="linjianhong" userLoginId="linjianhong" currentPassword="{SHA}47ca69ebb4bdc9ae0adec130880165d2cc05db1a" requirePasswordChange="N" />
+    <UserLoginSecurityGroup userLoginId="linjianhong" groupId="ACCESSORY_ADMIN" fromDate="2001-05-13 00:00:00"/>
+	
+	<Party partyId="wangyufei" partyTypeId="PERSON" statusId="PARTY_ENABLED" createdDate="2013-06-08 15:22:36.0" createdByUserLogin="admin" lastModifiedDate="2013-06-08 15:22:36.0" lastModifiedByUserLogin="admin" lastUpdatedStamp="2013-06-08 15:22:36.0" lastUpdatedTxStamp="2013-06-08 15:22:36.0" createdStamp="2013-06-08 15:22:36.0" createdTxStamp="2013-06-08 15:22:36.0"/>
+	<Person partyId="wangyufei" firstName="　" lastName="王玉飞" personalTitle="" lastUpdatedStamp="2013-05-30 16:27:10.0" lastUpdatedTxStamp="2013-05-30 16:27:10.0" createdStamp="2013-05-16 10:24:30.0" createdTxStamp="2013-05-16 10:24:30.0"/>
+	<PartyRole partyId="wangyufei" roleTypeId="EMPLOYEE" /> 
+	<UserLogin partyId="wangyufei" userLoginId="wangyufei" currentPassword="{SHA}47ca69ebb4bdc9ae0adec130880165d2cc05db1a" requirePasswordChange="N" />
+    <UserLoginSecurityGroup userLoginId="wangyufei" groupId="FABRICFACILITY_ADMIN" fromDate="2001-05-13 00:00:00"/>
+	
+	
+	<Party partyId="dongmengjie" partyTypeId="PERSON" statusId="PARTY_ENABLED" createdDate="2013-06-08 15:22:36.0" createdByUserLogin="admin" lastModifiedDate="2013-06-08 15:22:36.0" lastModifiedByUserLogin="admin"/>
+	<Person partyId="dongmengjie" firstName="　" lastName="董梦洁" personalTitle="" />
+	<PartyRole partyId="dongmengjie" roleTypeId="EMPLOYEE" /> 
+	<UserLogin partyId="dongmengjie" userLoginId="dongmengjie" currentPassword="{SHA}47ca69ebb4bdc9ae0adec130880165d2cc05db1a" requirePasswordChange="N" />
+    <UserLoginSecurityGroup userLoginId="dongmengjie" groupId="FULLADMIN" fromDate="2001-05-13 00:00:00"/>
+    
+    <Party partyId="liujia" partyTypeId="PERSON" statusId="PARTY_ENABLED" createdDate="2013-06-08 15:22:36.0" createdByUserLogin="admin" lastModifiedDate="2013-06-08 15:22:36.0" lastModifiedByUserLogin="admin"/>
+	<Person partyId="liujia" firstName="　" lastName="柳佳" personalTitle="" />
+	<PartyRole partyId="liujia" roleTypeId="EMPLOYEE" /> 
+	<UserLogin partyId="liujia" userLoginId="liujia" currentPassword="{SHA}47ca69ebb4bdc9ae0adec130880165d2cc05db1a" requirePasswordChange="N" />
+    <UserLoginSecurityGroup userLoginId="liujia" groupId="FULLADMIN" fromDate="2001-05-13 00:00:00"/>
+    
+    <Party partyId="yeyong" partyTypeId="PERSON" statusId="PARTY_ENABLED" createdDate="2013-06-08 15:22:36.0" createdByUserLogin="admin" lastModifiedDate="2013-06-08 15:22:36.0" lastModifiedByUserLogin="admin"/>
+	<Person partyId="yeyong" firstName="　" lastName="叶勇" personalTitle="" />
+	<PartyRole partyId="yeyong" roleTypeId="EMPLOYEE" /> 
+	<UserLogin partyId="yeyong" userLoginId="yeyong" currentPassword="{SHA}47ca69ebb4bdc9ae0adec130880165d2cc05db1a" requirePasswordChange="N" />
+    <UserLoginSecurityGroup userLoginId="yeyong" groupId="FULLADMIN" fromDate="2001-05-13 00:00:00"/>
+	
+	<Party partyId="yuanyikun" partyTypeId="PERSON" statusId="PARTY_ENABLED" createdDate="2013-06-08 15:22:36.0" createdByUserLogin="admin" lastModifiedDate="2013-06-08 15:22:36.0" lastModifiedByUserLogin="admin" />
+	<Person partyId="yuanyikun" firstName="　" lastName="袁溢坤" personalTitle="" />
+	<PartyRole partyId="yuanyikun" roleTypeId="EMPLOYEE" /> 
+	<UserLogin partyId="yuanyikun" userLoginId="yuanyikun" currentPassword="{SHA}47ca69ebb4bdc9ae0adec130880165d2cc05db1a" requirePasswordChange="N" />
+    <UserLoginSecurityGroup userLoginId="yuanyikun" groupId="FABRIC_ADMIN" fromDate="2015-06-5 00:00:00"/>
+    
+    <Party partyId="daijiaqi" partyTypeId="PERSON" statusId="PARTY_ENABLED" createdDate="2013-06-08 15:22:36.0" createdByUserLogin="admin" lastModifiedDate="2013-06-08 15:22:36.0" lastModifiedByUserLogin="admin" />
+	<Person partyId="daijiaqi" firstName="　" lastName="戴佳祺" personalTitle="" />
+	<PartyRole partyId="daijiaqi" roleTypeId="EMPLOYEE" /> 
+	<UserLogin partyId="daijiaqi" userLoginId="daijiaqi" currentPassword="{SHA}47ca69ebb4bdc9ae0adec130880165d2cc05db1a" requirePasswordChange="N" />
+    <UserLoginSecurityGroup userLoginId="daijiaqi" groupId="FULLADMIN" fromDate="2015-06-5 00:00:00"/>
+    
+    <Party partyId="sunlianying" partyTypeId="PERSON" statusId="PARTY_ENABLED" createdDate="2013-06-08 15:22:36.0" createdByUserLogin="admin" lastModifiedDate="2013-06-08 15:22:36.0" lastModifiedByUserLogin="admin" />
+	<Person partyId="sunlianying" firstName="　" lastName="孙莲英 " personalTitle="" />
+	<PartyRole partyId="sunlianying" roleTypeId="EMPLOYEE" /> 
+	<UserLogin partyId="sunlianying" userLoginId="sunlianying" currentPassword="{SHA}47ca69ebb4bdc9ae0adec130880165d2cc05db1a" requirePasswordChange="N" />
+    <UserLoginSecurityGroup userLoginId="sunlianying" groupId="ACCOUNTING_ADMIN" fromDate="2015-06-5 00:00:00"/><!-- ACCTG_FUNCTNL_ADMIN -->
+    <UserLoginSecurityGroup userLoginId="sunlianying" groupId="FABRIC_ADMIN" fromDate="2015-06-5 00:00:00"/>
+    <UserLoginSecurityGroup userLoginId="sunlianying" groupId="YARN_ADMIN" fromDate="2015-06-5 00:00:00"/>
+    <UserLoginSecurityGroup userLoginId="sunlianying" groupId="FABRICFACILITY_ADMIN" fromDate="2015-06-5 00:00:00"/>
+    <UserLoginSecurityGroup userLoginId="sunlianying" groupId="ACCESSORY_ADMIN" fromDate="2015-06-5 00:00:00"/>
+    <!-- zhuangtianxue 庄天雪 -->
+    <UserLoginSecurityGroup userLoginId="zhuangtianxue" groupId="TECHNOLOGY_ADMIN" fromDate="2015-06-5 00:00:00"/>
+    <UserLoginSecurityGroup userLoginId="zhuangtianxue" groupId="MANUFACT_GROUP" fromDate="2015-06-5 00:00:00"/>
+    
+    <Party partyId="zhumeihui" partyTypeId="PERSON" statusId="PARTY_ENABLED" createdDate="2013-06-08 15:22:36.0" createdByUserLogin="admin" lastModifiedDate="2013-06-08 15:22:36.0" lastModifiedByUserLogin="admin" />
+	<Person partyId="zhumeihui" firstName="　" lastName="朱美惠 " personalTitle="" />
+	<PartyRole partyId="zhumeihui" roleTypeId="EMPLOYEE" /> 
+	<UserLogin partyId="zhumeihui" userLoginId="zhumeihui" currentPassword="{SHA}47ca69ebb4bdc9ae0adec130880165d2cc05db1a" requirePasswordChange="N" />
+    <UserLoginSecurityGroup userLoginId="zhumeihui" groupId="ACCOUNTING_ADMIN" fromDate="2015-06-5 00:00:00"/><!-- ACCTG_FUNCTNL_ADMIN -->
+    <UserLoginSecurityGroup userLoginId="zhumeihui" groupId="FABRIC_ADMIN" fromDate="2015-06-5 00:00:00"/>
+    <UserLoginSecurityGroup userLoginId="zhumeihui" groupId="YARN_ADMIN" fromDate="2015-06-5 00:00:00"/>
+    <UserLoginSecurityGroup userLoginId="zhumeihui" groupId="FABRICFACILITY_ADMIN" fromDate="2015-06-5 00:00:00"/>
+    <UserLoginSecurityGroup userLoginId="zhumeihui" groupId="ACCESSORY_ADMIN" fromDate="2015-06-5 00:00:00"/>
+    
+    <Party partyId="wangqian" partyTypeId="PERSON" statusId="PARTY_ENABLED" createdDate="2013-06-08 15:22:36.0" createdByUserLogin="admin" lastModifiedDate="2013-06-08 15:22:36.0" lastModifiedByUserLogin="admin" />
+	<Person partyId="wangqian" firstName="　" lastName="王倩" personalTitle="" />
+	<PartyRole partyId="wangqian" roleTypeId="IMAGEAPPROVER" /> 
+	<UserLogin partyId="wangqian" userLoginId="wangqian" currentPassword="{SHA}47ca69ebb4bdc9ae0adec130880165d2cc05db1a" requirePasswordChange="N" />
+    <UserLoginSecurityGroup userLoginId="wangqian" groupId="PRODUCTMANAGE_ADMIN" fromDate="2015-06-5 00:00:00"/>
+    
+    <Party partyId="gongmin" partyTypeId="PERSON" statusId="PARTY_ENABLED" createdDate="2013-06-08 15:22:36.0" createdByUserLogin="admin" lastModifiedDate="2013-06-08 15:22:36.0" lastModifiedByUserLogin="admin" />
+	<Person partyId="gongmin" firstName="　" lastName="龚敏" personalTitle="" />
+	<PartyRole partyId="gongmin" roleTypeId="IMAGEAPPROVER" /> 
+	<UserLogin partyId="gongmin" userLoginId="gongmin" currentPassword="{SHA}47ca69ebb4bdc9ae0adec130880165d2cc05db1a" requirePasswordChange="N" />
+    <UserLoginSecurityGroup userLoginId="gongmin" groupId="PRODUCTMANAGE_ADMIN" fromDate="2015-06-5 00:00:00"/>
+    
+    <Party partyId="huangjiaqi" partyTypeId="PERSON" statusId="PARTY_ENABLED" createdDate="2013-06-08 15:22:36.0" createdByUserLogin="admin" lastModifiedDate="2013-06-08 15:22:36.0" lastModifiedByUserLogin="admin" />
+	<Person partyId="huangjiaqi" firstName="　" lastName="黄佳琦" personalTitle="" />
+	<PartyRole partyId="huangjiaqi" roleTypeId="IMAGEAPPROVER" /> 
+	<UserLogin partyId="huangjiaqi" userLoginId="huangjiaqi" currentPassword="{SHA}47ca69ebb4bdc9ae0adec130880165d2cc05db1a" requirePasswordChange="N" />
+    <UserLoginSecurityGroup userLoginId="huangjiaqi" groupId="DESIGN_ADMIN" fromDate="2015-06-5 00:00:00"/>
+    
+    <Party partyId="yinsipei" partyTypeId="PERSON" statusId="PARTY_ENABLED" createdDate="2013-06-08 15:22:36.0" createdByUserLogin="admin" lastModifiedDate="2013-06-08 15:22:36.0" lastModifiedByUserLogin="admin" />
+	<Person partyId="yinsipei" firstName="　" lastName="阴思培" personalTitle="" />
+	<PartyRole partyId="yinsipei" roleTypeId="IMAGEAPPROVER" /> 
+	<UserLogin partyId="yinsipei" userLoginId="yinsipei" currentPassword="{SHA}47ca69ebb4bdc9ae0adec130880165d2cc05db1a" requirePasswordChange="N" />
+    <UserLoginSecurityGroup userLoginId="yinsipei" groupId="DESIGN_ADMIN" fromDate="2015-06-5 00:00:00"/>
+    
+    
+	<Party partyId="huangyuesheng" partyTypeId="PERSON" statusId="PARTY_ENABLED" createdDate="2013-06-08 15:22:36.0" createdByUserLogin="admin" lastModifiedDate="2013-06-08 15:22:36.0" lastModifiedByUserLogin="admin" />
+	<Person partyId="huangyuesheng" firstName="　" lastName="黄月生 " personalTitle="" />
+	<PartyRole partyId="huangyuesheng" roleTypeId="EMPLOYEE" /> 
+	<UserLogin partyId="huangyuesheng" userLoginId="huangyuesheng" currentPassword="{SHA}47ca69ebb4bdc9ae0adec130880165d2cc05db1a" requirePasswordChange="N" />
+	<UserLoginSecurityGroup userLoginId="huangyuesheng" groupId="MANUFACT_GROUP" fromDate="2015-06-5 00:00:00"/>
+	<UserLoginSecurityGroup userLoginId="huangyuesheng" groupId="TECHNOLOGY_ADMIN" fromDate="2015-06-5 00:00:00"/>
+
+	<Party partyId="maochangyuan" partyTypeId="PERSON" statusId="PARTY_ENABLED" createdDate="2013-06-08 15:22:36.0" createdByUserLogin="admin" lastModifiedDate="2013-06-08 15:22:36.0" lastModifiedByUserLogin="admin" />
+	<Person partyId="maochangyuan" firstName="　" lastName="毛昌元 " personalTitle="" />
+	<PartyRole partyId="maochangyuan" roleTypeId="EMPLOYEE" /> 
+	<UserLogin partyId="maochangyuan" userLoginId="maochangyuan" currentPassword="{SHA}47ca69ebb4bdc9ae0adec130880165d2cc05db1a" requirePasswordChange="N" />
+	<UserLoginSecurityGroup userLoginId="maochangyuan" groupId="MANUFACT_GROUP" fromDate="2015-06-5 00:00:00"/>
+	<UserLoginSecurityGroup userLoginId="maochangyuan" groupId="TECHNOLOGY_ADMIN" fromDate="2015-06-5 00:00:00"/>
+	
+	<Party partyId="yanghailan" partyTypeId="PERSON" statusId="PARTY_ENABLED" createdDate="2013-06-08 15:22:36.0" createdByUserLogin="admin" lastModifiedDate="2013-06-08 15:22:36.0" lastModifiedByUserLogin="admin" />
+	<Person partyId="yanghailan" firstName="　" lastName="羊海兰 " personalTitle="" />
+	<PartyRole partyId="yanghailan" roleTypeId="EMPLOYEE" /> 
+	<UserLogin partyId="yanghailan" userLoginId="yanghailan" currentPassword="{SHA}47ca69ebb4bdc9ae0adec130880165d2cc05db1a" requirePasswordChange="N" />
+	<UserLoginSecurityGroup userLoginId="yanghailan" groupId="MANUFACT_GROUP" fromDate="2015-06-5 00:00:00"/>
+	<UserLoginSecurityGroup userLoginId="yanghailan" groupId="TECHNOLOGY_ADMIN" fromDate="2015-06-5 00:00:00"/>
+	
+	<Party partyId="wangyiwei" partyTypeId="PERSON" statusId="PARTY_ENABLED" createdDate="2013-06-08 15:22:36.0" createdByUserLogin="admin" lastModifiedDate="2013-06-08 15:22:36.0" lastModifiedByUserLogin="admin" />
+	<Person partyId="wangyiwei" firstName="　" lastName="王一唯 " personalTitle="" />
+	<PartyRole partyId="wangyiwei" roleTypeId="EMPLOYEE" /> 
+	<UserLogin partyId="wangyiwei" userLoginId="wangyiwei" currentPassword="{SHA}47ca69ebb4bdc9ae0adec130880165d2cc05db1a" requirePasswordChange="N" />
+	<UserLoginSecurityGroup userLoginId="wangyiwei" groupId="MANUFACT_GROUP" fromDate="2015-06-5 00:00:00"/>
+	<UserLoginSecurityGroup userLoginId="wangyiwei" groupId="TECHNOLOGY_ADMIN" fromDate="2015-06-5 00:00:00"/>
+	
+	<Party partyId="liyingbo" partyTypeId="PERSON" statusId="PARTY_ENABLED" createdDate="2013-06-08 15:22:36.0" createdByUserLogin="admin" lastModifiedDate="2013-06-08 15:22:36.0" lastModifiedByUserLogin="admin" />
+	<Person partyId="liyingbo" firstName="　" lastName="李赢博 " personalTitle="" />
+	<PartyRole partyId="liyingbo" roleTypeId="EMPLOYEE" /> 
+	<UserLogin partyId="liyingbo" userLoginId="liyingbo" currentPassword="{SHA}47ca69ebb4bdc9ae0adec130880165d2cc05db1a" requirePasswordChange="N" />
+	<UserLoginSecurityGroup userLoginId="liyingbo" groupId="MANUFACT_GROUP" fromDate="2015-06-5 00:00:00"/>
+	<UserLoginSecurityGroup userLoginId="liyingbo" groupId="TECHNOLOGY_ADMIN" fromDate="2015-06-5 00:00:00"/>
+	
+	<Party partyId="wangzaoxia" partyTypeId="PERSON" statusId="PARTY_ENABLED" createdDate="2013-06-08 15:22:36.0" createdByUserLogin="admin" lastModifiedDate="2013-06-08 15:22:36.0" lastModifiedByUserLogin="admin" />
+	<Person partyId="wangzaoxia" firstName="　" lastName="王早霞 " personalTitle="" />
+	<PartyRole partyId="wangzaoxia" roleTypeId="EMPLOYEE" /> 
+	<UserLogin partyId="wangzaoxia" userLoginId="wangzaoxia" currentPassword="{SHA}47ca69ebb4bdc9ae0adec130880165d2cc05db1a" requirePasswordChange="N" />
+	<UserLoginSecurityGroup userLoginId="wangzaoxia" groupId="MANUFACT_GROUP" fromDate="2015-06-5 00:00:00"/>
+	<UserLoginSecurityGroup userLoginId="wangzaoxia" groupId="TECHNOLOGY_ADMIN" fromDate="2015-06-5 00:00:00"/>
+	
+	<Party partyId="wangmin" partyTypeId="PERSON" statusId="PARTY_ENABLED" createdDate="2013-06-08 15:22:36.0" createdByUserLogin="admin" lastModifiedDate="2013-06-08 15:22:36.0" lastModifiedByUserLogin="admin" />
+	<Person partyId="wangmin" firstName="　" lastName="王敏 " personalTitle="" />
+	<PartyRole partyId="wangmin" roleTypeId="EMPLOYEE" /> 
+	<UserLogin partyId="wangmin" userLoginId="wangmin" currentPassword="{SHA}47ca69ebb4bdc9ae0adec130880165d2cc05db1a" requirePasswordChange="N" />
+	<UserLoginSecurityGroup userLoginId="wangmin" groupId="MANUFACT_GROUP" fromDate="2015-06-5 00:00:00"/>
+	<UserLoginSecurityGroup userLoginId="wangmin" groupId="TECHNOLOGY_ADMIN" fromDate="2015-06-5 00:00:00"/>
+	<!-- 林剑红-->
+	<UserLoginSecurityGroup userLoginId="linjianhong" groupId="MANUFACT_GROUP" fromDate="2015-06-5 00:00:00"/>
+	<UserLoginSecurityGroup userLoginId="linjianhong" groupId="TECHNOLOGY_ADMIN" fromDate="2015-06-5 00:00:00"/>
+	
+	<Party partyId="jiangyanli" partyTypeId="PERSON" statusId="PARTY_ENABLED" createdDate="2013-06-08 15:22:36.0" createdByUserLogin="admin" lastModifiedDate="2013-06-08 15:22:36.0" lastModifiedByUserLogin="admin" />
+	<Person partyId="jiangyanli" firstName="　" lastName="江艳丽 " personalTitle="" />
+	<PartyRole partyId="jiangyanli" roleTypeId="EMPLOYEE" /> 
+	<UserLogin partyId="jiangyanli" userLoginId="jiangyanli" currentPassword="{SHA}47ca69ebb4bdc9ae0adec130880165d2cc05db1a" requirePasswordChange="N" />
+	<UserLoginSecurityGroup userLoginId="jiangyanli" groupId="PRODUCTMANAGE_ADMIN" fromDate="2015-06-5 00:00:00"/>
+	
+	<Party partyId="limuqing" partyTypeId="PERSON" statusId="PARTY_ENABLED" createdDate="2013-06-08 15:22:36.0" createdByUserLogin="admin" lastModifiedDate="2013-06-08 15:22:36.0" lastModifiedByUserLogin="admin" />
+	<Person partyId="limuqing" firstName="　" lastName="李牧青 " personalTitle="" />
+	<PartyRole partyId="limuqing" roleTypeId="EMPLOYEE" /> 
+	<UserLogin partyId="limuqing" userLoginId="limuqing" currentPassword="{SHA}47ca69ebb4bdc9ae0adec130880165d2cc05db1a" requirePasswordChange="N" />
+	<UserLoginSecurityGroup userLoginId="limuqing" groupId="PRODUCTMANAGE_ADMIN" fromDate="2015-06-5 00:00:00"/>
+	
+	<Party partyId="tianpeiying" partyTypeId="PERSON" statusId="PARTY_ENABLED" createdDate="2013-06-08 15:22:36.0" createdByUserLogin="admin" lastModifiedDate="2013-06-08 15:22:36.0" lastModifiedByUserLogin="admin" />
+	<Person partyId="tianpeiying" firstName="　" lastName="田佩颖 " personalTitle="" />
+	<PartyRole partyId="tianpeiying" roleTypeId="EMPLOYEE" /> 
+	<UserLogin partyId="tianpeiying" userLoginId="tianpeiying" currentPassword="{SHA}47ca69ebb4bdc9ae0adec130880165d2cc05db1a" requirePasswordChange="N" />
+	<UserLoginSecurityGroup userLoginId="tianpeiying" groupId="PRODUCTMANAGE_ADMIN" fromDate="2015-06-5 00:00:00"/>
+	
+	<Party partyId="zhuzhe" partyTypeId="PERSON" statusId="PARTY_ENABLED" createdDate="2013-06-08 15:22:36.0" createdByUserLogin="admin" lastModifiedDate="2013-06-08 15:22:36.0" lastModifiedByUserLogin="admin" />
+	<Person partyId="zhuzhe" firstName="　" lastName="朱哲 " personalTitle="" />
+	<PartyRole partyId="zhuzhe" roleTypeId="EMPLOYEE" /> 
+	<UserLogin partyId="zhuzhe" userLoginId="zhuzhe" currentPassword="{SHA}47ca69ebb4bdc9ae0adec130880165d2cc05db1a" requirePasswordChange="N" />
+	<UserLoginSecurityGroup userLoginId="zhuzhe" groupId="YARN_ADMIN" fromDate="2015-06-5 00:00:00"/>
+	<UserLoginSecurityGroup userLoginId="zhuzhe" groupId="TECHNOLOGY_ADMIN" fromDate="2015-06-5 00:00:00"/>
+	<UserLoginSecurityGroup userLoginId="zhuzhe" groupId="MANUFACT_GROUP" fromDate="2015-06-5 00:00:00"/>
+	
+	<Party partyId="wuzhihong" partyTypeId="PERSON" statusId="PARTY_ENABLED" createdDate="2013-06-08 15:22:36.0" createdByUserLogin="admin" lastModifiedDate="2013-06-08 15:22:36.0" lastModifiedByUserLogin="admin" />
+	<Person partyId="wuzhihong" firstName="　" lastName="吴志红 " personalTitle="" />
+	<PartyRole partyId="wuzhihong" roleTypeId="EMPLOYEE" /> 
+	<UserLogin partyId="wuzhihong" userLoginId="wuzhihong" currentPassword="{SHA}47ca69ebb4bdc9ae0adec130880165d2cc05db1a" requirePasswordChange="N" />
+	<UserLoginSecurityGroup userLoginId="wuzhihong" groupId="YARN_ADMIN" fromDate="2015-06-5 00:00:00"/>
+	<UserLoginSecurityGroup userLoginId="wuzhihong" groupId="TECHNOLOGY_ADMIN" fromDate="2015-06-5 00:00:00"/>
+	<UserLoginSecurityGroup userLoginId="wuzhihong" groupId="MANUFACT_GROUP" fromDate="2015-06-5 00:00:00"/>
+	
+	
+	<UserLoginSecurityGroup userLoginId="yangchao" groupId="TECHNOLOGY_ADMIN" fromDate="2015-06-5 00:00:00"/>
+	
+	<Party partyId="chenchen" partyTypeId="PERSON" statusId="PARTY_ENABLED" createdDate="2013-06-08 15:22:36.0" createdByUserLogin="admin" lastModifiedDate="2013-06-08 15:22:36.0" lastModifiedByUserLogin="admin" />
+	<Person partyId="chenchen" firstName="　" lastName="陈晨" personalTitle="" />
+	<PartyRole partyId="chenchen" roleTypeId="EMPLOYEE" /> 
+	<UserLogin partyId="chenchen" userLoginId="chenchen" currentPassword="{SHA}47ca69ebb4bdc9ae0adec130880165d2cc05db1a" requirePasswordChange="N" />
+    <UserLoginSecurityGroup userLoginId="chenchen" groupId="PRODUCTMANAGE_ADMIN" fromDate="2015-06-5 00:00:00"/>
+    
+    <Party partyId="dingwenjun" partyTypeId="PERSON" statusId="PARTY_ENABLED" createdDate="2013-06-08 15:22:36.0" createdByUserLogin="admin" lastModifiedDate="2013-06-08 15:22:36.0" lastModifiedByUserLogin="admin" />
+	<Person partyId="dingwenjun" firstName="　" lastName="丁文俊 " personalTitle="" />
+	<PartyRole partyId="dingwenjun" roleTypeId="EMPLOYEE" /> 
+	<UserLogin partyId="dingwenjun" userLoginId="dingwenjun" currentPassword="{SHA}47ca69ebb4bdc9ae0adec130880165d2cc05db1a" requirePasswordChange="N" />
+    <UserLoginSecurityGroup userLoginId="dingwenjun" groupId="ACCOUNTING_ADMIN" fromDate="2015-06-5 00:00:00"/><!-- ACCTG_FUNCTNL_ADMIN -->
+    <UserLoginSecurityGroup userLoginId="dingwenjun" groupId="FABRIC_ADMIN" fromDate="2015-06-5 00:00:00"/>
+    <UserLoginSecurityGroup userLoginId="dingwenjun" groupId="YARN_ADMIN" fromDate="2015-06-5 00:00:00"/>
+    <UserLoginSecurityGroup userLoginId="dingwenjun" groupId="FABRICFACILITY_ADMIN" fromDate="2015-06-5 00:00:00"/>
+    <UserLoginSecurityGroup userLoginId="dingwenjun" groupId="ACCESSORY_ADMIN" fromDate="2015-06-5 00:00:00"/>
+	
+    
+    <Party partyId="shenjian" partyTypeId="PERSON" statusId="PARTY_ENABLED" createdDate="2013-06-08 15:22:36.0" createdByUserLogin="admin" lastModifiedDate="2013-06-08 15:22:36.0" lastModifiedByUserLogin="admin" />
+	<Person partyId="shenjian" firstName="　" lastName="沈健 " personalTitle="" />
+	<PartyRole partyId="shenjian" roleTypeId="EMPLOYEE" /> 
+	<UserLogin partyId="shenjian" userLoginId="shenjian" currentPassword="{SHA}47ca69ebb4bdc9ae0adec130880165d2cc05db1a" requirePasswordChange="N" />
+    <UserLoginSecurityGroup userLoginId="shenjian" groupId="ACCOUNTING_ADMIN" fromDate="2015-06-5 00:00:00"/><!-- ACCTG_FUNCTNL_ADMIN -->
+    <UserLoginSecurityGroup userLoginId="shenjian" groupId="FABRIC_ADMIN" fromDate="2015-06-5 00:00:00"/>
+    <UserLoginSecurityGroup userLoginId="shenjian" groupId="YARN_ADMIN" fromDate="2015-06-5 00:00:00"/>
+    <UserLoginSecurityGroup userLoginId="shenjian" groupId="FABRICFACILITY_ADMIN" fromDate="2015-06-5 00:00:00"/>
+    <UserLoginSecurityGroup userLoginId="shenjian" groupId="ACCESSORY_ADMIN" fromDate="2015-06-5 00:00:00"/>
+	
+	
+</entity-engine-xml>

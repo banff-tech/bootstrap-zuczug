@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simple-methods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/simple-methods.xsd">
+
+    <simple-method method-name="findProductInventory" short-description="find product with inventory">
+    	<set-service-fields service-name="performFind" to-map="inMap" map="parameters"/>
+    	<set field="inMap.entityName" value="ProductFacilityInventoryItem"/>
+    	<call-service service-name="performFind" in-map-name="inMap">
+            <result-to-field result-name="listIt" field="products"/>
+    		<result-to-field result-name="listSize"/>
+    		<result-to-field result-name="queryString"/>
+    		<result-to-field result-name="queryStringMap"/>
+    	</call-service>
+		
+    	<log level="info" message="==================================================== listSize = ${listSize}"/>
+    	
+    	<iterate entry="product" list="products">
+    		<log level="info" message="====================================================productId = ${product.productId}"/>
+    		<clear-field field="productInventory"/>
+    		<set field="productInventory.facilityId" from-field="product.facilityId"/>
+    		<set field="productInventory.productId" from-field="product.productId"/>
+    		<set field="productInventory.productName" from-field="product.productName"/>
+    		<set field="productInventory.internalName" from-field="product.internalName"/>
+    		<set field="productInventory.productId" from-field="product.productId"/>
+    		<set field="productInventory.availableToPromiseTotal" from-field="product.availableToPromiseTotal"/>
+    		<set field="productInventory.quantityOnHandTotal" from-field="product.quantityOnHandTotal"/>
+    		<entity-and list="productFeatureAndAppls" entity-name="ProductFeatureAndAppl">
+    			<field-map field-name="productFeatureTypeId" value="COLOR"/>
+    			<field-map field-name="productId" from-field="product.productId"/>
+    		</entity-and>
+    		<first-from-list entry="productFeatureAndAppl" list="productFeatureAndAppls"/>
+    		<set field="productInventory.color" from-field="productFeatureAndAppl.idCode"/>
+    		<entity-and list="productFeatureAndAppls" entity-name="ProductFeatureAndAppl">
+    			<field-map field-name="productFeatureTypeId" value="SIZE"/>
+    			<field-map field-name="productId" from-field="product.productId"/>
+    		</entity-and>
+    		<first-from-list entry="productFeatureAndAppl" list="productFeatureAndAppls"/>
+    		<set field="productInventory.size" from-field="productFeatureAndAppl.idCode"/>
+    		<field-to-list list="listIt" field="productInventory"/>
+    	</iterate>
+    	<field-to-result field="listIt" result-name="listIt"/>
+    	<field-to-result field="listSize"/>
+    	<field-to-result field="queryString"/>
+    	<field-to-result field="queryStringMap"/>
+
+    </simple-method>
+
+</simple-methods>

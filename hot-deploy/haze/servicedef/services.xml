@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>Haze Services</description>
+    <vendor></vendor>
+    <version>1.0</version>
+
+    <service name="findProductInventory" auth="false" engine="simple" invoke="findProductInventory"
+    	location="component://haze/script/com/zuczug/minilang/HazeFacilityServices.xml">
+        <description>find product with inventory</description>
+        <attribute name="inputFields" type="java.util.Map" mode="IN" optional="false"/>
+        <attribute name="fieldList" type="java.util.List" mode="IN" optional="true"/>
+        <attribute name="orderBy" type="String" mode="IN" optional="true"/>
+        <attribute name="noConditionFind" type="String" mode="IN" optional="true"><!-- find with no condition (empty entityConditionList) only done when this is Y --></attribute>
+        <attribute name="distinct" type="String" mode="IN" optional="true"><!-- distinct find only done when this is Y --></attribute>
+        <attribute name="filterByDate" type="String" mode="IN" optional="true"/>
+        <attribute name="filterByDateValue" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="viewIndex" type="Integer" mode="IN" optional="true"/>
+        <attribute name="viewSize" type="Integer" mode="IN" optional="true"/>
+        <attribute name="listIt" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="listSize" type="Integer" mode="OUT" optional="true"/>
+        <attribute name="queryString" type="String" mode="OUT" optional="true"/>
+        <attribute name="queryStringMap" type="java.util.Map" mode="OUT" optional="true"/>
+    </service>
+
+
+    <service name="submitProductToZuczug" auth="true" engine="java" invoke="submitProductToZuczug"
+    	location="com.zuczug.haze.HazeProductServices">
+        <description>将product提交到zuczug新运营平台</description>
+        <attribute name="productId" type="String" mode="IN" optional="false"/>
+    </service>
+
+    <service name="submitBomToZuczug" auth="true" engine="java" invoke="submitBomToZuczug"
+    	location="com.zuczug.haze.HazeProductServices">
+        <description>将bom提交到zuczug新运营平台</description>
+        <attribute name="productId" type="String" mode="IN" optional="false"/>
+    </service>
+    
+    
+    <service name="createNewPartner" engine="simple"
+        location="component://haze/script/com/zuczug/minilang/HazePartnerServices.xml" invoke="createNewPartner">
+        <description>创建一个新的合作伙伴 by sven</description>
+        <auto-attributes entity-name="PartyGroup" mode="IN" optional="true">
+            <exclude field-name="partyId"/>
+        </auto-attributes>
+        <auto-attributes entity-name="PostalAddress" mode="IN" optional="true">
+            <exclude field-name="contactMechId"/>
+        </auto-attributes>
+        <auto-attributes entity-name="TelecomNumber" mode="IN" optional="true">
+            <exclude field-name="contactMechId"/>
+        </auto-attributes>
+        <attribute name="emailAddress" type="String" mode="IN" optional="true"/>
+        <attribute name="extension" type="String" mode="IN" optional="true"/>
+        <attribute name="corporatePartyId" type="String" mode="IN" optional="true"/>
+        <attribute name="newCorporatePartyId" type="String" mode="IN" optional="true"/>
+        <attribute name="taxpayer" type="String" mode="IN" optional="true"/>
+        <attribute name="registeredCapital" type="String" mode="IN" optional="true"/>
+        <attribute name="businessScope" type="String" mode="IN" optional="true"/>
+        <attribute name="businessLicense" type="String" mode="IN" optional="true"/>
+        <attribute name="taxNumber" type="String" mode="IN" optional="true"/>
+        <attribute name="roleTypeId" type="String" mode="IN" optional="true"/>
+        <attribute name="partyId" type="String" mode="OUT" optional="false"/>
+    </service>
+    
+    <service name="updatePartner" engine="simple"
+        location="component://haze/script/com/zuczug/minilang/HazePartnerServices.xml" invoke="updatePartner">
+        <description>更新合作伙伴的一些基本信息 partyGroup</description>
+        <auto-attributes entity-name="PartyGroup" mode="IN" optional="true">
+            <exclude field-name="partyId"/>
+        </auto-attributes>
+        <attribute name="corporatePartyId" type="String" mode="IN" optional="true"/>
+        <attribute name="newCorporatePartyId" type="String" mode="IN" optional="true"/>
+        <attribute name="taxpayer" type="String" mode="IN" optional="true"/>
+        <attribute name="registeredCapital" type="String" mode="IN" optional="true"/>
+        <attribute name="businessScope" type="String" mode="IN" optional="true"/>
+        <attribute name="businessLicense" type="String" mode="IN" optional="true"/>
+        <attribute name="taxNumber" type="String" mode="IN" optional="true"/>
+        <attribute name="partyId" type="String" mode="INOUT" optional="false"/>
+    </service>
+    
+    
+    <service name="deleteFinAccount" engine="simple"
+        location="component://haze/script/com/zuczug/minilang/HazePartnerServices.xml" invoke="deleteFinAccount">
+        <description>重写删除 finAccount，如果删除要删除finAccountRole等 by sven</description>
+        <attribute name="finAccountId" mode="IN" type="String" optional="false"></attribute>
+    </service>
+    
+    <service name="findOrders" engine="java" transaction-timeout="300" auth="true"
+            location="com.zuczug.haze.HazeOrderServices" invoke="findOrders">
+        <description>重写了ofbiz原生的 findOrders 服务，增加了一个仓库的条件，其他的没动 by sven</description>
+        <!-- order header fields -->
+        <attribute name="orderId" type="String" mode="IN" optional="true"/>
+        <attribute name="orderName" type="String" mode="IN" optional="true"/>
+        <attribute name="orderTypeId" type="List" mode="IN" optional="true"/> <!-- can pass multiple values as list -->
+        <attribute name="orderStatusId" type="List" mode="IN" optional="true"/> <!-- can pass multiple values as list -->
+        <attribute name="productStoreId" type="List" mode="IN" optional="true"/> <!-- can pass multiple values as list -->
+        <attribute name="orderWebSiteId" type="List" mode="IN" optional="true"/> <!-- can pass multiple values as list -->
+        <attribute name="salesChannelEnumId" type="List" mode="IN" optional="true"/> <!-- can pass multiple values as list -->
+        <attribute name="createdBy" type="String" mode="IN" optional="true"/>
+        <attribute name="terminalId" type="String" mode="IN" optional="true"/>
+        <attribute name="transactionId" type="String" mode="IN" optional="true"/>
+        <attribute name="externalId" type="String" mode="IN" optional="true"/>
+        <attribute name="internalCode" type="String" mode="IN" optional="true"/>
+        <attribute name="facilityId" type="String" mode="IN" optional="true"/>
+        <attribute name="useEntryDate" type="String" mode="IN" optional="true"/> <!-- Y/N use entryDate instead of orderDate -->
+        <attribute name="minDate" type="String" mode="IN" optional="true"/> <!-- converted to Timestamp -->
+        <attribute name="maxDate" type="String" mode="IN" optional="true"/> <!-- converted to Timestamp -->
+        <attribute name="hasBackOrders" type="String" mode="IN" optional="true"/> <!-- Y to only show orders with items on backorder -->
+
+        <!-- order role fields -->
+        <attribute name="userLoginId" type="String" mode="IN" optional="true"/>
+        <attribute name="roleTypeId" type="List" mode="IN" optional="true"/> <!-- can pass multiple values as list -->
+        <attribute name="partyId" type="String" mode="IN" optional="true"/>
+
+        <!-- order item fields -->
+        <attribute name="correspondingPoId" type="String" mode="IN" optional="true"/>
+        <attribute name="subscriptionId" type="String" mode="IN" optional="true"/>
+        <attribute name="productId" type="String" mode="IN" optional="true"/>
+        <attribute name="budgetId" type="String" mode="IN" optional="true"/>
+        <attribute name="quoteId" type="String" mode="IN" optional="true"/>
+
+        <attribute name="billingAccountId" type="String" mode="IN" optional="true"/>
+        <attribute name="finAccountId" type="String" mode="IN" optional="true"/>
+        <attribute name="cardNumber" type="String" mode="IN" optional="true"/>
+        <attribute name="accountNumber" type="String" mode="IN" optional="true"/>
+        <attribute name="paymentStatusId" type="String" mode="IN" optional="true"/>
+
+        <!-- shipment/inventory fields -->
+        <attribute name="inventoryItemId" type="String" mode="IN" optional="true"/>
+        <attribute name="softIdentifier" type="String" mode="IN" optional="true"/>
+        <attribute name="serialNumber" type="String" mode="IN" optional="true"/>
+        <attribute name="shipmentId" type="String" mode="IN" optional="true"/>
+
+        <!-- inventory problem fields -->
+        <attribute name="filterInventoryProblems" type="String" mode="IN" optional="true"/>
+        <attribute name="filterPOsWithRejectedItems" type="String" mode="IN" optional="true"/>
+        <attribute name="filterPOsOpenPastTheirETA" type="String" mode="IN" optional="true"/>
+        <attribute name="filterPartiallyReceivedPOs" type="String" mode="IN" optional="true"/>
+
+        <attribute name="isViewed" type="String" mode="IN" optional="true"/> <!-- show orders with viewed Y/N -->
+        <attribute name="shipmentMethod" type="String" mode="IN" optional="true"/>
+        <attribute name="gatewayAvsResult" type="String" mode="IN" optional="true"/>
+        <attribute name="gatewayScoreResult" type="String" mode="IN" optional="true"/>
+
+        <!-- ship to country fields -->
+        <attribute name="countryGeoId" type="String" mode="IN" optional="true"/>
+        <attribute name="includeCountry" type="String" mode="IN" optional="true"/>        
+
+        <!-- view and page fields -->
+        <attribute name="viewIndex" type="Integer" mode="INOUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="INOUT" optional="false"/>
+        <attribute name="showAll" type="String" mode="INOUT" optional="true"/>
+
+        <!-- index fields -->
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+
+        <!-- inventory problem results -->
+        <attribute name="filterInventoryProblemsList" type="List" mode="OUT" optional="true"/>
+        <attribute name="filterPOsWithRejectedItemsList" type="List" mode="OUT" optional="true"/>
+        <attribute name="filterPOsOpenPastTheirETAList" type="List" mode="OUT" optional="true"/>
+        <attribute name="filterPartiallyReceivedPOsList" type="List" mode="OUT" optional="true"/>
+
+        <!-- actual results -->
+        <attribute name="paramList" type="String" mode="OUT" optional="false"/>
+        <attribute name="orderList" type="List" mode="OUT" optional="false"/>
+        <attribute name="orderListSize" type="Integer" mode="OUT" optional="false"/>
+    </service>
+    
+    <service name="HazeIssuanceShipment" engine="groovy"
+        location="component://haze/webapp/haze/WEB-INF/actions/facility/FacilityServices.groovy" invoke="HazeIssuanceShipment">
+        <description>haze中预定shipment的库存并且需要改变状态</description>
+        <attribute name="shipmentId" mode="IN" type="String" optional="false"></attribute>
+    </service>
+</services>

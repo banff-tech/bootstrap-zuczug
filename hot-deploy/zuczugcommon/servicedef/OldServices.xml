@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>ZuczugCommon Services</description>
+    <vendor></vendor>
+    <version>1.0</version>
+
+    <service name="noSyntaxError" engine="interface">
+        <description>
+            Dummy service to prevent empty files and syntax error - Remove when the 1st real service will be added here 
+        </description>
+    </service> 
+
+    <service name="copyGoodIdToVariants" engine="java" location="com.zuczug.product.OldZuczugProductServices"
+             invoke="copyGoodIdToVariants">
+        <description>将虚拟商品所有的GoodIdentification拷贝到变形</description>
+        <attribute name="virtualProductId" mode="IN" type="String" optional="true"></attribute>
+        <attribute name="variantProductId" mode="IN" type="String" optional="true"></attribute>
+    </service>
+    
+    <service name="boundColorToProduct" engine="simple"							
+                location="component://zuczugcommon/script/OldZuczugProductServices.xml" 
+                invoke="boundColorToProduct" auth="true">
+        <attribute name="productId" mode="IN" type="String" optional="false"></attribute>
+        <attribute name="productFeatureId" mode="IN" type="String" optional="false"></attribute>
+        <attribute name="productFeatureApplTypeId" mode="IN" type="String" optional="false"></attribute>
+    </service>
+     
+    <service name="createMaterialQuote" engine="simple"
+                location="component://zuczugcommon/script/OldZuczugProductServices.xml" invoke="createMaterialQuote" auth="true">
+        <description>通用方法，创建zuczug项目中的面料、辅料、纱线等产品</description>
+		<attribute name="productId" type="String" mode="INOUT" optional="true"/>
+		<attribute name="idValue" type="String" mode="IN" optional="true"/>
+		<attribute name="supplierProductId" type="String" mode="IN" optional="true"/>
+		<attribute name="description" type="String" mode="IN" allow-html="any" optional="true"/>
+		<attribute name="comments" type="String" mode="IN" optional="true"/>
+		<attribute name="longDescription" type="String" mode="IN" allow-html="any" optional="true"/>
+		<attribute name="widthUomId" type="String" mode="IN" optional="true"/>
+		<attribute name="productWidth" type="BigDecimal" mode="IN" optional="true"/>
+		<attribute name="partyId" type="String" mode="IN" optional="false"/>
+		<attribute name="availableFromDate" type="Timestamp" mode="IN" optional="true"/>
+		<attribute name="minimumOrderQuantity" type="BigDecimal" default-value="0" mode="IN" optional="true"/>
+		<attribute name="currencyUomId" type="String" mode="IN" optional="true"/>
+		<attribute name="standardLeadTimeDays" type="BigDecimal" default-value="0" mode="IN" optional="true"/>
+		<attribute name="quantityUomId" type="String" mode="IN" optional="true"/>
+		<attribute name="lastPrice" type="BigDecimal" default-value="0" mode="IN" optional="true"/>
+		<attribute name="seriesId" type="String" mode="IN" optional="true"/>
+		<attribute name="productMaterialId" type="String" mode="IN" optional="false"/>
+		<attribute name="productFeatureApplTypeId" type="String" mode="IN" optional="false"/>
+		<attribute name="productTypeId" type="String" mode="IN" optional="false"/>
+		<attribute name="primaryProductCategoryId" type="String" mode="IN" optional="true"/>
+    </service>
+    
+    <service name="updateMaterialProductAndFeature" engine="simple"
+                location="component://zuczugcommon/script/OldZuczugProductServices.xml" invoke="updateMaterialProductAndFeature" auth="true">
+	    <description>更新素然面料、辅料、纱线等产品的基本信息</description>
+	    <attribute name="productId" type="String" mode="IN" optional="false"/>
+	    <attribute name="internalName" type="String" mode="IN" optional="false"/>
+	    <attribute name="idValue" type="String" mode="IN" optional="true"/>
+	    <attribute name="isVirtual" type="String" mode="IN" optional="false"/>
+	    <attribute name="isVariant" type="String" mode="IN" optional="false"/>
+	    <attribute name="productTypeId" type="String" mode="IN" optional="false"/>
+	    <attribute name="productFeatureApplTypeId" type="String" mode="IN" optional="false"/>
+	    <attribute name="productMaterialId" type="String" mode="IN" default-value="FABRIC" optional="false"/>
+	    <attribute name="description" type="String" mode="IN" allow-html="any" optional="true"/>
+	    <attribute name="comments" type="String" mode="IN" optional="true"/>
+	    <attribute name="longDescription" type="String" mode="IN" allow-html="any" optional="true"/>
+	    <attribute name="productFeatureId" type="String" mode="IN" optional="true"/>
+	    <attribute name="quantityUomId" type="String" mode="IN" optional="true"/>
+	    <attribute name="widthUomId" type="String" mode="IN" optional="true"/>
+	    <attribute name="productWidth" type="BigDecimal" mode="IN" optional="true"/>
+	    <attribute name="primaryProductCategoryId" type="String" mode="IN" optional="true"/>
+    </service>
+</services>

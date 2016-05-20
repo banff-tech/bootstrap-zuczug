@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+    <!-- 查询门店页面 -->   
+    <screen name="FindProductStore">
+       <section>
+            <actions>
+                <set field="titleProperty" value="PageTitleEditProductStoreList"/>
+                <set field="headerItem" value="store"/>
+                <set field="tabButtonItem" value="EditProductStoreList"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="CommonProductStoreDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                    	<decorator-screen name="FindScreenDecorator" location="component://common/widget/CommonScreens.xml">
+                    		<decorator-section name="menu-bar">
+                                <container style="button-bar">
+                                    <link  text="${uiLabelMap.AddProductStore}" target="AddProductStore" style="buttontext create " />
+                                </container>
+                            </decorator-section>
+                    	 	<decorator-section name="search-options">
+                                <include-form name="FindProductStore" location="component://haze/widget/SalesManagerForms.xml"/>
+                            </decorator-section>
+                            <decorator-section name="search-results">
+                                <include-form name="ListProductStore" location="component://haze/widget/SalesManagerForms.xml"/>
+                            </decorator-section>
+                    	 </decorator-screen>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+       </section>
+    </screen>
+
+	<screen name="CommonOrderViewDecorator">
+        <section>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <section>
+                            <widgets>
+                                <decorator-section-include name="body"/>
+                            </widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="AddProductStore">
+       <section>
+            <actions>
+                <set field="titleProperty" value="PageTitleEditProductStore"/>
+                <set field="headerItem" value="store"/>
+              	<!--  <set field="tabButtonItem" value="EditProductStore"/> -->
+                <set field="labelTitleProperty" value="ProductStore"/>
+                <set field="productStoreId" from-field="parameters.productStoreId"/>
+                <set field="dependentId" value="stateProvinceGeoId"/>
+                <set field="selectedDependentOption" from-field="mechMap.postalAddress.stateProvinceGeoId" default-value="_none_"/> 
+                <entity-condition list="states" entity-name="GeoAssocAndGeoTo">
+                         <condition-list>
+                               <condition-expr field-name="geoIdFrom" value="CHN"/>
+                         </condition-list>                        
+                </entity-condition>  
+                <entity-one entity-name="ProductStore" value-field="productStore" auto-field-map="true"/>
+                <property-to-field field="defaultCurrencyUomId" resource="general" property="currency.uom.id.default" default="USD"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="CommonProductStoreDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <screenlet title="${uiLabelMap.ProductProductStore}">
+                            <include-form name="AddProductStore" location="component://haze/widget/SalesManagerForms.xml"/>
+                        </screenlet>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+       </section>
+    </screen>
+
+    <screen name="EditProductStore">
+       <section>
+            <actions>
+                <set field="titleProperty" value="EditProductStore"/>
+                <set field="headerItem" value="EditProductStore"/>
+              	<set field="tabButtonItem" value="EditProductStore"/>
+                <set field="labelTitleProperty" value="EditProductStore"/>
+                <set field="productStoreId" from-field="parameters.productStoreId"/>
+                <set field="dependentId" value="stateProvinceGeoId"/>
+                <set field="selectedDependentOption" from-field="mechMap.postalAddress.stateProvinceGeoId" default-value="_none_"/> 
+                <entity-condition list="states" entity-name="GeoAssocAndGeoTo">
+                         <condition-list>
+                               <condition-expr field-name="geoIdFrom" value="CHN"/>
+                         </condition-list>                        
+                </entity-condition>  
+                <entity-one entity-name="ProductStore" value-field="productStore" auto-field-map="true"/>
+                <property-to-field field="defaultCurrencyUomId" resource="general" property="currency.uom.id.default" default="USD"/>
+                <set field="facilityId" from-field="parameters.productStoreId"/>
+                <entity-one entity-name="Facility" value-field="facility"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="CommonProductStoreDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                    	<include-menu name="FacilityContactTabBar" location="component://haze/widget/SalesManagerMenus.xml"/>
+                        <screenlet title="${uiLabelMap.ProductProductStore}">
+                            <include-form name="EditProductStore" location="component://haze/widget/SalesManagerForms.xml"/>
+                        </screenlet>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+       </section>
+    </screen>
+    
+    
+
+   
+    <screen name="LookupPartyName">
+        <section>
+            <condition>
+                <if-service-permission service-name="partyBasePermissionCheck" main-action="VIEW"/>
+            </condition>
+            <actions>
+                <property-map resource="PartyUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="${uiLabelMap.PartyLookupPartyByName}"/>
+                <set field="queryString" from-field="result.queryString"/>
+                <set field="viewIndex" from-field="parameters.VIEW_INDEX" type="Integer" default-value="0"/>
+                <property-to-field resource="widget" property="widget.form.defaultViewSize" field="viewSizeDefaultValue"/>
+                <set field="viewSize" from-field="parameters.VIEW_SIZE" type="Integer" default-value="${viewSizeDefaultValue}"/>
+                
+                <!-- entries needed for lookup ajax auto completer -->
+                <!-- required: entity to search in -->
+                <set field="entityName" value="PartyNameView"/>
+                
+                <!-- required: fields to search a match -->
+                <!-- the first element from searchFields is returned after user selection --> 
+                <!-- it might be hidden based on widget.autocompleter.displayReturnField property in widget.properties -->                
+                <set field="searchFields" value="[partyId, firstName, middleName, lastName, groupName]"/>
+ 
+                <!-- optional: fields to display in the given order, default is searchFields -->
+                <set field="displayFields" value="[firstName, lastName, groupName]"/>
+                
+                <!-- optional: additional entity condition (named andCondition) added to search query -->
+                <script location="component://party/webapp/partymgr/WEB-INF/actions/party/StatusCondition.groovy"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="lookupPartyName" location="component://haze/widget/SalesManagerForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="listLookupPartyName" location="component://haze/widget/SalesManagerForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="LookupPartyForRegionManager">
+        <section>
+            <condition>
+                <if-service-permission service-name="partyBasePermissionCheck" main-action="VIEW"/>
+            </condition>
+            <actions>
+                <property-map resource="PartyUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="${uiLabelMap.PartyLookupPartyByName}"/>
+                <set field="queryString" from-field="result.queryString"/>
+                <set field="viewIndex" from-field="parameters.VIEW_INDEX" type="Integer" default-value="0"/>
+                <property-to-field resource="widget" property="widget.form.defaultViewSize" field="viewSizeDefaultValue"/>
+                <set field="viewSize" from-field="parameters.VIEW_SIZE" type="Integer" default-value="${viewSizeDefaultValue}"/>
+                
+                <!-- entries needed for lookup ajax auto completer -->
+                <!-- required: entity to search in -->
+                <set field="entityName" value="PartyNameRoleView"/>
+                
+                <!-- required: fields to search a match -->
+                <!-- the first element from searchFields is returned after user selection --> 
+                <!-- it might be hidden based on widget.autocompleter.displayReturnField property in widget.properties -->                
+                <set field="searchFields" value="[partyId, firstName, middleName, lastName, groupName]"/>
+ 
+                <!-- optional: fields to display in the given order, default is searchFields -->
+                <set field="displayFields" value="[firstName, lastName, groupName]"/>
+                
+                <!-- optional: additional entity condition (named andCondition) added to search query -->
+                <script location="component://party/webapp/partymgr/WEB-INF/actions/party/StatusCondition.groovy"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="lookupPartyForRegionManager" location="component://haze/widget/SalesManagerForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="listLookupPartyForRegionManager" location="component://haze/widget/SalesManagerForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+	<screen name="FindDealers">
+        <section>
+            <actions>
+                <set field="titleProperty" value="PageTitleDealer"/>
+                <set field="headerItem" value="dealer"/>
+                <set field="tabButtonItem" value="ViewDealer"/>
+                <set field="viewIndex" from-field="parameters.VIEW_INDEX" type="Integer"/>
+                <property-to-field resource="widget" property="widget.form.defaultViewSize" field="viewSizeDefaultValue"/>
+                <set field="viewSize" from-field="parameters.VIEW_SIZE" type="Integer" default-value="${viewSizeDefaultValue}"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="CommonDealerDecorator" location="component://haze/widget/CommonScreens.xml">
+                    <decorator-section name="body">
+                        <decorator-screen name="DealerScreenDecorator" location="component://haze/widget/CommonScreens.xml">
+                        	<decorator-section name="menu-bar">
+                                <container style="button-bar">
+                                    <link  text="${uiLabelMap.AddDealerInfo}" target="AddDealerInfo" style="buttontext create " />
+                                </container>
+                            </decorator-section>
+                            <decorator-section name="search-options">
+                                <include-form name="FindDealers" location="component://haze/widget/SalesManagerForms.xml"/>
+                            </decorator-section>
+                            <decorator-section name="search-results">
+                                <include-form name="ListFindDealers" location="component://haze/widget/SalesManagerForms.xml"/>
+                            </decorator-section>
+                        </decorator-screen>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="AddDealerInfo">
+		<section>
+			<actions>
+				<set field="titleProperty" value="AddDealerInfo"/>
+				<set field="headerItem" value="AddDealerInfo"/>
+				<set field="tabButtonItem" value="AddDealerInfo"/>
+				<set field="partyId" from-field="parameters.partyId" global="true"/>
+                <entity-one entity-name="DealerView" value-field="partyGroup"/>
+                <set field="partyGroup" from-field="partyGroup" global="true"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+					<decorator-section name="body">
+						<screenlet title="${uiLabelMap.AddDealerInfo}">
+		                	<include-form name="AddDealerInfo" location="component://haze/widget/SalesManagerForms.xml"/>
+						</screenlet>
+                   	</decorator-section>
+               	</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	
+	<screen name="EditDealerInfo">
+		<section>
+			<actions>
+				<set field="titleProperty" value="EditDealerInfo"/>
+				<set field="headerItem" value="EditDealerInfo"/>
+				<set field="tabButtonItem" value="EditDealerInfo"/>
+				<set field="partyId" from-field="parameters.partyId" global="true"/>
+                <entity-one entity-name="DealerView" value-field="partyGroup"/>
+                <set field="partyGroup" from-field="partyGroup" global="true"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+					<decorator-section name="body">
+						<screenlet title="${uiLabelMap.UpdateDealerInfo}">
+		                	<include-form name="EditDealerInfo" location="component://haze/widget/SalesManagerForms.xml"/>
+						</screenlet>
+                   	</decorator-section>
+               	</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+
+	<screen name="ViewContactMechs">
+        <section>
+            <actions>
+            	<set field="headerItem" value="FindFacilityAddress"/>
+                <set field="tabButtonItem" value="ViewContactMechs"/>
+                <script location="component://product/webapp/facility/WEB-INF/actions/facility/ViewContactMechs.groovy"/>
+                <set field="productStoreId" from-field="parameters.facilityId"/>
+                <set field="facilityId" from-field="parameters.facilityId"/>
+                <entity-one entity-name="Facility" value-field="facility"/>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap"/>
+                <property-map resource="PartyUiLabels" map-name="uiLabelMap" global="true"/>
+            </actions>
+            <widgets>
+            	<decorator-screen name="CommonProductStoreDecorator" location="${parameters.mainDecoratorLocation}">
+            		<decorator-section name="body">
+                    	<include-menu name="FacilityContactTabBar" location="component://haze/widget/SalesManagerMenus.xml"/>
+                        <link target="EditContactMech" text="${uiLabelMap.ProductNewContactMech}" style="buttontext">
+                            <parameter param-name="facilityId"/>
+                        </link>
+                        <screenlet title="${uiLabelMap.PartyContactInformation}">
+                            <platform-specific><html><html-template location="component://salesmanager/webapp/salesmanager/facility/ViewContactMechs.ftl"/></html></platform-specific>
+                        </screenlet>
+            		</decorator-section>
+            	</decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="EditContactMech">
+        <section>
+            <actions>
+            	<set field="headerItem" value="FindFacilityAddress"/>
+                <set field="tabButtonItem" value="ViewContactMechs"/>
+                <script location="component://product/webapp/facility/WEB-INF/actions/facility/EditContactMech.groovy"/>
+                
+                <set field="dependentForm" value="editcontactmechform"/>
+                <set field="paramKey" value="countryGeoId"/>
+                <set field="mainId" value="countryGeoId"/>
+                <set field="dependentId" value="stateProvinceGeoId"/>
+                <set field="requestName" value="getAssociatedStateList"/>
+                <set field="responseName" value="stateList"/>
+                <set field="dependentKeyName" value="geoId"/>
+                <set field="descName" value="geoName"/>
+                <set field="selectedDependentOption" from-field="mechMap.postalAddress.stateProvinceGeoId" default-value="_none_"/> 
+                               
+                <set field="facilityId" from-field="parameters.facilityId"/>
+                <entity-one entity-name="Facility" value-field="facility"/>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap"/>
+                <property-map resource="PartyUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="${uiLabelMap.PageTitleNewFacilityContactMech}"/>
+            </actions>
+            <widgets>
+                <section>
+                    <condition>
+                        <not><if-empty field="parameters.contactMechId"/></not>
+                    </condition>
+                    <actions>
+                        <set field="title" value="${uiLabelMap.PageTitleEditFacilityContactMech}"/>
+                    </actions>
+                    <widgets/>
+                </section>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <platform-specific>
+                            <html>
+                                <html-template location="component://common/webcommon/includes/setDependentDropdownValuesJs.ftl"/>
+                                <html-template location="component://product/webapp/facility/facility/EditContactMech.ftl"/>
+                            </html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+</screens>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+    <!-- ========================================================= -->
+    <!-- ======================== Defaults ======================= -->
+    <!-- ========================================================= -->
+    <title>Entity of ZuczugCommon Component</title>
+    <description>None</description>
+    <copyright></copyright>
+    <version></version>
+    
+    <view-entity entity-name="AllMateralsFeatureView" package-name="">
+    	<description>所有面辅料的Feature，提高view查询速度</description>
+    	<member-entity entity-alias="PF" entity-name="ProductFeature"></member-entity>
+    	<member-entity entity-alias="PFA" entity-name="ProductFeatureAppl"></member-entity>
+    	<alias-all entity-alias="PF"></alias-all>
+    	<alias-all entity-alias="PFA"></alias-all>
+    	<view-link entity-alias="PF" rel-entity-alias="PFA">
+    		<key-map field-name="productFeatureId" rel-field-name="productFeatureId"/>
+    	</view-link>
+    	<entity-condition>
+    		<condition-list combine="and">
+	   			<condition-expr entity-alias="PF" field-name="productFeatureTypeId" operator="equals" value="MATERIAL_TYPE"/>
+	   			<condition-expr entity-alias="PFA" field-name="productFeatureApplTypeId" operator="equals" value="STANDARD_FEATURE"/>
+    		</condition-list>
+    	</entity-condition>
+    </view-entity>
+    
+    
+    <view-entity entity-name="AllColorFeatureView" package-name="">
+    	<description>所有颜色的Feature，提高view查询速度</description>
+    	<member-entity entity-alias="PF" entity-name="ProductFeature"></member-entity>
+    	<member-entity entity-alias="PFA" entity-name="ProductFeatureAppl"></member-entity>
+    	<alias-all entity-alias="PF"></alias-all>
+    	<alias-all entity-alias="PFA"></alias-all>
+    	<view-link entity-alias="PF" rel-entity-alias="PFA">
+    		<key-map field-name="productFeatureId" rel-field-name="productFeatureId"/>
+    	</view-link>
+    	<entity-condition>
+   			<condition-expr entity-alias="PF" field-name="productFeatureTypeId" operator="equals" value="COLOR"/>
+    	</entity-condition>
+    </view-entity>
+    
+    <view-entity entity-name="AllSizeFeatureView" package-name="">
+    	<description>所有尺码的Feature，提高view查询速度</description>
+    	<member-entity entity-alias="PF" entity-name="ProductFeature"></member-entity>
+    	<member-entity entity-alias="PFA" entity-name="ProductFeatureAppl"></member-entity>
+    	<alias-all entity-alias="PF"></alias-all>
+    	<alias-all entity-alias="PFA"></alias-all>
+    	<view-link entity-alias="PF" rel-entity-alias="PFA">
+    		<key-map field-name="productFeatureId" rel-field-name="productFeatureId"/>
+    	</view-link>
+    	<entity-condition>
+   			<condition-expr entity-alias="PF" field-name="productFeatureTypeId" operator="equals" value="SIZE"/>
+    	</entity-condition>
+    </view-entity>
+    
+    <view-entity entity-name="AllMateralsFeatureStandardView" package-name="">
+    	<description>所有面辅料的Feature，提高view查询速度</description>
+    	<member-entity entity-alias="PF" entity-name="ProductFeature"></member-entity>
+    	<member-entity entity-alias="PFA" entity-name="ProductFeatureAppl"></member-entity>
+    	<alias-all entity-alias="PF"></alias-all>
+    	<alias-all entity-alias="PFA"></alias-all>
+    	<view-link entity-alias="PF" rel-entity-alias="PFA">
+    		<key-map field-name="productFeatureId" rel-field-name="productFeatureId"/>
+    	</view-link>
+    	<entity-condition>
+    		<condition-list combine="and">
+	   			<condition-expr entity-alias="PF" field-name="productFeatureTypeId" operator="equals" value="COLOR"/>
+	   			<condition-expr entity-alias="PFA" field-name="productFeatureApplTypeId" operator="equals" value="STANDARD_FEATURE"/>
+    		</condition-list>
+    	</entity-condition>
+    </view-entity>
+    
+    <view-entity entity-name="AllProductGroupMember" package-name="">
+    	<description>所有组别的分类的商品，提高view查询速度</description>
+    	<member-entity entity-alias="PC" entity-name="ProductCategory"></member-entity>
+		<member-entity entity-alias="PCM" entity-name="ProductCategoryMember"></member-entity>
+		<alias name="productCategoryId" entity-alias="PC"></alias>
+		<alias name="categoryName" entity-alias="PC"></alias>
+		<alias name="productId" entity-alias="PCM"></alias>
+    	<view-link entity-alias="PC" rel-entity-alias="PCM">
+			<key-map field-name="productCategoryId"/>
+		</view-link>
+    	<entity-condition>
+			<condition-expr entity-alias="PC" field-name="productCategoryTypeId" operator="equals" value="GROUPNAME"/>
+    	</entity-condition>
+    </view-entity>
+    
+    <view-entity entity-name="AllProductWaveCategory" package-name="">
+    	<description>所有波段的分类的商品，提高view查询速度</description>
+    	<member-entity entity-alias="PC" entity-name="ProductCategory"></member-entity>
+		<member-entity entity-alias="PCM" entity-name="ProductCategoryMember"></member-entity>
+		<alias name="productCategoryId" entity-alias="PC"></alias>
+		<alias name="categoryName" entity-alias="PC"></alias>
+		<alias name="productId" entity-alias="PCM"></alias>
+    	<view-link entity-alias="PC" rel-entity-alias="PCM">
+			<key-map field-name="productCategoryId"/>
+		</view-link>
+    	<entity-condition>
+			<condition-expr entity-alias="PC" field-name="productCategoryTypeId" operator="equals" value="WAVE"/>
+    	</entity-condition>
+    </view-entity>
+    
+
+</entitymodel>

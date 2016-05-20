@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-form.xsd">
+
+	
+	<form name="PartnersBasicInfoInput" type="single" target="FindInventoryItem"
+        header-row-style="header-row" default-table-style="basic-table" default-map-name="partyGroup">
+        <actions>
+        	<entity-one value-field="partyGroup" entity-name="PartyGroup"></entity-one>
+        </actions>
+        <field name="groupName" title="${uiLabelMap.CompanyName}"><text></text></field>
+        <field name="faren" title="${uiLabelMap.FaRenXinMing}"><text></text></field>
+        <field name="zijin" title="${uiLabelMap.ZhuCeZiJin}"><text></text></field>
+        <field name="fanwei" title="${uiLabelMap.YingYeFanWei}"><text></text></field>
+        <field name="submitButton" title="${uiLabelMap.CommonSave}">
+            <submit button-type="button"/>
+        </field>
+    </form>
+    
+    <form name="SearchPartnersForm" type="single" target="PartnersList"
+        header-row-style="header-row" default-table-style="basic-table">
+        <field name="groupName" title="${uiLabelMap.CompanyName}"><text-find></text-find> </field>
+        <field name="partyTypeId"><hidden value="PARTY_GROUP"/></field>
+        <field name="lookupFlag"><hidden value="Y"/></field>
+        <field name="roleTypeId" title="${uiLabelMap.AccountingInvoiceRoles}" required-field="true" tooltip="${uiLaelMap.YouNeedSelectRole}">
+        	<drop-down>
+        		<option key="CUSTOMER" description="${uiLabelMap['PartyRelationshipType.partyRelationshipName.CUSTOMER_REL']}"/>
+                <option key="SUPPLIER" description="${uiLabelMap['PageTitleListSupplierProduct']}"/>
+                <option key="PARTNER" description="${uiLabelMap['PartyRelationshipType.partyRelationshipName.PARTNERSHIP']}"/>
+                <option key="COMPETITOR" description="${uiLabelMap['RoleType.description.COMPETITOR']}"/>
+        	</drop-down>
+        </field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}">
+            <submit button-type="button"/>
+        </field>
+    </form>
+    
+    
+    <form name="ListPartnersForm" type="list" list-name="partyList" paginate-target="FindFacility"
+        odd-row-style="alternate-row"  header-row-style="header-row-2" default-table-style="basic-table hover-bar">
+        <actions>
+            <service service-name="findParty" auto-field-map="parameters" result-map="result" result-map-list="partyList"/>
+        </actions>
+        <row-actions>
+        	<entity-one value-field="pg" entity-name="PartyGroup">
+        		<field-map field-name="partyId" from-field="partyId"/>
+        	</entity-one>
+        	<set field="roleTyleList" value="${groovy:com.zuczug.party.ZuczugPartyUtil.getPartyRolesString(delegator, partyId)}" type="PlainString"/>
+        	<set field="location" value="${groovy: com.zuczug.party.ZuczugPartyUtil.getPartyPostalAddress(delegator, partyId, &quot;PRIMARY_LOCATION&quot;)}" type="Object"/>
+        </row-actions>
+        <field name="partyId" title="${uiLabelMap.Partners}${uiLabelMap.CommonId}" widget-style="buttontext">
+            <hyperlink description="${partyId}" target="EditPartner">
+            	<parameter param-name="partyId"/>
+            </hyperlink>
+        </field>
+        <field name="groupName" title="${uiLabelMap.CompanyName}" entry-name="pg.groupName">
+            <display></display>
+        </field>
+        <field name="roleTyleList" title="${uiLabelMap.AccountingInvoiceRoles}">
+        	<display></display>
+        </field>
+        <field name="fullAddress" title="${uiLabelMap.ContactAddress}" entry-name="location.fullAddress">
+        	<display></display>
+        </field>
+        <field name="idNumber" title="${uiLabelMap.TheBusinesslicense}">
+        	<display></display>
+        </field>
+    </form>
+    
+    <form name="AddPartyRole" type="single" title="Add a role to party" target="addrole">
+        <field name="partyId"><hidden value="${parameters.partyId}"/></field>
+        <field name="roleTypeId">
+            <drop-down allow-empty="false">
+                <option key="CUSTOMER" description="${uiLabelMap['PartyRelationshipType.partyRelationshipName.CUSTOMER_REL']}"/>
+                <option key="SUPPLIER" description="${uiLabelMap['PageTitleListSupplierProduct']}"/>
+                <option key="PARTNER" description="${uiLabelMap['PartyRelationshipType.partyRelationshipName.PARTNERSHIP']}"/>
+                <option key="COMPETITOR" description="${uiLabelMap['RoleType.description.COMPETITOR']}"/>
+            </drop-down>
+        </field>
+        <field name="add" title="${uiLabelMap.CommonAdd}"><submit/></field>
+    </form>
+    
+    
+    <form name="PartnerFinAccountList" type="list" list-name="list" paginate-target="FindFacility"
+        odd-row-style="alternate-row"  header-row-style="header-row-2" default-table-style="basic-table hover-bar">
+        <actions>
+            <entity-and entity-name="FinAccount" list="list">
+            	<field-map field-name="ownerPartyId" from-field="parameters.partyId"/>
+            </entity-and>
+        </actions>
+        <field name="finAccountId" widget-style="buttontext">
+        	<hyperlink description="${finAccountId}" target="EditFinAccount">
+        		<parameter param-name="finAccountId"/>
+        		<parameter param-name="partyId"/>
+        	</hyperlink>
+        </field>
+        <field name="finAccountTypeId">
+        	<display-entity entity-name="FinAccountType" description="${description}" key-field-name="finAccountTypeId"></display-entity>
+        </field>
+        <field name="statusId">
+        	<display-entity entity-name="StatusItem" description="${description}" key-field-name="statusId"></display-entity>
+        </field>
+        <field name="finAccountName" title="${uiLabelMap.BankName}"><display></display></field>
+        <field name="finAccountCode" title="${uiLabelMap.Accounting}"><display></display></field>
+        <field name="currencyUomId"><display></display></field>
+        <field name="delBtn" title=" ">
+        	<hyperlink description="${uiLabelMap.CommonDelete}" target="deleteFinAccount" confirmation-message="删除这个银行账户吗？">
+        		<parameter param-name="finAccountId"/>
+        		<parameter param-name="partyId"/>
+        	</hyperlink>
+        </field>
+    </form>
+    
+    <form name="EditFinAccount" type="single" target="updateFinAccount" default-map-name="finAccount"
+        header-row-style="header-row" default-table-style="basic-table">
+        <actions>
+            <entity-one entity-name="StatusItem" value-field="currentStatus" auto-field-map="false">
+                <field-map field-name="statusId" from-field="finAccount.statusId"/>
+            </entity-one>
+        </actions>
+        <alt-target use-when="finAccount==null" target="createFinAccount"/>
+
+        <field name="finAccountId" use-when="finAccountId!=null" tooltip="${uiLabelMap.CommonNotModifRecreat}"><display/></field>
+        <field name="partyId"><hidden value="${partyId}"/></field>
+
+        <field name="finAccountName" title="${uiLabelMap.BankName}"><text size="20"/></field>
+        <field name="finAccountCode" title="${uiLabelMap.Accounting}"><text size="20"/></field>
+        <field name="finAccountTypeId" title="${uiLabelMap.FormFieldTitle_finAccountType}">
+            <hidden value="BANK_ACCOUNT"/>
+        </field>
+        <field name="currencyUomId" title="${uiLabelMap.CommonCurrency}">
+            <drop-down no-current-selected-key="${defaultOrganizationPartyCurrencyUomId}">
+                <entity-options key-field-name="uomId" description="${description} - ${abbreviation}" entity-name="Uom">
+                    <entity-constraint name="uomTypeId" operator="equals" value="CURRENCY_MEASURE"/>
+                    <entity-order-by field-name="description"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field name="organizationPartyId">
+        	<hidden value="${partyId}"/>
+        </field>
+        <field name="ownerPartyId">
+        	<hidden value="${partyId}"/>
+        </field>
+        <field name="statusId" title="${uiLabelMap.CommonStatus}">
+            <hidden value="FNACT_ACTIVE"/>
+        </field>
+        <field name="submitButton" use-when="finAccountId==null" title="${uiLabelMap.CommonCreate}" widget-style="smallSubmit"><submit button-type="button"/></field>
+        <field name="submitButton" use-when="finAccountId!=null" title="${uiLabelMap.CommonUpdate}" widget-style="smallSubmit"><submit button-type="button"/></field>
+    </form>
+    
+    <form name="ListBillingAccountsByParty" type="list" list-name="billingAccounts" paginate-target="FindBillingAccount"
+        odd-row-style="alternate-row" default-table-style="basic-table hover-bar">
+        <field name="billingAccountId" widget-style="buttontext">
+            <hyperlink description="${billingAccountId}" target="EditBillingAccount">
+                <parameter param-name="billingAccountId"/>
+                <parameter param-name="partyId" from-field="${partyId}"/>
+            </hyperlink>
+        </field>
+        <field name="accountLimit" title="${uiLabelMap.AcctgTransType.description.CREDIT_LINE}">
+            <display type="currency" currency="${billingAccount.accountCurrencyUomId}"/>
+        </field>
+        <field name="accountBalance" title="${uiLabelMap.Balance}"><display type="currency"/></field>
+        <field name="description"><display/></field>
+        <field name="fromDate"><display/></field>
+        <field name="thruDate"><display/></field>
+        <field name="partyId" title="${uiLabelMap.PartyPartyId}"><display description="${parameters.partyId}"/></field>
+        <field name="roleTypeId" title="${uiLabelMap.AccountingRoleType}"><display-entity entity-name="RoleType"/></field>
+    </form>
+    
+    <form name="EditBillingAccount" type="single" target="updateBillingAccount" title=""
+        header-row-style="header-row" default-table-style="basic-table" default-map-name="billingAccount">
+        <actions>
+            <set field="availableBalance" value="${bsh:billingAccount != null ? org.ofbiz.accounting.payment.BillingAccountWorker.getBillingAccountBalance(billingAccount) : 0}" type="BigDecimal"/>
+        </actions>
+        <alt-target use-when="billingAccount==null" target="createBillingAccount"/>
+		
+        <field use-when="billingAccount!=null" name="billingAccountId" tooltip="${uiLabelMap.CommonNotModifRecreat}"><display/></field>
+        <field name="accountLimit" title="${uiLabelMap['AcctgTransType.description.CREDIT_LINE']}"><text size="10"/></field>
+        <field name="description"><text size="60"/></field>
+
+
+        <field name="partyId"><hidden value="${partyId}"/></field>
+        <field use-when="roleTypeId != null" name="roleTypeId"><hidden/></field>
+        <field use-when="roleTypeId == null" name="roleTypeId"><hidden value="BILL_TO_CUSTOMER"/></field>
+
+        <field name="accountCurrencyUomId">
+            <drop-down allow-empty="false" no-current-selected-key="${defaultOrganizationPartyCurrencyUomId}">
+                <entity-options key-field-name="uomId" description="${description} - ${abbreviation}" entity-name="Uom">
+                    <entity-constraint name="uomTypeId" operator="equals" value="CURRENCY_MEASURE"/>
+                    <entity-order-by field-name="description"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field name="fromDate">
+        	<date-time/>
+        </field>
+        <field name="thruDate">
+        	<date-time/>
+        </field>
+        <field name="availableBalance" title="${uiLabelMap.AccountingBillingAvailableBalance}" tooltip="${uiLabelMap.AccountingBillingAvailableBalanceMessage}">
+            <display type="currency" currency="${billingAccount.accountCurrencyUomId}"/>
+        </field>
+        <field name="submitButton" title="${uiLabelMap.CommonCreate}" use-when="billingAccount == null" widget-style="smallSubmit"><submit button-type="button"/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonUpdate}" use-when="billingAccount!=null" widget-style="smallSubmit"><submit button-type="button"/></field>
+    </form>
+</forms>

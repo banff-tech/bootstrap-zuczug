@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>蓝山项目关于转数据，修复数据的services</description>
+    <vendor></vendor>
+    <version>1.0</version>
+
+    <service name="zuczug.fixData" engine="groovy" auth="true" transaction-timeout="7200"
+            location="component://zuczugcommon/webapp/zuczugcommon/WEB-INF/actions/ZuczugDataHelper.groovy" 
+            invoke="fixData">
+        <description>
+        	修复数据
+        </description>
+    </service>
+    
+    <service name="zuczug.fixAccessoryBomCalcMethod" engine="groovy" auth="true" transaction-timeout="7200"
+            location="component://zuczugcommon/webapp/zuczugcommon/WEB-INF/actions/ZuczugDataHelper.groovy" 
+            invoke="fixAccessoryBomCalcMethod">
+        <description>
+        	字段对应的service为,cmToMeterComponentFormula，在producttechnology模块下。有两个任务要做。1. 写个service，所有已经有的BOM数据要加上这个字段
+        </description>
+    </service>
+    
+     <service name="productFeatureToCategory" engine="java"
+            location="com.zuczug.util.ZuczugFixDataServices" invoke="productFeatureToCategory" transaction-timeout="7200">
+        <description>
+        	把ProductFeatureAppl的数据转移到ProductCategoryMember中
+        </description>
+    </service>
+    
+    <service name="oldWaveToNewWave" engine="java"
+            location="com.zuczug.util.ZuczugFixDataServices" invoke="oldWaveToNewWave" transaction-timeout="7200">
+        <description>
+        	把ProductFeatureAppl波段的数据转移到ProductCategoryMember中
+        </description>
+    </service>
+    
+    <service name="zuczug.copyIntroductionDateToReleaseDate" engine="groovy" auth="true" transaction-timeout="7200"
+            location="component://zuczugcommon/webapp/zuczugcommon/WEB-INF/actions/ZuczugDataHelper.groovy" 
+            invoke="copyIntroductionDateToReleaseDate">
+        <description>
+        	copy IntroductionDate To ReleaseDate
+        </description>
+    </service>
+    
+    <service name="zuczug.removeAllThruProductFeature" engine="groovy" auth="true" transaction-timeout="7200"
+            location="component://zuczugcommon/webapp/zuczugcommon/WEB-INF/actions/ZuczugDataHelper.groovy" 
+            invoke="removeAllThruProductFeature">
+        <description>
+        	removeAllThruProductFeature
+        </description>
+    </service>
+    
+    <service name="zuczug.fixRealProductAndDesignProductAssoc" engine="simple" auth="true" transaction-timeout="7200"
+            location="component://zuczugcommon/script/ZuczugProductServices.xml" 
+            invoke="fixRealProductAndDesignProductAssoc">
+        <description>
+        	修复正式商品和待定商品的关系数据
+        </description>
+    </service>
+    
+    <service name="zuczug.removeProductAssocThruDate" engine="groovy" auth="true" transaction-timeout="7200"
+            location="component://zuczugcommon/webapp/zuczugcommon/WEB-INF/actions/ZuczugDataHelper.groovy" 
+            invoke="removeProductAssocThruDate">
+        <description>
+        	removeProductAssocThruDate
+        </description>
+    </service>
+    
+    <service name="zuczug.fixOrderInvoiceAndShipmentData" engine="groovy" auth="true" transaction-timeout="7200"
+            location="component://zuczugcommon/webapp/zuczugcommon/WEB-INF/actions/ZuczugDataHelper.groovy" 
+            invoke="fixOrderInvoiceAndShipmentData">
+        <description>
+        	修复订单由于收货问题导致的发票信息不准确的数据
+        </description>
+    </service>
+    
+    
+    <service name="zuczug.fix161ProductIntorductionDate" engine="groovy" auth="true" transaction-timeout="7200"
+            location="component://zuczugcommon/webapp/zuczugcommon/WEB-INF/actions/ZuczugDataHelper.groovy" 
+            invoke="fix161ProductIntorductionDate">
+        <description>
+        	修复所有161的正式商品的intorductionDate为2015年07-30号
+        </description>
+    </service>
+
+    
+    <service name="setProductOfNoSupplierProductData" engine="java"
+            location="com.zuczug.product.ZuczugProductServices" invoke="setProductOfNoSupplierProductData">
+        <description>
+        	为没有SupplierProduct数据的非虚拟商品 设置他关联的虚拟商品的supplierProduct数据
+        </description>
+        <attribute mode="OUT" name="errorId" optional="true" type="String"/>
+        <attribute mode="OUT" name="successId" optional="true" type="String"/>
+    </service>
+
+    <service name="zuczug.fix161QuoteUnitPrice" engine="groovy" auth="true" transaction-timeout="7200"
+            location="component://zuczugcommon/webapp/zuczugcommon/WEB-INF/actions/ZuczugDataHelper.groovy" 
+            invoke="fix161QuoteUnitPrice">
+        <description>
+        	修复所有161的Quote中unitPrice为0的问题数据
+        </description>
+    </service>
+    
+    <service name="zuczug.fixNoVirtualRepair" engine="simple"
+    	location="component://zuczugcommon/script/ZuczugDataServices.xml" invoke="fixNoVirtualRepair">
+    	<description>
+    		修复所有：非虚拟商品有关联变型商品，并且此非虚拟商品无订单、无库存、无Bom的数据。修复的结果是将非虚拟修复成虚拟
+    	</description>
+    	<attribute name="noVirtualList" mode="OUT" type="List" optional="false"></attribute>
+    </service>
+    
+    <service name="removeAllRealProductEngineerBOM" engine="groovy"
+    	location="component://zuczugcommon/webapp/zuczugcommon/WEB-INF/actions/ZuczugDataHelper.groovy" invoke="removeAllRealProductEngineerBOM">
+    	<description>
+    		删除所有正式商品的设计BOM
+    	</description>
+    </service>
+    
+    
+    <service name="replceSize4BomFromSize4" engine="groovy" transaction-timeout="7200"
+    	location="component://zuczugcommon/webapp/zuczugcommon/WEB-INF/actions/ZuczugDataHelper.groovy" invoke="replceSize4BomFromSize4">
+    	<description>
+    		把所有设计商品的非4码的BOM，并且是非虚拟非变型的（设计师没有填颜色的），如果4码对应的是它的变型，就覆盖过去
+    	</description>
+    	<attribute name="result" mode="OUT" type="List" optional="true"></attribute>
+    </service>
+	
+	<service name="createProductToBomProduct" engine="java"
+            location="com.zuczug.util.ZuczugFixDataServices" invoke="createProductToBomProduct">
+        <description>
+        	根据inventoryTransfer，生成shipment对象
+        </description>
+        <attribute mode="IN" name="productId" optional="false" type="String"/>
+        <attribute mode="IN" name="BomProduct" optional="false" type="String"/>
+        <attribute mode="IN" name="quantity" optional="true" type="BigDecimal"/>
+        <attribute mode="IN" name="instruction" optional="true" type="String"/>
+        <attribute mode="OUT" name="result" optional="true" type="Map"/>
+    </service>
+
+    <service name="zuczug.fixRetailDefaultPrice" engine="simple"
+    	location="component://zuczugcommon/script/ZuczugDataServices.xml" invoke="fixRetailDefaultPrice" transaction-timeout="7200">
+    	<description>
+    		为所有正式商品加上RETAIL的default价格，RETAIL default价格就是list price
+    	</description>
+    </service>
+    
+    <service name="zuczug.findProductAndDesignError" engine="simple"
+    	location="component://zuczugcommon/script/ZuczugDataServices.xml" invoke="findProductAndDesignError" transaction-timeout="7200">
+    	<description>
+    		找到正式商品对应了2个设计商品
+    		正式商品的颜色和设计商品的颜色不一样
+    	</description>
+    	<attribute name="result" mode="OUT" type="String" optional="true"></attribute>
+    </service>
+    
+    <service name="zuczug.findDesignAndProductError" engine="simple"
+    	location="component://zuczugcommon/script/ZuczugDataServices.xml" invoke="findDesignAndProductError" transaction-timeout="7200">
+    	<description>
+    		找到设计商品对应2个正式商品
+    		正式商品的颜色和设计商品的颜色不一样
+    	</description>
+    	<attribute name="result" mode="OUT" type="String" optional="true"></attribute>
+    </service>
+    
+    <service name="zuczug.fixPriductImageUrl" engine="simple"
+    	location="component://zuczugcommon/script/ZuczugDataServices.xml" invoke="fixPriductImageUrl" transaction-timeout="7200">
+    	<description>
+    		找到有productContent的图片，全部更新到product
+    	</description>
+    	<attribute name="result" mode="OUT" type="String" optional="true"></attribute>
+    </service>
+    
+    <service name="FixZuczugCode" engine="java" transaction-timeout="7200"
+            location="com.zuczug.util.ZuczugFixDataServices" invoke="FixZuczugCode">
+        <description>
+        	没有素然物料编号的商品通过商品ID重新赋值
+        </description>        
+        <attribute mode="OUT" name="result" optional="true" type="Map"/>
+    </service>
+    
+    <service name="zuczugfix.removeVariantProductFromWave" engine="groovy" transaction-timeout="7200"
+            location="component://zuczugcommon/webapp/zuczugcommon/WEB-INF/actions/ZuczugDataHelper.groovy" invoke="removeVariantProductFromWave">
+        <description>
+        	把虚拟商品从波段分类中移除 by sven
+        </description>        
+    </service>
+    
+    <service name="zuczugfix.rebuildZuczugClothingColorTable" engine="groovy" transaction-timeout="7200"
+            location="component://zuczugcommon/webapp/zuczugcommon/WEB-INF/actions/ZuczugDataHelper.groovy" invoke="rebuildZuczugClothingColorTable">
+        <description>
+        	把目前的色卡表的数据，加到一个新的productFeatureCategory中去 by sven
+        </description>        
+    </service>
+    
+    <service name="zuczugfix.quickReceiveBOMWithSKU" engine="groovy" transaction-timeout="7200"
+            location="component://zuczugcommon/webapp/zuczugcommon/WEB-INF/actions/ZuczugDataHelper.groovy" invoke="quickReceiveBOMWithSKU">
+        <description>
+        	快速在一个仓库内接收一个SKU的BOM，数量是1000件【仅限测试，不要在威震天跑】 by sven
+        </description> 
+        <attribute name="facilityId" mode="IN" type="String"></attribute>       
+        <attribute name="productId" mode="IN" type="String"></attribute>       
+    </service>
+    
+    <service name="zuczugfix.putRealProductsInCategory" engine="java"
+            location="com.zuczug.util.ZuczugFixDataServices" invoke="putRealProductsInCategory">
+        <description>
+        	把N(N>=1)个商品放入指定分类中
+        </description>
+        <attribute mode="IN" name="productId" optional="true" type="String"/>
+        <attribute mode="IN" name="productIdLike" optional="true" type="String"/>
+        <attribute mode="IN" name="seasonId" optional="true" type="String"/>
+        <attribute mode="IN" name="seriesId" optional="true" type="String"/>
+        <attribute mode="IN" name="productTypeId" optional="false" type="String"/>
+        <attribute mode="IN" name="toCategoryId" optional="false" type="String"/>
+    </service>
+</services>

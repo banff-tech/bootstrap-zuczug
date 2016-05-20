@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site-conf xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/site-conf.xsd">
+    <!-- The controller elements that are common to all OFBiz components
+         can be found in the following xml file. A component can override the
+         elements found in the common-controller.xml file. -->
+    
+    <request-map uri="FindBom">
+    	<description>Find Bom</description>
+    	<security auth="true" https="false"/>
+    	<response name="success" type="view" value="FindBom"></response>
+    	<response name="error" type="view" value="FindBom"></response>
+    </request-map>
+    
+    
+    <view-map name="FindBom" type="screen" page="component://haze/widget/ManufactScreens.xml#FindBom"/>
+    
+</site-conf>

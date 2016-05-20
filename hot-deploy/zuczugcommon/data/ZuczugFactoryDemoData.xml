@@ -1,0 +1,984 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-engine-xml>
+	<Party partyId="FAC_XL" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+	<PartyGroup partyId="FAC_XL" groupName="夏霖"/>
+	<PartyRole partyId="FAC_XL" roleTypeId="SUPPLIER"/>
+	<PartyRole partyId="FAC_XL" roleTypeId="MANUFACTURER"/>
+	<Facility facilityId="FAC_XL" facilityTypeId="PLANT" facilityName="夏霖"  ownerPartyId="FAC_XL" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+	<ContactMech contactMechId="FAC_XL_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_XL_CM" address1="松江区九亭镇同利路133号155-116" directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_XL_CM" facilityId="FAC_XL" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_XL_CM" facilityId="FAC_XL" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+	<ContactMech contactMechId="FAC_XL_CM1" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_XL_CM1" address1="松江区 九亭镇 金马路159号2号5楼" directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_XL_CM1" facilityId="FAC_XL" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_XL_CM1" facilityId="FAC_XL" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+	
+	
+	<Party partyId="FAC_YX" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+	<PartyGroup partyId="FAC_YX" groupName="依炫"/>
+	<PartyRole partyId="FAC_YX" roleTypeId="SUPPLIER"/>
+	<PartyRole partyId="FAC_YX" roleTypeId="MANUFACTURER"/>
+	<Facility facilityId="FAC_YX" facilityTypeId="PLANT" facilityName="依炫"  ownerPartyId="FAC_YX" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+	<ContactMech contactMechId="FAC_YX_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_YX_CM" address1="泰兴市江平南路58号" directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_YX_CM" facilityId="FAC_YX" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_YX_CM" facilityId="FAC_YX" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+	<ContactMech contactMechId="FAC_YX_CM1" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_YX_CM1" address1="泰兴市滨江镇卢碾村" directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_YX_CM1" facilityId="FAC_YX" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_YX_CM1" facilityId="FAC_YX" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+	
+	<Party partyId="FAC_JS" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+	<PartyGroup partyId="FAC_JS" groupName="俊水"/>
+	<PartyRole partyId="FAC_JS" roleTypeId="SUPPLIER"/>
+	<PartyRole partyId="FAC_JS" roleTypeId="MANUFACTURER"/>
+	<Facility facilityId="FAC_JS" facilityTypeId="PLANT" facilityName="俊水"  ownerPartyId="FAC_JS" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+	<ContactMech contactMechId="FAC_JS_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_JS_CM" address1="浦东奉贤区金汇镇益北路五宅三路616-618号" directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_JS_CM" facilityId="FAC_JS" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_JS_CM" facilityId="FAC_JS" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+	
+	<Party partyId="FAC_SR_BF" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+	<PartyGroup partyId="FAC_SR_BF" groupName="素然_版房"/>
+	<PartyRole partyId="FAC_SR_BF" roleTypeId="SUPPLIER"/>
+	<PartyRole partyId="FAC_SR_BF" roleTypeId="MANUFACTURER"/>
+	<Facility facilityId="FAC_SR_BF" facilityTypeId="PLANT" facilityName="素然_版房"  ownerPartyId="FAC_SR_BF" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+	<ContactMech contactMechId="FAC_SR_BF_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_SR_BF_CM" address1="上海市长宁区昭化路357号B栋4楼" directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_SR_BF_CM" facilityId="FAC_SR_BF" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_SR_BF_CM" facilityId="FAC_SR_BF" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+	
+	<Party partyId="FAC_CL" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+	<PartyGroup partyId="FAC_CL" groupName="春浓"/>
+	<PartyRole partyId="FAC_CL" roleTypeId="SUPPLIER"/>
+	<PartyRole partyId="FAC_CL" roleTypeId="MANUFACTURER"/>
+	<Facility facilityId="FAC_CL" facilityTypeId="PLANT" facilityName="春浓"  ownerPartyId="FAC_CL" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+	<ContactMech contactMechId="FAC_CL_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_CL_CM" address1="上海外青松公路白鹤镇朱浦村华家宅84号" directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_CL_CM" facilityId="FAC_CL" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_CL_CM" facilityId="FAC_CL" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+	<Party partyId="FAC_CY" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+	<PartyGroup partyId="FAC_CY" groupName="晨雅"/>
+	<PartyRole partyId="FAC_CY" roleTypeId="SUPPLIER"/>
+	<PartyRole partyId="FAC_CY" roleTypeId="MANUFACTURER"/>
+	<Facility facilityId="FAC_CY" facilityTypeId="PLANT" facilityName="晨雅"  ownerPartyId="FAC_CY" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+	<ContactMech contactMechId="FAC_CY_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_CY_CM" address1="闵行区纪王镇纪鹤路1069号四幢3楼" directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_CY_CM" facilityId="FAC_CY" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_CY_CM" facilityId="FAC_CY" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+	<Party partyId="FAC_SH" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+	<PartyGroup partyId="FAC_SH" groupName="世和"/>
+	<PartyRole partyId="FAC_SH" roleTypeId="SUPPLIER"/>
+	<PartyRole partyId="FAC_SH" roleTypeId="MANUFACTURER"/>
+	<Facility facilityId="FAC_SH" facilityTypeId="PLANT" facilityName="世和"  ownerPartyId="FAC_SH" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+	<ContactMech contactMechId="FAC_SH_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_SH_CM" address1="嘉定区浏翔公路3065号" directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_SH_CM" facilityId="FAC_SH" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_SH_CM" facilityId="FAC_SH" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+	<Party partyId="FAC_JH" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+	<PartyGroup partyId="FAC_JH" groupName="遐和"/>
+	<PartyRole partyId="FAC_JH" roleTypeId="SUPPLIER"/>
+	<PartyRole partyId="FAC_JH" roleTypeId="MANUFACTURER"/>
+	<Facility facilityId="FAC_JH" facilityTypeId="PLANT" facilityName="遐和"  ownerPartyId="FAC_JH" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+	<ContactMech contactMechId="FAC_JH_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_JH_CM" address1="嘉定区嘉行公路3028弄29号" directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_JH_CM" facilityId="FAC_JH" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_JH_CM" facilityId="FAC_JH" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+	<Party partyId="FAC_DL" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+	<PartyGroup partyId="FAC_DL" groupName="碟理"/>
+	<PartyRole partyId="FAC_DL" roleTypeId="SUPPLIER"/>
+	<PartyRole partyId="FAC_DL" roleTypeId="MANUFACTURER"/>
+	<Facility facilityId="FAC_DL" facilityTypeId="PLANT" facilityName="碟理"  ownerPartyId="FAC_DL" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+	<ContactMech contactMechId="FAC_DL_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_DL_CM" address1="上海市延安西路2201号上海国际贸易中心1201室" directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_DL_CM" facilityId="FAC_DL" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_DL_CM" facilityId="FAC_DL" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+	<Party partyId="FAC_XD" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+	<PartyGroup partyId="FAC_XD" groupName="新碟"/>
+	<PartyRole partyId="FAC_XD" roleTypeId="SUPPLIER"/>
+	<PartyRole partyId="FAC_XD" roleTypeId="MANUFACTURER"/>
+	<Facility facilityId="FAC_XD" facilityTypeId="PLANT" facilityName="新碟"  ownerPartyId="FAC_XD" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+	<ContactMech contactMechId="FAC_XD_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_XD_CM" address1="闵行区浦江镇江月路1358号2幢3F" directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_XD_CM" facilityId="FAC_XD" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_XD_CM" facilityId="FAC_XD" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+	<Party partyId="FAC_DS" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+	<PartyGroup partyId="FAC_DS" groupName="东盛"/>
+	<PartyRole partyId="FAC_DS" roleTypeId="SUPPLIER"/>
+	<PartyRole partyId="FAC_DS" roleTypeId="MANUFACTURER"/>
+	<Facility facilityId="FAC_DS" facilityTypeId="PLANT" facilityName="东盛"  ownerPartyId="FAC_DS" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+	<ContactMech contactMechId="FAC_DS_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_DS_CM" address1="上海市松江九亭开发区蒲汇路9号（原阿美德格路8号）" directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_DS_CM" facilityId="FAC_DS" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_DS_CM" facilityId="FAC_DS" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+	<Party partyId="FAC_DD" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+	<PartyGroup partyId="FAC_DD" groupName="东达"/>
+	<PartyRole partyId="FAC_DD" roleTypeId="SUPPLIER"/>
+	<PartyRole partyId="FAC_DD" roleTypeId="MANUFACTURER"/>
+	<Facility facilityId="FAC_DD" facilityTypeId="PLANT" facilityName="东达"  ownerPartyId="FAC_DD" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+	<ContactMech contactMechId="FAC_DD_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_DD_CM" address1="江苏省海安县曲塘镇东工业园区" directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_DD_CM" facilityId="FAC_DD" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_DD_CM" facilityId="FAC_DD" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+	<Party partyId="FAC_BS" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+	<PartyGroup partyId="FAC_BS" groupName="百盛"/>
+	<PartyRole partyId="FAC_BS" roleTypeId="SUPPLIER"/>
+	<PartyRole partyId="FAC_BS" roleTypeId="MANUFACTURER"/>
+	<Facility facilityId="FAC_BS" facilityTypeId="PLANT" facilityName="百盛"  ownerPartyId="FAC_BS" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+	<ContactMech contactMechId="FAC_BS_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_BS_CM" address1="江苏省泰兴溪桥工业园区华溪东路18号" directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_BS_CM" facilityId="FAC_BS" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_BS_CM" facilityId="FAC_BS" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+	<Party partyId="FAC_FT" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+	<PartyGroup partyId="FAC_FT" groupName="丰通"/>
+	<PartyRole partyId="FAC_FT" roleTypeId="SUPPLIER"/>
+	<PartyRole partyId="FAC_FT" roleTypeId="MANUFACTURER"/>
+	<Facility facilityId="FAC_FT" facilityTypeId="PLANT" facilityName="丰通"  ownerPartyId="FAC_FT" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+	<ContactMech contactMechId="FAC_FT_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_FT_CM" address1="江苏省南通市经济技术开发区振兴路32号" directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_FT_CM" facilityId="FAC_FT" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_FT_CM" facilityId="FAC_FT" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+	<Party partyId="FAC_ART" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+	<PartyGroup partyId="FAC_ART" groupName="爱染堂"/>
+	<PartyRole partyId="FAC_ART" roleTypeId="SUPPLIER"/>
+	<PartyRole partyId="FAC_ART" roleTypeId="MANUFACTURER"/>
+	<Facility facilityId="FAC_ART" facilityTypeId="PLANT" facilityName="爱染堂"  ownerPartyId="FAC_ART" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+	<ContactMech contactMechId="FAC_ART_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_ART_CM" address1="松江区新桥镇申港二支路16号" directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_ART_CM" facilityId="FAC_ART" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_ART_CM" facilityId="FAC_ART" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+	<Party partyId="FAC_HY" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+	<PartyGroup partyId="FAC_HY" groupName="华艺"/>
+	<PartyRole partyId="FAC_HY" roleTypeId="SUPPLIER"/>
+	<PartyRole partyId="FAC_HY" roleTypeId="MANUFACTURER"/>
+	<Facility facilityId="FAC_HY" facilityTypeId="PLANT" facilityName="华艺"  ownerPartyId="FAC_HY" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+	<ContactMech contactMechId="FAC_HY_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_HY_CM" address1="江苏海安长江西路88-1号" directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_HY_CM" facilityId="FAC_HY" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_HY_CM" facilityId="FAC_HY" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+	<Party partyId="FAC_YZ" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+	<PartyGroup partyId="FAC_YZ" groupName="依泽"/>
+	<PartyRole partyId="FAC_YZ" roleTypeId="SUPPLIER"/>
+	<PartyRole partyId="FAC_YZ" roleTypeId="MANUFACTURER"/>
+	<Facility facilityId="FAC_YZ" facilityTypeId="PLANT" facilityName="依泽"  ownerPartyId="FAC_YZ" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+	<ContactMech contactMechId="FAC_YZ_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_YZ_CM" address1="青浦区朱家角镇沈太路2119号" directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_YZ_CM" facilityId="FAC_YZ" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_YZ_CM" facilityId="FAC_YZ" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+	<Party partyId="FAC_DR" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+	<PartyGroup partyId="FAC_DR" groupName="东隆羽绒制品"/>
+	<PartyRole partyId="FAC_DR" roleTypeId="SUPPLIER"/>
+	<PartyRole partyId="FAC_DR" roleTypeId="MANUFACTURER"/>
+	<Facility facilityId="FAC_DR" facilityTypeId="PLANT" facilityName="东隆羽绒制品"  ownerPartyId="FAC_DR" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+	<ContactMech contactMechId="FAC_DR_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_DR_CM" address1="延安西路726号华敏翰尊国际27楼" directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_DR_CM" facilityId="FAC_DR" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_DR_CM" facilityId="FAC_DR" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+	<Party partyId="FAC_AY" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+	<PartyGroup partyId="FAC_AY" groupName="安杨服饰"/>
+	<PartyRole partyId="FAC_AY" roleTypeId="SUPPLIER"/>
+	<PartyRole partyId="FAC_AY" roleTypeId="MANUFACTURER"/>
+	<Facility facilityId="FAC_AY" facilityTypeId="PLANT" facilityName="安杨服饰"  ownerPartyId="FAC_AY" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+	<ContactMech contactMechId="FAC_AY_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_AY_CM" address1="泰兴市江平南路58号" directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_AY_CM" facilityId="FAC_AY" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_AY_CM" facilityId="FAC_AY" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+	<Party partyId="FAC_XJ" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+	<PartyGroup partyId="FAC_XJ" groupName="西江"/>
+	<PartyRole partyId="FAC_XJ" roleTypeId="SUPPLIER"/>
+	<PartyRole partyId="FAC_XJ" roleTypeId="MANUFACTURER"/>
+	<Facility facilityId="FAC_XJ" facilityTypeId="PLANT" facilityName="西江"  ownerPartyId="FAC_XJ" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+	<ContactMech contactMechId="FAC_XJ_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_XJ_CM" address1="浙江省平湖市林埭工业园区" directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_XJ_CM" facilityId="FAC_XJ" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_XJ_CM" facilityId="FAC_XJ" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+
+	<Party partyId="FAC_NB" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+	<PartyGroup partyId="FAC_NB" groupName="南宝"/>
+	<PartyRole partyId="FAC_NB" roleTypeId="SUPPLIER"/>
+	<PartyRole partyId="FAC_NB" roleTypeId="MANUFACTURER"/>
+	<Facility facilityId="FAC_NB" facilityTypeId="PLANT" facilityName="南宝"  ownerPartyId="FAC_NB" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+	<ContactMech contactMechId="FAC_NB_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_NB_CM" address1="嘉定区华亭镇嘉唐公路2389号" directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_NB_CM" facilityId="FAC_NB" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_NB_CM" facilityId="FAC_NB" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+
+	<Party partyId="FAC_YJ" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+	<PartyGroup partyId="FAC_YJ" groupName="岳佳"/>
+	<PartyRole partyId="FAC_YJ" roleTypeId="SUPPLIER"/>
+	<PartyRole partyId="FAC_YJ" roleTypeId="MANUFACTURER"/>
+	<Facility facilityId="FAC_YJ" facilityTypeId="PLANT" facilityName="岳佳"  ownerPartyId="FAC_YJ" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+	<ContactMech contactMechId="FAC_YJ_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_YJ_CM" address1="闵行区梅陇镇爱国村澄江路920号" directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_YJ_CM" facilityId="FAC_YJ" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_YJ_CM" facilityId="FAC_YJ" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+
+	<Party partyId="FAC_LZ" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+	<PartyGroup partyId="FAC_LZ" groupName="耀众服装（水洗）"/>
+	<PartyRole partyId="FAC_LZ" roleTypeId="SUPPLIER"/>
+	<PartyRole partyId="FAC_LZ" roleTypeId="MANUFACTURER"/>
+	<Facility facilityId="FAC_LZ" facilityTypeId="PLANT" facilityName="耀众服装（水洗）"  ownerPartyId="FAC_LZ" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+	<ContactMech contactMechId="FAC_LZ_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_LZ_CM" address1="常熟市碧溪镇碧溪中路258号" directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_LZ_CM" facilityId="FAC_LZ" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_LZ_CM" facilityId="FAC_LZ" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+
+	<Party partyId="FAC_XC" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+	<PartyGroup partyId="FAC_XC" groupName="协成水洗"/>
+	<PartyRole partyId="FAC_XC" roleTypeId="SUPPLIER"/>
+	<PartyRole partyId="FAC_XC" roleTypeId="MANUFACTURER"/>
+	<Facility facilityId="FAC_XC" facilityTypeId="PLANT" facilityName="协成水洗"  ownerPartyId="FAC_XC" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+	<ContactMech contactMechId="FAC_XC_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_XC_CM" address1="上海市闵行区澄江路805号" directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_XC_CM" facilityId="FAC_XC" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_XC_CM" facilityId="FAC_XC" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+
+	<Party partyId="FAC_BCYH" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+	<PartyGroup partyId="FAC_BCYH" groupName="并充印花"/>
+	<PartyRole partyId="FAC_BCYH" roleTypeId="SUPPLIER"/>
+	<PartyRole partyId="FAC_BCYH" roleTypeId="MANUFACTURER"/>
+	<Facility facilityId="FAC_BCYH" facilityTypeId="PLANT" facilityName="并充印花"  ownerPartyId="FAC_BCYH" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+	<ContactMech contactMechId="FAC_BCYH_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_BCYH_CM" address1="九亭镇高科技园区涞寅路1898号7号楼2楼 " directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_BCYH_CM" facilityId="FAC_BCYH" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_BCYH_CM" facilityId="FAC_BCYH" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+
+	<Party partyId="FAC_WXLB" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+	<PartyGroup partyId="FAC_WXLB" groupName="无锡力保"/>
+	<PartyRole partyId="FAC_WXLB" roleTypeId="SUPPLIER"/>
+	<PartyRole partyId="FAC_WXLB" roleTypeId="MANUFACTURER"/>
+	<Facility facilityId="FAC_WXLB" facilityTypeId="PLANT" facilityName="无锡力保"  ownerPartyId="FAC_WXLB" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+	<ContactMech contactMechId="FAC_WXLB_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_WXLB_CM" address1="江苏无锡市东亭镇锡山经济开发区合心路16号" directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_WXLB_CM" facilityId="FAC_WXLB" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_WXLB_CM" facilityId="FAC_WXLB" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+
+	<Party partyId="FAC_CC" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+	<PartyGroup partyId="FAC_CC" groupName="超成"/>
+	<PartyRole partyId="FAC_CC" roleTypeId="SUPPLIER"/>
+	<PartyRole partyId="FAC_CC" roleTypeId="MANUFACTURER"/>
+	<Facility facilityId="FAC_CC" facilityTypeId="PLANT" facilityName="超成"  ownerPartyId="FAC_CC" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+	<ContactMech contactMechId="FAC_CC_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_CC_CM" address1="浦东浦星路闸航路大治河2号桥南首" directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_CC_CM" facilityId="FAC_CC" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_CC_CM" facilityId="FAC_CC" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+
+	<Party partyId="FAC_CS" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+	<PartyGroup partyId="FAC_CS" groupName="驰尚"/>
+	<PartyRole partyId="FAC_CS" roleTypeId="SUPPLIER"/>
+	<PartyRole partyId="FAC_CS" roleTypeId="MANUFACTURER"/>
+	<Facility facilityId="FAC_CS" facilityTypeId="PLANT" facilityName="驰尚"  ownerPartyId="FAC_CS" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+	<ContactMech contactMechId="FAC_CS_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_CS_CM" address1="闵行区北桥镇放鹤路1718号" directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_CS_CM" facilityId="FAC_CS" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_CS_CM" facilityId="FAC_CS" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+
+	<Party partyId="FAC_JX" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+	<PartyGroup partyId="FAC_JX" groupName="精先"/>
+	<PartyRole partyId="FAC_JX" roleTypeId="SUPPLIER"/>
+	<PartyRole partyId="FAC_JX" roleTypeId="MANUFACTURER"/>
+	<Facility facilityId="FAC_JX" facilityTypeId="PLANT" facilityName="精先"  ownerPartyId="FAC_JX" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+	<ContactMech contactMechId="FAC_JX_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_JX_CM" address1="上海市金山区金山大道4298弄726（763）号6楼" directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_JX_CM" facilityId="FAC_JX" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_JX_CM" facilityId="FAC_JX" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+
+	<Party partyId="FAC_TM" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+	<PartyGroup partyId="FAC_TM" groupName="天马刺绣"/>
+	<PartyRole partyId="FAC_TM" roleTypeId="SUPPLIER"/>
+	<PartyRole partyId="FAC_TM" roleTypeId="MANUFACTURER"/>
+	<Facility facilityId="FAC_TM" facilityTypeId="PLANT" facilityName="天马刺绣"  ownerPartyId="FAC_TM" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+	<ContactMech contactMechId="FAC_TM_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_TM_CM" address1="闵行区浦江镇天马绣花上海刺绣厂" directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_TM_CM" facilityId="FAC_TM" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_TM_CM" facilityId="FAC_TM" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+
+	<Party partyId="FAC_YKK" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+	<PartyGroup partyId="FAC_YKK" groupName="YKK"/>
+	<PartyRole partyId="FAC_YKK" roleTypeId="SUPPLIER"/>
+	<PartyRole partyId="FAC_YKK" roleTypeId="MANUFACTURER"/>
+	<Facility facilityId="FAC_YKK" facilityTypeId="PLANT" facilityName="YKK"  ownerPartyId="FAC_YKK" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+	<ContactMech contactMechId="FAC_YKK_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_YKK_CM" address1="上海娄山关路83号新虹桥中心大厦25楼2501室" directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_YKK_CM" facilityId="FAC_YKK" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_YKK_CM" facilityId="FAC_YKK" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+
+	<Party partyId="FAC_STHGY" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+	<PartyGroup partyId="FAC_STHGY" groupName="裕挺鸿（特殊工艺）"/>
+	<PartyRole partyId="FAC_STHGY" roleTypeId="SUPPLIER"/>
+	<PartyRole partyId="FAC_STHGY" roleTypeId="MANUFACTURER"/>
+	<Facility facilityId="FAC_STHGY" facilityTypeId="PLANT" facilityName="裕挺鸿（特殊工艺）"  ownerPartyId="FAC_STHGY" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+	<ContactMech contactMechId="FAC_STHGY_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_STHGY_CM" address1="江苏省太仓市太仓经济开发区板桥宣公东路8号" directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_STHGY_CM" facilityId="FAC_STHGY" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_STHGY_CM" facilityId="FAC_STHGY" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+
+	<Party partyId="FAC_STHGS" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+	<PartyGroup partyId="FAC_STHGS" groupName="裕挺鸿（上海分公司）"/>
+	<PartyRole partyId="FAC_STHGS" roleTypeId="SUPPLIER"/>
+	<PartyRole partyId="FAC_STHGS" roleTypeId="MANUFACTURER"/>
+	<Facility facilityId="FAC_STHGS" facilityTypeId="PLANT" facilityName="裕挺鸿（上海分公司）"  ownerPartyId="FAC_STHGS" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+	<ContactMech contactMechId="FAC_STHGS_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_STHGS_CM" address1="徐汇区漕宝路400号1706室明申商务广场" directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_STHGS_CM" facilityId="FAC_STHGS" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_STHGS_CM" facilityId="FAC_STHGS" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+
+	<Party partyId="FAC_DH" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+	<PartyGroup partyId="FAC_DH" groupName="德海印花厂"/>
+	<PartyRole partyId="FAC_DH" roleTypeId="SUPPLIER"/>
+	<PartyRole partyId="FAC_DH" roleTypeId="MANUFACTURER"/>
+	<Facility facilityId="FAC_DH" facilityTypeId="PLANT" facilityName="德海印花厂"  ownerPartyId="FAC_DH" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+	<ContactMech contactMechId="FAC_DH_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_DH_CM" address1="松江区九亭镇久富工业区易富路899号" directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_DH_CM" facilityId="FAC_DH" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_DH_CM" facilityId="FAC_DH" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+
+	<Party partyId="FAC_YQ" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+	<PartyGroup partyId="FAC_YQ" groupName="云卿"/>
+	<PartyRole partyId="FAC_YQ" roleTypeId="SUPPLIER"/>
+	<PartyRole partyId="FAC_YQ" roleTypeId="MANUFACTURER"/>
+	<Facility facilityId="FAC_YQ" facilityTypeId="PLANT" facilityName="云卿"  ownerPartyId="FAC_YQ" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+	<ContactMech contactMechId="FAC_YQ_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_YQ_CM" address1="常州市延陵中路268号（天宇竞园商务中心6号楼）" directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_YQ_CM" facilityId="FAC_YQ" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_YQ_CM" facilityId="FAC_YQ" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+
+	<Party partyId="FAC_LLB" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+	<PartyGroup partyId="FAC_LLB" groupName="龙里柏"/>
+	<PartyRole partyId="FAC_LLB" roleTypeId="SUPPLIER"/>
+	<PartyRole partyId="FAC_LLB" roleTypeId="MANUFACTURER"/>
+	<Facility facilityId="FAC_LLB" facilityTypeId="PLANT" facilityName="龙里柏"  ownerPartyId="FAC_LLB" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+	<ContactMech contactMechId="FAC_LLB_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_LLB_CM" address1="嘉定区外岗镇沪宜公路5945号外岗工业园区3区" directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_LLB_CM" facilityId="FAC_LLB" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_LLB_CM" facilityId="FAC_LLB" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+
+	<Party partyId="FAC_PLGS" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+	<PartyGroup partyId="FAC_PLGS" groupName="普洛革时"/>
+	<PartyRole partyId="FAC_PLGS" roleTypeId="SUPPLIER"/>
+	<PartyRole partyId="FAC_PLGS" roleTypeId="MANUFACTURER"/>
+	<Facility facilityId="FAC_PLGS" facilityTypeId="PLANT" facilityName="普洛革时"  ownerPartyId="FAC_PLGS" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+	<ContactMech contactMechId="FAC_PLGS_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_PLGS_CM" address1="上海市延安西路2299号世贸商城4N19" directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_PLGS_CM" facilityId="FAC_PLGS" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_PLGS_CM" facilityId="FAC_PLGS" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+
+	<Party partyId="FAC_CLFS" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+	<PartyGroup partyId="FAC_CLFS" groupName="臣龙服饰"/>
+	<PartyRole partyId="FAC_CLFS" roleTypeId="SUPPLIER"/>
+	<PartyRole partyId="FAC_CLFS" roleTypeId="MANUFACTURER"/>
+	<Facility facilityId="FAC_CLFS" facilityTypeId="PLANT" facilityName="臣龙服饰"  ownerPartyId="FAC_CLFS" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+	<ContactMech contactMechId="FAC_CLFS_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_CLFS_CM" address1="奉贤区南桥镇江海村2组（修污渍）" directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_CLFS_CM" facilityId="FAC_CLFS" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_CLFS_CM" facilityId="FAC_CLFS" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+
+	<Party partyId="FAC_JSF" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+	<PartyGroup partyId="FAC_JSF" groupName="集丝坊"/>
+	<PartyRole partyId="FAC_JSF" roleTypeId="SUPPLIER"/>
+	<PartyRole partyId="FAC_JSF" roleTypeId="MANUFACTURER"/>
+	<Facility facilityId="FAC_JSF" facilityTypeId="PLANT" facilityName="集丝坊"  ownerPartyId="FAC_JSF" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+	<ContactMech contactMechId="FAC_JSF_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_JSF_CM" address1="长宁区万航渡路2452号苏州河DOHO B馆202室" directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_JSF_CM" facilityId="FAC_JSF" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_JSF_CM" facilityId="FAC_JSF" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+
+	<Party partyId="FAC_XS" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+	<PartyGroup partyId="FAC_XS" groupName="秀手"/>
+	<PartyRole partyId="FAC_XS" roleTypeId="SUPPLIER"/>
+	<PartyRole partyId="FAC_XS" roleTypeId="MANUFACTURER"/>
+	<Facility facilityId="FAC_XS" facilityTypeId="PLANT" facilityName="秀手"  ownerPartyId="FAC_XS" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+	<ContactMech contactMechId="FAC_XS_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_XS_CM" address1="浦江镇丰南路1238号" directions="" city="" postalCode="" countryGeoId="CHN" />
+	<FacilityContactMech contactMechId="FAC_XS_CM" facilityId="FAC_XS" fromDate="2014-05-23 11:57:40.936"/>
+	<FacilityContactMechPurpose contactMechId="FAC_XS_CM" facilityId="FAC_XS" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+	
+	
+    <Party partyId="FAC_BHLY" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_BHLY" groupName="百合若英"/>
+    <PartyRole partyId="FAC_BHLY" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_BHLY" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_BHLY" facilityTypeId="PLANT" facilityName="百合若英"  ownerPartyId="FAC_BHLY" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+    <ContactMech contactMechId="FAC_BHLY_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="FAC_BHLY_CM" address1="上海市龙吴路5055号" directions="" city="" postalCode="" countryGeoId="CHN" />
+    <FacilityContactMech contactMechId="FAC_BHLY_CM" facilityId="FAC_BHLY" fromDate="2014-05-23 11:57:40.936"/>
+    <FacilityContactMechPurpose contactMechId="FAC_BHLY_CM" facilityId="FAC_BHLY" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+    <Party partyId="FAC_MGLY" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_MGLY" groupName="玛格丽雅"/>
+    <PartyRole partyId="FAC_MGLY" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_MGLY" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_MGLY" facilityTypeId="PLANT" facilityName="玛格丽雅"  ownerPartyId="FAC_MGLY" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+    <ContactMech contactMechId="FAC_MGLY_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="FAC_MGLY_CM" address1="上海市绿春路279号" directions="" city="" postalCode="" countryGeoId="CHN" />
+    <FacilityContactMech contactMechId="FAC_MGLY_CM" facilityId="FAC_MGLY" fromDate="2014-05-23 11:57:40.936"/>
+    <FacilityContactMechPurpose contactMechId="FAC_MGLY_CM" facilityId="FAC_MGLY" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+    <Party partyId="FAC_DDM" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_DDM" groupName="多丰米"/>
+    <PartyRole partyId="FAC_DDM" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_DDM" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_DDM" facilityTypeId="PLANT" facilityName="多丰米"  ownerPartyId="FAC_DDM" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+    <ContactMech contactMechId="FAC_DDM_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="FAC_DDM_CM" address1="上海市兴南路6号乙" directions="" city="" postalCode="" countryGeoId="CHN" />
+    <FacilityContactMech contactMechId="FAC_DDM_CM" facilityId="FAC_DDM" fromDate="2014-05-23 11:57:40.936"/>
+    <FacilityContactMechPurpose contactMechId="FAC_DDM_CM" facilityId="FAC_DDM" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+    <Party partyId="FAC_JQY" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_JQY" groupName="佳琦雅"/>
+    <PartyRole partyId="FAC_JQY" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_JQY" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_JQY" facilityTypeId="PLANT" facilityName="佳琦雅"  ownerPartyId="FAC_JQY" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+    <ContactMech contactMechId="FAC_JQY_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="FAC_JQY_CM" address1="上海市大叶公路1150号" directions="" city="" postalCode="" countryGeoId="CHN" />
+    <FacilityContactMech contactMechId="FAC_JQY_CM" facilityId="FAC_JQY" fromDate="2014-05-23 11:57:40.936"/>
+    <FacilityContactMechPurpose contactMechId="FAC_JQY_CM" facilityId="FAC_JQY" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+    <Party partyId="FAC_WXAS" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_WXAS" groupName="无锡艾莎"/>
+    <PartyRole partyId="FAC_WXAS" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_WXAS" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_WXAS" facilityTypeId="PLANT" facilityName="无锡艾莎"  ownerPartyId="FAC_WXAS" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+    <ContactMech contactMechId="FAC_WXAS_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="FAC_WXAS_CM" address1="江苏省无锡市浜湖区南湖中路28-8号" directions="" city="" postalCode="" countryGeoId="CHN" />
+    <FacilityContactMech contactMechId="FAC_WXAS_CM" facilityId="FAC_WXAS" fromDate="2014-05-23 11:57:40.936"/>
+    <FacilityContactMechPurpose contactMechId="FAC_WXAS_CM" facilityId="FAC_WXAS" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+    <!-- 
+    <Party partyId="FAC_TMCH" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_TMCH" groupName="天马刺绣"/>
+    <PartyRole partyId="FAC_TMCH" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_TMCH" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_TMCH" facilityTypeId="PLANT" facilityName="天马刺绣工厂"  ownerPartyId="FAC_TMCH" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+    <ContactMech contactMechId="FAC_TMCH_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="FAC_TMCH_CM" address1="上海市闵行区浦江镇天马绣花上海刺绣厂" directions="" city="" postalCode="" countryGeoId="CHN" />
+    <FacilityContactMech contactMechId="FAC_TMCH_CM" facilityId="FAC_TMCH" fromDate="2014-05-23 11:57:40.936"/>
+    <FacilityContactMechPurpose contactMechId="FAC_TMCH_CM" facilityId="FAC_TMCH" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+ -->
+
+
+    <Party partyId="FAC_BCYH" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_BCYH" groupName="并充印花"/>
+    <PartyRole partyId="FAC_BCYH" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_BCYH" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_BCYH" facilityTypeId="PLANT" facilityName="并充印花"  ownerPartyId="FAC_BCYH" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+    <ContactMech contactMechId="FAC_BCYH_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="FAC_BCYH_CM" address1="上海市九亭镇高科技园区涞寅路1898号7号楼2楼" directions="" city="" postalCode="" countryGeoId="CHN" />
+    <FacilityContactMech contactMechId="FAC_BCYH_CM" facilityId="FAC_BCYH" fromDate="2014-05-23 11:57:40.936"/>
+    <FacilityContactMechPurpose contactMechId="FAC_BCYH_CM" facilityId="FAC_BCYH" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+
+
+    <Party partyId="FAC_WXBL" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_WXBL" groupName="无锡利保"/>
+    <PartyRole partyId="FAC_WXBL" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_WXBL" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_WXBL" facilityTypeId="PLANT" facilityName="无锡利保"  ownerPartyId="FAC_WXBL" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+    <ContactMech contactMechId="FAC_WXBL_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="FAC_WXBL_CM" address1="江苏省无锡市东亭镇锡山经济开发区合心路16号" directions="" city="" postalCode="" countryGeoId="CHN" />
+    <FacilityContactMech contactMechId="FAC_WXBL_CM" facilityId="FAC_WXBL" fromDate="2014-05-23 11:57:40.936"/>
+    <FacilityContactMechPurpose contactMechId="FAC_WXBL_CM" facilityId="FAC_WXBL" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+
+   <!--  <Party partyId="FAC_DHYH" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_DHYH" groupName="德海印花厂"/>
+    <PartyRole partyId="FAC_DHYH" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_DHYH" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_DHYH" facilityTypeId="PLANT" facilityName="德海印花工厂"  ownerPartyId="FAC_DHYH" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+    <ContactMech contactMechId="FAC_DHYH_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="FAC_DHYH_CM" address1="上海市松江区九亭镇久富工业区易富路899号" directions="" city="" postalCode="" countryGeoId="CHN" />
+    <FacilityContactMech contactMechId="FAC_DHYH_CM" facilityId="FAC_DHYH" fromDate="2014-05-23 11:57:40.936"/>
+    <FacilityContactMechPurpose contactMechId="FAC_DHYH_CM" facilityId="FAC_DHYH" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+ -->
+
+<!-- 
+    <Party partyId="FAC_CCH" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_CCH" groupName="超成"/>
+    <PartyRole partyId="FAC_CCH" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_CCH" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_CCH" facilityTypeId="PLANT" facilityName="超成工厂"  ownerPartyId="FAC_CCH" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+    <ContactMech contactMechId="FAC_CCH_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="FAC_CCH_CM" address1="上海市浦东新区浦新路闸航路大治河2号桥南首" directions="" city="" postalCode="" countryGeoId="CHN" />
+    <FacilityContactMech contactMechId="FAC_CCH_CM" facilityId="FAC_CCH" fromDate="2014-05-23 11:57:40.936"/>
+    <FacilityContactMechPurpose contactMechId="FAC_CCH_CM" facilityId="FAC_CCH" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+ -->
+
+
+<!--     <Party partyId="FAC_CSXH" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_CSXH" groupName="驰尚绣花厂"/>
+    <PartyRole partyId="FAC_CSXH" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_CSXH" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_CSXH" facilityTypeId="PLANT" facilityName="驰尚绣花工厂"  ownerPartyId="FAC_CSXH" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+    <ContactMech contactMechId="FAC_CSXH_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="FAC_CSXH_CM" address1="上海市闵行区北桥镇放鹤路1718号" directions="" city="" postalCode="" countryGeoId="CHN" />
+    <FacilityContactMech contactMechId="FAC_CSXH_CM" facilityId="FAC_CSXH" fromDate="2014-05-23 11:57:40.936"/>
+    <FacilityContactMechPurpose contactMechId="FAC_CSXH_CM" facilityId="FAC_CSXH" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+ -->
+
+    <Party partyId="FAC_JXFZ" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_JXFZ" groupName="上海精先服装有限公司"/>
+    <PartyRole partyId="FAC_JXFZ" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_JXFZ" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_JXFZ" facilityTypeId="PLANT" facilityName="上海精先服装有限公司"  ownerPartyId="FAC_JXFZ" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+    <ContactMech contactMechId="FAC_JXFZ_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="FAC_JXFZ_CM" address1="上海市金山区金山大道4298弄726（763）号6楼" directions="" city="" postalCode="" countryGeoId="CHN" />
+    <FacilityContactMech contactMechId="FAC_JXFZ_CM" facilityId="FAC_JXFZ" fromDate="2014-05-23 11:57:40.936"/>
+    <FacilityContactMechPurpose contactMechId="FAC_JXFZ_CM" facilityId="FAC_JXFZ" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+
+
+    <Party partyId="FAC_DZH" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_DZH" groupName="点之浩"/>
+    <PartyRole partyId="FAC_DZH" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_DZH" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_DZH" facilityTypeId="PLANT" facilityName="点之浩"  ownerPartyId="FAC_DZH" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+    <ContactMech contactMechId="FAC_DZH_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="FAC_DZH_CM" address1="上海市嘉定区南翔镇沪宜公路1061号（中国电信工业园）" directions="" city="" postalCode="" countryGeoId="CHN" />
+    <FacilityContactMech contactMechId="FAC_DZH_CM" facilityId="FAC_DZH" fromDate="2014-05-23 11:57:40.936"/>
+    <FacilityContactMechPurpose contactMechId="FAC_DZH_CM" facilityId="FAC_DZH" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+
+
+    <Party partyId="FAC_ZFDFZ" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_ZFDFZ" groupName="张家港中孚达纺织科技有限公司"/>
+    <PartyRole partyId="FAC_ZFDFZ" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_ZFDFZ" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_ZFDFZ" facilityTypeId="PLANT" facilityName="张家港中孚达纺织科技有限公司"  ownerPartyId="FAC_ZFDFZ" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+    <ContactMech contactMechId="FAC_ZFDFZ_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="FAC_ZFDFZ_CM" address1="江苏省张家港市人民东路9号国泰广场1214（销售部）" directions="" city="" postalCode="" countryGeoId="CHN" />
+    <FacilityContactMech contactMechId="FAC_ZFDFZ_CM" facilityId="FAC_ZFDFZ" fromDate="2014-05-23 11:57:40.936"/>
+    <FacilityContactMechPurpose contactMechId="FAC_ZFDFZ_CM" facilityId="FAC_ZFDFZ" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+
+
+    <Party partyId="FAC_PASM" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_PASM" groupName="上海翩然数码"/>
+    <PartyRole partyId="FAC_PASM" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_PASM" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_PASM" facilityTypeId="PLANT" facilityName="上海翩然数码"  ownerPartyId="FAC_PASM" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+    <ContactMech contactMechId="FAC_PASM_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="FAC_PASM_CM" address1="上海市嘉定区惠亚路118弄2号楼" directions="" city="" postalCode="" countryGeoId="CHN" />
+    <FacilityContactMech contactMechId="FAC_PASM_CM" facilityId="FAC_PASM" fromDate="2014-05-23 11:57:40.936"/>
+    <FacilityContactMechPurpose contactMechId="FAC_PASM_CM" facilityId="FAC_PASM" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+
+
+    <Party partyId="FAC_HYSC" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_HYSC" groupName="上海和音丝绸有限公司"/>
+    <PartyRole partyId="FAC_HYSC" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_HYSC" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_HYSC" facilityTypeId="PLANT" facilityName="上海和音丝绸有限公司"  ownerPartyId="FAC_HYSC" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+    <ContactMech contactMechId="FAC_HYSC_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="FAC_HYSC_CM" address1="上海市杨浦区长阳路1624号" directions="" city="" postalCode="" countryGeoId="CHN" />
+    <FacilityContactMech contactMechId="FAC_HYSC_CM" facilityId="FAC_HYSC" fromDate="2014-05-23 11:57:40.936"/>
+    <FacilityContactMechPurpose contactMechId="FAC_HYSC_CM" facilityId="FAC_HYSC" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+
+
+    <Party partyId="FAC_LC" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_LC" groupName="上海林川"/>
+    <PartyRole partyId="FAC_LC" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_LC" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_LC" facilityTypeId="PLANT" facilityName="上海林川"  ownerPartyId="FAC_LC" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+    <ContactMech contactMechId="FAC_LC_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="FAC_LC_CM" address1="上海市青浦区崧秀路289号B3栋西三楼" directions="" city="" postalCode="" countryGeoId="CHN" />
+    <FacilityContactMech contactMechId="FAC_LC_CM" facilityId="FAC_LC" fromDate="2014-05-23 11:57:40.936"/>
+    <FacilityContactMechPurpose contactMechId="FAC_LC_CM" facilityId="FAC_LC" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+
+
+    <Party partyId="FAC_YFFS" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_YFFS" groupName="上海依芳服饰有限公司"/>
+    <PartyRole partyId="FAC_YFFS" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_YFFS" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_YFFS" facilityTypeId="PLANT" facilityName="上海依芳服饰有限公司"  ownerPartyId="FAC_YFFS" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+    <ContactMech contactMechId="FAC_YFFS_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="FAC_YFFS_CM" address1="上海市长宁区延安西路2299号04C30室" directions="" city="" postalCode="" countryGeoId="CHN" />
+    <FacilityContactMech contactMechId="FAC_YFFS_CM" facilityId="FAC_YFFS" fromDate="2014-05-23 11:57:40.936"/>
+    <FacilityContactMechPurpose contactMechId="FAC_YFFS_CM" facilityId="FAC_YFFS" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+
+
+    <Party partyId="FAC_XBLYPH" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_XBLYPH" groupName="上海市第一西比利亚皮货洗衣中心"/>
+    <PartyRole partyId="FAC_XBLYPH" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_XBLYPH" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_XBLYPH" facilityTypeId="PLANT" facilityName="上海市第一西比利亚皮货洗衣中心"  ownerPartyId="FAC_XBLYPH" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+    <ContactMech contactMechId="FAC_XBLYPH_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="FAC_XBLYPH_CM" address1="上海市沪太支路668弄60号" directions="" city="" postalCode="" countryGeoId="CHN" />
+    <FacilityContactMech contactMechId="FAC_XBLYPH_CM" facilityId="FAC_XBLYPH" fromDate="2014-05-23 11:57:40.936"/>
+    <FacilityContactMechPurpose contactMechId="FAC_XBLYPH_CM" facilityId="FAC_XBLYPH" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+
+
+
+    <Party partyId="FAC_CHFS" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_CHFS" groupName="上海晨海服饰印花厂"/>
+    <PartyRole partyId="FAC_CHFS" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_CHFS" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_CHFS" facilityTypeId="PLANT" facilityName="上海晨海服饰印花厂"  ownerPartyId="FAC_CHFS" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+    <ContactMech contactMechId="FAC_CHFS_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="FAC_CHFS_CM" address1="浙江省宁波市勤州区邱隘镇下万令村" directions="" city="" postalCode="" countryGeoId="CHN" />
+    <FacilityContactMech contactMechId="FAC_CHFS_CM" facilityId="FAC_CHFS" fromDate="2014-05-23 11:57:40.936"/>
+    <FacilityContactMechPurpose contactMechId="FAC_CHFS_CM" facilityId="FAC_CHFS" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+	
+	<Party partyId="FAC_JZSFS" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_JZSFS" groupName="上海集怿衫服饰有限公司"/>
+    <PartyRole partyId="FAC_JZSFS" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_JZSFS" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_JZSFS" facilityTypeId="PLANT" facilityName="上海集怿衫服饰有限公司"  ownerPartyId="FAC_JZSFS" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+    <ContactMech contactMechId="FAC_JZSFS_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="FAC_JZSFS_CM" address1="浙江省宁波市勤州区邱隘镇下万令村" directions="" city="" postalCode="" countryGeoId="CHN" />
+    <FacilityContactMech contactMechId="FAC_JZSFS_CM" facilityId="FAC_JZSFS" fromDate="2014-05-23 11:57:40.936"/>
+    <FacilityContactMechPurpose contactMechId="FAC_JZSFS_CM" facilityId="FAC_JZSFS" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+    <ContactMech contactMechId="FAC_JZSFS_CMT" contactMechTypeId="TELECOM_NUMBER"/>
+    <TelecomNumber contactMechId="FAC_JZSFS_CMT" countryCode="" areaCode="" contactNumber="13801776426" askForName="刘静" />
+    <PartyContactMechPurpose partyId="FAC_JZSFS" contactMechId="FAC_JZSFS_CMT" contactMechPurposeTypeId="PHONE_MOBILE" fromDate="2014-05-23 11:57:40.936"/>
+
+
+    <Party partyId="FAC_JDFS" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_JDFS" groupName="广州金董服饰皮具有限公司"/>
+    <PartyRole partyId="FAC_JDFS" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_JDFS" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_JDFS" facilityTypeId="PLANT" facilityName="广州金董服饰皮具有限公司"  ownerPartyId="FAC_JDFS" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+    <ContactMech contactMechId="FAC_JDFS_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <ContactMech contactMechId="FAC_JDFS_CMT" contactMechTypeId="TELECOM_NUMBER"/>
+    <PostalAddress contactMechId="FAC_JDFS_CM" address1="浙江省宁波市勤州区邱隘镇下万令村" directions="" city="" postalCode="" countryGeoId="CHN" />
+    <FacilityContactMech contactMechId="FAC_JDFS_CM" facilityId="FAC_JDFS" fromDate="2014-05-23 11:57:40.936"/>
+    <FacilityContactMechPurpose contactMechId="FAC_JDFS_CM" facilityId="FAC_JDFS" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+    <TelecomNumber contactMechId="FAC_JDFS_CMT" countryCode="" areaCode="" contactNumber="18688463970" askForName="毛楼楼" />
+    <PartyContactMechPurpose partyId="FAC_JDFS" contactMechId="FAC_JDFS_CMT" contactMechPurposeTypeId="PHONE_MOBILE" fromDate="2014-05-23 11:57:40.936"/>
+    
+        <Party partyId="FAC_XZ" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_XZ" groupName="喜芝"/>
+    <PartyRole partyId="FAC_XZ" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_XZ" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_XZ" facilityTypeId="PLANT" facilityName="喜芝"  ownerPartyId="FAC_XZ" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+    <ContactMech contactMechId="FAC_XZ_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <FacilityContactMech contactMechId="FAC_XZ_CM" facilityId="FAC_XZ" fromDate="2014-05-23 11:57:40.936"/>
+    <FacilityContactMechPurpose contactMechId="FAC_XZ_CM" facilityId="FAC_XZ" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+    <ContactMech contactMechId="FAC_XZ_CMT" contactMechTypeId="TELECOM_NUMBER"/>
+    <TelecomNumber contactMechId="FAC_XZ_CMT" countryCode="" areaCode="" contactNumber="13764612383" askForName="徐本云"/>
+    <PartyContactMechPurpose partyId="FAC_XZ" contactMechId="FAC_XZ_CMT" contactMechPurposeTypeId="PHONE_MOBILE" fromDate="2014-05-23 11:57:40.936"/>
+
+
+    <Party partyId="FAC_XF" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_XF" groupName="晓凡"/>
+    <PartyRole partyId="FAC_XF" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_XF" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_XF" facilityTypeId="PLANT" facilityName="晓凡"  ownerPartyId="FAC_XF" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+    <ContactMech contactMechId="FAC_XF_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <FacilityContactMech contactMechId="FAC_XF_CM" facilityId="FAC_XF" fromDate="2014-05-23 11:57:40.936"/>
+    <FacilityContactMechPurpose contactMechId="FAC_XF_CM" facilityId="FAC_XF" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+    <ContactMech contactMechId="FAC_XF_CMT" contactMechTypeId="TELECOM_NUMBER"/>
+    <TelecomNumber contactMechId="FAC_XF_CMT" countryCode="" areaCode="" contactNumber="13764111898" askForName="刘小凡"/>
+    <PartyContactMechPurpose partyId="FAC_XF" contactMechId="FAC_XF_CMT" contactMechPurposeTypeId="PHONE_MOBILE" fromDate="2014-05-23 11:57:40.936"/>
+
+    <Party partyId="FAC_MDY" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_MDY" groupName="美迪洋"/>
+    <PartyRole partyId="FAC_MDY" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_MDY" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_MDY" facilityTypeId="PLANT" facilityName="美迪洋"  ownerPartyId="FAC_MDY" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+    <ContactMech contactMechId="FAC_MDY_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <FacilityContactMech contactMechId="FAC_MDY_CM" facilityId="FAC_MDY" fromDate="2014-05-23 11:57:40.936"/>
+    <FacilityContactMechPurpose contactMechId="FAC_MDY_CM" facilityId="FAC_MDY" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+    <ContactMech contactMechId="FAC_MDY_CMT" contactMechTypeId="TELECOM_NUMBER"/>
+    <TelecomNumber contactMechId="FAC_MDY_CMT" countryCode="" areaCode="" contactNumber="13773078816" askForName="于静"/>
+    <PartyContactMechPurpose partyId="FAC_MDY" contactMechId="FAC_MDY_CMT" contactMechPurposeTypeId="PHONE_MOBILE" fromDate="2014-05-23 11:57:40.936"/>
+
+    <Party partyId="FAC_YD" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_YD" groupName="圆达"/>
+    <PartyRole partyId="FAC_YD" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_YD" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_YD" facilityTypeId="PLANT" facilityName="圆达"  ownerPartyId="FAC_YD" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+    <ContactMech contactMechId="FAC_YD_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <FacilityContactMech contactMechId="FAC_YD_CM" facilityId="FAC_YD" fromDate="2014-05-23 11:57:40.936"/>
+    <FacilityContactMechPurpose contactMechId="FAC_YD_CM" facilityId="FAC_YD" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+    <ContactMech contactMechId="FAC_YD_CMT" contactMechTypeId="TELECOM_NUMBER"/>
+    <TelecomNumber contactMechId="FAC_YD_CMT" countryCode="" areaCode="" contactNumber="18998396516" askForName="赵小姐"/>
+    <PartyContactMechPurpose partyId="FAC_YD" contactMechId="FAC_YD_CMT" contactMechPurposeTypeId="PHONE_MOBILE" fromDate="2014-05-23 11:57:40.936"/>
+
+    <Party partyId="FAC_MS" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_MS" groupName="美上"/>
+    <PartyRole partyId="FAC_MS" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_MS" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_MS" facilityTypeId="PLANT" facilityName="美上"  ownerPartyId="FAC_MS" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+    <ContactMech contactMechId="FAC_MS_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <FacilityContactMech contactMechId="FAC_MS_CM" facilityId="FAC_MS" fromDate="2014-05-23 11:57:40.936"/>
+    <FacilityContactMechPurpose contactMechId="FAC_MS_CM" facilityId="FAC_MS" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+    <ContactMech contactMechId="FAC_MS_CMT" contactMechTypeId="TELECOM_NUMBER"/>
+    <TelecomNumber contactMechId="FAC_MS_CMT" countryCode="" areaCode="" contactNumber="15157445505" askForName="小杜"/>
+    <PartyContactMechPurpose partyId="FAC_MS" contactMechId="FAC_MS_CMT" contactMechPurposeTypeId="PHONE_MOBILE" fromDate="2014-05-23 11:57:40.936"/>
+
+    <Party partyId="FAC_PZ" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_PZ" groupName="质品"/>
+    <PartyRole partyId="FAC_PZ" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_PZ" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_PZ" facilityTypeId="PLANT" facilityName="质品"  ownerPartyId="FAC_PZ" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+    <ContactMech contactMechId="FAC_PZ_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <FacilityContactMech contactMechId="FAC_PZ_CM" facilityId="FAC_PZ" fromDate="2014-05-23 11:57:40.936"/>
+    <FacilityContactMechPurpose contactMechId="FAC_PZ_CM" facilityId="FAC_PZ" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+    <ContactMech contactMechId="FAC_PZ_CMT" contactMechTypeId="TELECOM_NUMBER"/>
+    <TelecomNumber contactMechId="FAC_PZ_CMT" countryCode="" areaCode="" contactNumber="13511192512" askForName="李平"/>
+    <PartyContactMechPurpose partyId="FAC_PZ" contactMechId="FAC_PZ_CMT" contactMechPurposeTypeId="PHONE_MOBILE" fromDate="2014-05-23 11:57:40.936"/>
+
+    <Party partyId="FAC_DAL" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_DAL" groupName="达利"/>
+    <PartyRole partyId="FAC_DAL" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_DAL" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_DAL" facilityTypeId="PLANT" facilityName="达利"  ownerPartyId="FAC_DAL" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+    <ContactMech contactMechId="FAC_DAL_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+	<PostalAddress contactMechId="FAC_DLI_CM" address1="浙江省杭州市萧山区钱江农场鸿达路北侧1号楼9楼  " directions="" city="" postalCode="" countryGeoId="CHN" />
+    <FacilityContactMech contactMechId="FAC_DAL_CM" facilityId="FAC_DAL" fromDate="2014-05-23 11:57:40.936"/>
+    <FacilityContactMechPurpose contactMechId="FAC_DAL_CM" facilityId="FAC_DAL" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+    <ContactMech contactMechId="FAC_DAL_CMT" contactMechTypeId="TELECOM_NUMBER"/>
+    <TelecomNumber contactMechId="FAC_DAL_CMT" countryCode="" areaCode="" contactNumber="18767138984" askForName="小叶"/>
+    <PartyContactMechPurpose partyId="FAC_DAL" contactMechId="FAC_DAL_CMT" contactMechPurposeTypeId="PHONE_MOBILE" fromDate="2014-05-23 11:57:40.936"/>
+
+    <Party partyId="FAC_AKN" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_AKN" groupName="爱肯娜"/>
+    <PartyRole partyId="FAC_AKN" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_AKN" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_AKN" facilityTypeId="PLANT" facilityName="爱肯娜"  ownerPartyId="FAC_AKN" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+    <ContactMech contactMechId="FAC_AKN_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <FacilityContactMech contactMechId="FAC_AKN_CM" facilityId="FAC_AKN" fromDate="2014-05-23 11:57:40.936"/>
+    <FacilityContactMechPurpose contactMechId="FAC_AKN_CM" facilityId="FAC_AKN" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+    <ContactMech contactMechId="FAC_AKN_CMT" contactMechTypeId="TELECOM_NUMBER"/>
+    <TelecomNumber contactMechId="FAC_AKN_CMT" countryCode="" areaCode="" contactNumber="13320946240" askForName="邹黛明"/>
+    <PartyContactMechPurpose partyId="FAC_AKN" contactMechId="FAC_AKN_CMT" contactMechPurposeTypeId="PHONE_MOBILE" fromDate="2014-05-23 11:57:40.936"/>
+    
+   	
+    <Party partyId="FAC_XW" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_XW" groupName="夏为"/>
+    <PartyRole partyId="FAC_XW" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_XW" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_XW" facilityTypeId="PLANT" facilityName="夏为"  ownerPartyId="FAC_XW" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+
+
+    <Party partyId="FAC_JX" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_JX" groupName="景兴"/>
+    <PartyRole partyId="FAC_JX" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_JX" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_JX" facilityTypeId="PLANT" facilityName="景兴"  ownerPartyId="FAC_JX" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+    <ContactMech contactMechId="FAC_JX_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="FAC_JX_CM" address1="上海市奉贤去金汇镇沿浦路2500号" directions="" city="" postalCode="" countryGeoId="CHN" />
+    <FacilityContactMech contactMechId="FAC_JX_CM" facilityId="FAC_JX" fromDate="2014-05-23 11:57:40.936"/>
+    <FacilityContactMechPurpose contactMechId="FAC_JX_CM" facilityId="FAC_JX" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+    <ContactMech contactMechId="FAC_JX_CMT" contactMechTypeId="TELECOM_NUMBER"/>
+    <TelecomNumber contactMechId="FAC_JX_CMT" countryCode="" areaCode="" contactNumber="13816855490" askForName="李小姐"/>
+    <PartyContactMechPurpose partyId="FAC_JX" contactMechId="FAC_JX_CMT" contactMechPurposeTypeId="PHONE_MOBILE" fromDate="2014-05-23 11:57:40.936"/>
+
+
+    <Party partyId="FAC_SJJ" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_SJJ" groupName="世纪锦"/>
+    <PartyRole partyId="FAC_SJJ" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_SJJ" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_SJJ" facilityTypeId="PLANT" facilityName="世纪锦"  ownerPartyId="FAC_SJJ" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+    <ContactMech contactMechId="FAC_SJJ_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="FAC_SJJ_CM" address1="浙江省嘉兴市禾平路309号" directions="" city="" postalCode="" countryGeoId="CHN" />
+    <FacilityContactMech contactMechId="FAC_SJJ_CM" facilityId="FAC_SJJ" fromDate="2014-05-23 11:57:40.936"/>
+    <FacilityContactMechPurpose contactMechId="FAC_SJJ_CM" facilityId="FAC_SJJ" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+    <ContactMech contactMechId="FAC_SJJ_CMT" contactMechTypeId="TELECOM_NUMBER"/>
+    <TelecomNumber contactMechId="FAC_SJJ_CMT" countryCode="" areaCode="" contactNumber="13967389100" askForName="朱锦萍"/>
+    <PartyContactMechPurpose partyId="FAC_SJJ" contactMechId="FAC_SJJ_CMT" contactMechPurposeTypeId="PHONE_MOBILE" fromDate="2014-05-23 11:57:40.936"/>
+
+
+    <Party partyId="FAC_HK" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_HK" groupName="虹口"/>
+    <PartyRole partyId="FAC_HK" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_HK" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_HK" facilityTypeId="PLANT" facilityName="虹口"  ownerPartyId="FAC_HK" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+    <ContactMech contactMechId="FAC_HK_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="FAC_HK_CM" address1="上海市虹口区长春路79号" directions="" city="" postalCode="" countryGeoId="CHN" />
+    <FacilityContactMech contactMechId="FAC_HK_CM" facilityId="FAC_HK" fromDate="2014-05-23 11:57:40.936"/>
+    <FacilityContactMechPurpose contactMechId="FAC_HK_CM" facilityId="FAC_HK" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+    <ContactMech contactMechId="FAC_HK_CMT" contactMechTypeId="TELECOM_NUMBER"/>
+    <TelecomNumber contactMechId="FAC_HK_CMT" countryCode="" areaCode="" contactNumber="15601856302" askForName="江海权"/>
+    <PartyContactMechPurpose partyId="FAC_HK" contactMechId="FAC_HK_CMT" contactMechPurposeTypeId="PHONE_MOBILE" fromDate="2014-05-23 11:57:40.936"/>
+
+
+
+    <Party partyId="FAC_YH" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_YH" groupName="友卉"/>
+    <PartyRole partyId="FAC_YH" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_YH" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_YH" facilityTypeId="PLANT" facilityName="有卉"  ownerPartyId="FAC_YH" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+
+
+    <Party partyId="FAC_SM" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_SM" groupName="世梅"/>
+    <PartyRole partyId="FAC_SM" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_SM" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_SM" facilityTypeId="PLANT" facilityName="世梅"  ownerPartyId="FAC_SM" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+    <ContactMech contactMechId="FAC_SM_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="FAC_SM_CM" address1="上海市嘉定区黄渡曹安公路4260号2楼" directions="" city="" postalCode="" countryGeoId="CHN" />
+    <FacilityContactMech contactMechId="FAC_SM_CM" facilityId="FAC_SM" fromDate="2014-05-23 11:57:40.936"/>
+    <FacilityContactMechPurpose contactMechId="FAC_SM_CM" facilityId="FAC_SM" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+    <ContactMech contactMechId="FAC_SM_CMT" contactMechTypeId="TELECOM_NUMBER"/>
+    <TelecomNumber contactMechId="FAC_SM_CMT" countryCode="" areaCode="" contactNumber="18621010879" askForName="詹明主"/>
+    <PartyContactMechPurpose partyId="FAC_SM" contactMechId="FAC_SM_CMT" contactMechPurposeTypeId="PHONE_MOBILE" fromDate="2014-05-23 11:57:40.936"/>
+
+
+    <Party partyId="FAC_YQT" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_YQT" groupName="虞庆堂"/>
+    <PartyRole partyId="FAC_YQT" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_YQT" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_YQT" facilityTypeId="PLANT" facilityName="虞庆堂"  ownerPartyId="FAC_YQT" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+    <ContactMech contactMechId="FAC_YQT_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="FAC_YQT_CM" address1="昆山市张浦镇花苑路1号" directions="" city="" postalCode="" countryGeoId="CHN" />
+    <FacilityContactMech contactMechId="FAC_YQT_CM" facilityId="FAC_YQT" fromDate="2014-05-23 11:57:40.936"/>
+    <FacilityContactMechPurpose contactMechId="FAC_YQT_CM" facilityId="FAC_YQT" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+    <ContactMech contactMechId="FAC_YQT_CMT" contactMechTypeId="TELECOM_NUMBER"/>
+    <TelecomNumber contactMechId="FAC_YQT_CMT" countryCode="" areaCode="" contactNumber="18915759838" askForName="颜小姐"/>
+    <PartyContactMechPurpose partyId="FAC_YQT" contactMechId="FAC_YQT_CMT" contactMechPurposeTypeId="PHONE_MOBILE" fromDate="2014-05-23 11:57:40.936"/>
+
+
+    <Party partyId="FAC_SJ" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_SJ" groupName="三景"/>
+    <PartyRole partyId="FAC_SJ" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_SJ" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_SJ" facilityTypeId="PLANT" facilityName="三景"  ownerPartyId="FAC_SJ" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+
+
+    <Party partyId="FAC_YF" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_YF" groupName="洋帆"/>
+    <PartyRole partyId="FAC_YF" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_YF" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_YF" facilityTypeId="PLANT" facilityName="洋帆"  ownerPartyId="FAC_YF" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+
+
+    <Party partyId="FAC_MKE" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_MKE" groupName="名珂尔"/>
+    <PartyRole partyId="FAC_MKE" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_MKE" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_MKE" facilityTypeId="PLANT" facilityName="名珂尔"  ownerPartyId="FAC_MKE" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+
+
+    <Party partyId="FAC_SY" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_SY" groupName="尚云"/>
+    <PartyRole partyId="FAC_SY" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_SY" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_SY" facilityTypeId="PLANT" facilityName="尚云"  ownerPartyId="FAC_SY" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+
+
+    <Party partyId="FAC_ZJ" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_ZJ" groupName="住金"/>
+    <PartyRole partyId="FAC_ZJ" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_ZJ" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_ZJ" facilityTypeId="PLANT" facilityName="住金"  ownerPartyId="FAC_ZJ" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+
+
+    <Party partyId="FAC_ZNHY" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_ZNHY" groupName="昭奈华裕"/>
+    <PartyRole partyId="FAC_ZNHY" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_ZNHY" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_ZNHY" facilityTypeId="PLANT" facilityName="昭奈华裕"  ownerPartyId="FAC_ZNHY" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+
+
+    <Party partyId="FAC_BIS" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_BIS" groupName="碧胜"/>
+    <PartyRole partyId="FAC_BIS" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_BIS" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_BIS" facilityTypeId="PLANT" facilityName="碧胜"  ownerPartyId="FAC_BIS" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+    <ContactMech contactMechId="FAC_BIS_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="FAC_BIS_CM" address1="上海市松江区九亭镇九亭开发区蒲汇路15弄58号" directions="" city="" postalCode="" countryGeoId="CHN" />
+    <FacilityContactMech contactMechId="FAC_BIS_CM" facilityId="FAC_BIS" fromDate="2014-05-23 11:57:40.936"/>
+    <FacilityContactMechPurpose contactMechId="FAC_BIS_CM" facilityId="FAC_BIS" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+    <ContactMech contactMechId="FAC_BIS_CMT" contactMechTypeId="TELECOM_NUMBER"/>
+    <TelecomNumber contactMechId="FAC_BIS_CMT" countryCode="" areaCode="" contactNumber="18939816397" askForName="王丽萍"/>
+    <PartyContactMechPurpose partyId="FAC_BIS" contactMechId="FAC_BIS_CMT" contactMechPurposeTypeId="PHONE_MOBILE" fromDate="2014-05-23 11:57:40.936"/>
+
+
+    <Party partyId="FAC_BD" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_BD" groupName="贝蒂"/>
+    <PartyRole partyId="FAC_BD" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_BD" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_BD" facilityTypeId="PLANT" facilityName="贝蒂"  ownerPartyId="FAC_BD" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+    <ContactMech contactMechId="FAC_BD_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="FAC_BD_CM" address1="江苏省张家巷市杨舍镇城南工业区D区1号" directions="" city="" postalCode="" countryGeoId="CHN" />
+    <FacilityContactMech contactMechId="FAC_BD_CM" facilityId="FAC_BD" fromDate="2014-05-23 11:57:40.936"/>
+    <FacilityContactMechPurpose contactMechId="FAC_BD_CM" facilityId="FAC_BD" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+    <ContactMech contactMechId="FAC_BD_CMT" contactMechTypeId="TELECOM_NUMBER"/>
+    <TelecomNumber contactMechId="FAC_BD_CMT" countryCode="" areaCode="" contactNumber="13962453681" askForName="沈杰"/>
+    <PartyContactMechPurpose partyId="FAC_BD" contactMechId="FAC_BD_CMT" contactMechPurposeTypeId="PHONE_MOBILE" fromDate="2014-05-23 11:57:40.936"/>
+	
+	<Party partyId="FAC_YQZY" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_YQZY" groupName="上海雨巧制衣"/>
+    <PartyRole partyId="FAC_YQZY" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_YQZY" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_YQZY" facilityTypeId="PLANT" facilityName="上海雨巧制衣"  ownerPartyId="FAC_YQZY" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+    <ContactMech contactMechId="FAC_YQZY_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="FAC_YQZY_CM" address1="上海宝山区宝祁路855号" directions="" city="" postalCode="" countryGeoId="CHN" />
+    <FacilityContactMech contactMechId="FAC_YQZY_CM" facilityId="FAC_YQZY" fromDate="2014-05-23 11:57:40.936"/>
+    <FacilityContactMechPurpose contactMechId="FAC_YQZY_CM" facilityId="FAC_YQZY" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+    <ContactMech contactMechId="FAC_YQZY_CMT" contactMechTypeId="TELECOM_NUMBER"/>
+    <TelecomNumber contactMechId="FAC_YQZY_CMT" countryCode="" areaCode="" contactNumber="18916134569" askForName=""/>
+    <PartyContactMechPurpose partyId="FAC_YQZY" contactMechId="FAC_YQZY_CMT" contactMechPurposeTypeId="PHONE_MOBILE" fromDate="2014-05-23 11:57:40.936"/>
+
+
+
+    <Party partyId="FAC_HHUI" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_HHUI" groupName="红卉"/>
+    <PartyRole partyId="FAC_HHUI" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_HHUI" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_HHUI" facilityTypeId="PLANT" facilityName="红卉"  ownerPartyId="FAC_HHUI" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+    <ContactMech contactMechId="FAC_HHUI_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="FAC_HHUI_CM" address1="上南路2985号2108室" directions="" city="" postalCode="" countryGeoId="CHN" />
+    <FacilityContactMech contactMechId="FAC_HHUI_CM" facilityId="FAC_HHUI" fromDate="2014-05-23 11:57:40.936"/>
+    <FacilityContactMechPurpose contactMechId="FAC_HHUI_CM" facilityId="FAC_HHUI" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+    <ContactMech contactMechId="FAC_HHUI_CMT" contactMechTypeId="TELECOM_NUMBER"/>
+    <TelecomNumber contactMechId="FAC_HHUI_CMT" countryCode="" areaCode="" contactNumber="15821210922" askForName="蔡雅玲"/>
+    <PartyContactMechPurpose partyId="FAC_HHUI" contactMechId="FAC_HHUI_CMT" contactMechPurposeTypeId="PHONE_MOBILE" fromDate="2014-05-23 11:57:40.936"/>
+    
+    
+    <Party partyId="FAC_DSHU" partyTypeId="PARTY_GROUP" preferredCurrencyUomId="CNY" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="FAC_DSHU" groupName="东曙服饰"/>
+    <PartyRole partyId="FAC_DSHU" roleTypeId="SUPPLIER"/>
+    <PartyRole partyId="FAC_DSHU" roleTypeId="MANUFACTURER"/>
+    <Facility facilityId="FAC_DSHU" facilityTypeId="PLANT" facilityName="东曙服饰"  ownerPartyId="FAC_DS" defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+    <ContactMech contactMechId="FAC_DSHU_CMT" contactMechTypeId="TELECOM_NUMBER"/>
+    <TelecomNumber contactMechId="FAC_DSHU_CMT" countryCode="" areaCode="" contactNumber="15961043349" askForName="李娟"/>
+	<FacilityContactMech contactMechId="FAC_DSHU_CMT" facilityId="FAC_DSHU" fromDate="2015-12-01 00:00:00"/>
+	<FacilityContactMechPurpose contactMechId="FAC_DSHU_CMT" facilityId="FAC_DSHU" contactMechPurposeTypeId="PHONE_WORK" fromDate="2015-12-01 00:00:00"/>
+    <ContactMech contactMechId="FAC_DSHU_CM" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="FAC_DSHU_CM" address1="泰兴市横垛镇跃进路" directions="" city="" postalCode="" countryGeoId="CHN" />
+    <FacilityContactMech contactMechId="FAC_DSHU_CM" facilityId="FAC_DSHU" fromDate="2014-05-23 11:57:40.936"/>
+    <FacilityContactMechPurpose contactMechId="FAC_DSHU_CM" facilityId="FAC_DSHU" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2014-05-23 11:57:40.936"/>
+</entity-engine-xml>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-engine-xml>	
+	<ProductFeatureGroup productFeatureGroupId="STYLE" description="款型" />
+	
+	<ProductFeature productFeatureId="JA" idCode="JA" productFeatureTypeId="STYLE" description="夹克、外套" />
+	<ProductFeature productFeatureId="SU" idCode="SU" productFeatureTypeId="STYLE" description="西装" />
+	<ProductFeature productFeatureId="TC" idCode="TC" productFeatureTypeId="STYLE" description="风衣" />
+	<ProductFeature productFeatureId="CO" idCode="CO" productFeatureTypeId="STYLE" description="大衣" />
+	<ProductFeature productFeatureId="DO" idCode="DO" productFeatureTypeId="STYLE" description="羽绒服" />
+	<ProductFeature productFeatureId="CL" idCode="CL" productFeatureTypeId="STYLE" description="斗篷" />
+	<ProductFeature productFeatureId="TS" idCode="TS" productFeatureTypeId="STYLE" description="T恤" />
+	<ProductFeature productFeatureId="VE" idCode="VE" productFeatureTypeId="STYLE" description="背心、马甲、吊带衫" />
+	<ProductFeature productFeatureId="BL" idCode="BL" productFeatureTypeId="STYLE" description="衬衫" />
+	<ProductFeature productFeatureId="PA" idCode="PA" productFeatureTypeId="STYLE" description="裤子" />
+	<ProductFeature productFeatureId="SK" idCode="SK" productFeatureTypeId="STYLE" description="裙子" />
+	<ProductFeature productFeatureId="DR" idCode="DR" productFeatureTypeId="STYLE" description="连衣裙" />
+	<ProductFeature productFeatureId="SW" idCode="SW" productFeatureTypeId="STYLE" description="泳装" />
+	<ProductFeature productFeatureId="SS" idCode="SS" productFeatureTypeId="STYLE" description="运动袜" />
+	<ProductFeature productFeatureId="GL" idCode="GL" productFeatureTypeId="STYLE" description="手套" />
+	<ProductFeature productFeatureId="CA" idCode="CA" productFeatureTypeId="STYLE" description="帽子" />
+	<ProductFeature productFeatureId="KW" idCode="KW" productFeatureTypeId="STYLE" description="童装" />
+	<ProductFeature productFeatureId="KT" idCode="KT" productFeatureTypeId="STYLE" description="套头衫" />
+	<ProductFeature productFeatureId="KJ" idCode="KJ" productFeatureTypeId="STYLE" description="开衫" />
+	<ProductFeature productFeatureId="KV" idCode="KV" productFeatureTypeId="STYLE" description="背心、吊带衫" />
+	<ProductFeature productFeatureId="KH" idCode="KH" productFeatureTypeId="STYLE" description="帽子" />
+	<ProductFeature productFeatureId="KN" idCode="KN" productFeatureTypeId="STYLE" description="手套、袜子" />
+	<ProductFeature productFeatureId="KP" idCode="KP" productFeatureTypeId="STYLE" description="Legging、裤子" />
+	<ProductFeature productFeatureId="KS" idCode="KS" productFeatureTypeId="STYLE" description="半裙" />
+	<ProductFeature productFeatureId="KD" idCode="KD" productFeatureTypeId="STYLE" description="连衣裙" />
+	<ProductFeature productFeatureId="KC" idCode="KC" productFeatureTypeId="STYLE" description="围巾" />
+	<ProductFeature productFeatureId="KO" idCode="KO" productFeatureTypeId="STYLE" description="大衣" />
+	<ProductFeature productFeatureId="AC" idCode="AC" productFeatureTypeId="STYLE" description="小皮件" />
+	<ProductFeature productFeatureId="BA" idCode="BA" productFeatureTypeId="STYLE" description="包" />
+	<ProductFeature productFeatureId="BE" idCode="BE" productFeatureTypeId="STYLE" description="皮带" />
+	<ProductFeature productFeatureId="SC" idCode="SC" productFeatureTypeId="STYLE" description="围巾" />
+	<ProductFeature productFeatureId="BRA" idCode="BRA" productFeatureTypeId="STYLE" description="胸衣" />
+	<ProductFeature productFeatureId="TO" idCode="TO" productFeatureTypeId="STYLE" description="毛巾" />
+	<ProductFeatureGroupAppl productFeatureGroupId="STYLE" productFeatureId="TO" fromDate="2015-01-01 00:00:00"/>
+	<ProductFeatureGroupAppl productFeatureGroupId="STYLE" productFeatureId="BRA" fromDate="2015-01-01 00:00:00"/>
+	<ProductFeatureGroupAppl productFeatureGroupId="STYLE" productFeatureId="JA" fromDate="2015-01-01 00:00:00"/>
+	<ProductFeatureGroupAppl productFeatureGroupId="STYLE" productFeatureId="SU" fromDate="2015-01-01 00:00:00"/>
+	<ProductFeatureGroupAppl productFeatureGroupId="STYLE" productFeatureId="TC" fromDate="2015-01-01 00:00:00"/>
+	<ProductFeatureGroupAppl productFeatureGroupId="STYLE" productFeatureId="CO" fromDate="2015-01-01 00:00:00"/>
+	<ProductFeatureGroupAppl productFeatureGroupId="STYLE" productFeatureId="DO" fromDate="2015-01-01 00:00:00"/>
+	<ProductFeatureGroupAppl productFeatureGroupId="STYLE" productFeatureId="CL" fromDate="2015-01-01 00:00:00"/>
+	<ProductFeatureGroupAppl productFeatureGroupId="STYLE" productFeatureId="TS" fromDate="2015-01-01 00:00:00"/>
+	<ProductFeatureGroupAppl productFeatureGroupId="STYLE" productFeatureId="VE" fromDate="2015-01-01 00:00:00"/>
+	<ProductFeatureGroupAppl productFeatureGroupId="STYLE" productFeatureId="BL" fromDate="2015-01-01 00:00:00"/>
+	<ProductFeatureGroupAppl productFeatureGroupId="STYLE" productFeatureId="PA" fromDate="2015-01-01 00:00:00"/>
+	<ProductFeatureGroupAppl productFeatureGroupId="STYLE" productFeatureId="SK" fromDate="2015-01-01 00:00:00"/>
+	<ProductFeatureGroupAppl productFeatureGroupId="STYLE" productFeatureId="DR" fromDate="2015-01-01 00:00:00"/>
+	<ProductFeatureGroupAppl productFeatureGroupId="STYLE" productFeatureId="SW" fromDate="2015-01-01 00:00:00"/>
+	<ProductFeatureGroupAppl productFeatureGroupId="STYLE" productFeatureId="SS" fromDate="2015-01-01 00:00:00"/>
+	<ProductFeatureGroupAppl productFeatureGroupId="STYLE" productFeatureId="GL" fromDate="2015-01-01 00:00:00"/>
+	<ProductFeatureGroupAppl productFeatureGroupId="STYLE" productFeatureId="CA" fromDate="2015-01-01 00:00:00"/>
+	<ProductFeatureGroupAppl productFeatureGroupId="STYLE" productFeatureId="KW" fromDate="2015-01-01 00:00:00"/>
+	<ProductFeatureGroupAppl productFeatureGroupId="STYLE" productFeatureId="KJ" fromDate="2015-01-01 00:00:00"/>
+	<ProductFeatureGroupAppl productFeatureGroupId="STYLE" productFeatureId="KV" fromDate="2015-01-01 00:00:00"/>
+	<ProductFeatureGroupAppl productFeatureGroupId="STYLE" productFeatureId="KH" fromDate="2015-01-01 00:00:00"/>
+	<ProductFeatureGroupAppl productFeatureGroupId="STYLE" productFeatureId="KN" fromDate="2015-01-01 00:00:00"/>
+	<ProductFeatureGroupAppl productFeatureGroupId="STYLE" productFeatureId="KT" fromDate="2015-01-01 00:00:00"/>
+	<ProductFeatureGroupAppl productFeatureGroupId="STYLE" productFeatureId="KP" fromDate="2015-01-01 00:00:00"/>
+	<ProductFeatureGroupAppl productFeatureGroupId="STYLE" productFeatureId="KS" fromDate="2015-01-01 00:00:00"/>
+	<ProductFeatureGroupAppl productFeatureGroupId="STYLE" productFeatureId="KD" fromDate="2015-01-01 00:00:00"/>
+	<ProductFeatureGroupAppl productFeatureGroupId="STYLE" productFeatureId="KC" fromDate="2015-01-01 00:00:00"/>
+	<ProductFeatureGroupAppl productFeatureGroupId="STYLE" productFeatureId="KO" fromDate="2015-01-01 00:00:00"/>
+	<ProductFeatureGroupAppl productFeatureGroupId="STYLE" productFeatureId="AC" fromDate="2015-01-01 00:00:00"/>
+	<ProductFeatureGroupAppl productFeatureGroupId="STYLE" productFeatureId="BA" fromDate="2015-01-01 00:00:00"/>
+	<ProductFeatureGroupAppl productFeatureGroupId="STYLE" productFeatureId="BE" fromDate="2015-01-01 00:00:00"/>
+	<ProductFeatureGroupAppl productFeatureGroupId="STYLE" productFeatureId="SC" fromDate="2015-01-01 00:00:00"/>
+	
+</entity-engine-xml>

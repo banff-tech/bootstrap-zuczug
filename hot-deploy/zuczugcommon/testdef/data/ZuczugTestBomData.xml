@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<entity-engine-xml>
+	
+	<!-- 两个商品转BOM测试数据 -
+    <Product productId="KBZTEST1" productTypeId="RAW_MATERIAL" primaryProductCategoryId="ACCE_OTHER" internalName="拷贝纸测试数据1" comments="常备" description="拷贝纸测试数据1" quantityUomId="ZHANG" widthUomId="LEN_cm" productWidth="0" isVirtual="Y" isVariant="N" createdDate="2015-12-15 00:00:00.000" createdByUserLogin="zhoulei"/>
+    <Product productId="KBZTEST1-01" productTypeId="RAW_MATERIAL" primaryProductCategoryId="ACCE_OTHER" internalName="拷贝纸测试数据1" comments="常备" description="拷贝纸测试数据1" quantityUomId="ZHANG" widthUomId="LEN_cm" productWidth="0" isVirtual="N" isVariant="Y" createdDate="2015-12-15 00:00:00.000" createdByUserLogin="zhoulei"/>
+    <Product productId="KBZTEST1-02" productTypeId="RAW_MATERIAL" primaryProductCategoryId="ACCE_OTHER" internalName="拷贝纸测试数据1" comments="常备" description="拷贝纸测试数据1" quantityUomId="ZHANG" widthUomId="LEN_cm" productWidth="0" isVirtual="N" isVariant="Y" createdDate="2015-12-15 00:00:00.000" createdByUserLogin="zhoulei"/>
+    <ProductAssoc productId="KBZTEST1" productIdTo="KBZTEST1-01" productAssocTypeId="PRODUCT_VARIANT" fromDate="2015-12-15 00:00:00.000" />
+    <ProductAssoc productId="KBZTEST1" productIdTo="KBZTEST1-02" productAssocTypeId="PRODUCT_VARIANT" fromDate="2015-12-15 00:00:00.000" />
+
+
+    <Product productId="KBZTEST2" productTypeId="RAW_MATERIAL" primaryProductCategoryId="ACCE_OTHER" internalName="拷贝纸测试数据2" comments="常备" description="拷贝纸测试数据2" quantityUomId="ZHANG" widthUomId="LEN_cm" productWidth="0" isVirtual="Y" isVariant="N" createdDate="2015-12-15 00:00:00.000" createdByUserLogin="zhoulei"/>
+    <Product productId="KBZTEST2-01" productTypeId="RAW_MATERIAL" primaryProductCategoryId="ACCE_OTHER" internalName="拷贝纸测试数据2" comments="常备" description="拷贝纸测试数据2" quantityUomId="ZHANG" widthUomId="LEN_cm" productWidth="0" isVirtual="N" isVariant="Y" createdDate="2015-12-15 00:00:00.000" createdByUserLogin="zhoulei"/>
+    <Product productId="KBZTEST2-02" productTypeId="RAW_MATERIAL" primaryProductCategoryId="ACCE_OTHER" internalName="拷贝纸测试数据2" comments="常备" description="拷贝纸测试数据2" quantityUomId="ZHANG" widthUomId="LEN_cm" productWidth="0" isVirtual="N" isVariant="Y" createdDate="2015-12-15 00:00:00.000" createdByUserLogin="zhoulei"/>
+    <ProductAssoc productId="KBZTEST2" productIdTo="KBZTEST2-01" productAssocTypeId="PRODUCT_VARIANT" fromDate="2015-12-15 00:00:00.000" />
+    <ProductAssoc productId="KBZTEST2" productIdTo="KBZTEST2-02" productAssocTypeId="PRODUCT_VARIANT" fromDate="2015-12-15 00:00:00.000" />
+
+
+    <Product productId="BOMTEST1" productTypeId="FINISHED_GOOD" primaryProductCategoryId="ACCE_OTHER" internalName="测试BOM数据1" comments="常备" description="测试BOM数据1" quantityUomId="ZHANG" widthUomId="LEN_cm" productWidth="0" isVirtual="Y" isVariant="N" createdDate="2015-12-15 00:00:00.000" createdByUserLogin="zhoulei"/>
+    <Product productId="BOMTEST1-01" productTypeId="FINISHED_GOOD" primaryProductCategoryId="ACCE_OTHER" internalName="测试BOM数据1-01" comments="常备" description="测试BOM数据1-01" quantityUomId="ZHANG" widthUomId="LEN_cm" productWidth="0" isVirtual="N" isVariant="Y" createdDate="2015-12-15 00:00:00.000" createdByUserLogin="zhoulei"/>
+    <Product productId="BOMTEST2" productTypeId="FINISHED_GOOD" primaryProductCategoryId="ACCE_OTHER" internalName="测试BOM数据2" comments="常备" description="测试BOM数据2" quantityUomId="ZHANG" widthUomId="LEN_cm" productWidth="0" isVirtual="N" isVariant="Y" createdDate="2015-12-15 00:00:00.000" createdByUserLogin="zhoulei"/>
+    <Product productId="BOMTEST2-01" productTypeId="FINISHED_GOOD" primaryProductCategoryId="ACCE_OTHER" internalName="测试BOM数据2-01" comments="常备" description="测试BOM数据2-01" quantityUomId="ZHANG" widthUomId="LEN_cm" productWidth="0" isVirtual="N" isVariant="N" createdDate="2015-12-15 00:00:00.000" createdByUserLogin="zhoulei"/>
+    <Product productId="BOMTEST3" productTypeId="FINISHED_GOOD" primaryProductCategoryId="ACCE_OTHER" internalName="测试BOM数据3" comments="常备" description="测试BOM数据3" quantityUomId="ZHANG" widthUomId="LEN_cm" productWidth="0" isVirtual="Y" isVariant="N" createdDate="2015-12-15 00:00:00.000" createdByUserLogin="zhoulei"/>
+    <Product productId="BOMTEST4" productTypeId="FINISHED_GOOD" primaryProductCategoryId="ACCE_OTHER" internalName="测试BOM数据4" comments="常备" description="测试BOM数据4" quantityUomId="ZHANG" widthUomId="LEN_cm" productWidth="0" isVirtual="N" isVariant="N" createdDate="2015-12-15 00:00:00.000" createdByUserLogin="zhoulei"/>
+    <Product productId="BOMTEST5" productTypeId="FINISHED_GOOD" primaryProductCategoryId="ACCE_OTHER" internalName="测试BOM数据5" comments="常备" description="测试BOM数据5" quantityUomId="ZHANG" widthUomId="LEN_cm" productWidth="0" isVirtual="Y" isVariant="N" createdDate="2015-12-15 00:00:00.000" createdByUserLogin="zhoulei"/>
+    <Product productId="BOMTEST5-01" productTypeId="FINISHED_GOOD" primaryProductCategoryId="ACCE_OTHER" internalName="测试BOM数据5" comments="常备" description="测试BOM数据5" quantityUomId="ZHANG" widthUomId="LEN_cm" productWidth="0" isVirtual="N" isVariant="Y" createdDate="2015-12-15 00:00:00.000" createdByUserLogin="zhoulei"/>
+    <Product productId="BOMTEST6" productTypeId="FINISHED_GOOD" primaryProductCategoryId="ACCE_OTHER" internalName="测试BOM数据6" comments="常备" description="测试BOM数据6" quantityUomId="ZHANG" widthUomId="LEN_cm" productWidth="0" isVirtual="N" isVariant="Y" createdDate="2015-12-15 00:00:00.000" createdByUserLogin="zhoulei"/>
+    <Product productId="BOMTEST6-01" productTypeId="FINISHED_GOOD" primaryProductCategoryId="ACCE_OTHER" internalName="测试BOM数据6" comments="常备" description="测试BOM数据6" quantityUomId="ZHANG" widthUomId="LEN_cm" productWidth="0" isVirtual="N" isVariant="Y" createdDate="2015-12-15 00:00:00.000" createdByUserLogin="zhoulei"/>
+    <Product productId="BOMTEST7" productTypeId="FINISHED_GOOD" primaryProductCategoryId="ACCE_OTHER" internalName="测试BOM数据7" comments="常备" description="测试BOM数据7" quantityUomId="ZHANG" widthUomId="LEN_cm" productWidth="0" isVirtual="N" isVariant="N" createdDate="2015-12-15 00:00:00.000" createdByUserLogin="zhoulei"/>
+    <Product productId="BOMTEST7-01" productTypeId="FINISHED_GOOD" primaryProductCategoryId="ACCE_OTHER" internalName="测试BOM数据7" comments="常备" description="测试BOM数据7" quantityUomId="ZHANG" widthUomId="LEN_cm" productWidth="0" isVirtual="N" isVariant="Y" createdDate="2015-12-15 00:00:00.000" createdByUserLogin="zhoulei"/>
+    
+    <ProductAssoc productId="BOMTEST1" productIdTo="BOMTEST1-01" productAssocTypeId="PRODUCT_VARIANT" fromDate="2015-12-15 00:00:00.000"/>
+    <ProductAssoc productId="BOMTEST2" productIdTo="BOMTEST2-01" productAssocTypeId="PRODUCT_VARIANT" fromDate="2015-12-15 00:00:00.000"/>
+    <ProductAssoc productId="BOMTEST5" productIdTo="BOMTEST5-01" productAssocTypeId="PRODUCT_VARIANT" fromDate="2015-12-15 00:00:00.000"/>
+    <ProductAssoc productId="BOMTEST6" productIdTo="BOMTEST6-01" productAssocTypeId="PRODUCT_VARIANT" fromDate="2015-12-15 00:00:00.000"/>
+    <ProductAssoc productId="BOMTEST7" productIdTo="BOMTEST7-01" productAssocTypeId="PRODUCT_VARIANT" fromDate="2015-12-15 00:00:00.000"/>
+
+    <ProductAssoc productId="BOMTEST1" productIdTo="KBZTEST2" productAssocTypeId="ENGINEER_COMPONENT" fromDate="2015-12-15 00:00:00.000" quantity="100"/>
+    <ProductAssoc productId="BOMTEST2" productIdTo="KBZTEST2" productAssocTypeId="ENGINEER_COMPONENT" fromDate="2015-12-15 00:00:00.000" quantity="100"/>
+    <ProductAssoc productId="BOMTEST3" productIdTo="KBZTEST2" productAssocTypeId="ENGINEER_COMPONENT" fromDate="2015-12-15 00:00:00.000" quantity="100"/>
+    <ProductAssoc productId="BOMTEST4" productIdTo="KBZTEST2" productAssocTypeId="ENGINEER_COMPONENT" fromDate="2015-12-15 00:00:00.000" quantity="100"/>
+    <ProductAssoc productId="BOMTEST5" productIdTo="KBZTEST1" productAssocTypeId="ENGINEER_COMPONENT" fromDate="2015-12-15 00:00:00.000" quantity="100"/>
+    <ProductAssoc productId="BOMTEST6" productIdTo="KBZTEST1" productAssocTypeId="ENGINEER_COMPONENT" fromDate="2015-12-15 00:00:00.000" quantity="100"/>
+    <ProductAssoc productId="BOMTEST7" productIdTo="KBZTEST1" productAssocTypeId="ENGINEER_COMPONENT" fromDate="2015-12-15 00:00:00.000" quantity="100"/>
+-->
+    <!-- MANUF_COMPONENT 生产Bom-
+
+    <Product productId="BOMTEST11" productTypeId="FINISHED_GOOD" primaryProductCategoryId="ACCE_OTHER" internalName="测试BOM数据1" comments="常备" description="测试BOM数据1" quantityUomId="ZHANG" widthUomId="LEN_cm" productWidth="0" isVirtual="Y" isVariant="N" createdDate="2015-12-15 00:00:00.000" createdByUserLogin="zhoulei"/>
+    <Product productId="BOMTEST22" productTypeId="FINISHED_GOOD" primaryProductCategoryId="ACCE_OTHER" internalName="测试BOM数据2" comments="常备" description="测试BOM数据2" quantityUomId="ZHANG" widthUomId="LEN_cm" productWidth="0" isVirtual="N" isVariant="Y" createdDate="2015-12-15 00:00:00.000" createdByUserLogin="zhoulei"/>
+    <Product productId="BOMTEST33" productTypeId="FINISHED_GOOD" primaryProductCategoryId="ACCE_OTHER" internalName="测试BOM数据3" comments="常备" description="测试BOM数据3" quantityUomId="ZHANG" widthUomId="LEN_cm" productWidth="0" isVirtual="Y" isVariant="N" createdDate="2015-12-15 00:00:00.000" createdByUserLogin="zhoulei"/>
+    <Product productId="BOMTEST44" productTypeId="FINISHED_GOOD" primaryProductCategoryId="ACCE_OTHER" internalName="测试BOM数据4" comments="常备" description="测试BOM数据4" quantityUomId="ZHANG" widthUomId="LEN_cm" productWidth="0" isVirtual="N" isVariant="N" createdDate="2015-12-15 00:00:00.000" createdByUserLogin="zhoulei"/>
+    <Product productId="BOMTEST55" productTypeId="FINISHED_GOOD" primaryProductCategoryId="ACCE_OTHER" internalName="测试BOM数据5" comments="常备" description="测试BOM数据5" quantityUomId="ZHANG" widthUomId="LEN_cm" productWidth="0" isVirtual="Y" isVariant="N" createdDate="2015-12-15 00:00:00.000" createdByUserLogin="zhoulei"/>
+    <Product productId="BOMTEST66" productTypeId="FINISHED_GOOD" primaryProductCategoryId="ACCE_OTHER" internalName="测试BOM数据6" comments="常备" description="测试BOM数据6" quantityUomId="ZHANG" widthUomId="LEN_cm" productWidth="0" isVirtual="N" isVariant="Y" createdDate="2015-12-15 00:00:00.000" createdByUserLogin="zhoulei"/>
+    <Product productId="BOMTEST77" productTypeId="FINISHED_GOOD" primaryProductCategoryId="ACCE_OTHER" internalName="测试BOM数据7" comments="常备" description="测试BOM数据7" quantityUomId="ZHANG" widthUomId="LEN_cm" productWidth="0" isVirtual="N" isVariant="N" createdDate="2015-12-15 00:00:00.000" createdByUserLogin="zhoulei"/>
+    
+    <ProductAssoc productId="BOMTEST11" productIdTo="KBZTEST2" productAssocTypeId="MANUF_COMPONENT" fromDate="2015-12-15 00:00:00.000" quantity="100"/>
+    <ProductAssoc productId="BOMTEST22" productIdTo="KBZTEST2" productAssocTypeId="MANUF_COMPONENT" fromDate="2015-12-15 00:00:00.000" quantity="100"/>
+    <ProductAssoc productId="BOMTEST33" productIdTo="KBZTEST2" productAssocTypeId="MANUF_COMPONENT" fromDate="2015-12-15 00:00:00.000" quantity="100"/>
+    <ProductAssoc productId="BOMTEST44" productIdTo="KBZTEST2" productAssocTypeId="MANUF_COMPONENT" fromDate="2015-12-15 00:00:00.000" quantity="100"/>
+    <ProductAssoc productId="BOMTEST55" productIdTo="KBZTEST1" productAssocTypeId="MANUF_COMPONENT" fromDate="2015-12-15 00:00:00.000" quantity="100"/>
+    <ProductAssoc productId="BOMTEST66" productIdTo="KBZTEST1" productAssocTypeId="MANUF_COMPONENT" fromDate="2015-12-15 00:00:00.000" quantity="100"/>
+    <ProductAssoc productId="BOMTEST77" productIdTo="KBZTEST1" productAssocTypeId="MANUF_COMPONENT" fromDate="2015-12-15 00:00:00.000" quantity="100"/>
+    -->
+    
+    <!-- 是否有素然物料编号测试数据 -->
+    <Product productId="Z161TEST1" productTypeId="RAW_MATERIAL" primaryProductCategoryId="ACCE_OTHER" internalName="测试数据1" comments="常备" description="测试数据1" quantityUomId="ZHANG" widthUomId="LEN_cm" productWidth="0" isVirtual="Y" isVariant="N" createdDate="2015-12-15 00:00:00.000" createdByUserLogin="zhoulei"/>
+    <Product productId="Z161TESTBIANXIN1" productTypeId="RAW_MATERIAL" primaryProductCategoryId="ACCE_OTHER" internalName="测试数据1" comments="常备" description="测试数据1" quantityUomId="ZHANG" widthUomId="LEN_cm" productWidth="0" isVirtual="N" isVariant="N" createdDate="2015-12-15 00:00:00.000" createdByUserLogin="zhoulei"/>
+    <Product productId="Z161TESTBIANXIN2" productTypeId="RAW_MATERIAL" primaryProductCategoryId="ACCE_OTHER" internalName="测试数据1" comments="常备" description="测试数据1" quantityUomId="ZHANG" widthUomId="LEN_cm" productWidth="0" isVirtual="N" isVariant="Y" createdDate="2015-12-15 00:00:00.000" createdByUserLogin="zhoulei"/>
+    <Product productId="Z161TEST2" productTypeId="RAW_MATERIAL" primaryProductCategoryId="ACCE_OTHER" internalName="测试数据2" comments="常备" description="测试数据2" quantityUomId="ZHANG" widthUomId="LEN_cm" productWidth="0" isVirtual="N" isVariant="Y" createdDate="2015-12-15 00:00:00.000" createdByUserLogin="zhoulei"/>
+    <Product productId="Z161TEST3" productTypeId="RAW_MATERIAL" primaryProductCategoryId="ACCE_OTHER" internalName="测试数据3" comments="常备" description="测试数据3" quantityUomId="ZHANG" widthUomId="LEN_cm" productWidth="0" isVirtual="Y" isVariant="N" createdDate="2015-12-15 00:00:00.000" createdByUserLogin="zhoulei"/>
+    <Product productId="Z161TEST4" productTypeId="RAW_MATERIAL" primaryProductCategoryId="ACCE_OTHER" internalName="测试数据4" comments="常备" description="测试数据4" quantityUomId="ZHANG" widthUomId="LEN_cm" productWidth="0" isVirtual="Y" isVariant="Y" createdDate="2015-12-15 00:00:00.000" createdByUserLogin="zhoulei"/>
+    <Product productId="Z161TEST5" productTypeId="RAW_MATERIAL" primaryProductCategoryId="ACCE_OTHER" internalName="测试数据5" comments="常备" description="测试数据5" quantityUomId="ZHANG" widthUomId="LEN_cm" productWidth="0" isVirtual="Y" isVariant="N" createdDate="2015-12-15 00:00:00.000" createdByUserLogin="zhoulei"/>
+    <Product productId="Z161TEST6" productTypeId="RAW_MATERIAL" primaryProductCategoryId="ACCE_OTHER" internalName="测试数据6" comments="常备" description="测试数据6" quantityUomId="ZHANG" widthUomId="LEN_cm" productWidth="0" isVirtual="Y" isVariant="Y" createdDate="2015-12-15 00:00:00.000" createdByUserLogin="zhoulei"/>
+    <Product productId="Z161TEST7" productTypeId="FINISHED_GOOD" primaryProductCategoryId="ACCE_OTHER" internalName="测试数据7" comments="常备" description="测试数据7" quantityUomId="ZHANG" widthUomId="LEN_cm" productWidth="0" isVirtual="N" isVariant="N" createdDate="2015-12-15 00:00:00.000" createdByUserLogin="zhoulei"/>
+    
+    
+    <ProductAssoc productId="Z161TEST1" productIdTo="Z161TESTBIANXIN1" productAssocTypeId="PRODUCT_VARIANT" fromDate="2015-12-15 00:00:00.000" quantity="100"/>
+    <ProductAssoc productId="Z161TEST1" productIdTo="Z161TESTBIANXIN2" productAssocTypeId="PRODUCT_VARIANT" fromDate="2015-12-15 00:00:00.000" quantity="100"/>
+    
+    <GoodIdentification goodIdentificationTypeId="ZUCZUG_CODE" productId="Z161TEST1" idValue="Z161TEST1"/>
+    <GoodIdentification goodIdentificationTypeId="ZUCZUG_CODE" productId="Z161TEST3" idValue="Z161TEST3"/>
+    <GoodIdentification goodIdentificationTypeId="ZUCZUG_CODE" productId="Z161TEST5" idValue="Z161TEST5"/>
+    
+
+</entity-engine-xml>

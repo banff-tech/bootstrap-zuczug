@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+	<!-- 销售订单 -->
+	<screen name="FindSalesOrder">
+		<section>
+			<actions>
+				<set field="titleProperty" value="EditMaterialProduct"/>
+				<set field="headerItem" value="FindSalesOrder"/>
+				<set field="tabButtonItem" value="FindSalesOrder"/>
+				<set field="labelTitleProperty" value="PageTitleEditMaterialProduct"/>
+				<set field="productId" from-field="parameters.productId"/>
+				<entity-one entity-name="OrderHeader" value-field="oheader">
+					<field-map field-name="orderId" from-field="parameters.orderId"/>
+				</entity-one>
+				<property-map resource="FabricFacilityUiLabels" map-name="uiLabelMap" global="true"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="FabricDevelopmentCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                   	<decorator-section name="body">
+	                   	<include-menu location="component://haze/widget/HazeMenus.xml" name="SalesManageTabBar"/>
+						<link target="AddSalesOrder" text="${uiLabelMap.AddSalesOrder}" style="buttontext"></link>
+	                   	<screenlet id="searchOptions" name="findScreenlet" collapsible="true" save-collapsed="true" initially-collapsed="true" title="${uiLabelMap.CommonSearchOptions}">
+		                    <container id="search-options">
+		                        <include-form name="SearchSalesOrder" location="component://haze/widget/SalesOrderForms.xml"/>
+		                    </container>
+		                </screenlet>
+		                
+		                <screenlet id="search-results" title="${uiLabelMap.SalesOrderList}">
+		                    <container id="search-results">
+		                        <include-form name="ListSalesOrder" location="component://haze/widget/SalesOrderForms.xml"/>
+		                    </container>
+		                </screenlet>
+                   </decorator-section>
+               </decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	
+	<!-- 新建销售订单-->
+	<screen name="AddSalesOrder">
+		<section>
+			<actions>
+				<set field="titleProperty" value="EditMaterialProduct"/>
+				<set field="headerItem" value="FindSalesOrder"/>
+				<set field="tabButtonItem" value="FindSalesOrder"/>               
+				<set field="labelTitleProperty" value="PageTitleEditMaterialProduct"/>
+				<set field="productId" from-field="parameters.productId"/>
+				<entity-one entity-name="OrderHeader" value-field="oheader">
+					<field-map field-name="orderId" from-field="parameters.orderId"/>
+				</entity-one>
+            	<entity-condition list="facilityList" entity-name="Facility">
+            		<condition-list combine="or">
+            			<condition-expr field-name="facilityTypeId" value="WAREHOUSE"/>
+            			<condition-expr field-name="facilityTypeId" value="PLANT"/>
+            		</condition-list>
+            	</entity-condition>
+            	<entity-condition list="productStoreList" entity-name="ProductStore">
+
+            	</entity-condition>
+				<set field="cart" value="${groovy:org.ofbiz.order.shoppingcart.ShoppingCartEvents.getCartObject(request)}" type="Object"/>
+				<set field="cartItems" value="${groovy:cart.items()}" type="Object"/>
+				
+				<entity-and list="suppliers" entity-name="PartyRole">
+					<field-map field-name="roleTypeId" value="SUPPLIER"/>
+				</entity-and>
+				<!-- 获取已经在购物车中的数据 -->
+				<!-- <script location="component://fabricdevelopment/webapp/fabricdevelopment/WEB-INF/actions/purchaseShoppingCart.groovy" /> -->
+				<set field="layoutSettings.javaScripts[]" value="/zuczugcommon/upload/plugins/validate/additional-methods.js" global="true"/>
+				
+				<!-- 所有的服务项目 -->
+				<entity-and list="serviceList" entity-name="Product">
+					<field-map field-name="productTypeId" value="SERVICE"/>
+					<select-field field-name="productId"/>
+					<select-field field-name="productName"/>
+				</entity-and>
+			</actions>
+			<widgets>
+				<decorator-screen name="FabricDevelopmentCommonDecorator" location="${parameters.mainDecoratorLocation}">
+					<decorator-section name="body">
+						<!-- <include-menu name="PurchaseOrderManagement" location="component://haze/widget/SalesOrderMenus.xml"/> -->
+						<platform-specific>
+							<html>
+								<html-template location="component://haze/webapp/haze/html/editSalesOrder.ftl"/>
+							</html>
+						</platform-specific>
+                   	</decorator-section>
+               	</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	
+	<screen name="FindSalesOrderItem">
+        <section>
+            <actions>
+                <set field="headerItem" value="FindSalesOrder"/><!-- this highlights the selected menu-item with name "main" -->
+                <set field="tabButtonItem" value="FindSalesOrder" />
+            	<property-map resource="FabricDevelopmentUiLabels" map-name="uiLabelMap" global="true"/>
+            	<set field="layoutSettings.javaScripts[]" value="/zuczugcommon/upload/plugins/validate/additional-methods.js" global="true"/>
+            	<entity-one value-field="orderHeader" entity-name="OrderHeader"></entity-one>
+            	<entity-and list="oisgList" entity-name="OrderItemShipGroup">
+            		<field-map field-name="orderId" from-field="parameters.orderId"/>
+            	</entity-and>
+            	
+            	<entity-condition list="facilityList" entity-name="Facility">
+            		<condition-list combine="or">
+            			<condition-expr field-name="facilityTypeId" operator="equals" value="WAREHOUSE"/>
+            			<condition-expr field-name="facilityTypeId" operator="equals" value="PLANT"/>
+            		</condition-list>
+            	</entity-condition>
+            	
+            	<!-- 供应商 -->
+            	<set field="orh" value="${groovy:org.ofbiz.order.order.OrderReadHelper.getHelper(orderHeader)}" type="Object"/>
+            	<set field="supplier" value="${groovy:orh.getPartyFromRole('SUPPLIER')}" type="Object"/>
+				<set field="supplierId" from-field="supplier.partyId"/>
+            	
+            	<!-- 所有的服务项目 -->
+				<entity-and list="serviceList" entity-name="Product">
+					<field-map field-name="productTypeId" value="SERVICE"/>
+					<select-field field-name="productId"/>
+					<select-field field-name="productName"/>
+				</entity-and>
+            </actions>
+            <widgets>
+                <decorator-screen name="FabricDevelopmentCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">                 
+                    	
+                    	<screenlet id="orderHeader" title="${uiLabelMap.OrderInfo}">
+                    		<include-form name="salesOrderHeader" location="component://haze/widget/SalesOrderForms.xml"/>
+                    	</screenlet>
+                    	<section>
+                    		<condition>
+                    			<if-compare operator="equals" value="Y" field="parameters.editFlag"/>
+                    		</condition>
+                    		<widgets>
+                    			<platform-specific>
+			                    	<html><html-template location="component://haze/webapp/haze/html/sales/editSalesOrderItemDetail.ftl"/></html>
+			                    </platform-specific>
+                    		</widgets>
+                    		<fail-widgets>
+                    			<platform-specific>
+			                    	<html><html-template location="component://haze/webapp/haze/html/sales/orderItemDetail.ftl"/></html>
+			                    </platform-specific>
+                    		</fail-widgets>
+                    	</section>	                    
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    
+    <screen name="EditOrderShipmentGroups">
+        <section>
+            <actions>
+                <set field="headerItem" value="FindSalesOrder"/><!-- this highlights the selected menu-item with name "main" -->
+                <set field="tabButtonItem" value="FindSalesOrder" />
+            	<property-map resource="FabricDevelopmentUiLabels" map-name="uiLabelMap" global="true"/>
+            	<set field="layoutSettings.javaScripts[]" value="/zuczugcommon/upload/plugins/validate/additional-methods.js" global="true"/>
+            	<entity-one value-field="orderHeader" entity-name="OrderHeader"></entity-one>
+            	<entity-and list="oisgList" entity-name="OrderItemShipGroup">
+            		<field-map field-name="orderId" from-field="parameters.orderId"/>
+            	</entity-and>
+            	
+            	<entity-condition list="facilityList" entity-name="Facility">
+            		<condition-list combine="or">
+            			<condition-expr field-name="facilityTypeId" operator="equals" value="WAREHOUSE"/>
+            			<condition-expr field-name="facilityTypeId" operator="equals" value="PLANT"/>
+            		</condition-list>
+            	</entity-condition>
+            	
+            	<!-- 供应商 -->
+            	<set field="orh" value="${groovy:org.ofbiz.order.order.OrderReadHelper.getHelper(orderHeader)}" type="Object"/>
+            	<set field="supplier" value="${groovy:orh.getPartyFromRole('SUPPLIER')}" type="Object"/>
+				<set field="supplierId" from-field="supplier.partyId"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="FabricDevelopmentCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                    	<link target="FindSalesOrderItem?orderId=${parameters.orderId}" url-mode="plain" text="${uiLabelMap.EditOver}" style="buttontext" />
+               			<platform-specific>
+	                    	<html><html-template location="component://haze/webapp/haze/html/sales/editOrderShipmentGroups.ftl"/></html>
+	                    </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+</screens>

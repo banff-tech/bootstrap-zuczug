@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simple-methods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/simple-methods.xsd">
+                
+	<!-- 保存不同类型的订单备注 -->
+	<simple-method method-name="createOrUpdateOrderInfoNote" short-description="Create a system to to a specific party">
+        <set field="parameters.partyId" from-field="parameters.partyId" default-value="userLogin.partyId"/>
+        <!-- 先获取这个订单有没有这个类型的备注 -->
+        <!-- List<GenericValue> notes = delegator.findByAnd("OrderHeaderAndNote", UtilMisc.toMap("orderId",orderId,"noteName",noteName)); -->
+        <entity-and list="notes" entity-name="OrderHeaderAndNote">
+        	<field-map field-name="orderId" from-field="parameters.orderId"/>
+        	<field-map field-name="noteName" from-field="parameters.noteName"/>
+        </entity-and>
+        <if-not-empty field="notes"><!-- 如果这个有了，就修改 -->
+        	<first-from-list entry="note" list="notes"/>
+        	<set field="note.noteInfo" from-field="parameters.noteInfo"/>
+        	<store-value value-field="note"/>
+        <else><!-- 如果没有，就新增 -->
+	        <make-value value-field="noteData" entity-name="NoteData"/>
+	        <set-nonpk-fields value-field="noteData" map="parameters"/>
+	        <now-timestamp field="noteData.noteDateTime"/>
+	        <sequenced-id sequence-name="NoteData" field="noteData.noteId"/>
+	        <clear-field field="inMap"/>
+	        <set field="inMap.note" from-field="parameters.noteInfo"/>
+	        <set field="inMap.noteName" from-field="parameters.noteName"/>
+	        <call-service service-name="createNote" in-map-name="inMap">
+	        	<result-to-field result-name="noteId" field="noteData.noteId"/>
+	        </call-service>
+	        
+	        <make-value value-field="orderHeaderNote" entity-name="OrderHeaderNote"/>
+	        <set field="orderHeaderNote.orderId" from-field="parameters.orderId"/>
+	        <set field="orderHeaderNote.noteId" from-field="noteData.noteId"/>
+	        <set field="orderHeaderNote.internalNote" value="Y"/>
+	        
+	        <clear-field field="inMap"/>
+   	        <set field="inMap.note" from-field="parameters.noteInfo"/>
+   	        <set field="inMap.noteName" from-field="parameters.noteName"/>
+	        
+	        <set-service-fields service-name="createOrderNote" to-map="inMap" map="orderHeaderNote"/>
+	        <call-service service-name="createOrderNote" in-map-name="inMap">
+	        </call-service>
+        </else>
+        </if-not-empty>
+    </simple-method>
+
+	<!-- 新增或者修改订单的某个属性 -->
+	<simple-method method-name="createOrUpdateOrderAttribute" short-description="createOrUpdateOrderAttribute">
+		<entity-one value-field="oa" entity-name="OrderAttribute">
+			<field-map field-name="orderId" from-field="parameters.orderId"/>
+			<field-map field-name="attrName" from-field="parameters.attrName"/>
+		</entity-one>
+		<if-not-empty field="oa">
+			<set field="oa.attrValue" from-field="parameters.attrValue"/>
+			<store-value value-field="oa"/>
+		<else>
+			<make-value value-field="oa" entity-name="OrderAttribute"/>
+			<set field="oa.orderId" from-field="parameters.orderId"/>
+			<set field="oa.attrName" from-field="parameters.attrName"/>
+			<set field="oa.attrValue" from-field="parameters.attrValue"/>
+			<create-value value-field="oa"/>
+		</else>
+		</if-not-empty>
+	</simple-method>
+	
+	
+	<simple-method method-name="createOrderContent" short-description="create Order Content">
+		<make-value value-field="newEntity" entity-name="OrderContent"/>
+		<set-nonpk-fields value-field="newEntity" map="parameters"/>
+		<set-pk-fields value-field="newEntity" map="parameters"/>
+		<create-value value-field="newEntity"/>
+		<check-errors></check-errors>
+	</simple-method>
+	
+</simple-methods>
+    

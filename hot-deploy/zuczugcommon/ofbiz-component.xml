@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ofbiz-component name="zuczugcommon"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/ofbiz-component.xsd">
+    <!-- define resource loaders; most common is to use the component resource loader -->
+    <resource-loader name="main" type="component"/>
+
+    <!-- place the config directory on the classpath to access configuration files -->
+    <classpath type="dir" location="config"/>
+    <classpath type="dir" location="dtd"/>
+
+    <!-- load single or multiple external libraries -->
+    <classpath type="jar" location="build/lib/*"/>
+    <classpath type="jar" location="lib/*"/>
+
+    <!-- entity resources: model(s), eca(s), group, and data definitions -->
+    <entity-resource type="model" reader-name="main" loader="main" location="entitydef/entitymodel.xml"/>
+    <entity-resource type="model" reader-name="main" loader="main" location="entitydef/entitymodel_view.xml"/>
+    <entity-resource type="model" reader-name="main" loader="main" location="entitydef/entitymodelCommon_view.xml"/>
+    <!-- <entity-resource type="eca" reader-name="main" loader="main" location="entitydef/eecas.xml"/> -->
+    <entity-resource type="data" reader-name="demo" loader="main" location="data/ZuczugCommonTypeData.xml"/>
+    <entity-resource type="data" reader-name="demo" loader="main" location="data/ZuczugCommonSecurityData.xml"/>
+    <entity-resource type="data" reader-name="demo" loader="main" location="data/ZuczugCommonDemoData.xml"/>
+
+    <!-- service resources: model(s), eca(s) and group definitions -->
+    <service-resource type="model" loader="main" location="servicedef/services.xml"/>
+    <service-resource type="model" loader="main" location="servicedef/OldServices.xml"/>
+    <service-resource type="model" loader="main" location="servicedef/zuczugOrderServiceUtil.xml"/>
+    <service-resource type="model" loader="main" location="servicedef/zuczugProductServiceUtil.xml"/>
+    <service-resource type="model" loader="main" location="servicedef/ZuczugFixDataServices.xml"/>
+    <service-resource type="model" loader="main" location="servicedef/ZuczugShipmentServiceUtil.xml"/>
+    <!--
+    <service-resource type="eca" loader="main" location="servicedef/secas.xml"/>
+    <service-resource type="group" loader="main" location="servicedef/groups.xml"/>
+    -->
+
+    <test-suite loader="main" location="testdef/ZuczugCommonTests.xml"/>
+
+    <!-- web applications; will be mounted when using the embedded container -->
+    <webapp name="zuczugcommon"
+        title="ZuczugCommon"
+        server="default-server"
+        location="webapp/zuczugcommon"
+        app-bar-display="false"
+        base-permission="OFBTOOLS,ZUCZUGUTIL"
+        mount-point="/zuczugcommon"/>
+</ofbiz-component>

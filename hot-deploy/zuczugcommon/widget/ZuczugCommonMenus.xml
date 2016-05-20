@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menus xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-menu.xsd">
+    <menu name="MainAppBar" title="${uiLabelMap.ZuczugCommonApplication}" extends="CommonAppBarMenu" extends-resource="component://common/widget/CommonMenus.xml">
+        <menu-item name="main" title="${uiLabelMap.CommonMain}"><link target="main"/></menu-item>
+    </menu>
+    
+    <menu name="ProductTabBar" extends="CommonTabBarMenu" extends-resource="component://common/widget/CommonMenus.xml">
+    	<menu-item name="EditVariantProduct" title="物料">
+    		<condition>
+				<if-compare field="isVariant" operator="equals" value="Y"/>
+            </condition>
+            <link target="EditVariantProduct">
+                <parameter param-name="productId"/>
+                <parameter param-name="idValue"/>
+                <parameter param-name="productCategoryId"/>
+                <parameter param-name="isVirtual"/>
+                <parameter param-name="isVariant"/>
+            </link>
+        </menu-item>
+    	<menu-item name="EditProduct" title="物料">
+    		<condition>
+				<if-compare field="isVariant" operator="not-equals" value="Y"/>
+            </condition>
+            <link target="EditProduct">
+                <parameter param-name="productId"/>
+                <parameter param-name="idValue"/>
+                <parameter param-name="productCategoryId"/>
+                <parameter param-name="isVirtual"/>
+                <parameter param-name="isVariant"/>
+            </link>
+        </menu-item>
+        
+        <!-- <menu-item name="EditProductFeatures" title="特征">
+            <link target="EditProductFeatures">
+                <parameter param-name="productId"/>
+                <parameter param-name="idValue"/>
+                <parameter param-name="productCategoryId"/>
+                <parameter param-name="isVirtual"/>
+                <parameter param-name="isVariant"/>
+            </link>
+        </menu-item> -->
+                    
+        <menu-item name="EditProductCategories" title="${uiLabelMap.ProductCategories}">        	
+            <link target="EditProductCategories">
+                <parameter param-name="productId"/>
+                <parameter param-name="idValue"/>
+                <parameter param-name="productCategoryId"/>
+                <parameter param-name="isVirtual"/>
+                <parameter param-name="isVariant"/>
+            </link>
+        </menu-item> 
+               
+        <menu-item name="EditProductAssoc" title="商品关联" >
+        	<condition>
+				<if-compare field="isVirtual" operator="equals" value="Y"/>
+            </condition>
+            <link target="EditProductAssoc">
+                <parameter param-name="productId"/>
+                <parameter param-name="idValue"/>
+                <parameter param-name="productCategoryId"/>
+                <parameter param-name="isVirtual"/>
+                <parameter param-name="isVariant"/>
+            </link>
+        </menu-item>
+        
+        <menu-item name="BOMAssoc" title="BOM关联" >
+        	<condition>
+				<if-compare field="isVirtual" operator="equals" value="N"/>
+            </condition>
+            <link target="BOMAssoc">
+                <parameter param-name="productId"/>
+                <parameter param-name="idValue"/>
+                <parameter param-name="productCategoryId"/>
+                <parameter param-name="isVirtual"/>
+                <parameter param-name="isVariant"/>
+            </link>
+        </menu-item>
+
+        <menu-item name="EditProductInventoryItems" title="${uiLabelMap.ProductInventory}">
+        	<condition>
+				<if-compare field="isVirtual" operator="equals" value="N"/>
+            </condition>
+            <link target="EditProductInventoryItems">
+                <parameter param-name="productId"/>
+                <parameter param-name="showAllFacilities" value="Y"/>
+                <parameter param-name="idValue"/>
+                <parameter param-name="productCategoryId"/>
+                <parameter param-name="isVirtual"/>
+                <parameter param-name="isVariant"/>
+            </link>
+        </menu-item>
+        <menu-item name="EditAccessorySuppliers" title="${uiLabelMap.ProductSuppliers}">
+            <link target="EditAccessorySuppliers">
+                <parameter param-name="productId"/>
+                <parameter param-name="idValue"/>
+                <parameter param-name="productCategoryId"/>
+                <parameter param-name="isVirtual"/>
+                <parameter param-name="isVariant"/>
+            </link>
+        </menu-item>
+        <menu-item name="viewProductOrder" title="${uiLabelMap.OrderOrders}">
+        	<condition>
+				<if-compare field="isVirtual" operator="equals" value="N"/>
+            </condition>
+            <link target="viewProductOrder">
+                <parameter param-name="productId"/>
+                <parameter param-name="viewIndex" value="1"/>
+                <parameter param-name="viewSize" value="20"/>
+                <parameter param-name="showAll" value="Y"/>
+                <parameter param-name="idValue"/>
+                <parameter param-name="productCategoryId"/>
+                <parameter param-name="isVirtual"/>
+                <parameter param-name="isVariant"/>
+            </link>
+        </menu-item>     
+        <menu-item name="EditKeyWord" title="关键字">
+        	<link target="EditKeyWord">
+        		<parameter param-name="productId"/>
+        		<parameter param-name="idValue"/>
+                <parameter param-name="productCategoryId"/>
+                <parameter param-name="isVirtual"/>
+                <parameter param-name="isVariant"/>
+        	</link>        	
+        </menu-item>
+        
+        <menu-item name="EditProductFacilities" title="存放规则">
+    		<condition>
+				<if-compare field="isVirtual" operator="equals" value="N"/>
+            </condition>
+            <link target="EditProductFacilities">
+                <parameter param-name="productId"/>
+                <parameter param-name="idValue"/>
+                <parameter param-name="productCategoryId"/>
+                <parameter param-name="isVirtual"/>
+                <parameter param-name="isVariant"/>
+            </link>
+        </menu-item>
+    </menu>
+    
+    <menu name="PurchaseOrderManagement" extends="CommonTabBarMenu" extends-resource="component://common/widget/CommonMenus.xml">
+        <menu-item name="CustRequests" title="需求单">
+            <link target="CustRequests">
+            	<parameter param-name="purchaseType"/>
+            </link>
+        </menu-item>
+        <menu-item name="FindQuote" title="报价单">
+            <link target="FindQuote">
+            	<parameter param-name="purchaseType"/>
+            </link>
+        </menu-item>
+        <menu-item name="FindAccessoryPurchase" title="采购单">
+            <link target="FindAccessoryPurchase">
+            	<parameter param-name="purchaseType"/>
+            </link>
+        </menu-item>        
+        <menu-item name="MaterialsRequirement" title="调拨单">
+            <link target="MaterialsRequirement"></link>
+        </menu-item>        
+	</menu>
+	
+	<menu name="FindOrderTabBar" menu-container-style="button-bar button-style-2" default-selected-style="selected">
+     	<menu-item name="FindAccessoryPurchase" title="查询采购单">
+        	<link target="FindAccessoryPurchase">
+        		<parameter param-name="purchaseType" from-field="purchaseType"/>        		
+        	</link>        	
+        </menu-item>
+     	<menu-item name="FindOrderByProduct" title="按照物料查询采购单">
+        	<link target="FindOrderByProduct">
+        		<parameter param-name="purchaseType" from-field="purchaseType"/>        	
+        	</link>        	
+        </menu-item>
+        <menu-item name="FindOrderByKeyword" title="按照关键字查询采购单">
+        	<link target="FindOrderByKeyword">
+        		<parameter param-name="purchaseType" from-field="purchaseType"/>        	
+        	</link>        	
+        </menu-item>
+        
+     </menu>
+     
+     <menu name="OrderTabBar" menu-container-style="button-bar button-style-2" default-selected-style="selected">
+     	<menu-item name="FindAccessoryPurchase" title="返回查询订单">
+        	<link target="FindAccessoryPurchase"></link>        	
+        </menu-item>   
+        <menu-item name="FindFabricPurchaseItem" title="订单[${orderId}]首页">
+        	<link target="FindFabricPurchaseItem">
+        		<parameter param-name="orderId" from-field="orderId"/>
+        		<parameter param-name="purchaseType" from-field="purchaseType"/>
+        	</link>        	
+        </menu-item>         	  
+     </menu>
+     
+    
+	
+	
+</menus>

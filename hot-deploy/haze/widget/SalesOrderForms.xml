@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-form.xsd">
+
+    <form name="SearchSalesOrder" type="single" target="FindSalesOrder" title="" default-map-name="supplierProduct"
+        header-row-style="header-row" default-table-style="basic-table">
+        <field name="orderId" title="${uiLabelMap.SalesOrderId}">
+        	<text-find></text-find>
+        </field>
+        <field name="searchStatusId" title="${uiLabelMap.Status}">
+			<drop-down no-current-selected-key="ORDER_CREATED">
+				<option key="ORDER_CANCELLED" description="${uiLabelMap.OrderCancelled}"/>
+				<option key="ORDER_CREATED" description="${uiLabelMap.OrderCreated}"/>
+				<option key="ORDER_APPROVED" description="${uiLabelMap.OrderApproved}"/>
+				<option key="ORDER_COMPLETED" description="${uiLabelMap.OrderCompleted}"/>
+				<!-- <entity-options description="${description}" entity-name="StatusItem" key-field-name="statusId">
+					<entity-constraint name="statusTypeId" value="ORDER_STATUS"/>
+				</entity-options> -->
+			</drop-down>
+		</field>
+		<field name="partyId" title="${uiLabelMap.Customer}">
+            <lookup target-form-name="LookupPartyName" ></lookup>
+        </field>
+        <field name="orderDate" title="${uiLabelMap.OrderDate}">
+        	<date-find />
+        </field>    
+        <field name="submitButton" title="${uiLabelMap.CommonSearch}"><submit button-type="button"/></field>
+    </form>
+    
+    
+    <form name="ListSalesOrder" type="list" target="SearchSalesOrder" list-name="listIt" 
+		odd-row-style="odd" default-table-style="basic-table" paginate-target="FindSalesOrder"
+		paginate="true" paginate-style="nav-pager">
+		<actions>
+			<set field="pcx.partyId" from-field="parameters.partyId"/>
+			<set field="pcx.orderId_value" from-field="parameters.orderId"/>
+			<!-- <set field="pcx.originFacilityId" from-field="parameters.facilityId"/> -->
+			<set field="pcx.statusId" value="${parameters.searchStatusId}"/>
+			<set field="pcx.orderDate_fld0_value" from-field="parameters.orderDate_fld0_value"/>
+			<set field="pcx.orderDate_fld0_op" from-field="parameters.orderDate_fld0_op"/>
+			<set field="pcx.orderDate_fld1_value" from-field="parameters.orderDate_fld1_value"/>
+			<set field="pcx.orderDate_fld1_op" from-field="parameters.orderDate_fld1_op"/>
+			<set field="viewIndex" from-field="parameters.viewIndex" default-value="0" type="Integer"/>
+			<set field="viewSize" from-field="parameters.viewSize"  type="Integer"/>
+			
+			<service service-name="performFind" result-map="result" result-map-list="listIt">
+			    <field-map field-name="inputFields" from-field="pcx"/>
+                <field-map field-name="entityName" value="FindSalesOrderView"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+			</service>
+		</actions>
+		<row-actions>
+			
+			<entity-and entity-name="OrderItemShipGroup" list="oisg">
+				<field-map field-name="orderId" from-field="orderId"/>
+			</entity-and>
+			<set field="estimateDate" from-field="oisg[0].estimatedShipDate"/>
+			<set field="facilityId" from-field="oisg[0].facilityId"/>
+			
+			<!-- 组别 -->
+			<entity-one value-field="groupNameAttr" entity-name="OrderAttribute">
+				<field-map field-name="orderId" from-field="orderId"/>
+				<field-map field-name="attrName" value="ORDER_TYPE"/>
+			</entity-one>
+			<set field="groupName" from-field="groupNameAttr.attrValue"/>
+			
+			<!-- 查看是否有收货，否则不能取消 -->
+			<entity-and entity-name="ShipmentReceipt" list="srList">
+				<field-map field-name="orderId" from-field="orderId"/>
+			</entity-and>
+			
+			<set field="remarks" value="${groovy:com.zuczug.order.ZuczugOrderUtils.getOrderNoteByName(delegator,orderId,'ORDER_REMARKE')}"/>
+		</row-actions>
+		<field name="productId"><hidden/></field>
+        <field name="orderId" title="${uiLabelMap.SalesOrderId}"><display/></field>
+        <field name="partyId" title="${uiLabelMap.Customer}">
+        	<display-entity entity-name="PartyGroup" description="${groupName}" key-field-name="partyId"></display-entity>
+        </field>
+        <field name="orderDate" title="${uiLabelMap.OrderDate}"><display type="date"/></field>
+        <field name="statusId" title="${uiLabelMap.Status}">
+        	<display-entity entity-name="StatusItem" description="${description}" key-field-name="statusId"></display-entity>
+        </field>
+        <field name="detailBtn" title=" " widget-style="buttontext">
+        	<hyperlink target="FindSalesOrderItem" description="${uiLabelMap.DetaliInfo}" target-window="_blank">
+        		<parameter param-name="orderId"/>
+        	</hyperlink>
+        </field>
+        <field name="cancelBtn" title=" " widget-style="buttontext" use-when="srList.size()==0 &amp;&amp; ((&quot;ORDER_PROCESSING&quot;).equals(statusId) || (&quot;ORDER_CREATED&quot;).equals(statusId) )">
+        	<hyperlink target="cancelSalesOrder?statusId=ORDER_CANCELLED" description="${uiLabelMap.CancelOrder}" confirmation-message="${uiLabelMap.SureCancelOrder}">
+        		<parameter param-name="orderId"/>
+        		<parameter param-name="setItemStatus" value="Y"/>
+        	</hyperlink>
+        </field>
+	</form>
+	
+	<form name="salesOrderHeader" type="single" target="updateSalesOrderHeader" title="" default-map-name="orderHeader"
+        header-row-style="header-row" default-table-style="basic-table">
+		<actions>
+			<entity-one value-field="orderHeader" entity-name="OrderHeader">
+				<field-map field-name="orderId" from-field="parameters.orderId"/>
+			</entity-one>
+			<set field="buyer" value="${groovy:orh.getPartyFromRole('BILL_TO_CUSTOMER')}" type="Object"/>
+			<set field="groupName" value="${groovy:orh.getOrderAttribute('ORDER_TYPE')}"/>
+			<set field="noteInfo" value="${groovy:com.zuczug.order.ZuczugOrderUtils.getOrderNoteByName(delegator,orderHeader.orderId,'ORDER_REMARKE')}"/>
+			<set field="statusId" from-field="orderHeader.statusId"/>
+		</actions>
+		<field name="orderId" title="${uiLabelMap.SalesOrderId}" position="1"><display /></field>
+		<field name="entryDate" title="${uiLabelMap.EntryDate}" position="2"><display /> </field>
+		<field name="buyer" title="${uiLabelMap.Customer}" position="1"><display default-value="${buyer.groupName} [${buyer.partyId}]"/></field>
+		<field name="createdBy" title="${uiLabelMap.CreatedBy}" position="2"><display/></field>
+		<field name="selectGroupName" title="${uiLabelMap.OrderType}">
+			<drop-down no-current-selected-key="${groupName}">
+				<option key="1" description="${uiLabelMap.PlanOrder}"/>
+				<option key="2" description="${uiLabelMap.ConfigOrder}"/>
+				<option key="3" description="${uiLabelMap.ReplenishmentOrder}"/>
+				<option key="4" description="${uiLabelMap.BuyOneOrder}"/>
+			</drop-down>
+		</field>
+		<field name="groupName" title="${uiLabelMap.OrderType}" position="2"><display default-value="${groupName}"></display></field>
+		<field name="description" title="${uiLabelMap.Description}" position="1">
+			<textarea default-value="${noteInfo}"/>
+		</field>
+		<field name="statusId" title="${uiLabelMap.OrderStatus}">
+			<display-entity entity-name="StatusItem" description="${description}" key-field-name="statusId"></display-entity>
+		</field>
+		<field name="submitBtn" title="${uiLabelMap.Save}" use-when="&quot;ORDER_CREATED&quot;.equals(statusId) || &quot;ORDER_PROCESSING&quot;.equals(statusId)">
+			<submit/>
+		</field>
+	</form>
+    
+</forms>

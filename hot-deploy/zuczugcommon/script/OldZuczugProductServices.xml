@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simple-methods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/simple-methods.xsd">
+                
+    <simple-method method-name="boundColorToProduct" login-required="true" short-description="">
+
+		<entity-condition entity-name="ProductFeatureAppl" list="productFeatureApplList" filter-by-date="true">
+			<condition-list combine="and">
+				<condition-expr field-name="productId" from-field="parameters.productId"/>
+				<condition-expr field-name="productFeatureId" from-field="parameters.productFeatureId"/>
+				<condition-expr field-name="productFeatureApplTypeId" from-field="parameters.productFeatureApplTypeId"/>
+			</condition-list>
+		</entity-condition>	
+		
+		<entity-one value-field="productFeature" entity-name="ProductFeature">
+			<field-map field-name="productFeatureId" from-field="parameters.productFeatureId"/>
+		</entity-one>
+		<set field="idCode" from-field="productFeature.idCode"/>
+		
+		<if-not-empty field="productFeatureApplList">
+		    <add-error>
+        		<fail-property resource="FabricDevelopmentUiLabels" property="ErrorMessage_DuplicateColorInProd"/> 
+        	</add-error>
+        	<else>
+				<clear-field field="inMap"/>
+		        <set field="inMap.productFeatureId" from-field="parameters.productFeatureId"/>
+		        <set field="inMap.productFeatureApplTypeId" from-field="parameters.productFeatureApplTypeId"/>
+		        <set field="inMap.productId" from-field="parameters.productId"/>
+		        <call-service service-name="applyFeatureToProduct" in-map-name="inMap">
+				</call-service>
+        	</else>
+		</if-not-empty>
+		<check-errors/> 
+		
+		<clear-field field="inMap"/>
+        <set field="inMap.variantProductId" value="${parameters.productId}-${idCode}"/>
+         <set field="inMap.productId" from-field="parameters.productId"/>
+        <call-service service-name="createOrUpdateVariantProduct" in-map-name="inMap"/>
+
+		<entity-condition entity-name="ProductFeatureAppl" list="variantProductFeatureApplList" filter-by-date="true">
+			<condition-list combine="and">
+				<condition-expr field-name="productId" value="${parameters.productId}-${idCode}"/>
+				<condition-expr field-name="productFeatureId" from-field="parameters.productFeatureId"/>
+				<condition-expr field-name="productFeatureApplTypeId" value="STANDARD_FEATURE"/>
+			</condition-list>
+		</entity-condition>	
+		
+		<if-empty field="variantProductFeatureApplList">
+			<clear-field field="inMap"/>
+		    <set field="inMap.productFeatureId" from-field="parameters.productFeatureId"/>
+		    <set field="inMap.productFeatureApplTypeId" value="STANDARD_FEATURE"/>
+		    <set field="inMap.productId" value="${parameters.productId}-${idCode}"/>
+		    <call-service service-name="applyFeatureToProduct" in-map-name="inMap">
+			</call-service>
+		</if-empty>
+		<check-errors/> 
+
+		<clear-field field="inMap"/>
+        <set field="inMap.virtualProductId" from-field="parameters.productId"/>
+        <call-service service-name="copyStandardFeaturesToVariants" in-map-name="inMap"/>
+        <check-errors/> 
+        <call-service service-name="copyProductSupplierToVariants" in-map-name="inMap"/>
+        <check-errors/> 
+        <call-service service-name="copyGoodIdToVariants" in-map-name="inMap"/>
+        <check-errors/> 
+        <call-service service-name="copyProductAttributeToVariantNoCover" in-map-name="inMap"/>
+        <check-errors/> 
+    </simple-method>
+	
+	<simple-method method-name="createMaterialQuote" login-required="true" short-description="">
+		<sequenced-id sequence-name="Product" field="parameters.productId"/>
+	    <entity-condition entity-name="ProductFeatureAndAppl" list="productFeatureAndAppls">
+	    	<condition-list combine="and">
+	        	<condition-expr field-name="productId" from-field="parameters.productId"/>
+	        </condition-list>
+	    </entity-condition>
+	    <first-from-list entry="productFeatureAndAppl" list="productFeatureAndAppls"/>
+	    
+	    <if-empty field="productFeatureAndAppl">
+			<clear-field field="inMap"/>
+	        <set field="inMap.productId" from-field="parameters.productId"/>
+	        <set field="inMap.description" from-field="parameters.description"/>
+	        <set field="inMap.comments" from-field="parameters.comments"/>
+	        <set field="inMap.longDescription" from-field="parameters.longDescription"/>
+	        <set field="inMap.widthUomId" from-field="parameters.widthUomId"/>
+	        <set field="inMap.productWidth" from-field="parameters.productWidth"/>
+	        <set field="inMap.productTypeId" from-field="parameters.productTypeId"/>
+	        <set field="inMap.internalName" from-field="parameters.productId"/>
+
+        	<set field="inMap.primaryProductCategoryId" from-field="parameters.primaryProductCategoryId"/>
+        	<if-compare operator="equals" value="ACCE_ZIPPER" field="parameters.primaryProductCategoryId"><!-- 如果是拉链，则创建的就是虚拟商品 -->
+        		<set field="inMap.isVirtual" value="Y"/>
+        	</if-compare>
+        	
+	        <call-service service-name="createProduct" in-map-name="inMap"/>
+	        <check-errors/> 
+			<clear-field field="inMap"/>
+			<set field="inMap.productId" from-field="parameters.productId"/>
+			<set field="inMap.partyId" from-field="parameters.partyId"/>
+			
+			<if-empty field="parameters.availableFromDate">
+		        <set field="defaultDateTime" value="${groovy:
+		            import java.text.SimpleDateFormat;
+		            def sdf = new SimpleDateFormat(&quot;yyyy-MM-dd 00:00:00.000&quot;);
+		            def today = sdf.format(new Date());
+		            return today;
+		        }" type="Timestamp"/>
+				<!--set field="defaultDateTime" value="${groovy:
+				     return Date.parse(&quot;yyyy-MM-dd 00:00:00&quot;,&quot;2099-01-01 00:00:00&quot;);}" type="Timestamp"/-->
+				<set field="inMap.availableFromDate" from-field="defaultDateTime"/>
+				<else>
+					<set field="inMap.availableFromDate" from-field="parameters.availableFromDate"/>
+				</else>
+			</if-empty>
+			<set field="inMap.minimumOrderQuantity" default-value="0" from-field="parameters.minimumOrderQuantity"/>
+			<set field="inMap.currencyUomId" default-value="CNY" from-field="parameters.currencyUomId"/>
+			<set field="inMap.standardLeadTimeDays" from-field="parameters.standardLeadTimeDays"/>
+			<set field="inMap.quantityUomId" from-field="parameters.quantityUomId"/>
+			<set field="inMap.lastPrice" from-field="parameters.lastPrice"/>
+			<set field="inMap.supplierProductId" from-field="parameters.supplierProductId"/>
+	        <call-service service-name="createSupplierProduct" in-map-name="inMap"/>
+	        <check-errors/>    
+	        <if-not-empty field="parameters.seriesId">
+				<clear-field field="inMap"/>
+				<set field="inMap.productId" from-field="parameters.productId"/>
+				<set field="inMap.productFeatureApplTypeId" from-field="parameters.productFeatureApplTypeId"/>
+		        <set field="inMap.productFeatureId" from-field="parameters.seriesId"/>
+		        <call-service service-name="applyFeatureToProduct" in-map-name="inMap"/>
+		        <check-errors/>   
+	        </if-not-empty>
+	        <if-not-empty field="parameters.productMaterialId">
+				<clear-field field="inMap"/>
+				<set field="inMap.productId" from-field="parameters.productId"/>
+				<set field="inMap.productFeatureApplTypeId" from-field="parameters.productFeatureApplTypeId"/>
+		        <set field="inMap.productFeatureId" from-field="parameters.productMaterialId"/>
+		        <call-service service-name="applyFeatureToProduct" in-map-name="inMap"/>
+		        <check-errors/>   
+	        </if-not-empty>
+			<if-not-empty field="parameters.idValue">
+	        	<clear-field field="inMap"/>
+				<set field="inMap.productId" from-field="parameters.productId"/>
+				<set field="inMap.idValue" from-field="parameters.idValue"/>
+		        <set field="inMap.goodIdentificationTypeId" value="ZUCZUG_CODE"/>
+		        <call-service service-name="createZuczugCodeGoodIdentification" in-map-name="inMap"/>
+		        <check-errors/>   
+	        </if-not-empty>
+	        <field-to-result field="parameters.productId" result-name="productId"/>
+	        <else>
+	        	<add-error><fail-message message="产品主键重复，请重新输入"/></add-error>
+            	<check-errors/>
+	        </else>
+	    </if-empty>
+    </simple-method>
+    
+    <simple-method method-name="updateMaterialProductAndFeature" login-required="true" short-description="">
+		<clear-field field="inMap"/>
+        <set field="inMap.productId" from-field="parameters.productId"/>
+        <set field="inMap.internalName" from-field="parameters.internalName"/>
+        <set field="inMap.isVirtual" from-field="parameters.isVirtual"/>
+        <set field="inMap.isVariant" from-field="parameters.isVariant"/>
+        <set field="inMap.productTypeId" from-field="parameters.productTypeId"/>
+        <set field="inMap.description" from-field="parameters.description" default-value=" "/>
+        <set field="inMap.comments" from-field="parameters.comments"/>
+        <set field="inMap.longDescription" from-field="parameters.longDescription"/>
+        <set field="inMap.quantityUomId" from-field="parameters.quantityUomId"/>
+        <set field="inMap.widthUomId" from-field="parameters.widthUomId"/>
+        <set field="inMap.productWidth" from-field="parameters.productWidth"/>
+       	<set field="inMap.primaryProductCategoryId" from-field="parameters.primaryProductCategoryId"/>
+       	<if-compare operator="equals" value="ACCE_ZIPPER" field="parameters.primaryProductCategoryId"><!-- 如果是拉链，则更新为虚拟商品 -->
+       		<set field="inMap.isVirtual" value="Y"/>
+       	</if-compare>
+        <call-service service-name="updateProduct" in-map-name="inMap"/>
+        <check-errors/> 
+
+		<entity-condition entity-name="ProductAssoc" list="productAssocList" filter-by-date="true">
+			<condition-list combine="and">
+				<condition-expr field-name="productId" from-field="parameters.productId"/>
+				<condition-expr field-name="productAssocTypeId" value="PRODUCT_VARIANT"/>
+			</condition-list>
+		</entity-condition>
+        <iterate list="productAssocList" entry="productAssoc">
+			<clear-field field="inMap"/>
+	        <set field="inMap.variantProductId" from-field="productAssoc.productIdTo"/>
+	        <set field="inMap.productId" from-field="parameters.productId"/>
+	        <log level="info" message="${productAssoc.productIdTo}"></log>       
+	        <call-service service-name="createOrUpdateVariantProduct" in-map-name="inMap"/>
+	        <check-errors/>  
+	    </iterate> 
+    
+	    <entity-condition entity-name="ProductFeatureAndAppl" list="productFeatureAndAppls">
+	    	<condition-list combine="and">
+	        	<condition-expr field-name="productId" from-field="parameters.productId"/>
+	            <condition-expr field-name="productFeatureTypeId" value="FABRIC_FEATURE"/>
+	        </condition-list>
+	    </entity-condition>
+	    <first-from-list entry="productFeatureAndAppl" list="productFeatureAndAppls"/>
+		<log level="info" message="${parameters.productId}, ${parameters.productFeatureId}, ${productFeatureAndAppl.fromDate}"/>
+		<if-not-empty field="productFeatureAndAppl">
+			<clear-field field="inMap"/>
+	        <set field="inMap.productId" from-field="parameters.productId"/>
+	        <set field="inMap.productFeatureId" from-field="productFeatureAndAppl.productFeatureId"/>
+	        <set field="inMap.fromDate" from-field="productFeatureAndAppl.fromDate"/>
+	        <call-service service-name="removeStandardFeatureFromProdAndVariant" in-map-name="inMap"/>
+	        <check-errors/> 
+	    </if-not-empty>
+        <if-not-empty field="parameters.productFeatureId">
+			<clear-field field="inMap"/>
+			<set field="inMap.productFeatureApplTypeId" from-field="parameters.productFeatureApplTypeId"/>
+	        <set field="inMap.productId" from-field="parameters.productId"/>
+	        <set field="inMap.productFeatureId" from-field="parameters.productFeatureId"/>
+	        <call-service service-name="applyFeatureToProduct" in-map-name="inMap"/>
+	        <check-errors/> 
+        </if-not-empty>
+		<clear-field field="inMap"/>
+		
+		<call-simple-method method-name="updateProductZuczugCode" xml-resource="component://fabricdevelopment/script/FabricDevelopmentServices.xml"/>
+		
+        <set field="inMap.virtualProductId" from-field="parameters.productId"/>	
+        <call-service service-name="copyStandardFeaturesToVariants" in-map-name="inMap"/>
+        <check-errors/>  
+    </simple-method>
+</simple-methods>
+    

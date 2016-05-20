@@ -1,0 +1,1302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+	
+	<!-- 查询辅料 -->
+    <screen name="lookupAccessory">
+        <section>
+            <condition>
+                <if-service-permission service-name="catalogPermissionCheck" main-action="VIEW"/>
+            </condition>
+            <actions>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="辅料搜索帮助"/>
+                <set field="queryString" from-field="result.queryString"/>
+                <set field="entityName" value="findAllProductView"/>
+                <set field="searchFields" value="[idValue, internalName]"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="lookupAccessory" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="listLookupAccessory" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+     <screen name="lookupVirtualProduct">
+        <section>
+            <condition>
+                <if-service-permission service-name="catalogPermissionCheck" main-action="VIEW"/>
+            </condition>
+            <actions>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="辅料搜索帮助"/>
+                <set field="queryString" from-field="result.queryString"/>
+                <set field="entityName" value="findAllProductView"/>
+                <set field="searchFields" value="[idValue, internalName]"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="lookupVirtualProduct" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="listLookupVirtualProduct" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <!-- 根据类型查询辅料 -->
+    <screen name="lookupAccessoryByType">
+        <section>
+            <condition>
+                <if-service-permission service-name="catalogPermissionCheck" main-action="VIEW"/>
+            </condition>
+            <actions>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="辅料搜索帮助"/>
+                <set field="queryString" from-field="result.queryString"/>
+                <set field="entityName" value="AccessoriesSeasonGroupView"/>
+                <set field="conditionFields.isVariant" value="N"/>
+                <set field="conditionFields.primaryProductCategoryId" from-field="parameters.primaryProductCategoryId"/>
+                <set field="searchFields" value="[productId, internalName, description]"/>
+                
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="lookupAccessoryByType" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="listLookupAccessoryByType" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+     <!-- 查询金属件类辅料（零时） -->
+    <screen name="lookupAccessoryByMetal">
+        <section>
+            <condition>
+                <if-service-permission service-name="catalogPermissionCheck" main-action="VIEW"/>
+            </condition>
+            <actions>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="辅料搜索帮助"/>
+                <set field="queryString" from-field="result.queryString"/>
+                <set field="entityName" value="AccessoriesSeasonGroupView"/>
+                <set field="conditionFields.isVariant" value="N"/>
+                <set field="conditionFields.primaryProductCategoryId" from-field="parameters.primaryProductCategoryId"/>
+                <set field="searchFields" value="[productId, internalName, description]"/>
+                
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="lookupAccessoryByMetal" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="listLookupAccessoryByMetal" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <!-- 查询其他类辅料（零时） -->
+    <screen name="lookupAccessoryByOther">
+        <section>
+            <condition>
+                <if-service-permission service-name="catalogPermissionCheck" main-action="VIEW"/>
+            </condition>
+            <actions>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="辅料搜索帮助"/>
+                <set field="queryString" from-field="result.queryString"/>
+                <set field="entityName" value="AccessoriesSeasonGroupView"/>
+                <set field="conditionFields.isVariant" value="N"/>
+                <set field="conditionFields.primaryProductCategoryId" from-field="parameters.primaryProductCategoryId"/>
+                <set field="searchFields" value="[productId, internalName, description]"/>
+                
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="lookupAccessoryByOther" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="listLookupAccessoryByOther" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <!-- 辅料非虚拟变型 -->
+    <screen name="lookupAccessoryNotVirtual">
+        <section>
+            <condition>
+                <if-service-permission service-name="catalogPermissionCheck" main-action="VIEW"/>
+            </condition>
+            <actions>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="辅料搜索帮助"/>
+                <set field="conditionFields.isVirtual" value="N"/>
+                <set field="queryString" from-field="result.queryString"/>
+                <set field="entityName" value="Product"/>
+                <set field="searchFields" value="[productId, internalName]"/>
+                
+                <set field="cart" value="${groovy:org.ofbiz.order.shoppingcart.ShoppingCartEvents.getCartObject(request)}" type="Object"/>
+				<set field="supplierId" value="${groovy:cart.getBillFromVendorPartyId()}" type="Object"/>
+				<entity-one entity-name="PartyNameView" value-field="partyName" auto-field-map="false">
+                    <field-map field-name="partyId" from-field="supplierId"/>
+                </entity-one>
+                
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="lookupAccessoryNoVirtual" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="listLookupAccessoryNoVirtual" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+	
+	<!-- 查询面料 -->
+	<screen name="lookupFabric">
+        <section>
+            <condition>
+                <if-service-permission service-name="catalogPermissionCheck" main-action="VIEW"/>
+            </condition>
+            <actions>
+                <property-map resource="ProductDesignUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="面料搜索帮助"/>
+                <set field="queryString" from-field="result.queryString"/>
+                <set field="entityName" value="FabricAndColorView"/>
+                <set field="searchFields" value="[productId, internalName]"/>
+                
+                <set field="cart" value="${groovy:org.ofbiz.order.shoppingcart.ShoppingCartEvents.getCartObject(request)}" type="Object"/>
+				<set field="supplierId" value="${groovy:cart.getBillFromVendorPartyId()}" type="Object"/>
+				<entity-one entity-name="PartyNameView" value-field="partyName" auto-field-map="false">
+                    <field-map field-name="partyId" from-field="supplierId"/>
+                </entity-one>
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="lookupFabric" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="listLookupFabric" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <!-- 修改采购单查询面料 -->
+	<screen name="lookupOrderFabric">
+        <section>
+            <condition>
+                <if-service-permission service-name="catalogPermissionCheck" main-action="VIEW"/>
+            </condition>
+            <actions>
+                <property-map resource="ProductDesignUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="面料搜索帮助"/>
+                <set field="queryString" from-field="result.queryString"/>
+                <set field="entityName" value="FabricAndColorView"/>
+                <set field="searchFields" value="[productId, internalName]"/>
+                
+                <!-- <entity-one entity-name="PartyNameView" value-field="partyName" auto-field-map="false">
+                    <field-map field-name="groupName" from-field="parameters.groupName"/>
+                </entity-one> -->
+                <entity-one value-field="orderHeader" entity-name="OrderHeader">
+					<field-map field-name="orderId" from-field="parameters.orderId"/>
+				</entity-one>
+				
+            	<set field="orh" value="${groovy:org.ofbiz.order.order.OrderReadHelper.getHelper(orderHeader)}" type="Object"/>	
+				<set field="agentSupplier" value="${groovy:orh.getPartyFromRole('SUPPLIER_AGENT')}" type="Object"/>
+				<set field="supplier" value="${groovy:orh.getPartyFromRole('SUPPLIER')}" type="Object"/>
+				<entity-one entity-name="PartyNameView" value-field="partyName" auto-field-map="false">
+                    <field-map field-name="partyId" from-field="agentSupplier.partyId"/>
+                </entity-one>
+                
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="lookupOrderFabric" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="listLookupOrderFabric" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- 修改采购单查询辅料 -->
+    <screen name="lookupOrderAccessory">
+        <section>
+            <condition>
+                <if-service-permission service-name="catalogPermissionCheck" main-action="VIEW"/>
+            </condition>
+            <actions>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="辅料搜索帮助"/>
+                <set field="queryString" from-field="result.queryString"/>
+                <set field="entityName" value="AccessoriesView"/>
+                <set field="searchFields" value="[productId, internalName]"/>
+                
+                <entity-one value-field="orderHeader" entity-name="OrderHeader">
+					<field-map field-name="orderId" from-field="parameters.orderId"/>
+				</entity-one>
+				
+            	<set field="orh" value="${groovy:org.ofbiz.order.order.OrderReadHelper.getHelper(orderHeader)}" type="Object"/>	
+				<set field="agentSupplier" value="${groovy:orh.getPartyFromRole('SUPPLIER_AGENT')}" type="Object"/>
+				<set field="supplier" value="${groovy:orh.getPartyFromRole('SUPPLIER')}" type="Object"/>
+				<entity-one entity-name="PartyNameView" value-field="partyName" auto-field-map="false">
+                    <field-map field-name="partyId" from-field="agentSupplier.partyId"/>
+                </entity-one>
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="lookupOrderAccessory" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="listLookupAccessory" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- 修改采购单查询纱线 -->
+    <screen name="lookupOrderYarn">
+        <section>
+            <condition>
+                <if-service-permission service-name="catalogPermissionCheck" main-action="VIEW"/>
+            </condition>
+            <actions>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="纱线搜索帮助"/>
+                <set field="queryString" from-field="result.queryString"/>
+                <set field="entityName" value="YarnAndColorView"/>
+                <set field="searchFields" value="[productId, internalName]"/>
+                
+                
+                <entity-one value-field="orderHeader" entity-name="OrderHeader">
+					<field-map field-name="orderId" from-field="parameters.orderId"/>
+				</entity-one>
+				
+            	<set field="orh" value="${groovy:org.ofbiz.order.order.OrderReadHelper.getHelper(orderHeader)}" type="Object"/>	
+				<set field="agentSupplier" value="${groovy:orh.getPartyFromRole('SUPPLIER_AGENT')}" type="Object"/>
+				<set field="supplier" value="${groovy:orh.getPartyFromRole('SUPPLIER')}" type="Object"/>
+				<entity-one entity-name="PartyNameView" value-field="partyName" auto-field-map="false">
+                    <field-map field-name="partyId" from-field="agentSupplier.partyId"/>
+                </entity-one>
+                
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="lookupOrderYarn" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="listLookupYarn" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <!-- 查询面料非变型 -->
+	<screen name="LookupFabricNoVariant">
+        <section>
+            <condition>
+                <if-service-permission service-name="catalogPermissionCheck" main-action="VIEW"/>
+            </condition>
+            <actions>
+                <property-map resource="ProductDesignUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="面料搜索帮助"/>
+                <set field="queryString" from-field="result.queryString"/>
+                <set field="conditionFields.isVariant" value="N"/>
+                <set field="entityName" value="FabricAndColorView"/>
+                <set field="searchFields" value="[productId, internalName]"/>
+                
+                <set field="cart" value="${groovy:org.ofbiz.order.shoppingcart.ShoppingCartEvents.getCartObject(request)}" type="Object"/>
+				<set field="supplierId" value="${groovy:cart.getBillFromVendorPartyId()}" type="Object"/>
+				<entity-one entity-name="PartyNameView" value-field="partyName" auto-field-map="false">
+                    <field-map field-name="partyId" from-field="supplierId"/>
+                </entity-one>
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="LookupFabricNoVariant" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="listLookupFabric" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>  
+    
+    <!-- 面料，非虚拟 -->
+    <screen name="LookupFabricNoVirtual">
+        <section>
+            <condition>
+                <if-service-permission service-name="catalogPermissionCheck" main-action="VIEW"/>
+            </condition>
+            <actions>
+                <property-map resource="ProductDesignUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="面料搜索帮助"/>
+                <set field="queryString" from-field="result.queryString"/>
+                <set field="conditionFields.isVirtual" value="N"/>
+                <set field="entityName" value="FabricAndColorView"/>
+                <set field="searchFields" value="[productId, internalName]"/>
+                
+                <set field="cart" value="${groovy:org.ofbiz.order.shoppingcart.ShoppingCartEvents.getCartObject(request)}" type="Object"/>
+				<set field="supplierId" value="${groovy:cart.getBillFromVendorPartyId()}" type="Object"/>
+				<entity-one entity-name="PartyNameView" value-field="partyName" auto-field-map="false">
+                    <field-map field-name="partyId" from-field="supplierId"/>
+                </entity-one>
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="LookupFabricNoVirtual" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="ListLookupFabricNoVirtual" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>   
+
+	<!-- 查询纱线 -->
+    <screen name="lookupYarn">
+        <section>
+            <condition>
+                <if-service-permission service-name="catalogPermissionCheck" main-action="VIEW"/>
+            </condition>
+            <actions>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="纱线搜索帮助"/>
+                <set field="queryString" from-field="result.queryString"/>
+                <set field="entityName" value="YarnAndColorView"/>
+                <set field="searchFields" value="[productId, internalName]"/>
+                
+                <set field="cart" value="${groovy:org.ofbiz.order.shoppingcart.ShoppingCartEvents.getCartObject(request)}" type="Object"/>
+				<set field="supplierId" value="${groovy:cart.getBillFromVendorPartyId()}" type="Object"/>
+				<entity-one entity-name="PartyNameView" value-field="partyName" auto-field-map="false">
+                    <field-map field-name="partyId" from-field="supplierId"/>
+                </entity-one>
+                
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="lookupYarn" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="listLookupYarn" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+	
+	<!-- 查询纱线排除变型 -->
+    <screen name="LookupYarnNoVariant">
+        <section>
+            <condition>
+                <if-service-permission service-name="catalogPermissionCheck" main-action="VIEW"/>
+            </condition>
+            <actions>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="纱线搜索帮助"/>
+                <set field="queryString" from-field="result.queryString"/>
+                <set field="conditionFields.isVariant" value="N"/>
+                <set field="entityName" value="YarnAndColorView"/>
+                <set field="searchFields" value="[productId, internalName]"/>
+				<set field="parameters.isVariant" value="N"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="LookupYarnNoVariant" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="listLookupYarn" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <!-- 查询纱线，非虚拟 -->
+    <screen name="LookupYarnNoVirtual">
+        <section>
+            <condition>
+                <if-service-permission service-name="catalogPermissionCheck" main-action="VIEW"/>
+            </condition>
+            <actions>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="纱线搜索帮助"/>
+                <set field="queryString" from-field="result.queryString"/>
+                <set field="conditionFields.isVirtual" value="N"/>
+                <set field="entityName" value="YarnAndColorView"/>
+                <set field="searchFields" value="[productId, internalName]"/>
+                
+                <set field="cart" value="${groovy:org.ofbiz.order.shoppingcart.ShoppingCartEvents.getCartObject(request)}" type="Object"/>
+				<set field="supplierId" value="${groovy:cart.getBillFromVendorPartyId()}" type="Object"/>
+				<entity-one entity-name="PartyNameView" value-field="partyName" auto-field-map="false">
+                    <field-map field-name="partyId" from-field="supplierId"/>
+                </entity-one>
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="LookupYarnNoVritual" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="ListLookupYarnNoVirtual" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+	<!-- 查询供应商 -->
+	<screen name="LookupSupplier">
+        <section>
+            <condition>
+                <if-service-permission service-name="catalogPermissionCheck" main-action="VIEW"/>
+            </condition>
+            <actions>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="供应商查询"/>
+                <set field="queryString" from-field="result.queryString"/>
+                <set field="entityName" value="SupplierView"/>
+                <set field="searchFields" value="[partyId, groupName, description]"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="lookupSupplier" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="listLookupSupplier" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <!-- 查询颜色 -->
+    <screen name="LookupColor">
+        <section>
+            <condition>
+                <if-service-permission service-name="catalogPermissionCheck" main-action="VIEW"/>
+            </condition>
+            <actions>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="颜色搜索帮助"/>
+                <set field="queryString" from-field="result.queryString"/>
+                <set field="entityName" value="ProductColorView"/>
+                <set field="searchFields" value="[productFeatureId, idCode, description]"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="lookupProductColor" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="listLookupProductColor" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <!-- 根据商品特征类型查询特征 -->
+    <screen name="lookupProductFeatureWithType">
+        <section>
+            <condition>
+                <if-service-permission service-name="catalogPermissionCheck" main-action="VIEW"/>
+            </condition>
+            <actions>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="${uiLabelMap.PageTitleLookupProductColor}"/>
+                <set field="queryString" from-field="result.queryString"/>
+                <set field="conditionFields.productFeatureTypeId" from-field="parameters.productFeatureTypeId"/>
+                <set field="entityName" value="ProductFeature"/>
+                <set field="searchFields" value="[productFeatureId, idCode, description]"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="lookupProductFeature" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="listLookupProductFeature" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="lookupIdentification">
+        <section>
+            <condition>
+                <if-service-permission service-name="catalogPermissionCheck" main-action="VIEW"/>
+            </condition>
+            <actions>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="${uiLabelMap.PageTitleLookupProductColor}"/>
+                <set field="queryString" from-field="result.queryString"/>
+                <set field="conditionFields.isUser" value="N"/>
+                <set field="conditionFields.identificationTypeId" from-field="parameters.identificationTypeId"/>
+                <set field="entityName" value="Identification"/>
+                <set field="searchFields" value="[idValue]"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="lookupIdentification" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="listLookupIdentification" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <!-- 根据特征组查询特征 -->
+    <screen name="LookupProductFeatureByGroup">
+        <section>
+            <condition>
+                <if-service-permission service-name="catalogPermissionCheck" main-action="VIEW"/>
+            </condition>
+            <actions>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="查询商品特征"/>
+                <set field="queryString" from-field="result.queryString"/>
+                
+                <set field="conditionFields.productFeatureGroupId" from-field="parameters.productFeatureGroupId"/>
+                <set field="entityName" value="ProductFeatureAndGroupView"/>
+                <set field="searchFields" value="[productFeatureId, productFeatureGroupId, idCode, description]"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="LookupProductFeatureByGroup" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="ListLookupProductFeatureByGroup" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <!-- 查询成分 -->
+    <screen name="LookupProductIngredient">
+        <section>
+            <condition>
+                <if-service-permission service-name="catalogPermissionCheck" main-action="VIEW"/>
+            </condition>
+            <actions>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="查询商品特征"/>
+                <set field="queryString" from-field="result.queryString"/>
+                <set field="entityName" value="Ingredient"/>
+                <set field="searchFields" value="[ingredientId, description]"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="LookupProductIngredient" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="ListLookupProductIngredient" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="LookupProduct">
+        <section>
+            <condition>
+                <if-service-permission service-name="catalogPermissionCheck" main-action="VIEW"/>
+            </condition>
+            <actions>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="${uiLabelMap.PageTitleLookupProduct}"/>
+                <set field="queryString" from-field="result.queryString"/>
+                <set field="entityName" value="Product"/>
+                <set field="searchFields" value="[productId, internalName, brandName]"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="lookupProduct" location="component://product/widget/catalog/FieldLookupForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="listLookupProduct" location="component://product/widget/catalog/FieldLookupForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <!-- 查询组别 -->
+    <screen name="lookupProdGroupName">
+        <section>
+            <condition>
+                <if-service-permission service-name="catalogPermissionCheck" main-action="VIEW"/>
+            </condition>
+            <actions>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="组别搜索帮助"/>
+                <set field="queryString" from-field="result.queryString"/>
+                <!-- <set field="conditionFields.productCategoryTypeId" value="GROUPNAME"/> -->
+                <!-- <set field="entityName" value="ProductCategory"/> -->
+                <set field="entityName" value="ProductCategoryGroupView"/>
+                <set field="searchFields" value="[groupId, groupName]"/>
+                <set field="displayFields" value="[subSeriesName, groupName, seasonName, seriesName]"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="lookupProdGroupName" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="listLookupProdGroupName" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <!-- 查询仓库 -->
+    <screen name="LookupFacility">
+        <section>
+ 			<condition>
+        		<not><if-empty field="parameters.facilityTypeId"/></not>
+        	</condition>
+            <widgets>
+            	<section>
+            		<actions>
+		        		<property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+		                <set field="title" value="仓库搜索帮助"/>
+		                <set field="queryString" from-field="result.queryString"/>
+		                <set field="entityName" value="Facility"/>
+		                <set field="searchFields" value="[facilityId, facilityName]"/>
+		                <set field="displayFields" value="[facilityName, facilityId]"/>
+            			<set field="conditionFields.facilityTypeId" from-field="parameters.facilityTypeId"/>
+            		</actions>
+            		<widgets>
+            			<decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+						    <decorator-section name="search-options">
+						        <include-form name="LookupFindFacility" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+						    </decorator-section>
+						    <decorator-section name="search-results">
+						        <include-form name="LookupFacilityList" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+						    </decorator-section>
+						</decorator-screen>
+            		</widgets>
+            	</section>
+            </widgets>
+            <fail-widgets>
+            	<section>
+            		<actions>
+		        		<property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+		                <set field="title" value="仓库搜索帮助"/>
+		                <set field="queryString" from-field="result.queryString"/>
+		                <set field="entityName" value="Facility"/>
+		                <set field="searchFields" value="[facilityId, facilityName]"/>
+		                <set field="displayFields" value="[facilityName, facilityId]"/>
+		        	</actions>
+		        	<widgets>
+		        		<decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+						    <decorator-section name="search-options">
+						        <include-form name="LookupFindFacility" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+						    </decorator-section>
+						    <decorator-section name="search-results">
+						        <include-form name="LookupFacilityList" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+						    </decorator-section>
+						</decorator-screen>
+		        	</widgets>
+            	</section>
+            </fail-widgets>
+        </section>
+    </screen>
+    
+     <!-- 查询仓库 -->
+    <screen name="LookupWareHouseAndPlantFacility">
+        <section>
+ 			<condition>
+        		<not><if-empty field="parameters.facilityTypeId"/></not>
+        	</condition>
+            <widgets>
+            	<section>
+            		<actions>
+		        		<property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+		                <set field="title" value="仓库搜索帮助"/>
+		                <set field="queryString" from-field="result.queryString"/>
+		                <set field="entityName" value="Facility"/>
+		                <set field="searchFields" value="[facilityId, facilityName]"/>
+		                <set field="displayFields" value="[facilityName, facilityId]"/>
+            			<set field="conditionFields.facilityTypeId" from-field="parameters.facilityTypeId"/>
+            		</actions>
+            		<widgets>
+            			<decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+						    <decorator-section name="search-options">
+						        <include-form name="LookupFindWareHouseAndPlantFacility" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+						    </decorator-section>
+						    <decorator-section name="search-results">
+						        <include-form name="LookupFacilityList" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+						    </decorator-section>
+						</decorator-screen>
+            		</widgets>
+            	</section>
+            </widgets>
+            <fail-widgets>
+            	<section>
+            		<actions>
+		        		<property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+		                <set field="title" value="仓库搜索帮助"/>
+		                <set field="queryString" from-field="result.queryString"/>
+		                <set field="entityName" value="Facility"/>
+		                <set field="searchFields" value="[facilityId, facilityName]"/>
+		                <set field="displayFields" value="[facilityName, facilityId]"/>
+		        	</actions>
+		        	<widgets>
+		        		<decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+						    <decorator-section name="search-options">
+						        <include-form name="LookupFindWareHouseAndPlantFacility" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+						    </decorator-section>
+						    <decorator-section name="search-results">
+						        <include-form name="LookupFacilityList" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+						    </decorator-section>
+						</decorator-screen>
+		        	</widgets>
+            	</section>
+            </fail-widgets>
+        </section>
+    </screen>
+    
+    <screen name="LookupProductMatch">
+        <section>
+            <condition>
+                <if-service-permission service-name="catalogPermissionCheck" main-action="VIEW"/>
+            </condition>
+            <actions>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="商品搜索帮助"/>
+                <set field="displayFields" value="[productId, productName]"/>
+                <set field="context.returnField" from-field="parameters.searchValueFieldName"/>
+                <set field="displayFieldsSet" value="${groovy:org.ofbiz.base.util.StringUtil.toSet(displayFields)}" type="Object"/>
+                <service service-name="findProductVariantMiddleSize" result-map="result" result-map-list="listIt">
+	                <field-map field-name="productId" from-field="parameters.productId"/>
+	                <field-map field-name="productName" from-field="parameters.productName"/>
+	                <field-map field-name="searchValue" from-field="parameters.term"/>
+	            </service>
+				<script location="component://zuczugcommon/webapp/zuczugcommon/WEB-INF/actions/ZuczugProductServices.groovy#setDescription"/>
+	            <set field="listIt" from-field="result.listIt"/>
+	            <set field="autocompleteOptions" from-field="result.listIt"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://zuczugcommon/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="FindProductMatch" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="ListProductMatch" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    
+    <screen name="LookupRealProductNoVirtual">
+        <section>
+            <actions>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="商品搜索帮助"/>
+                <set field="parameters.ajaxLookup" value=""/>
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://zuczugcommon/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="FindRealProductNoVirtual" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="ListRealProductNoVirtual" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="LookupMaterialsAndClothsNoVirtual">
+        <section>
+            <actions>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="商品搜索帮助"/>
+                <set field="parameters.ajaxLookup" value=""/>
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://zuczugcommon/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="FindMaterialsAndClothsNoVirtual" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="ListMaterialsAndClothsNoVirtual" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <screen name="LookupRealProductNoVirtualForSku">
+        <section>
+            <actions>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="商品搜索帮助"/>
+                
+                <set field="queryString" from-field="result.queryString"/>
+                <set field="entityName" value="Product"/>
+                <set field="searchFields" value="[productId, internalName, brandName]"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="FindRealProductNoVirtualForSku" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="ListRealProductNoVirtualForSku" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="LookupRealProductNoVirtualForSkuNoAjex">
+        <section>
+            <actions>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="商品搜索帮助"/>
+                <set field="title" value="${uiLabelMap.PageTitleLookupProduct}"/>
+                <set field="queryString" from-field="result.queryString"/>
+                <set field="entityName" value="ProductRealSkuView"/>
+                <set field="searchFields" value="[productId, internalName]"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="FindRealProductNoVirtualForSku" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="ListRealProductNoVirtualForSku" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="LookupRealProductNoVariantForSku">
+        <section>
+            <actions>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="商品搜索帮助"/>
+                <set field="title" value="${uiLabelMap.PageTitleLookupProduct}"/>
+                <set field="queryString" from-field="result.queryString"/>
+                <set field="entityName" value="Product"/>
+                <set field="conditionFields.isVariant" value="N"/> 
+                <!--<set field="conditionFields.productTypeId" value="FINISHED_GOOD"/>-->
+                <set field="searchFields" value="[productId, internalName, brandName]"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="FindRealProductNoVariantForSku" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="ListRealProductNoVariantForSku" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+	<screen name="LookupShipmentContactMech">
+        <section>
+            <actions>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="收货地址搜索帮助"/>
+                <set field="queryString" from-field="result.queryString"/>
+                <set field="entityName" value="FindFacilityContactMech"/>
+                <set field="searchFields" value="[contactMechId, storeName, address1]"/> 
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="lookupShipmentContactMech" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="listLookupShipmentContactMech" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+	<screen name="LookupFacilityForShipment">
+        <section>
+ 			<condition>
+        		<not><if-empty field="parameters.facilityTypeId"/></not>
+        	</condition>
+            <widgets>
+            	<section>
+            		<actions>
+		        		<property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+		                <set field="title" value="仓库搜索帮助"/>
+		                <set field="queryString" from-field="result.queryString"/>
+		                <set field="entityName" value="Facility"/>
+		                <set field="searchFields" value="[facilityId, facilityName]"/>
+		                <set field="displayFields" value="[facilityName, facilityId]"/>
+            			<set field="conditionFields.facilityTypeId" from-field="parameters.facilityTypeId"/>
+            		</actions>
+            		<widgets>
+            			<decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+						    <decorator-section name="search-options">
+						        <include-form name="LookupFindFacilityForShipment" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+						    </decorator-section>
+						    <decorator-section name="search-results">
+						        <include-form name="LookupFacilityListForShipment" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+						    </decorator-section>
+						</decorator-screen>
+            		</widgets>
+            	</section>
+            </widgets>
+            <fail-widgets>
+            	<section>
+            		<actions>
+		        		<property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+		                <set field="title" value="仓库搜索帮助"/>
+		                <set field="queryString" from-field="result.queryString"/>
+		                <set field="entityName" value="Facility"/>
+		                <set field="searchFields" value="[facilityId, facilityName]"/>
+		                <set field="displayFields" value="[facilityName, facilityId]"/>
+		        	</actions>
+		        	<widgets>
+		        		<decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+						    <decorator-section name="search-options">
+						        <include-form name="LookupFindFacilityForShipment" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+						    </decorator-section>
+						    <decorator-section name="search-results">
+						        <include-form name="LookupFacilityListForShipment" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+						    </decorator-section>
+						</decorator-screen>
+		        	</widgets>
+            	</section>
+            </fail-widgets>
+        </section>
+    </screen>
+    
+    <screen name="LookupInventoryItem">
+		<section>
+	     	<actions>
+	       		<property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+	               <set field="title" value="库存明细搜索"/>
+	               <set field="queryString" from-field="result.queryString"/>
+	               <set field="entityName" value="InventoryItem"/>
+	               <set field="searchFields" value="[inventoryItemId, productId]"/>
+	               <set field="displayFields" value="[inventoryItemId, inventoryItemId]"/>
+	       	</actions>
+	       	<widgets>
+	       		<decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+				    <decorator-section name="search-options">
+				        <include-form name="LookupFindInventoryItem" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+				    </decorator-section>
+				    <decorator-section name="search-results">
+				        <include-form name="LookupListInventoryItem" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+				    </decorator-section>
+				</decorator-screen>
+	       	</widgets>
+		</section>
+    </screen>
+	
+	<screen name="lookupProductByType">
+        <section>
+            <condition>
+                <if-service-permission service-name="catalogPermissionCheck" main-action="VIEW"/>
+            </condition>
+            <actions>
+            	<set field="productTypeId" from-field="parameters.productTypeId"/>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="辅料搜索帮助"/>
+                <set field="queryString" from-field="result.queryString"/>
+                <set field="entityName" value="findAllProductView"/>
+                <set field="searchFields" value="[idValue, internalName]"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="lookupProductByType" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="listLookupProductByType" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="LookupProductCatalogCategory">
+        <section>
+            <condition>
+                <if-service-permission service-name="catalogPermissionCheck" main-action="VIEW"/>
+            </condition>
+            <actions>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="${uiLabelMap.PageTitleLookupProductCategory}"/>
+                <set field="queryString" from-field="result.queryString"/>
+                <set field="entityName" value="ProductCategory"/>
+                <set field="searchFields" value="[productCategoryId, categoryName, description]"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="lookupProductCatalogCategory" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="listLookupProductCatalogCategory" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    
+    <screen name="lookupVirtualAccessoryProduct">
+        <section>
+            <!-- <condition>
+                <if-service-permission service-name="catalogPermissionCheck" main-action="VIEW"/>
+            </condition> -->
+            <actions>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="${uiLabelMap.PageTitleLookupProductCategory}"/>
+                <set field="queryString" from-field="result.queryString"/>     
+                <set field="entityName" value="ZuczugAccessoryProductView"/>
+                <set field="searchFields" value="[idValue, internalName]"/>           
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="lookupVirtualAccessoryProduct" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="listLookupVirtualAccessoryProduct" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="lookupAccessoryProductInCatalog">
+        <section>
+            <!-- <condition>
+                <if-service-permission service-name="catalogPermissionCheck" main-action="VIEW"/>
+            </condition> -->
+            <actions>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="${uiLabelMap.PageTitleLookupProductCategory}"/>
+                <set field="queryString" from-field="result.queryString"/>     
+                <set field="entityName" value="ZuczugAccessoryProductView"/>
+                <set field="searchFields" value="[idValue, internalName]"/>           
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="lookupAccessoryProductInCatalog" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="listLookupAccessoryProductInCatalog" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="lookupRealProductNotVirtual">
+        <section>
+            <condition>
+                <if-service-permission service-name="catalogPermissionCheck" main-action="VIEW"/>
+            </condition>
+            <actions>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="商品搜索帮助"/>
+                <set field="conditionFields.isVirtual" value="N"/>
+                <set field="queryString" from-field="result.queryString"/>
+                <set field="entityName" value="RealProductCategorySupplierView"/>
+                <set field="searchFields" value="[productId, internalName]"/>
+                
+                <set field="cart" value="${groovy:org.ofbiz.order.shoppingcart.ShoppingCartEvents.getCartObject(request)}" type="Object"/>
+				<set field="supplierId" value="${groovy:cart.getBillFromVendorPartyId()}" type="Object"/>
+				<entity-one entity-name="PartyNameView" value-field="partyName" auto-field-map="false">
+                    <field-map field-name="partyId" from-field="supplierId"/>
+                </entity-one>
+                
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="lookupRealProductNotVirtual" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="listLookupRealProductNotVirtual" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="lookupAccessoryProductNotVirtual">
+        <section>
+            <condition>
+                <if-service-permission service-name="catalogPermissionCheck" main-action="VIEW"/>
+            </condition>
+            <actions>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="商品搜索帮助"/>
+                <set field="conditionFields.isVirtual" value="N"/>
+                <set field="queryString" from-field="result.queryString"/>
+                <set field="entityName" value="AccessoryProductCategorySupplierView"/>
+                <set field="searchFields" value="[productId, internalName]"/>
+                
+                
+				<set field="supplierId" from-field="parameters.supplierId"/>
+				<entity-one entity-name="PartyNameView" value-field="partyName" auto-field-map="false">
+                    <field-map field-name="partyId" from-field="supplierId"/>
+                </entity-one>
+                
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="lookupAccessoryProductNotVirtual" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="listAccessoryProductNotVirtual" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="lookupSupplierProductNotVirtual">
+    	<section>
+            <condition>
+                <if-service-permission service-name="catalogPermissionCheck" main-action="VIEW"/>
+            </condition>
+            <actions>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="商品搜索帮助"/>
+                <set field="conditionFields.isVirtual" value="N"/>
+                <set field="queryString" from-field="result.queryString"/>
+                <set field="entityName" value="SupplierProductCategoryView"/>
+                <set field="searchFields" value="[productId, internalName]"/>
+                <set field="partyIdView" from-field="parameters.partyIdView"/>
+                <set field="groupNameView" from-field="parameters.groupNameView"/>
+                
+                <set field="cart" value="${groovy:org.ofbiz.order.shoppingcart.ShoppingCartEvents.getCartObject(request)}" type="Object"/>
+				<set field="partyId" value="${parameters.partyId}"/>
+				<entity-one entity-name="PartyNameView" value-field="partyName" auto-field-map="false">
+                    <field-map field-name="partyId" from-field="partyId"/>
+                </entity-one>
+                
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="lookupSupplierProductNotVirtual" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="listSupplierProductNotVirtual" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+         </section>
+    </screen>
+    
+    <screen name="lookupVirtualProductByParty">
+        <section>
+            <condition>
+                <if-service-permission service-name="catalogPermissionCheck" main-action="VIEW"/>
+            </condition>
+            <actions>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="${uiLabelMap.PageTitleLookupProductCategory}"/>
+                <set field="queryString" from-field="result.queryString"/>   
+                <set field="supplierId" from-field="parameters.supplierId"/>
+				<entity-one entity-name="PartyNameView" value-field="partyName" auto-field-map="false">
+                    <field-map field-name="partyId" from-field="supplierId"/>
+                </entity-one>             
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="lookupVirtualProductByParty" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="listLookupVirtualProductByParty" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <!-- 查询设计商品 -->
+    <screen name="LookupDesignProduct">
+        <section>
+            
+            <actions>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="辅料搜索帮助"/>
+                <set field="queryString" from-field="result.queryString"/>
+                <set field="entityName" value="ProductDesignView"/>
+                <set field="searchFields" value="[productId, internalName]"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="LookupDesignProduct" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="ListLookupDesignProduct" location="component://zuczugcommon/widget/ZuczugCommonLookupForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+</screens>

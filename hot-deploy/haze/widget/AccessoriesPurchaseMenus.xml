@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menus xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-menu.xsd">
+    
+     <menu name="MainAppBar" title="${uiLabelMap.AccessoryDevelopmentApplication}" extends="CommonAppBarMenu" extends-resource="component://common/widget/CommonMenus.xml">
+        <menu-item name="main" title="物料列表">
+            <link target="ProductList"/>
+        </menu-item>
+        <menu-item name="FindAccessoryCategory" title="分类特征管理">
+            <link target="FindAccessoryCategory"/>
+        </menu-item>  
+        
+        <menu-item name="FindCatalogAndCategory" title="目录分类维护">
+        	<link target="FindCatalogAndCategory">
+        		<parameter param-name="productTypeId" value="RAW_MATERIAL"/>
+        		<parameter param-name="module" value="ZUCZUG"/>
+        	</link>
+        </menu-item> 
+        <menu-item name="FindMaterialSupplier" title="供应商">
+            <link target="FindMaterialSupplier"/>
+        </menu-item>   
+        <menu-item name="FindFinGoodRequirements" title="成衣需求查看">
+            <link target="FindFinGoodRequirements"/>
+        </menu-item>
+        <menu-item name="AccessoryPurchase" title="物料需求、采购、调拨">
+            <link target="FindAccessoryPurchase">
+            	<parameter param-name="purchaseType" value="ACCESSORY_PURCHASE"/>
+            </link>
+        </menu-item>
+        <menu-item name="FindNuclearAccounts" title="${uiLabelMap.NuclearAccounts}">
+            <link target="FindNuclearAccounts"/>
+        </menu-item>
+    </menu>
+    
+    <menu name="AccessoryVariantProductInfo" extends="CommonTabBarMenu" extends-resource="component://common/widget/CommonMenus.xml">
+    	<menu-item name="QueryProductInfo" title="库存">
+            <link target="QueryProductInfo">
+            	<parameter param-name="productId" from-field="parameters.productId"/>
+            </link>
+        </menu-item>
+        <menu-item name="AccessoryProductOrder" title="采购单">
+            <link target="AccessoryProductOrder">
+            	<parameter param-name="productId" from-field="parameters.productId"/>
+            </link>
+        </menu-item>
+        <menu-item name="AccessoryProductWorkEffort" title="生产任务">
+            <link target="AccessoryProductWorkEffort">
+            	<parameter param-name="productId" from-field="parameters.productId"/>
+            </link>
+        </menu-item>  
+    	
+    </menu>
+    <menu name="VirtualProductBomMenu" extends="CommonTabBarMenu" extends-resource="component://common/widget/CommonMenus.xml">
+    	<menu-item name="EditVirtualAccessoryBom" title="设计Bom查看">
+            <link target="EditVirtualAccessoryBom">
+            	<parameter param-name="accessoryProductId" from-field="parameters.accessoryProductId"/>
+            </link>
+        </menu-item>
+        <menu-item name="AddVirtualProductBom" title="设计Bom添加物料">
+            <link target="AddVirtualProductBom">
+            	<parameter param-name="accessoryProductId" from-field="parameters.accessoryProductId"/>
+            </link>
+        </menu-item>
+    </menu>
+    
+    
+    
+    
+     <menu name="FindAccessoryQuoteTabBar" menu-container-style="button-bar button-style-2" default-selected-style="selected">
+     	<menu-item name="ProductList" title="按照非变型查询">
+        	<link target="ProductList">
+        		<parameter param-name="productId"/>
+        		<parameter param-name="idValue"/>
+                <parameter param-name="productCategoryId"/>
+                <parameter param-name="isVirtual"/>
+        	</link>        	
+        </menu-item>
+     	<menu-item name="FindAccessoryQuoteKeyWord" title="按照关键字查询物料">
+        	<link target="FindAccessoryQuoteKeyWord">
+        		<parameter param-name="productId"/>
+        		<parameter param-name="idValue"/>
+                <parameter param-name="productCategoryId"/>
+                <parameter param-name="isVirtual"/>
+        	</link>        	
+        </menu-item>
+        <menu-item name="FindAccessoryQuoteCategory" title="按照分类查询物料">
+        	<link target="FindAccessoryQuoteCategory">
+        		<parameter param-name="productId"/>
+        		<parameter param-name="idValue"/>
+                <parameter param-name="productCategoryId"/>
+                <parameter param-name="isVirtual"/>
+        	</link>        	
+        </menu-item>
+        <menu-item name="FindProductSupplierProduct" title="按照供应商查询物料">
+        	<link target="FindProductSupplierProduct">
+        		<parameter param-name="productId"/>
+        		<parameter param-name="idValue"/>
+                <parameter param-name="productCategoryId"/>
+                <parameter param-name="isVirtual"/>
+        	</link>        	
+        </menu-item>
+        <menu-item name="AccessoryMaintain" title="按照特征查询物料">
+            <link target="AccessoryMaintain"/>
+        </menu-item>
+        <menu-item name="AllProductList" title="查询所有物料">
+        	<link target="AllProductList">
+        		<parameter param-name="productId"/>
+        		<parameter param-name="idValue"/>
+                <parameter param-name="productCategoryId"/>
+                <parameter param-name="isVirtual"/>
+        	</link>        	
+        </menu-item>
+     </menu>
+     
+     <menu name="ProductListTabBar" extends="CommonTabBarMenu" extends-resource="component://common/widget/CommonMenus.xml">
+        <menu-item name="ProductList" title="物料查询与创建">
+            <link target="ProductList">
+            </link>
+        </menu-item>
+        <!-- <menu-item name="findProdusedGoodProduct" title="设计物料查询">
+            <link target="findProdusedGoodProduct">
+            </link>
+        </menu-item> -->
+        <menu-item name="FindProductDesignInfo" title="设计商品管理">
+            <link target="FindProductDesignInfo">
+            </link>
+        </menu-item>
+        
+	</menu>
+	
+	<menu name="FindProdusedGoodProductTabBar" menu-container-style="button-bar button-style-2" default-selected-style="selected">
+     	<menu-item name="findProdusedGoodProduct" title="按照非变型查询">
+        	<link target="findProdusedGoodProduct">
+        		<parameter param-name="productId"/>
+        		<parameter param-name="idValue"/>
+                <parameter param-name="productCategoryId"/>
+                <parameter param-name="isVirtual"/>
+        	</link>        	
+        </menu-item>
+     	<menu-item name="findProdusedGoodProductKeyWord" title="按照关键字查询物料">
+        	<link target="findProdusedGoodProductKeyWord">
+        		<parameter param-name="productId"/>
+        		<parameter param-name="idValue"/>
+                <parameter param-name="productCategoryId"/>
+                <parameter param-name="isVirtual"/>
+        	</link>        	
+        </menu-item>
+        <menu-item name="findProdusedGoodProductCategory" title="按照分类查询物料">
+        	<link target="findProdusedGoodProductCategory">
+        		<parameter param-name="productId"/>
+        		<parameter param-name="idValue"/>
+                <parameter param-name="productCategoryId"/>
+                <parameter param-name="isVirtual"/>
+        	</link>        	
+        </menu-item>
+        <menu-item name="ProdusedGoodProductMaintain" title="按照特征查询物料">
+            <link target="ProdusedGoodProductMaintain"/>
+        </menu-item>
+     </menu>
+     
+     
+	
+	<menu name="AccessoryProductSubTabBar" menu-container-style="button-bar button-style-2" default-selected-style="selected">
+        <menu-item name="EditMaterialProduct" title="${uiLabelMap.NewAccessory}" widget-style="buttontext create">
+            <link target="EditAccessoryQuote"/>
+        </menu-item>
+    </menu>
+    
+    <menu name="SupplierTabBar" extends="CommonTabBarMenu" extends-resource="component://common/widget/CommonMenus.xml">
+        <menu-item name="EditSupplierInfo" title="${uiLabelMap.AccessorySuppliers}">
+            <link target="EditSupplierInfo">
+                <parameter param-name="partyId"/>
+            </link>
+        </menu-item>
+	</menu>
+	
+	<menu name="SupplierInfoSubTabBar" menu-container-style="button-bar button-style-2" default-selected-style="selected">
+        <menu-item name="EditSupplierInfo" title="${uiLabelMap.NewSupplier}" widget-style="buttontext create">
+            <link target="EditSupplierInfo"/>
+        </menu-item>
+    </menu>
+    
+    <menu name="RequestSubTabBar" extends="CommonTabBarMenu" extends-resource="component://common/widget/CommonMenus.xml"
+        menu-container-style="button-bar button-style-2">
+        <menu-item name="receiveRequest" title="${uiLabelMap.ReceiveRequest}">
+            <condition>
+                <and>
+                    <not><if-empty field="custRequest"/></not>
+                    <if-compare field="custRequest.custRequestTypeId" operator="equals" value="RF_PUR_QUOTE"/>
+                    <if-compare field="custRequest.statusId" operator="equals" value="CRQ_SUBMITTED"/>
+                </and>
+            </condition>
+            <link target="changeCustRequestStatus" confirmation-message="您将成为此请求的受理人，确认继续">
+                <parameter param-name="custRequestId" from-field="custRequest.custRequestId"/>
+                <parameter param-name="purchaseType"/>
+                <parameter param-name="statusId" value="CRQ_ACCEPTED"/>
+            </link>
+        </menu-item>
+        <menu-item name="completedRequest" title="${uiLabelMap.CompletedRequest}">
+            <condition>
+                <and>
+                    <not><if-empty field="custRequest"/></not>
+                    <if-compare field="custRequest.custRequestTypeId" operator="equals" value="RF_PUR_QUOTE"/>
+                    <if-compare field="custRequest.statusId" operator="equals" value="CRQ_ACCEPTED"/>
+                </and>
+            </condition>
+            <link target="changeCustRequestStatus" confirmation-message="完成请求后无法恢复，您将成为此请求的管理者，确认继续？">
+                <parameter param-name="custRequestId" from-field="custRequest.custRequestId"/>
+                <parameter param-name="statusId" value="CRQ_COMPLETED"/>
+                <parameter param-name="purchaseType"/>
+            </link>
+        </menu-item>
+        <menu-item name="createQuoteFromRequest" title="${uiLabelMap.OrderCreateQuoteFromRequest}">
+            <condition>
+                <and>
+                    <not><if-empty field="custRequest"/></not>
+                    <if-compare field="custRequest.custRequestTypeId" operator="equals" value="RF_PUR_QUOTE"/>
+                    <if-compare field="custRequest.statusId" operator="equals" value="CRQ_ACCEPTED"/>
+                </and>
+            </condition>
+            <link target="createQuoteFromCustRequest" confirmation-message="转换后请求会被转换成完成状态，此操作不可逆，是否继续？">
+                <parameter param-name="custRequestId" from-field="custRequest.custRequestId"/>
+                <parameter param-name="purchaseType"/>
+            </link>
+        </menu-item>
+        <menu-item name="cancelledRequest" title="${uiLabelMap.CancelledRequest}">
+            <condition>
+                <and>
+                    <not><if-empty field="custRequest"/></not>
+                    <if-compare field="custRequest.custRequestTypeId" operator="equals" value="RF_PUR_QUOTE"/>
+                    <if-compare field="custRequest.statusId" operator="equals" value="CRQ_COMPLETED"/>
+                </and>
+            </condition>
+            <link target="changeCustRequestStatus" confirmation-message="取消请求后，此请求无法恢复，确认继续">
+                <parameter param-name="custRequestId" from-field="custRequest.custRequestId"/>
+                <parameter param-name="statusId" value="CRQ_CANCELLED"/>
+                <parameter param-name="purchaseType"/>
+            </link>
+        </menu-item>
+    </menu>
+    
+    <menu name="RequestTabBar" extends="CommonTabBarMenu" extends-resource="component://common/widget/CommonMenus.xml">
+        <menu-item name="ViewRequest" title="${uiLabelMap.OrderRequestOverview}">
+            <link target="ViewRequest">
+                <parameter param-name="custRequestId" from-field="custRequest.custRequestId"/>
+                <parameter param-name="purchaseType"/>
+            </link>
+        </menu-item>
+        <menu-item name="editRequest" title="${uiLabelMap.OrderRequest}">
+            <condition>
+                <and>
+                    <not><if-empty field="custRequest"/></not>
+                    <if-compare field="custRequest.statusId" operator="not-equals" value="CRQ_CANCELLED"/>
+                    <if-compare field="custRequest.statusId" operator="not-equals" value="CRQ_COMPLETED"/>
+                </and>
+            </condition>
+            <link target="request">
+                <parameter param-name="custRequestId" from-field="custRequest.custRequestId"/>
+                <parameter param-name="purchaseType"/>
+            </link>
+        </menu-item>       
+        <menu-item name="requestitems" title="${uiLabelMap.OrderRequestItems}">
+            <condition>
+                <and>
+                    <not><if-empty field="custRequest"/></not>
+                    <if-compare field="custRequest.statusId" operator="not-equals" value="CRQ_CANCELLED"/>
+                    <if-compare field="custRequest.statusId" operator="not-equals" value="CRQ_COMPLETED"/>
+                </and>
+            </condition>
+            <link target="/requestitems">
+                <parameter param-name="custRequestId" from-field="custRequest.custRequestId"/>
+                <parameter param-name="purchaseType"/>
+            </link>
+        </menu-item>
+    </menu>
+    
+    <menu name="QuoteTabBar" extends="CommonTabBarMenu" extends-resource="component://common/widget/CommonMenus.xml">
+        <menu-item name="ViewQuote" title="${uiLabelMap.OrderViewQuote}">
+            <link target="ViewQuote">
+                <parameter param-name="quoteId" from-field="quote.quoteId"/>
+                <parameter param-name="purchaseType"/>
+            </link>
+        </menu-item>
+
+        <menu-item name="EditQuote" title="${uiLabelMap.OrderOrderQuote}">
+            <condition>
+                <if-compare operator="equals" value="QUO_CREATED" field="quote.statusId"/>
+            </condition>
+            <link target="EditQuote">
+                <parameter param-name="quoteId" from-field="quote.quoteId"/>
+                 <parameter param-name="purchaseType"/>
+            </link>
+        </menu-item>
+
+        <menu-item name="ListQuoteRoles" title="${uiLabelMap.OrderOrderQuoteRoles}">
+            <condition>
+                <if-compare operator="equals" value="QUO_CREATED" field="quote.statusId"/>
+            </condition>
+            <link target="ListQuoteRoles">
+                <parameter param-name="quoteId" from-field="quote.quoteId"/>
+                 <parameter param-name="purchaseType"/>
+            </link>
+        </menu-item>
+
+        <menu-item name="ListQuoteItems" title="${uiLabelMap.OrderOrderQuoteItems}">
+            <condition>
+                <if-compare operator="equals" value="QUO_CREATED" field="quote.statusId"/>
+            </condition>
+            <link target="ListQuoteItems">
+                <parameter param-name="quoteId" from-field="quote.quoteId"/>
+                 <parameter param-name="purchaseType"/>
+            </link>
+        </menu-item>
+
+        <menu-item name="ManageQuotePrices" title="${uiLabelMap.OrderOrderQuotePrices}">
+            <condition>
+                <and>
+                    <if-has-permission permission="ORDERMGR" action="_QUOTE_PRICE"/>
+                    <if-compare operator="equals" value="QUO_CREATED" field="quote.statusId"/>
+                </and>
+            </condition>
+            <link target="ManageQuotePrices">
+                <parameter param-name="quoteId" from-field="quote.quoteId"/>
+                 <parameter param-name="purchaseType"/>
+            </link>
+        </menu-item>
+    </menu>
+    
+     <menu name="QuoteperationTabBar" extends="CommonTabBarMenu" extends-resource="component://common/widget/CommonMenus.xml">
+     	<menu-item name="EditQuote" title="${uiLabelMap.AcceptQuote}">
+            <condition>
+                <if-compare operator="equals" value="QUO_CREATED" field="quote.statusId"/>
+            </condition>
+            <link target="acceptQuote" confirmation-message="${uiLabelMap.SureAfterCantModifyNumAndPrice}">
+                <parameter param-name="quoteId" from-field="quote.quoteId"/>
+                <parameter param-name="purchaseType"/>
+            </link>
+        </menu-item>
+        <menu-item name="createOrder" title="${uiLabelMap.OrderCreateOrder}">
+            <condition disabled-style="disabled">
+                <and>
+                    <not><if-empty field="quote"/></not>
+                    <if-compare operator="equals" value="QUO_APPROVED" field="quote.statusId"/>
+                </and>
+            </condition>
+            <link target="loadCartFromQuote" confirmation-message="生成后无法重复生成，是否需要按照此报价单生成采购单？">
+                <parameter param-name="quoteId" from-field="quote.quoteId"/>
+                <parameter param-name="finalizeMode" value="init"/>
+                <parameter param-name="purchaseType"/>
+            </link>
+        </menu-item>
+     </menu>
+     
+      <menu name="ProductDesignTabBar" extends="CommonTabBarMenu" extends-resource="component://common/widget/CommonMenus.xml">
+        <menu-item name="EditProductDesign" title="款">
+            <link target="EditProductDesign">
+            	<parameter param-name="productId" from-field="parameters.productId"/>
+            </link>
+        </menu-item>        
+        <menu-item name="EditAccessoryBom" title="款包含的面辅料">
+            <link target="EditAccessoryBom">
+            	<parameter param-name="productId" from-field="parameters.productId"/>
+            </link>
+        </menu-item>        
+	</menu>
+     
+     
+</menus>

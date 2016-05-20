@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+    <screen name="main-decorator">
+        <section>
+            <actions>
+                <property-map resource="ZuczugCommonUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="CommonUiLabels" map-name="uiLabelMap" global="true"/>
+
+                <set field="layoutSettings.companyName" from-field="uiLabelMap.ZuczugCommonCompanyName" global="true"/>
+                <set field="layoutSettings.companySubtitle" from-field="uiLabelMap.ZuczugCommonCompanySubtitle" global="true"/>
+
+                <set field="activeApp" value="zuczugcommon" global="true"/>
+                <set field="applicationMenuName" value="MainAppBar" global="true"/>
+                <set field="applicationMenuLocation" value="component://zuczugcommon/widget/ZuczugCommonMenus.xml" global="true"/>
+                <set field="applicationTitle" value="${uiLabelMap.ZuczugCommonApplication}" global="true"/>
+                <set field="layoutSettings.javaScripts[]" value="/zuczugcommon/upload/plugins/validate/additional-methods.js" global="true"/>
+            </actions>
+            <widgets>
+                <include-screen name="ApplicationDecorator" location="component://commonext/widget/CommonScreens.xml"/>
+            </widgets>
+        </section>
+    </screen>
+
+    <screen name="ZuczugCommonCommonDecorator">
+        <section>
+            <actions>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                                <decorator-section-include name="body"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <!-- Global decorator for Lookup pop-up windows or layered CSS -->
+    <screen name="LookupDecorator">
+        <section>
+            <condition>
+                <not><if-compare operator="equals" value="Y" field="parameters.ajaxLookup"/></not>
+            </condition>
+            <widgets>
+                <section>
+                    <actions>
+                        <property-map resource="CommonUiLabels" map-name="uiLabelMap" global="true"/>
+                        <service service-name="getUserPreferenceGroup" result-map="prefResult">
+                            <field-map field-name="userPrefGroupTypeId" value="GLOBAL_PREFERENCES"/>
+                        </service>
+                        <set field="userPreferences" from-field="prefResult.userPrefMap" global="true"/>
+
+                        <property-map resource="general" map-name="generalProperties" global="true"/>
+                        <set field="visualThemeId" from-field="userPreferences.VISUAL_THEME" global="true"/>
+                        <service service-name="getVisualThemeResources">
+                            <field-map field-name="visualThemeId"/>
+                            <field-map field-name="themeResources" from-field="layoutSettings"/>
+                        </service>
+
+                        <set field="layoutSettings" from-field="themeResources" default-value="${layoutSettings}" global="true"/>
+                        <set field="layoutSettings.javaScripts[]" value="/images/fieldlookup.js" global="true"/>
+
+                        <set field="messagesTemplateLocation" from-field="layoutSettings.VT_MSG_TMPLT_LOC[0]" default-value="component://common/webcommon/includes/messages.ftl"/>
+                    </actions>
+                    <widgets>
+                        <section>
+                        <condition>
+                                <if-compare value="layer" operator="not-equals" field="parameters.presentation"/>
+                        </condition>
+                            <widgets>
+                                <platform-specific><html><html-template location="component://common/webcommon/includes/lookup.ftl" /></html></platform-specific>
+                            </widgets>
+                        </section>
+                        <platform-specific><html><html-template location="${messagesTemplateLocation}"/></html></platform-specific>
+                        <section>
+                            <condition>
+                                <not><if-empty-section section-name="body"/></not>
+                            </condition>
+                            <widgets>
+                                <decorator-section-include name="body"/>
+                            </widgets>
+                            <fail-widgets>
+                                <screenlet title="${title}" id="findScreenlet" collapsible="true" padded="false">
+                                    <container id="search-options">
+                                        <decorator-section-include name="search-options"/>
+                                    </container>
+                                </screenlet>
+                                <screenlet>
+                                    <container id="search-results">
+                                        <decorator-section-include name="search-results"/>
+                                    </container>
+                                </screenlet>
+                            </fail-widgets>
+                        </section>
+                        <section>
+                        <condition>
+                            <if-compare value="layer" operator="not-equals" field="parameters.presentation"/>
+                        </condition>
+                            <widgets>
+                                <platform-specific><html><html-template location="component://common/webcommon/includes/lookupFooter.ftl"/></html></platform-specific>
+                            </widgets>
+                        </section>
+                    </widgets>
+                </section>
+            </widgets>
+            <!-- <fail-widgets>
+                <section>
+                    <actions>
+                        <property-map resource="CommonUiLabels" map-name="uiLabelMap" global="true"/>
+                        <set field="searchType" from-field="parameters.searchType" default-value="${searchType}"/>
+                        <script location="component://common/webcommon/WEB-INF/actions/includes/FindAutocompleteOptions.groovy"/>
+                    </actions>
+                    <widgets>
+                        <decorator-screen name="AjaxGlobalDecorator">
+                            <decorator-section name="body">
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://common/webcommon/includes/ajaxAutocompleteOptions.ftl" />
+                                    </html>
+                                </platform-specific>
+                            </decorator-section>
+                        </decorator-screen>
+                    </widgets>
+                </section>
+            </fail-widgets> -->
+        </section>
+    </screen>
+    
+    <screen name="AjaxGlobalDecorator">
+        <section>
+            <actions>
+                <property-map resource="CommonUiLabels" map-name="uiLabelMap" global="true" />
+            </actions>
+            <widgets>
+                <platform-specific>
+                    <html>
+                        <html-template location="component://common/webcommon/includes/htmlheader-for-ajax.ftl" />
+                    </html>
+                </platform-specific>
+                <decorator-section-include name="body" />
+                <platform-specific>
+                    <html>
+                        <html-template location="component://common/webcommon/includes/htmlfooter-for-ajax.ftl" />
+                    </html>
+                </platform-specific>
+            </widgets>
+        </section>
+    </screen>
+</screens>

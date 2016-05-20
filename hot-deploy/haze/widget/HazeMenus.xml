@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menus xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-menu.xsd">
+    <menu name="MainAppBar" title="${uiLabelMap.HazeApplication}" extends="CommonAppBarMenu" extends-resource="component://common/widget/CommonMenus.xml">
+        <menu-item name="main" title="首页">
+        	<link target="main"/>
+        </menu-item>
+        <menu-item name="ProductManage" title="商品管理">
+        	<link target="ProductList">
+        		<parameter param-name="module" value="HAZE"/>
+        	</link>
+        </menu-item>
+        <menu-item name="PartnersManage" title="合作伙伴">
+        	<link target="PartnersList"/>
+        </menu-item>
+        <menu-item name="RequestManage" title="销售管理">
+        	<link target="FindCustRequest"/>
+        </menu-item>
+        <menu-item name="FacilityManage" title="仓库管理">
+        	<link target="FindFacility"/>
+        </menu-item>
+        <menu-item name="PurchaseManage" title="采购管理">
+        	<link target="PurchaseOrderList"/>
+        </menu-item>
+        <menu-item name="ManufactManage" title="${uiLabelMap.ManufactManage}">
+        	<link target="FindBom"/>
+        </menu-item>
+        <menu-item name="AccountingManage" title="${uiLabelMap.AccountingManage}">
+        	<link target="FindPayments"/>
+        </menu-item>
+        <menu-item name="ProductStoreManage" title="${uiLabelMap.ProductStoreManage}">
+        	<link target="FindProductStore"/>
+        </menu-item>
+    </menu>
+    
+    <!-- 进入的主菜单，和下拉一样 -->
+    <menu name="MainTabBar" extends="CommonTabBarMenu" extends-resource="component://common/widget/CommonMenus.xml">
+        <menu-item name="ProductList" title="商品管理">
+        	<link target="ProductList">
+        		<parameter param-name="module" value="HAZE"/>
+        	</link>
+        </menu-item>
+        <menu-item name="PartnersManage" title="合作伙伴">
+        	<link target="PartnersList"/>
+        </menu-item>
+        <menu-item name="SalesManage" title="销售管理">
+        	<link target="FindCustRequest"/>
+        </menu-item>
+        <menu-item name="FacilityManage" title="仓库管理">
+        	<link target="FindFacility"/>
+        </menu-item>
+        <menu-item name="PurchaseManage" title="采购管理">
+        	<link target="PurchaseOrderList"/>
+        </menu-item>
+        <menu-item name="ManufactManage" title="${uiLabelMap.ManufactManage}">
+        	<link target="FindBom"/>
+        </menu-item>
+        <menu-item name="AccountingManage" title="${uiLabelMap.AccountingManage}">
+        	<link target="FindPayments"/>
+        </menu-item>
+        <menu-item name="ProductStoreManage" title="${uiLabelMap.ProductStoreManage}">
+        	<link target="FindProductStore"/>
+        </menu-item>
+	</menu>
+	
+	<menu name="ProductManageTabBar" extends="CommonTabBarMenu" extends-resource="component://common/widget/CommonMenus.xml">
+        <menu-item name="ProductList" title="商品管理">
+        	<link target="ProductList">
+        		<parameter param-name="module" value="HAZE"/>
+        	</link>
+        </menu-item>
+        <menu-item name="ProductFeatureManage" title="特征数据维护">
+        	<link target="FindProductFeatureTypeList"/>
+        </menu-item>
+        <menu-item name="ProductCatalogAndCategory" title="目录分类维护">
+        	<link target="FindCatalogAndCategory"/>
+        </menu-item>
+	</menu>
+	
+	<!-- 商品列表子菜单 -->
+	<menu name="ProductManageSubMenu" menu-container-style="button-bar button-style-2  no-clear" default-selected-style="selected"
+		selected-menuitem-context-field-name="subMenuItem">
+        <menu-item name="EditProduct" title="商品基本信息">
+            <link target="EditProduct" url-mode="content">
+            	<parameter param-name="productId" from-field="parameters.productId"/>
+            </link>
+        </menu-item>
+        <menu-item name="FindProductCategoryMember" title="商品分类">
+            <link target="FindProductCategoryMember" url-mode="content">
+            	<parameter param-name="productId" from-field="parameters.productId"/>
+            </link>
+        </menu-item>
+        <menu-item name="FindProductFeatureAppl" title="商品特征">
+            <link target="FindProductFeatureAppl" url-mode="content">
+            	<parameter param-name="productId" from-field="parameters.productId"/>
+            </link>
+        </menu-item>
+        <menu-item name="EditProductPrices" title="商品价格">
+            <link target="EditProductPrices" url-mode="content">
+            	<parameter param-name="productId" from-field="parameters.productId"/>
+            </link>
+        </menu-item>
+        <menu-item name="EditKeyWords" title="商品标签">
+            <link target="EditKeyWords" url-mode="content">
+            	<parameter param-name="productId" from-field="parameters.productId"/>
+            </link>
+        </menu-item>
+        <menu-item name="FindProductBOM" title="商品BOM列表">
+            <link target="FindProductBOM" url-mode="content">
+            	<parameter param-name="productId" from-field="parameters.productId"/>
+           	</link>
+        </menu-item>
+        <menu-item name="FindProductVariants" title="商品变型">
+            <link target="FindProductVariants" url-mode="content">
+            	<parameter param-name="productId" from-field="parameters.productId"/>
+            </link>
+        </menu-item>
+        <menu-item name="SupplierList" title="供应商">
+            <link target="FindProductAssoc" url-mode="content"/>
+        </menu-item>
+    </menu>
+	
+	
+	<!-- 分类目录子菜单 -->
+	<menu name="CatalogAndCategorySubTabBar" menu-container-style="button-bar button-style-2" default-selected-style="selected"
+		selected-menuitem-context-field-name="subMenuItem">
+        <menu-item name="EditProductCatalog" title="添加新目录">
+            <link target="javascript:$('#centerdiv').load('EditProdCatalog');" url-mode="content"/>
+        </menu-item>
+    </menu>
+    
+    <!-- 特征子菜单 -->
+	<menu name="ProductFeatureManageSubMenu" menu-container-style="button-bar button-style-2" default-selected-style="selected"
+		selected-menuitem-context-field-name="subMenuItem">
+        <menu-item name="FindProductFeatureTypeList" title="特征分类">
+            <link target="FindProductFeatureTypeList" url-mode="content"/>
+        </menu-item>
+        <menu-item name="FindProductFeatureList" title="特征列表">
+            <link target="FindProductFeatureList" url-mode="content"/>
+        </menu-item>
+        <menu-item name="FindFeatureGroups" title="特征组">
+            <link target="FindFeatureGroups" url-mode="content"/>
+        </menu-item>
+    </menu>
+	
+	<menu name="PartnersManageTabBar" extends="CommonTabBarMenu" extends-resource="component://common/widget/CommonMenus.xml">
+        <menu-item name="EditPartner" title="新增合作伙伴">
+        	<link target="EditPartner"/>
+        </menu-item>
+        <menu-item name="PartnersList" title="合作伙伴列表">
+        	<link target="PartnersList"/>
+        </menu-item>
+	</menu>
+	
+	<menu name="SalesManageTabBar" extends="CommonTabBarMenu" extends-resource="component://common/widget/CommonMenus.xml">
+        <menu-item name="RequestManage" title="需求管理">
+        	<link target="FindCustRequest"/>
+        </menu-item>
+        <menu-item name="FindQuote" title="报价管理">
+        	<link target="FindQuote"/>
+        </menu-item>
+        <menu-item name="FindSalesOrder" title="销售订单管理">
+        	<link target="FindSalesOrder"/>
+        </menu-item>
+        <menu-item name="c" title="${uiLabelMap.FindCustomers}">
+        	<link target="FindCustomers"/>
+        </menu-item>
+        <menu-item name="d" title="门店管理">
+        	<link target="productManageMain"/>
+        </menu-item>
+        <menu-item name="e" title="价格规则设定">
+        	<link target="productManageMain"/>
+        </menu-item>
+	</menu>
+	
+	<menu name="FacilityManageTabBar" extends="CommonTabBarMenu" extends-resource="component://common/widget/CommonMenus.xml">
+        <menu-item name="FindFacility" title="切换仓库">
+        	<link target="FindFacility"/>
+        </menu-item>
+        <menu-item name="EditFacility" title="仓库基本信息">
+        	<link target="EditFacility">
+        		<parameter param-name="facilityId" from-field="parameters.facilityId"/>
+        	</link>
+        </menu-item>
+        <menu-item name="ViewFacilityContactMechs" title="联系方式">
+        	<link target="ViewFacilityContactMechs">
+        		<parameter param-name="facilityId" from-field="parameters.facilityId"/>
+        	</link>
+        </menu-item>
+        <menu-item name="ReceiveInventoryItem" title="接收库存">
+        	<link target="ReceiveInventoryItem">
+        		<parameter param-name="facilityId" from-field="parameters.facilityId"/>
+        	</link>
+        </menu-item>
+        <menu-item name="FindFacilityLocation" title="库位管理">
+        	<link target="FindFacilityLocation">
+        		<parameter param-name="facilityId" from-field="parameters.facilityId"/>
+        	</link>
+        </menu-item>
+        <menu-item name="FindInventoryItem" title="库存明细查询">
+        	<link target="FindInventoryItem">
+        		<parameter param-name="facilityId" from-field="parameters.facilityId"/>
+        	</link>
+        </menu-item>
+        <!-- <menu-item name="ViewFacilityInventoryByProduct" title="${uiLabelMap.ViewFacilityInventoryByProduct}">
+            <link target="ViewFacilityInventoryByProduct">
+                <parameter param-name="facilityId" from-field="parameters.facilityId"/>
+            </link>
+        </menu-item> -->
+        <menu-item name="FindSalesOrders" title="销售订单发货">
+        	<link target="FindSalesOrders">
+        		<parameter param-name="facilityId" from-field="parameters.facilityId"/>
+        	</link>
+        </menu-item>
+        <menu-item name="FindOutTransferShipment" title="其他发货">
+        	<link target="FindOutTransferShipment">
+        		<parameter param-name="facilityId" from-field="parameters.facilityId"/>
+        	</link>
+        </menu-item>
+        <menu-item name="FindPurchaseOrderList" title="采购入库">
+        	<link target="FindPurchaseOrderList">
+        		<parameter param-name="facilityId" from-field="parameters.facilityId"/>
+        	</link>
+        </menu-item>
+        <menu-item name="FindInTransferShipment" title="其他入库">
+        	<link target="FindInTransferShipment">
+        		<parameter param-name="facilityId" from-field="parameters.facilityId"/>
+        	</link>
+        </menu-item>
+	</menu>
+	
+	<!-- 编辑合作伙伴子菜单 -->
+	<menu name="PartnerSubTabBar" menu-container-style="button-bar button-style-2" default-selected-style="selected"
+		selected-menuitem-context-field-name="subMenuItem">
+        <menu-item name="EditPartner" title="编辑伙伴信息">
+            <link target="EditPartner" url-mode="content">
+            	<parameter param-name="partyId" from-field="parameters.partyId"/>
+            </link>
+        </menu-item>
+        <menu-item name="EditPartnerRoles" title="角色">
+            <link target="EditPartnerRoles" url-mode="content">
+            	<parameter param-name="partyId" from-field="parameters.partyId"/>
+            </link>
+        </menu-item>
+        <menu-item name="EditPartnerContactMech" title="联系方式">
+            <link target="EditPartnerContactMech" url-mode="content">
+            	<parameter param-name="partyId" from-field="parameters.partyId"/>
+            </link>
+        </menu-item>
+        <menu-item name="FindPartnerAccounting" title="账户信息">
+            <link target="FindPartnerAccounting" url-mode="content">
+            	<parameter param-name="partyId" from-field="parameters.partyId"/>
+            </link>
+        </menu-item>
+        <menu-item name="FindPartnerBillingAccount" title="账单账户">
+            <link target="FindPartnerBillingAccount" url-mode="content">
+            	<parameter param-name="partyId" from-field="parameters.partyId"/>
+            </link>
+        </menu-item>
+        <menu-item name="FindPartnerNotes" title="备注">
+            <link target="FindPartnerNotes" url-mode="content">
+            	<parameter param-name="partyId" from-field="parameters.partyId"/>
+            </link>
+        </menu-item>
+    </menu>
+	
+	<menu name="PurchaseManageTabBar" extends="CommonTabBarMenu" extends-resource="component://common/widget/CommonMenus.xml">
+        <menu-item name="EditPurchaseOrder" title="新建采购单">
+        	<link target="EditPurchaseOrder"/>
+        </menu-item>
+        <menu-item name="PurchaseOrderList" title="采购单列表">
+        	<link target="PurchaseOrderList"/>
+        </menu-item>
+	</menu>
+
+
+    <menu name="ManufactManageTabBar" extends="CommonTabBarMenu" extends-resource="component://common/widget/CommonMenus.xml"
+          default-menu-item-name="FindBom">
+        <menu-item name="FindBom" title="${uiLabelMap.FindBom}">
+            <link target="FindBom"/>
+        </menu-item>
+        <menu-item name="FindBom" title="${uiLabelMap.FindBom}">
+            <link target="FindBom"/>
+        </menu-item>
+    </menu>
+
+    <menu name="AccountingManageTabBar" extends="CommonTabBarMenu" extends-resource="component://common/widget/CommonMenus.xml"
+          default-menu-item-name="FindPayments">
+        <menu-item name="FindPayments" title="${uiLabelMap.FindPayments}">
+            <link target="FindPayments"/>
+        </menu-item>
+        <menu-item name="FindInvoices" title="${uiLabelMap.FindInvoices}">
+            <link target="FindInvoices"/>
+        </menu-item>
+    </menu>
+</menus>

@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<simple-methods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/simple-methods-v2.xsd">
+        
+	<simple-method method-name="fixNoVirtualRepair">
+		<call-service service-name="checkNoVirtualNoVariantBM" in-map-name="inMap">
+			<result-to-field result-name="noBusinessData" field="noBusinessDatas"/>
+		</call-service> 
+		
+		<iterate entry="noBusinessData" list="noBusinessDatas">
+			<entity-one value-field="product" entity-name="Product">
+				<field-map field-name="productId" from-field="noBusinessData"/>
+			</entity-one>
+			<if-not-empty field="product">
+				<set field="product.isVirtual" value="Y"/>
+				<set-service-fields service-name="updateProduct" to-map="productMap" map="product"/>
+				<call-service service-name="updateProduct" in-map-name="productMap"></call-service>
+				<set field="noVirtualList[]" from-field="noBusinessData"/>
+			</if-not-empty>
+		</iterate>
+		
+		<field-to-result field="noVirtualList"/>
+	</simple-method>
+	
+	<simple-method method-name="checkUpdateEstimatedQuantity">
+		<!-- 找到所有有效的productionRun，并且包含这个产品的 -->
+        <entity-condition list="includeMateralsGoodStandardsList" entity-name="IncludeMateralsGoodStandards">
+        	<condition-list combine="and">
+        		<condition-expr field-name="productId" operator="equals" from-field="parameters.productId"/>
+        		<condition-expr field-name="workEffortGoodStdTypeId" operator="equals" value="PRUNT_PROD_NEEDED"/>
+        		<condition-list combine="or">
+        			<condition-expr field-name="currentStatusId" operator="equals" value="PRUN_DOC_PRINTED"/>
+        			<condition-expr field-name="currentStatusId" operator="equals" value="PRUN_CREATED"/>
+        		</condition-list>
+        	</condition-list>
+        </entity-condition>
+        <log message="${parameters.productId}========1" level="info"/>
+        
+        <iterate entry="includeMateralsGoodStandards" list="includeMateralsGoodStandardsList">
+        	<!-- 找到这条生产的上级标识 -->
+        	<entity-one value-field="workEffort" entity-name="WorkEffort">
+        		<field-map field-name="workEffortId" from-field="includeMateralsGoodStandards.workEffortId"/>
+        	</entity-one>
+        	<log message="${workEffort.workEffortId}========2" level="info"/>
+        	<!-- 用它的上级表识找到他的BOM -->
+        	<entity-and list="workEffortGoodStandards" entity-name="WorkEffortGoodStandard">
+        		<field-map field-name="workEffortId" from-field="workEffort.workEffortParentId"/>
+        	</entity-and>
+        	<first-from-list entry="workEffortGoodStandard" list="workEffortGoodStandards"/>
+        	<log message="${workEffortGoodStandard.workEffortId}========3" level="info"/>
+        	<!-- 找到这条BOM的quantity用料数量 -->
+        	<entity-and list="productAssocs" entity-name="ProductAssoc">
+        		<field-map field-name="productId" from-field="workEffortGoodStandard.productId"/>
+        		<field-map field-name="productIdTo" from-field="parameters.productId"/>
+        	</entity-and>
+        	<first-from-list entry="productAssoc" list="productAssocs"/>
+        	
+        	<entity-one value-field="goodStandard" entity-name="WorkEffortGoodStandard">
+        		<field-map field-name="workEffortId" from-field="includeMateralsGoodStandards.workEffortId"/>
+        		<field-map field-name="productId" from-field="includeMateralsGoodStandards.productId"/>
+        		<field-map field-name="workEffortGoodStdTypeId" from-field="includeMateralsGoodStandards.workEffortGoodStdTypeId"/>
+        		<field-map field-name="fromDate" from-field="includeMateralsGoodStandards.fromDate"/>
+        	</entity-one>
+        	<if-empty field="goodStandard">
+				<add-error><fail-message message="查询错误"/> </add-error>
+			</if-empty>
+			
+			<!-- 修改数量 -->
+			<set field="estimatedQuantityBM" value=""/>
+			<calculate field="estimatedQuantityBM">
+   				<calcop field="productAssoc.quantity" operator="multiply">
+   					<calcop operator="get" field="workEffort.quantityToProduce"></calcop>
+   				</calcop>
+   			</calculate>
+   			<set field="goodStandard.estimatedQuantity" value="${groovy:
+   			estimatedQuantityBM.doubleValue();
+   			}"/>
+   			
+   			<log message="${estimatedQuantityBM}=====6" level="info"/>
+   			<log message="${goodStandard.estimatedQuantity}=====5" level="info"/>
+   			<set-service-fields service-name="updateWorkEffortGoodStandard" to-map="goodStandardMap" map="goodStandard"/>
+			<call-service service-name="updateWorkEffortGoodStandard" in-map-name="goodStandardMap"></call-service>
+			
+			<set field="productAssoc.estimateCalcMethod" value=""/>
+   			<set-service-fields service-name="updateProductAssoc" to-map="productAssocMap" map="productAssoc"/>
+			<call-service service-name="updateProductAssoc" in-map-name="productAssocMap"></call-service>
+        </iterate>
+	</simple-method>
+	
+	<simple-method method-name="fixRetailDefaultPrice" short-description="为所有正式商品加上RETAIL的default价格，RETAIL default价格就是list price">
+		<entity-and list="products" entity-name="Product">
+			<field-map field-name="productTypeId" value="FINISHED_GOOD"/>
+		</entity-and>
+		<iterate entry="product" list="products">
+			<!-- 先检查有没有RETAIL的default price -->
+			<entity-and list="defaultPrices" entity-name="ProductPrice" filter-by-date="true">
+				<field-map field-name="productId" from-field="product.productId"/>
+				<field-map field-name="productPriceTypeId" value="DEFAULT_PRICE"/>
+				<field-map field-name="productStoreGroupId" value="RETAIL"/>
+			</entity-and>
+			<!-- 我们只处理没有RETAIL default price的商品 -->
+			<if-empty field="defaultPrices">
+				<entity-and list="listPrices" entity-name="ProductPrice" filter-by-date="true">
+					<field-map field-name="productId" from-field="product.productId"/>
+					<field-map field-name="productPriceTypeId" value="LIST_PRICE"/>
+				</entity-and>
+				<first-from-list entry="listPrice" list="listPrices"/>
+				<!-- 如果连list price都没有，那就算了 -->
+				<if-not-empty field="listPrice">
+					<set-service-fields service-name="createProductPrice" to-map="inMap" map="listPrice"/>
+					<set field="inMap.productStoreGroupId" value="RETAIL"/>
+					<set field="inMap.productPriceTypeId" value="DEFAULT_PRICE"/>
+					<call-service service-name="createProductPrice" in-map-name="inMap"></call-service>
+				</if-not-empty>
+			</if-empty>
+		</iterate>
+	</simple-method>
+	
+	<simple-method method-name="findProductAndDesignError" short-description="">
+		<!-- 找到所有的正式商品，并且是变型商品 -->
+		<entity-condition list="variantProductList" entity-name="Product">
+			<condition-list>
+				<condition-expr field-name="isVariant" operator="equals" value="Y"/>
+				<condition-expr field-name="productTypeId" operator="equals" value="FINISHED_GOOD"/>
+			</condition-list>
+		</entity-condition>
+		<set field="result" default-value=""/>
+		<iterate entry="product" list="variantProductList">
+			<entity-and list="designPaList" entity-name="ProductAssoc">
+				<field-map field-name="productIdTo" from-field="product.productId"/>
+				<field-map field-name="productAssocTypeId" value="UNIQUE_ITEM"/>
+			</entity-and>
+			<call-object-method method-name="size" obj-field="designPaList" ret-field="designPaListSize"></call-object-method>
+			<if-compare operator="greater" value="1" field="designPaListSize">
+				<set field="result" value="${result} ### ${product.productId}/有2个设计商品"/>
+			</if-compare>
+			
+			<if-compare operator="greater-equals" value="1" field="designPaListSize">
+				<!-- 再检查是否这个SKU的尺码和对应的设计商品尺码不一样的 -->
+				<entity-and list="sizeList" entity-name="ProductFeatureAndAppl">
+					<field-map field-name="productId" from-field="product.productId"/>
+					<field-map field-name="productFeatureTypeId" value="SIZE"/>
+				</entity-and>
+				<set field="realSizeId" from-field="sizeList[0].productFeatureId"/>
+				
+				<entity-and list="sizeList2" entity-name="ProductFeatureAndAppl">
+					<field-map field-name="productId" from-field="designPaList[0].productId"/>
+					<field-map field-name="productFeatureTypeId" value="SIZE"/>
+				</entity-and>
+				<set field="designSizeId" from-field="sizeList2[0].productFeatureId"/>
+				<if-compare operator="not-equals" value="SIZE_F" field="realSizeId">
+					<if-compare operator="equals" value="SIZE_25" field="realSizeId">
+						<set field="realSizeId" value="SIZE_0"/>
+					</if-compare>
+					<if-compare operator="equals" value="SIZE_26" field="realSizeId">
+						<set field="realSizeId" value="SIZE_2"/>
+					</if-compare>
+					<if-compare operator="equals" value="SIZE_27" field="realSizeId">
+						<set field="realSizeId" value="SIZE_4"/>
+					</if-compare>
+					<if-compare operator="equals" value="SIZE_28" field="realSizeId">
+						<set field="realSizeId" value="SIZE_6"/>
+					</if-compare>
+					<if-compare operator="equals" value="SIZE_29" field="realSizeId">
+						<set field="realSizeId" value="SIZE_8"/>
+					</if-compare>
+					
+					<if-compare operator="not-equals" value="${realSizeId}" field="designSizeId">
+						<set field="result" value="${result} ### ${product.productId}和设计商品${designPaList[0].productId}的尺码不一样"/>
+					</if-compare>
+				</if-compare>
+			</if-compare>
+			
+		</iterate>
+		<log message="================${result}=====" level="info"/>
+		<field-to-result field="result"/>
+	</simple-method>
+	
+	
+	<simple-method method-name="findDesignAndProductError" short-description="">
+		<!-- 找到所有的设计商品，并且是变型商品 -->
+		<entity-condition list="variantDesignList" entity-name="Product">
+			<condition-list>
+				<condition-expr field-name="isVariant" operator="equals" value="Y"/>
+				<condition-expr field-name="productTypeId" operator="equals" value="WIP"/>
+			</condition-list>
+		</entity-condition>
+		<set field="result" default-value=""/>
+		<iterate entry="product" list="variantDesignList">
+			<entity-and list="productPaList" entity-name="ProductAssoc">
+				<field-map field-name="productId" from-field="product.productId"/>
+				<field-map field-name="productAssocTypeId" value="UNIQUE_ITEM"/>
+			</entity-and>
+			<call-object-method method-name="size" obj-field="productPaList" ret-field="productPaListSize"></call-object-method>
+			<if-compare operator="greater" value="1" field="productPaListSize">
+				<set field="result" value="${result} ### ${product.productId}/有2个正式商品"/>
+			</if-compare>
+		</iterate>
+		<log message="================${result}=====" level="info"/>
+		<field-to-result field="result"/>
+	</simple-method>
+	
+	<simple-method method-name="fixPriductImageUrl">
+		<entity-and list="productList" entity-name="Product">
+			<field-map field-name="productTypeId" value="WIP"/>
+			<select-field field-name="productId"/>
+		</entity-and>
+		<iterate entry="product" list="productList">
+			<if-empty field="product.smallImageUrl">
+				<entity-and list="contentList" entity-name="ProductContentAndInfo">
+					<field-map field-name="productId" from-field="product.productId"/>
+					<field-map field-name="productContentTypeId" value="MODELS_POSITIVE_IMAGE"/>
+					<order-by field-name="-createdDate"/>
+				</entity-and>
+				<if-not-empty field="contentList">
+					<first-from-list entry="content" list="contentList"/>
+					<set field="contentId" from-field="content.contentId"/>
+					<set field="productId" from-field="product.productId"/>
+					<call-simple-method method-name="setProductDesignEntityImages" xml-resource="component://productdesign/script/ProductDesignServices.xml"></call-simple-method>
+				</if-not-empty>
+			</if-empty>
+		</iterate>
+	</simple-method>
+	
+	<simple-method method-name="fixWhetherThereSeries">
+		<entity-and list="productList" entity-name="Product">
+			<field-map field-name="productTypeId" value="FINISHED_GOOD"/>
+			<field-map field-name="isVariant" value="N"/>
+			<field-map field-name="isVirtual" value="Y"/>
+		</entity-and>
+		
+		<iterate entry="product" list="productList">
+			<entity-and list="productCategoryMemberList" entity-name="ProductCategoryAndMember">
+				<field-map field-name="productCategoryTypeId" value="SERIES"/>
+				<field-map field-name="productId" from-field="product.productId"/>
+			</entity-and>
+			<first-from-list entry="productCategoryMember" list="productCategoryMemberList"/>
+			<if-empty field="productCategoryMember">
+				<log message="------------------1:${product.productId}" level="info"/>
+				<set field="inMap.productId" from-field="product.productId"/>
+				<call-service service-name="repairProductSeries" in-map-name="inMap"></call-service>
+			</if-empty>
+		</iterate>
+	</simple-method>
+	
+</simple-methods>

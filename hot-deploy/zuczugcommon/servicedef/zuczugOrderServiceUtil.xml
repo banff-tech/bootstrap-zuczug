@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>蓝山项目关于订单的公共服务</description>
+    <vendor></vendor>
+    <version>1.0</version>
+
+    <service name="noSyntaxError" engine="interface">
+        <description>
+            Dummy service to prevent empty files and syntax error - Remove when the 1st real service will be added here 
+        </description>
+    </service> 
+
+    <service name="createOrUpdateOrderInfoNote" engine="simple" default-entity-name="NoteData"
+        location="component://zuczugcommon/script/ZuczugOrderServicesUtil.xml" invoke="createOrUpdateOrderInfoNote">
+        <description>Create a system info note</description>
+        <auto-attributes include="nonpk" mode="IN" optional="true" entity-name="NoteData"/>
+        <auto-attributes include="all" mode="IN" optional="true" entity-name="OrderHeaderNote"/>
+    </service>
+    
+    <service name="createOrUpdateOrderAttribute" engine="simple" default-entity-name="OrderAttribute"
+        location="component://zuczugcommon/script/ZuczugOrderServicesUtil.xml" invoke="createOrUpdateOrderAttribute">
+        <description>create Or Update Order Attribute</description>
+        <auto-attributes include="all" mode="IN" optional="true" entity-name="OrderAttribute"/>
+    </service>
+    
+    <service name="createOrderContent" engine="simple" default-entity-name="OrderContent"
+        location="component://zuczugcommon/script/ZuczugOrderServicesUtil.xml" invoke="createOrderContent">
+        <description>create Order Content</description>
+        <auto-attributes include="all" mode="IN" optional="true" />
+    </service>
+</services>

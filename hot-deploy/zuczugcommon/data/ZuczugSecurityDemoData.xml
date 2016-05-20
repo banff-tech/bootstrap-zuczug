@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-engine-xml>
+	<SecurityGroup groupId="MANUFACT_GROUP" description="生产管理权限"/> 
+	<SecurityGroupPermission groupId="MANUFACT_GROUP" permissionId="ACCOUNTING_ADMIN"/>
+	<SecurityGroupPermission groupId="MANUFACT_GROUP" permissionId="ACCTG_ATX_ADMIN"/>
+	<SecurityGroupPermission groupId="MANUFACT_GROUP" permissionId="ACCTG_PREF_ADMIN"/>
+	<SecurityGroupPermission groupId="MANUFACT_GROUP" permissionId="CATALOG_ADMIN"/>
+	<SecurityGroupPermission groupId="MANUFACT_GROUP" permissionId="MYPORTALBASE_ADMIN"/>
+	<SecurityGroupPermission groupId="MANUFACT_GROUP" permissionId="ORDERMGR_CREATE"/>
+	<SecurityGroupPermission groupId="MANUFACT_GROUP" permissionId="ORDERMGR_PURCHASE_CREATE"/>
+	<SecurityGroupPermission groupId="MANUFACT_GROUP" permissionId="ORDERMGR_UPDATE"/>
+	<SecurityGroupPermission groupId="MANUFACT_GROUP" permissionId="PARTYMGR_ADMIN"/>
+	<SecurityGroupPermission groupId="MANUFACT_GROUP" permissionId="PAY_INFO_ADMIN"/>
+	<SecurityGroupPermission groupId="MANUFACT_GROUP" permissionId="CONTENTMGR_ROLE_ADMIN"/>
+	<SecurityGroupPermission groupId="MANUFACT_GROUP" permissionId="CONTENTMGR_ADMIN"/>
+    <SecurityGroupPermission groupId="MANUFACT_GROUP" permissionId="MANUFACT_ADMIN" />
+    <SecurityGroupPermission groupId="MANUFACT_GROUP" permissionId="MANUFACT_PRUN_GENERAL" />
+    <SecurityGroupPermission groupId="MANUFACT_GROUP" permissionId="MANUFACT_PRUN_OPERATE" />
+    <SecurityGroupPermission groupId="MANUFACT_GROUP" permissionId="WORKEFFORTMGR_VIEW" />
+    <SecurityGroupPermission groupId="MANUFACT_GROUP" permissionId="MANUFACTURING_VIEW" />
+    <SecurityGroupPermission groupId="MANUFACT_GROUP" permissionId="WORKEFFORTMGR_ROLE_CREATE" />
+    <SecurityGroupPermission groupId="MANUFACT_GROUP" permissionId="ASSETMAINT_CREATE" />
+	
+	<SecurityGroup groupId="ACCOUNTING_ADMIN" description="会计权限组"/>
+	<SecurityGroupPermission groupId="ACCOUNTING_ADMIN" permissionId="ACCOUNTING_ADMIN"/>
+    <SecurityGroupPermission groupId="ACCOUNTING_ADMIN" permissionId="OFBTOOLS_VIEW"/>
+    <SecurityGroupPermission groupId="ACCOUNTING_ADMIN" permissionId="ACCTG_ATX_ADMIN"/>
+    <SecurityGroupPermission groupId="ACCOUNTING_ADMIN" permissionId="ACCTG_FX_UPDATE"/>
+    <SecurityGroupPermission groupId="ACCOUNTING_ADMIN" permissionId="ACCTG_PREF_ADMIN"/>
+    <SecurityGroupPermission groupId="ACCOUNTING_ADMIN" permissionId="ACCOUNTING_PRINT_CHECKS"/>
+    <SecurityGroupPermission groupId="ACCOUNTING_ADMIN" permissionId="ACCOUNTING_COMM_VIEW"/>
+    <SecurityGroupPermission groupId="ACCOUNTING_ADMIN" permissionId="MANUAL_PAYMENT"/>
+    <SecurityGroupPermission groupId="ACCOUNTING_ADMIN" permissionId="PAY_INFO_ADMIN"/>
+    <SecurityGroupPermission groupId="ACCOUNTING_ADMIN" permissionId="PAYPROC_ADMIN"/>
+    <SecurityGroupPermission groupId="ACCOUNTING_ADMIN" permissionId="ASSETMAINT_VIEW"/>
+    <SecurityGroupPermission groupId="ACCOUNTING_ADMIN" permissionId="ACCOUNTING_CREATE"/>
+    <SecurityGroupPermission groupId="ACCOUNTING_ADMIN" permissionId="ACCOUNTING_DELETE"/>
+    <SecurityGroupPermission groupId="ACCOUNTING_ADMIN" permissionId="ACCOUNTING_UPDATE"/>
+    <SecurityGroupPermission groupId="ACCOUNTING_ADMIN" permissionId="ACCOUNTING_VIEW"/>
+    <SecurityGroupPermission groupId="ACCOUNTING_ADMIN" permissionId="MYPORTALBASE_ADMIN" />
+    
+    
+	<!-- 面料开发 FABRIC_ADMIN -->
+	<SecurityGroupPermission groupId="FABRIC_ADMIN" permissionId="CONTENTMGR_ROLE_ADMIN"/>
+	<SecurityGroupPermission groupId="FABRIC_ADMIN" permissionId="CONTENTMGR_ADMIN"/>
+	<!-- 纱线开发 YARN_ADMIN -->
+	<SecurityGroupPermission groupId="YARN_ADMIN" permissionId="CONTENTMGR_ROLE_ADMIN"/>
+	<SecurityGroupPermission groupId="YARN_ADMIN" permissionId="CONTENTMGR_ADMIN"/>
+	<!-- 辅料开发  ACCESSORY_ADMIN-->
+	<SecurityGroupPermission groupId="ACCESSORY_ADMIN" permissionId="CONTENTMGR_ROLE_ADMIN"/>
+	<SecurityGroupPermission groupId="ACCESSORY_ADMIN" permissionId="CONTENTMGR_ADMIN"/>
+	<!-- 商品设计  DESIGN_ADMIN-->
+	<SecurityGroupPermission groupId="DESIGN_ADMIN" permissionId="CONTENTMGR_ROLE_ADMIN"/>
+	<SecurityGroupPermission groupId="DESIGN_ADMIN" permissionId="CONTENTMGR_ADMIN"/>
+	<!-- 商品制版  TECHNOLOGY_ADMIN-->
+	<SecurityGroupPermission groupId="TECHNOLOGY_ADMIN" permissionId="CONTENTMGR_ROLE_ADMIN"/>
+	<SecurityGroupPermission groupId="TECHNOLOGY_ADMIN" permissionId="CONTENTMGR_ADMIN"/>
+	
+	<!-- 仓库管理 FABRICFACILITY_ADMIN-->
+	<SecurityGroupPermission groupId="FABRICFACILITY_ADMIN" permissionId="CONTENTMGR_ROLE_ADMIN"/>
+	<SecurityGroupPermission groupId="FABRICFACILITY_ADMIN" permissionId="CONTENTMGR_ADMIN"/>
+	
+
+	<SecurityGroup groupId="PRODUCTMANAGE_ADMIN" description="商品管理程序管理员权限组"/>
+	<SecurityGroupPermission groupId="PRODUCTMANAGE_ADMIN" permissionId="ACCOUNTING_ADMIN"/>
+	<SecurityGroupPermission groupId="PRODUCTMANAGE_ADMIN" permissionId="ACCTG_ATX_ADMIN"/>
+	<SecurityGroupPermission groupId="PRODUCTMANAGE_ADMIN" permissionId="ACCTG_PREF_ADMIN"/>
+	<SecurityGroupPermission groupId="PRODUCTMANAGE_ADMIN" permissionId="CATALOG_ADMIN"/>
+	<SecurityGroupPermission groupId="PRODUCTMANAGE_ADMIN" permissionId="MYPORTALBASE_ADMIN"/>
+	<SecurityGroupPermission groupId="PRODUCTMANAGE_ADMIN" permissionId="ORDERMGR_CREATE"/>
+	<SecurityGroupPermission groupId="PRODUCTMANAGE_ADMIN" permissionId="ORDERMGR_PURCHASE_CREATE"/>
+	<SecurityGroupPermission groupId="PRODUCTMANAGE_ADMIN" permissionId="ORDERMGR_UPDATE"/>
+	<SecurityGroupPermission groupId="PRODUCTMANAGE_ADMIN" permissionId="PARTYMGR_ADMIN"/>
+	<SecurityGroupPermission groupId="PRODUCTMANAGE_ADMIN" permissionId="PAY_INFO_ADMIN"/>
+	<SecurityGroupPermission groupId="PRODUCTMANAGE_ADMIN" permissionId="PRODUCTMANAGE_ADMIN"/>
+	<SecurityGroupPermission groupId="PRODUCTMANAGE_ADMIN" permissionId="CONTENTMGR_ROLE_ADMIN"/>
+	<SecurityGroupPermission groupId="PRODUCTMANAGE_ADMIN" permissionId="CONTENTMGR_ADMIN"/>
+
+	<SecurityGroup groupId="FABRICFACILITY_ADMIN" description="面辅料仓库管理员权限组"/>
+	<SecurityGroupPermission groupId="FABRICFACILITY_ADMIN" permissionId="ACCOUNTING_ADMIN"/>
+	<SecurityGroupPermission groupId="FABRICFACILITY_ADMIN" permissionId="ACCTG_ATX_ADMIN"/>
+	<SecurityGroupPermission groupId="FABRICFACILITY_ADMIN" permissionId="ACCTG_PREF_ADMIN"/>
+	<SecurityGroupPermission groupId="FABRICFACILITY_ADMIN" permissionId="CATALOG_ADMIN"/>
+	<SecurityGroupPermission groupId="FABRICFACILITY_ADMIN" permissionId="MYPORTALBASE_ADMIN"/>
+	<SecurityGroupPermission groupId="FABRICFACILITY_ADMIN" permissionId="ORDERMGR_CREATE"/>
+	<SecurityGroupPermission groupId="FABRICFACILITY_ADMIN" permissionId="ORDERMGR_PURCHASE_CREATE"/>
+	<SecurityGroupPermission groupId="FABRICFACILITY_ADMIN" permissionId="ORDERMGR_UPDATE"/>
+	<SecurityGroupPermission groupId="FABRICFACILITY_ADMIN" permissionId="PARTYMGR_ADMIN"/>
+	<SecurityGroupPermission groupId="FABRICFACILITY_ADMIN" permissionId="PAY_INFO_ADMIN"/>
+	<SecurityGroupPermission groupId="FABRICFACILITY_ADMIN" permissionId="FACILITY_ADMIN"/>
+	<SecurityGroupPermission groupId="FABRICFACILITY_ADMIN" permissionId="FABRICFACILITY_ADMIN"/>
+</entity-engine-xml>

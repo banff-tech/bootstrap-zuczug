@@ -1,0 +1,1168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+	<!-- <screen name="ProductList">
+        <section>
+            <actions>
+                <set field="headerItem" value="ProductManage"/>
+                <set field="tabButtonItem" value="ProductList"/>
+                <set field="subMenuItem" value="ProductList"/>
+                <set field="titleProperty" value="${groovy:org.ofbiz.base.util.StringUtil.wrapString('商品列表')}" />
+                
+            </actions>
+            <widgets>
+                <decorator-screen name="ProdCatalogCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                    	
+                    	<link style="buttontext" text="添加新商品" target="EditProduct"/>
+                    	<screenlet title="商品分类列表">
+                            <include-form name="FindProduct" location="component://haze/widget/ProductForms.xml"/>
+                        </screenlet>
+                        <screenlet title="添加商品到分类">
+                            <include-form name="ListProduct" location="component://haze/widget/ProductForms.xml"/>
+                        </screenlet>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen> -->
+    
+    <screen name="ProductList">
+		<section>
+           <actions>
+               <set field="titleProperty" value="ProductList"/>
+               <set field="headerItem" value="ProductList"/>
+               <set field="tabButtonItem" value="ProductList"/>               
+               <set field="labelTitleProperty" value="PageTitleFindQuote"/>
+               <set field="productTypeId" from-field="parameters.productTypeId"/>
+        	   <set field="isVariant" from-field="parameters.isVariant"/>    
+        	   <set field="module" value="HAZE"/>            
+           </actions>
+           <widgets>
+               <decorator-screen name="ProdCatalogCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                   <decorator-section name="body">                  		
+                        <container style="button-bar">
+                            <link  text="新建物料" target="CreateNewVirtualProduct" style="buttontext create " ></link>                            
+                        </container>
+                        <include-menu location="component://haze/widget/AccessoriesPurchaseMenus.xml" name="FindAccessoryQuoteTabBar"/>
+                        <decorator-screen name="FindScreenDecorator" location="component://common/widget/CommonScreens.xml">
+                   			<decorator-section name="search-options">
+                        		<include-form name="ProductList" location="component://zuczugcommon/widget/ZuczugCommonForms.xml"/>
+                   			</decorator-section>
+                   			<decorator-section name="search-results">
+                         		<include-form name="productIdForm" location="component://haze/widget/ProductForms.xml"/>                         	
+                   			</decorator-section>
+                   		</decorator-screen>                                                
+                   </decorator-section>
+               </decorator-screen>
+           </widgets>
+		</section>
+	</screen>
+
+    
+    
+    <screen name="FindProductFeatureTypeList">
+        <section>
+            <actions>
+                <set field="headerItem" value="ProductManage"/>
+                <set field="tabButtonItem" value="ProductFeatureManage"/>
+                <set field="titleProperty" value="${groovy:org.ofbiz.base.util.StringUtil.wrapString('特征维护')}" />
+                <set field="subMenuItem" value="FindProductFeatureTypeList"/>
+                <script location="component://product/webapp/catalog/WEB-INF/actions/category/CategoryTree.groovy"/>
+                <set field="parameters.productCategoryTypeId" value="CATALOG_CATEGORY"/>
+	            <service service-name="performFind" result-map="result" >
+	               <field-map field-name="inputFields" from-field="parameters"/>
+	               <field-map field-name="orderBy" from-field="parameters.sortField"/>
+	               <field-map field-name="entityName" value="ProdCatalogCategoryDetlView"/>
+	               <field-map field-name="viewIndex" from-field="viewIndex"/>
+	               <field-map field-name="viewSize" from-field="viewSize"/>
+	            </service>  
+	            <set field="listIt" from-field="result.listIt"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="ProdCatalogCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                    	<!-- <include-menu location="component://haze/widget/HazeMenus.xml" name="ProductFeatureManageSubMenu"/> -->
+                    	<screenlet title="查询">
+                            <include-form name="FindAccessoryCategory" location="component://zuczugcommon/widget/ZuczugCommonForms.xml"/>
+                        </screenlet>
+                        <screenlet title="列表">
+                            <include-form name="ListAccessoryCategory" location="component://zuczugcommon/widget/ZuczugCommonForms.xml"/>
+                        </screenlet>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+	
+	<screen name="EditCatalog">
+        <section>
+            <actions>
+                <set field="headerItem" value="ProductManage"/>
+                <set field="tabButtonItem" value="ProductCatalogAndCategory"/>
+                <set field="productTypeId" from-field="parameters.productTypeId"/>
+                <set field="titleProperty" value="${groovy:org.ofbiz.base.util.StringUtil.wrapString('目录和分类维护')}" />
+                <set field="module" from-field="parameters.module"/>
+                <script location="component://product/webapp/catalog/WEB-INF/actions/category/CategoryTree.groovy"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="ProdCatalogTreeCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                	
+                    <decorator-section name="body">   
+                    	                    	
+                    	<include-screen name="EditProdCatalog" location="component://haze/widget/ProductScreens.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+	<screen name="EditProdCatalog">
+        <section>
+            <actions>
+            	<set field="prodCatalogId" from-field="parameters.prodCatalogId"/>
+            	<set field="productTypeId" from-field="parameters.productTypeId"/>
+            	<entity-one value-field="prodCatalog" entity-name="ProdCatalog">
+            		<field-map field-name="prodCatalogId" from-field="prodCatalogId"/>
+            	</entity-one>
+            	<set field="module" from-field="parameters.module"/>
+            </actions>
+            <widgets>
+
+            	<screenlet title="${groovy:prodCatalogId==null?&quot;新增&quot;:&quot;编辑&quot;}目录">
+	                <include-form location="component://haze/widget/ProductForms.xml" name="EditProdCatalog"/>
+            	</screenlet>
+            	<section>
+            		<condition>
+            			<not><if-empty field="prodCatalog"/></not>
+            		</condition>
+            		<widgets>
+            			<screenlet title="在 [${prodCatalog.catalogName}] 下添加新分类${module}">
+			                <include-form location="component://haze/widget/ProductForms.xml" name="EditProductCategory"/>
+		            	</screenlet>
+		            	<screenlet title="在已有分类中选择添加">
+			                <include-form location="component://haze/widget/ProductForms.xml" name="addProductCategoryToProdCatalog"/>
+		            	</screenlet>
+            		</widgets>
+            	</section>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="EditCategory">
+        <section>
+            <actions>
+                <set field="headerItem" value="ProductManage"/>
+                <set field="tabButtonItem" value="ProductCatalogAndCategory"/>
+                <set field="productTypeId" from-field="parameters.productTypeId"/>
+                <set field="titleProperty" value="${groovy:org.ofbiz.base.util.StringUtil.wrapString('目录和分类维护')}" />
+                
+                <script location="component://product/webapp/catalog/WEB-INF/actions/category/CategoryTree.groovy"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="ProdCatalogTreeCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                	
+                    <decorator-section name="body">   
+                    	<include-screen name="EditProductCategory" location="component://haze/widget/ProductScreens.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="EditProductCategory">
+        <section>
+            <actions>
+            	<set field="productCategoryId" from-field="parameters.productCategoryId"/>
+            	<set field="productTypeId" from-field="parameters.productTypeId"/>
+            	<entity-one value-field="productCategory" entity-name="ProductCategory"></entity-one>
+            </actions>
+            <widgets>
+          		<screenlet title="编辑分类">
+	                <include-form location="component://haze/widget/ProductForms.xml" name="EditProductCategory"/>
+            	</screenlet>
+            	<screenlet title="该分类所属目录">
+	                <include-form location="component://haze/widget/ProductForms.xml" name="ListProductCategoryInCatalog"/>
+            	</screenlet>
+            	<screenlet title="分类添加商品" >
+	                <include-form location="component://haze/widget/ProductForms.xml" name="AddCategoryProductMember"/>
+            	</screenlet>
+            	<screenlet title="该分类下的商品" >
+	                <include-form location="component://haze/widget/ProductForms.xml" name="ProductListInProductCategory"/>
+            	</screenlet>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="FindProductFeatureList">
+        <section>
+            <actions>
+                <set field="headerItem" value="ProductManage"/>
+                <set field="tabButtonItem" value="ProductFeatureManage"/>
+                <set field="titleProperty" value="${groovy:org.ofbiz.base.util.StringUtil.wrapString('特征列表')}" />
+                <set field="subMenuItem" value="FindProductFeatureList"/>
+                <script location="component://product/webapp/catalog/WEB-INF/actions/category/CategoryTree.groovy"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="ProdCatalogCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                    	<include-menu location="component://haze/widget/HazeMenus.xml" name="ProductFeatureManageSubMenu"/>
+                    	<screenlet title="查询">
+                            <include-form name="FindProductFeature" location="component://haze/widget/ProductForms.xml"/>
+                        </screenlet>
+                        <screenlet title="列表">
+                            <include-form name="ListProductFeature" location="component://haze/widget/ProductForms.xml"/>
+                        </screenlet>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <!-- <screen name="EditProduct">
+        <section>
+            <actions>
+                <set field="headerItem" value="ProductManage"/>
+                <set field="tabButtonItem" value="ProductList"/>
+                <set field="subMenuItem" value="EditProduct"/>
+                <set field="titleProperty" value="${groovy:org.ofbiz.base.util.StringUtil.wrapString('商品列表')}" />
+            </actions>
+            <widgets>
+                <decorator-screen name="ProductEditCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <screenlet title="编辑商品">
+                            <include-form name="EditProduct" location="component://haze/widget/ProductForms.xml"/>
+                        </screenlet>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen> -->
+    
+    
+    <!-- 把商品添加到分类 -->
+    <screen name="FindProductCategoryMember">
+        <section>
+            <actions>
+                <set field="headerItem" value="ProductManage"/>
+                <set field="tabButtonItem" value="ProductList"/>
+                <set field="subMenuItem" value="FindProductCategoryMember"/>
+                <set field="titleProperty" value="${groovy:org.ofbiz.base.util.StringUtil.wrapString('商品列表')}" />
+                <set field="productId" from-field="parameters.productId"/>
+                
+                <entity-condition entity-name="ProductCategoryMember" list="productCategoryMembers">
+                    <condition-expr field-name="productId" from-field="productId"/>
+                    <order-by field-name="sequenceNum"/>
+                    <order-by field-name="productCategoryId"/>
+                </entity-condition>
+            </actions>
+            <widgets>
+                <decorator-screen name="ProductEditCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                    	<screenlet title="商品分类列表">
+                            <include-form name="UpdateProductCategoryMember" location="component://haze/widget/ProductForms.xml"/>
+                        </screenlet>
+                        <screenlet title="添加商品到分类">
+                            <include-form name="AddProductCategoryMember" location="component://haze/widget/ProductForms.xml"/>
+                        </screenlet>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="EditProductPrices">
+        <section>
+            <actions>
+                <set field="headerItem" value="ProductManage"/>
+                <set field="tabButtonItem" value="ProductList"/>
+				<set field="subMenuItem" value="EditProductPrices"/>
+                <set field="titleProperty" value="${groovy:org.ofbiz.base.util.StringUtil.wrapString('商品价格')}" />
+                <entity-and entity-name="ProductPrice" list="productPrices">
+                    <field-map field-name="productId" from-field="parameters.productId"/>
+                    <order-by field-name="productStoreGroupId"/>
+                    <order-by field-name="productPricePurposeId"/>
+                    <order-by field-name="productPriceTypeId"/>
+                    <order-by field-name="currencyUomId"/>
+                    <order-by field-name="fromDate"/>
+                </entity-and>
+                <property-to-field field="currencyUomId" resource="general" property="currency.uom.id.default" default="CNY"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="ProductEditCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <screenlet title="${uiLabelMap.PageTitleEditProductPrices}">
+                            <include-form name="UpdateProductPrice" location="component://haze/widget/ProductForms.xml"/>
+                        </screenlet>
+                        <screenlet title="${uiLabelMap.PageTitleAddProductPrices}">
+                            <include-form name="AddProductPrice" location="component://haze/widget/ProductForms.xml"/>
+                        </screenlet>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="FindProductFeatureAppl">
+        <section>
+            <actions>
+                <set field="headerItem" value="ProductManage"/>
+                <set field="tabButtonItem" value="ProductList"/>
+				<set field="subMenuItem" value="FindProductFeatureAppl"/>
+                <set field="titleProperty" value="${groovy:org.ofbiz.base.util.StringUtil.wrapString('商品特征维护')}" />
+            </actions>
+            <widgets>
+                <decorator-screen name="ProductEditCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                    	<screenlet title="特征列表">
+                    		<include-form name="ProductFeatureApplList" location="component://haze/widget/ProductForms.xml"/>
+                    	</screenlet>
+                        <screenlet title="固定特征维护">
+                        	<section>
+                        		<actions>
+                        			<!-- <entity-and list="featureGroupList" entity-name="ProductFeatureCatGrpAppl">
+                        				<field-map field-name="productCategoryId" from-field="product.primaryProductCategoryId"/>
+                        			</entity-and>
+                        			<entity-and list="featureCategoryList" entity-name="ProductFeatureCategoryAppl">
+                        				<field-map field-name="productCategoryId" from-field="product.primaryProductCategoryId"/>
+                        			</entity-and> -->
+                        			<set field="hideProductInfo" value="Y"/>
+                        			<set field="formAction" value="applyProductFeatures"/>
+                        		</actions>
+                        		<condition>
+                        			<not><if-empty field="product.primaryProductCategoryId"/></not>
+                        		</condition>
+                        		<widgets>
+                        			<!-- <platform-specific>
+		                            	<html>
+		                            		<html-template location="component://haze/webapp/haze/html/product/ProductFeatureApplEdit.ftl"/>
+		                            	</html>
+		                            </platform-specific> -->
+		                            <include-screen name="EditZuczugVirtualProduct" location="component://zuczugcommon/widget/ZuczugCommonScreens.xml" share-scope="true"/>
+                        		</widgets>
+                        		<fail-widgets>
+                        			<label text="这个商品还没有选择「主分类」，请先在「商品基本信息」菜单选择「主分类」再添加特征。"></label>
+                        		</fail-widgets>
+                        	</section>
+                        </screenlet>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    
+	<screen name="EditKeyWords">
+        <section>
+            <actions>
+                <set field="headerItem" value="EditKeyWord"/>
+                <set field="tabButtonItem" value="EditKeyWord"/>
+				<set field="subMenuItem" value="EditKeyWord"/>
+                <set field="titleProperty" value="${groovy:org.ofbiz.base.util.StringUtil.wrapString('商品标签维护')}" />
+            </actions>
+            <widgets>
+                <decorator-screen name="ProductEditCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                    	<screenlet title="${uiLabelMap.ProductAddProductKeyword}">
+                            <include-form name="AddProductKeyword" location="component://haze/widget/ProductForms.xml"/>
+                        </screenlet>                       
+                        <section>
+                            <actions>
+                                <set field="keywordTypeId" value="KWT_TAG"/>
+                            </actions>
+                            <widgets>
+                                <screenlet title="${uiLabelMap.PageTitleEditProductKeywords} : ${keywordType.description}">
+                                    <include-form name="UpdateProductKeyword" location="component://haze/widget/ProductForms.xml"/>
+                                </screenlet>
+                            </widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="FindProductVariants">
+        <section>
+            <actions>
+                <set field="headerItem" value="ProductManage"/>
+                <set field="tabButtonItem" value="ProductList"/>
+				<set field="subMenuItem" value="FindProductVariants"/>
+                <set field="titleProperty" value="${groovy:org.ofbiz.base.util.StringUtil.wrapString('商品变型')}" />
+            </actions>
+            <widgets>
+                <decorator-screen name="ProductEditCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                    	<section>
+                    		<actions>
+                    			<entity-and list="featureCategoryList" entity-name="ProductFeatureCategoryAppl">
+				      				<field-map field-name="productCategoryId" from-field="product.primaryProductCategoryId"/>
+				      			</entity-and>
+                    		</actions>
+                    		<condition>
+                    			<if-compare operator="equals" value="Y" field="product.isVirtual"/>
+                    		</condition>
+                    		<widgets>
+                    			<screenlet title="变型商品列表">
+                    				<include-form name="ProductVariantList" location="component://haze/widget/ProductForms.xml"/>
+                    			</screenlet>
+                    			<screenlet title="选择特征">
+			                    	<platform-specific>
+			                        	<html>
+			                        		<html-template location="component://haze/webapp/haze/html/product/ProductFeatureApplEdit.ftl"/>
+			                        	</html>
+			                        </platform-specific>
+		                        </screenlet>
+                    		</widgets>
+                    		<fail-widgets>
+                    			<label text="${productId}[${product.productName}]已经是变型商品"></label>
+                    		</fail-widgets>
+                    	</section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    
+    <screen name="FindProductBOM">
+        <section>
+            <actions>
+                <set field="headerItem" value="ProductManage"/>
+                <set field="tabButtonItem" value="ProductList"/>
+				<set field="subMenuItem" value="FindProductBOM"/>
+                <set field="titleProperty" value="${groovy:org.ofbiz.base.util.StringUtil.wrapString('维护商品BOM')}" />
+                <set field="bomToProductId" from-field="parameters.productId"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="ProductEditCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                    	<screenlet title="[${bomToProductId}] 的BOM列表">
+                            <include-form name="ProductBOMList" location="component://haze/widget/ProductForms.xml"/>
+                        </screenlet>
+                        <screenlet title="添加BOM">
+                            <include-form name="ProductBOMAdd" location="component://haze/widget/ProductForms.xml"/>
+                        </screenlet>                       
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="ListAccessoryFeatureCatGrpAppl">
+        <section>
+        	<actions>
+        		   <set field="titleProperty" value="FindProductFeatureTypeList"/>
+	               <set field="headerItem" value="FindProductFeatureTypeList"/>
+	               <set field="tabButtonItem" value="FindProductFeatureTypeList"/>               
+	               <set field="labelTitleProperty" value="FindProductFeatureTypeList"/>
+	        	   <set field="productCategoryId" from-field="parameters.productCategoryId"/>
+	        	   <set field="categoryName" from-field="parameters.categoryName"/>
+        	</actions>           
+            <widgets>
+                <decorator-screen name="ProdCatalogCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                    	<include-screen name="ListAccessoryFeatureCatGrpAppl" location="component://zuczugcommon/widget/ZuczugCommonScreens.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="ListAccessoryFeatureGroupAppl">
+        <section>
+        	<actions>
+        		   <set field="titleProperty" value="FindProductFeatureTypeList"/>
+	               <set field="headerItem" value="FindProductFeatureTypeList"/>
+	               <set field="tabButtonItem" value="FindProductFeatureTypeList"/>               
+	               <set field="labelTitleProperty" value="FindProductFeatureTypeList"/>
+	        	   <set field="productCategoryId" from-field="parameters.productCategoryId"/>
+	        	   <set field="productFeatureGroupId" from-field="parameters.productFeatureGroupId"/>
+	        	   <set field="deleteAction" value="deleteAccessoryFeatureGroupAppl"/>
+	        	   <set field="editAction" value="ListProductFeatureGroupAppl"/>
+        	</actions>           
+            <widgets>
+                <decorator-screen name="ProdCatalogCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                    	<include-screen name="ListAccessoryFeatureGroupAppl" location="component://zuczugcommon/widget/ZuczugCommonScreens.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <!-- 创建辅料ProductFeatureGroup的通用screen -->
+	<screen name="CreateAccessoryFeatureCatGrpAppl">
+       <section>
+           <actions>
+           	   <property-map resource="ZuczugCommonUiLabels" map-name="uiLabelMap" global="true"/> 	  
+               <set field="titleProperty" value="EditAccessoryQuote"/>
+               <set field="headerItem" value="EditAccessoryQuote"/>
+               <set field="tabButtonItem" value="EditAccessoryQuote"/>               
+               <set field="labelTitleProperty" value="PageTitleEditAccessoryQuote"/>
+        	   <set field="productCategoryId" from-field="parameters.productCategoryId"/>
+        	   <set field="formAction" value="createAccessoryFeatureCatGrpAppl"/>
+        	   <set field="categoryName" from-field="parameters.categoryName"/>
+           </actions>
+	       <widgets>
+	       	   <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+		           <decorator-section name="body">
+		           		<label style="h1">分类名 : ${categoryName}</label>
+						<screenlet title="${uiLabelMap.PageTitleCreateProductFeatureCatGrpAppl}">
+		                    <include-screen name="CreateProductFeatureCatGrpAppl" location="component://zuczugcommon/widget/ZuczugCommonScreens.xml"/>
+						</screenlet>
+                   	</decorator-section>
+               	</decorator-screen>
+           </widgets>
+       </section>
+	</screen>
+    
+    <!-- 创建辅料ProductFeatureCategory的通用screen -->
+	<screen name="CreateAccessoryFeatureCategory">
+       <section>
+           <actions>
+           	   <property-map resource="ZuczugCommonUiLabels" map-name="uiLabelMap" global="true"/> 	  
+               <set field="titleProperty" value="EditAccessoryQuote"/>
+               <set field="headerItem" value="EditAccessoryQuote"/>
+               <set field="tabButtonItem" value="EditAccessoryQuote"/>               
+               <set field="labelTitleProperty" value="PageTitleEditAccessoryQuote"/>
+        	   <set field="productCategoryId" from-field="parameters.productCategoryId"/>
+        	   <set field="formAction" value="createAccessoryFeatureCategory"/>
+        	   <set field="categoryName" from-field="parameters.categoryName"/>
+           </actions>
+	       <widgets>
+	       	   <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+		           <decorator-section name="body">
+		           		<label style="h1">分类名 : ${categoryName}</label>
+						<screenlet title="${uiLabelMap.PageTitleCreateProductFeatureCategory}">
+		                    <include-screen name="CreateProductFeatureCategory" location="component://zuczugcommon/widget/ZuczugCommonScreens.xml"/>
+						</screenlet>
+                   	</decorator-section>
+               	</decorator-screen>
+           </widgets>
+       </section>
+	</screen>
+	
+	<!-- 列出辅料ProductFeatureCategory里的所有productFeature -->
+	<screen name="ListAccessorySelectableFeature">
+       <section>
+           <actions>
+           	   <property-map resource="ZuczugCommonUiLabels" map-name="uiLabelMap" global="true"/> 
+               <set field="titleProperty" value="EditAccessoryQuote"/>
+               <set field="headerItem" value="EditAccessoryQuote"/>
+               <set field="tabButtonItem" value="EditAccessoryQuote"/>               
+               <set field="labelTitleProperty" value="PageTitleEditAccessoryQuote"/>
+        	   <set field="productCategoryId" from-field="parameters.productCategoryId"/>
+        	   <set field="productFeatureCategoryId" from-field="parameters.productFeatureCategoryId"/>
+        	   <set field="deleteAction" value="deleteAccessorySelectableFeature"/>
+           </actions>
+	       <widgets>
+	       	   <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+		           <decorator-section name="body">
+			            <container style="button-bar">
+	                        <link  text="${uiLabelMap.CreateMoreAccessoryFeatures}" target="CreateAccessorySelectableFeature" style="buttontext create ">
+	                        	<parameter param-name="productCategoryId"/>
+	                        	<parameter param-name="productFeatureCategoryId"/>
+	                        </link>
+	                        <link  text="${uiLabelMap.Back}" target="ListAccessoryFeatureCatGrpAppl" style="buttontext">
+	                        	<parameter param-name="productCategoryId"/>
+	                        </link>
+						</container>
+						<screenlet title="${uiLabelMap.PageTitleListProductSelectableFeature}">
+		                    <include-screen name="ListProductSelectableFeature" location="component://zuczugcommon/widget/ZuczugCommonScreens.xml"/>
+						</screenlet>
+                   	</decorator-section>
+               	</decorator-screen>
+           </widgets>
+       </section>
+	</screen>
+	
+	<!-- 创建辅料ProductFeatureGroup添加新的ProductFeature的通用screen -->
+	<screen name="CreateAccessoryFeatureGroupAppl">
+       <section>
+           <actions>
+           	   <property-map resource="ZuczugCommonUiLabels" map-name="uiLabelMap" global="true"/> 
+               <set field="titleProperty" value="EditAccessoryQuote"/>
+               <set field="headerItem" value="EditAccessoryQuote"/>
+               <set field="tabButtonItem" value="EditAccessoryQuote"/>               
+               <set field="labelTitleProperty" value="PageTitleEditAccessoryQuote"/>
+        	   <set field="productFeatureGroupId" from-field="parameters.productFeatureGroupId"/>
+        	   <set field="productCategoryId" from-field="parameters.productCategoryId"/>
+        	   <set field="formAction" value="createAccessoryFeatureGroupAppl"/>
+           </actions>
+	       <widgets>
+	       	   <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+		           <decorator-section name="body">
+						<screenlet title="${uiLabelMap.PageTitleCreateProductFeatureGroupAppl}">
+		                    <include-screen name="CreateProductFeatureGroupAppl" location="component://zuczugcommon/widget/ZuczugCommonScreens.xml"/>
+						</screenlet>
+                   	</decorator-section>
+               	</decorator-screen>
+           </widgets>
+       </section>
+	</screen>
+	
+	<!-- 为某个productFeatureCategory添加ProductFeature的通用screen -->
+	<screen name="CreateAccessorySelectableFeature">
+       <section>
+           <actions>
+           	   <property-map resource="ZuczugCommonUiLabels" map-name="uiLabelMap" global="true"/> 
+               <set field="titleProperty" value="EditAccessoryQuote"/>
+               <set field="headerItem" value="EditAccessoryQuote"/>
+               <set field="tabButtonItem" value="EditAccessoryQuote"/>               
+               <set field="labelTitleProperty" value="PageTitleEditAccessoryQuote"/>
+        	   <set field="productCategoryId" from-field="parameters.productCategoryId"/>
+        	   <set field="productFeatureCategoryId" from-field="parameters.productFeatureCategoryId"/>
+        	   <set field="formAction" value="createAccessorySelectableFeature"/>
+           </actions>
+	       <widgets>
+	       	   <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+		           <decorator-section name="body">
+						<screenlet title="${uiLabelMap.PageTitleCreateProductSelectableFeature}">
+		                    <include-screen name="CreateProductSelectableFeature" location="component://zuczugcommon/widget/ZuczugCommonScreens.xml"/>
+						</screenlet>
+                   	</decorator-section>
+               	</decorator-screen>
+           </widgets>
+       </section>
+	</screen>
+	
+	<screen name="EditProduct">
+       <section>
+           <actions>
+           	   <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+               <set field="titleProperty" value="EditProduct"/>
+               <set field="headerItem" value="EditProduct"/>
+               <set field="tabButtonItem" value="EditProduct"/>                                         
+               <set field="labelTitleProperty" value="PageTitleEditMaterialProduct"/>
+               <set field="productId" from-field="parameters.productId"/>                
+               <set field="module" value="HAZE"/>
+               <set field="virtualProductId" from-field="parameters.virtualProductId"/>
+               <set field="formAction" value="updateProductFeature"/> 
+               <set field="productTypeId" from-field="parameters.productTypeId"/>
+               <entity-one value-field="product" entity-name="Product">
+               		<field-map field-name="productId" from-field="parameters.productId"/>
+               </entity-one>
+               <set field="isVirtual" from-field="product.isVirtual"/> 
+               <set field="isVariant" from-field="product.isVariant"/>
+               <set field="productCategoryId" from-field="product.primaryProductCategoryId"/>
+               <set field="layoutSettings.javaScripts[]" value="/zuczugcommon/upload/plugins/validate/additional-methods.js" global="true"/>
+               <script location="component://zuczugcommon/webapp/zuczugcommon/WEB-INF/actions/EditVirtualProduct.groovy"/>                                     
+           </actions>
+           <widgets>
+               <decorator-screen name="ProductEditCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                   <decorator-section name="body">						
+						<screenlet title="编辑商品">
+							<platform-specific>
+								<html><html-template location="component://zuczugcommon/webapp/zuczugcommon/html/MaterielProductFeature.ftl"/></html>
+							</platform-specific>
+						</screenlet>
+                   	</decorator-section>
+               	</decorator-screen>
+           </widgets>
+       </section>
+	</screen>
+	
+	<screen name="EditProductCategories">
+        <section>
+            <actions>
+            	<property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="titleProperty" value="PageTitleEditProductCategories"/>
+                <set field="tabButtonItem" value="EditProductCategories"/>
+                <set field="labelTitleProperty" value="ProductCategoryMembers"/>
+				<set field="idValue" from-field="parameters.idValue"/> 
+				<set field="productCategoryId" from-field="parameters.productCategoryId"/> 
+                <entity-condition entity-name="ProductCategoryMember" list="productCategoryMembers">
+                    <condition-expr field-name="productId" from-field="parameters.productId"/>
+                    <order-by field-name="sequenceNum"/>
+                    <order-by field-name="productCategoryId"/>
+                </entity-condition>
+                <set field="isVirtual" from-field="parameters.isVirtual"/> 
+                <set field="isVariant" from-field="parameters.isVariant"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="ProductEditCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <screenlet title="${uiLabelMap.PageTitleEditProductCategories}">
+                            <include-form name="UpdateProductCategoryMember" location="component://zuczugcommon/widget/ZuczugCommonForms.xml"/>
+                        </screenlet>
+                        <screenlet title="${uiLabelMap.PageTitleAddProductCategories}">
+                            <include-form name="AddProductCategoryMember" location="component://zuczugcommon/widget/ZuczugCommonForms.xml"/>
+                        </screenlet>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="EditProductInventoryItems">
+        <section>
+            <actions>
+                <property-map resource="OrderUiLabels" map-name="uiLabelMap"/>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="titleProperty" value="PageTitleEditProductInventoryItems"/>
+                <set field="tabButtonItem" value="EditProductInventoryItems"/>
+                <set field="labelTitleProperty" value="ProductInventorySummary"/>
+				<set field="idValue" from-field="parameters.idValue"/> 
+				<set field="productCategoryId" from-field="parameters.productCategoryId"/> 
+                <set field="productId" from-field="parameters.productId"/>
+                <set field="isVirtual" from-field="parameters.isVirtual"/>
+                
+                <entity-one entity-name="Product" value-field="product">
+                	<field-map field-name="productId" from-field="productId"/>
+                </entity-one>
+                <set field="isVariant" from-field="product.isVariant"/>
+                <script location="component://product/webapp/catalog/WEB-INF/actions/product/EditProductInventoryItems.groovy"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="ProductEditCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-compare field="product.isVirtual" operator="equals" type="String" value="Y"/>
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html><html-template location="component://zuczugcommon/webapp/zuczugcommon/html/EditVirtualProductInventory.ftl"/></html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <platform-specific>
+                                    <html><html-template location="component://product/webapp/catalog/product/ProductInventorySummary.ftl"/></html>
+                                </platform-specific>
+                                <screenlet title="${uiLabelMap.ProductOutstandingPurchaseOrders}">
+                                    <include-form name="OutstandingPurchaseOrders" location="component://product/widget/catalog/ProductForms.xml"/>
+                                </screenlet>
+                                <platform-specific>
+                                    <html><html-template location="component://zuczugcommon/webapp/zuczugcommon/html/EditProductInventoryItems.ftl"/></html>
+                                </platform-specific>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="EditAccessorySuppliers">
+		<section>
+			<actions>
+				<property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+				<set field="titleProperty" value="EditAccessorySuppliers"/>
+				<set field="headerItem" value="EditAccessorySuppliers"/>
+				<set field="tabButtonItem" value="EditAccessorySuppliers"/>  
+				<set field="idValue" from-field="parameters.idValue"/>
+				<set field="productCategoryId" from-field="parameters.productCategoryId"/>              
+				<set field="labelTitleProperty" value="PageTitleEditMaterialProduct"/>
+				<set field="isVirtual" from-field="parameters.isVirtual"/>
+               	<entity-one entity-name="Product" value-field="product">
+                	<field-map field-name="productId" from-field="productId"/>
+                </entity-one>
+                <set field="isVariant" from-field="parameters.isVariant"/>
+			</actions>
+			<widgets>
+                <decorator-screen name="ProductEditCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <screenlet title="${uiLabelMap.PageTitleListSupplierProduct}">
+                            <include-form name="ListSupplierProducts" location="component://zuczugcommon/widget/ZuczugCommonForms.xml"/>
+                        </screenlet>
+                        <screenlet title="${uiLabelMap.PageTitleAddAccessorySuppliers}">
+                            <include-form name="AddSupplierProduct" location="component://zuczugcommon/widget/ZuczugCommonForms.xml"/>
+                        </screenlet>
+                    </decorator-section>
+                </decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	
+	<screen name="ViewProductOrder">
+        <section>
+            <actions>
+            	<property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="titleProperty" value="PageTitleViewProductOrders"/>
+                <set field="tabButtonItem" value="viewProductOrder"/>
+                <set field="labelTitleProperty" value="OrderOrders"/>
+                <set field="idValue" from-field="parameters.idValue"/> 
+                <set field="productCategoryId" from-field="parameters.productCategoryId"/>
+                <set field="isVirtual" from-field="parameters.isVirtual"/> 
+                <set field="isVariant" from-field="parameters.isVariant"/>
+                <script location="component://order/webapp/ordermgr/WEB-INF/actions/order/FindOrders.groovy"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="ProductEditCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <platform-specific>
+                            <html><html-template location="component://product/webapp/catalog/product/ViewProductOrders.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="EditKeyWord">
+       <section>
+           <actions>   
+           	   <set field="titleProperty" value="PageTitleViewProductOrders"/>
+                <set field="tabButtonItem" value="EditKeyWord"/>
+                <set field="labelTitleProperty" value="EditKeyWord"/>
+           	   <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>            
+               <set field="productId" from-field="parameters.productId"/>
+                <entity-one entity-name="Product" value-field="product"/>
+                <entity-and entity-name="Enumeration" list="keywordTypeList">
+                    <field-map field-name="enumTypeId" value="KEYWORD_TYPE"/>
+                </entity-and>
+        	   <set field="AddFormAction" value="createProductKeyword"/>
+        	   <set field="UpdateFormAction" value="updateProductKeyword"/>
+        	   <set field="deleteKeyWordAction" value="deleteProductKeyword"/>
+        	   
+        	   <set field="productCategoryId" from-field="parameters.productCategoryId"/>
+        	   <set field="productTypeId" value="RAW_MATERIAL"/>
+        	   <set field="virtualProductId" from-field="parameters.virtualProductId" global="true"/>
+        	   <set field="idValue" from-field="parameters.idValue"/>
+        	   <set field="isVirtual" from-field="parameters.isVirtual"/>
+        	   <script location="component://zuczugcommon/webapp/zuczugcommon/WEB-INF/actions/GetProductAllFeature.groovy"/>
+           </actions>
+	       <widgets>           					
+				<decorator-screen name="ProductEditCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                   <decorator-section name="body">                          		                                                         		
+						<screenlet title="${uiLabelMap.ProductAddProductKeyword}">
+                            <include-form name="AddProductKeyword" location="component://zuczugcommon/widget/ZuczugCommonForms.xml"/>
+                        </screenlet>                       
+                            <section>
+                                <actions>
+                                    <set field="keywordTypeId" value="KWT_TAG"/>
+                                </actions>
+                                <widgets>
+                                    <screenlet title="${uiLabelMap.PageTitleEditProductKeywords} : ${keywordType.description}">
+                                        <include-form name="UpdateProductKeyword" location="component://zuczugcommon/widget/ZuczugCommonForms.xml"/>
+                                    </screenlet>
+                                </widgets>
+                            </section>
+                   	</decorator-section>
+               </decorator-screen>
+           </widgets>
+       </section>
+	</screen>
+	
+	<screen name="EditProductAssoc">
+        <section>
+            <actions>
+               <set field="titleProperty" value="PageTitleEditProductAssociations"/>
+               <set field="tabButtonItem" value="EditProductAssoc"/>
+               <set field="labelTitleProperty" value="ProductAssociations"/>
+			   <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+			   <set field="productId" from-field="parameters.productId"/>
+               <set field="virtualProductId" from-field="parameters.virtualProductId"/>
+        	   <set field="formAction" value="updateAccessoryProduct"/>
+        	   <set field="productCategoryId" from-field="parameters.productCategoryId"/>
+        	   <set field="productTypeId" value="RAW_MATERIAL"/>        	   
+        	   <entity-one entity-name="GoodIdentification" value-field="zuczugGoodID">
+        	   		<field-map field-name="goodIdentificationTypeId" value="ZUCZUG_CODE"/>
+        	   		<field-map field-name="productId" from-field="productId"/>
+        	   </entity-one>
+        	   <set field="idValue" from-field="parameters.idValue"/> 
+        	   <set field="zuczugId" from-field="zuczugGoodID.idValue"/>
+               <set field="product" from-field="product"/>
+               <set field="errorMsg" from-field="parameters.errorMsg"/>
+        	   <set field="isVirtual" from-field="parameters.isVirtual"/>
+               <script location="component://zuczugcommon/webapp/zuczugcommon/WEB-INF/actions/GetProductAllFeature.groovy"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="ProductEditCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                   <decorator-section name="body">  
+	                   <screenlet title="生成变型商品">
+	                   		<container>
+			                   	<section>
+			                        <widgets>
+			                        	<platform-specific>
+											<html><html-template location="component://zuczugcommon/webapp/zuczugcommon/html/VirtualToVariantAssoc.ftl"/></html>
+										</platform-specific>
+			                        </widgets>
+			                    </section>	                  		
+		                   </container>  
+		               </screenlet> 
+		               <screenlet title="物料变型商品">
+		               		<include-form name="listProductVariantAssoc" location="component://zuczugcommon/widget/ZuczugCommonForms.xml"/>
+		               </screenlet>              	                         
+                   </decorator-section>
+               </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="AccessoryProofing">
+		<section>
+			<actions>
+				<property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+				<set field="titleProperty" value="EditMaterialProduct"/>
+				<set field="headerItem" value="FindMaterialProduct"/>
+				<set field="tabButtonItem" value="AccessoryProofing"/>               
+				<set field="labelTitleProperty" value="PageTitleEditMaterialProduct"/>
+				<property-map resource="OrderEntityLabels" map-name="uiLabelMap" global="true"/>
+				<property-map resource="OrderUiLabels" map-name="uiLabelMap" global="true"/>
+				<set field="idValue" from-field="parameters.idValue"/>   
+                <set field="productId" from-field="parameters.productId"/>  
+                <set field="isVirtual" from-field="parameters.isVirtual"/> 
+				<set field="appStatusId" from-field="parameters.statusId" />
+				<set field="layoutSettings.javaScripts[]" value="/zuczugcommon/upload/plugins/validate/additional-methods.js" global="true"/>
+				<entity-one entity-name="OrderHeader" value-field="oheader">
+					<field-map field-name="orderId" from-field="parameters.orderId"/>
+				</entity-one>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+					<decorator-section name="body">						
+						<link target="AddAccessoryProofing?productId=${parameters.productId}&amp;idValue=${parameters.idValue}&amp;isVirtual=${parameters.isVirtual}" text="${uiLabelMap.AddAccessoryProofing}" style="buttontext"></link>
+						<screenlet id="searchOptions" name="findScreenlet" collapsible="true" save-collapsed="true" initially-collapsed="true" title="${uiLabelMap.CommonSearchOptions}">
+		                    <container id="search-options">
+		                        <include-form name="SearchAccessoryProofing" location="component://zuczugcommon/widget/ZuczugCommonForms.xml"/>
+		                    </container>
+		                </screenlet>
+		                
+		                <screenlet id="search-results" title="${uiLabelMap.ListAccessoryProofing}">
+		                    <container id="search-results">
+		                        <include-form name="ListAccessoryProofing" location="component://zuczugcommon/widget/ZuczugCommonForms.xml"/>
+		                    </container>
+		                </screenlet>
+						
+						<section>
+							<condition>
+								<and>
+									<not><if-empty field="oheader"/></not>
+									<if-compare operator="equals" value="ORDER_APPROVED" field="oheader.statusId"/>
+									<if-empty field="appStatusId"/>
+								</and>
+							</condition>
+							<widgets>
+								<screenlet title="${uiLabelMap.ReceiveProofing}">
+									<include-form name="receiveShipForm" location="component://zuczugcommon/widget/ZuczugCommonForms.xml"/>
+								</screenlet>
+							</widgets>
+						</section>
+                   	</decorator-section>
+               	</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	
+	<screen name="AddAccessoryProofing">
+		<section>
+			<actions>
+				<property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+				<set field="titleProperty" value="EditMaterialProduct"/>
+				<set field="headerItem" value="FindMaterialProduct"/>
+				<set field="tabButtonItem" value="AccessoryProofing"/>               
+				<set field="labelTitleProperty" value="PageTitleEditMaterialProduct"/>
+				<property-map resource="OrderEntityLabels" map-name="uiLabelMap" global="true"/>
+				<property-map resource="OrderUiLabels" map-name="uiLabelMap" global="true"/>
+				<set field="productId" from-field="parameters.productId" global="true"/>
+				<set field="layoutSettings.javaScripts[]" value="/zuczugcommon/upload/plugins/validate/additional-methods.js" global="true"/>
+				<entity-one value-field="product" entity-name="Product"></entity-one>
+				<set field="idValue" from-field="parameters.idValue"/>   
+                <set field="productId" from-field="parameters.productId"/>  
+                <set field="isVirtual" from-field="parameters.isVirtual"/> 
+			</actions>
+			<widgets>
+				<decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+					<decorator-section name="body">
+						<screenlet title="${uiLabelMap.AddAccessoryProofing}">
+							<include-form name="EditAccessoryProofing" location="component://haze/widget/AccessoriesPurchaseForms.xml"/>
+						</screenlet>
+                   	</decorator-section>
+               	</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	
+	<screen name="EditVariantProduct">
+       <section>
+           <actions>
+           	   <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+           	   <property-map resource="ZuczugCommonUiLabels" map-name="uiLabelMap" global="true"/>
+               <set field="titleProperty" value="EditAccessoryProduct"/>
+               <set field="headerItem" value="EditAccessoryProduct"/>
+               <set field="tabButtonItem" value="EditAccessoryProduct"/>
+               <set field="idValue" from-field="parameters.idValue"/>   
+               <set field="productId" from-field="parameters.productId"/>           
+               <set field="labelTitleProperty" value="PageTitleEditMaterialProduct"/>
+               <set field="layoutSettings.javaScripts[]" value="/zuczugcommon/upload/plugins/validate/additional-methods.js" global="true"/>
+               <entity-one value-field="product" entity-name="Product">
+               		<field-map field-name="productId" from-field="parameters.productId"/>
+               </entity-one> 
+               <set field="productCategoryId" from-field="parameters.productCategoryId"/>
+               <set field="virtualProductId" from-field="parameters.virtualProductId"/>
+               <set field="formAction" value="updateVariantProductAndFeature"/> 
+               <set field="productTypeId" from-field="parameters.productTypeId"/> 
+               <set field="isVariant" from-field="product.isVariant"/>
+               <set field="isVirtual" from-field="product.isVirtual"/>               
+               <script location="component://zuczugcommon/webapp/zuczugcommon/WEB-INF/actions/GetProductAllFeature.groovy"/>                       
+           </actions>
+           <widgets>
+                <decorator-screen name="ProductEditCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                   <decorator-section name="body">						
+						<screenlet title="${uiLabelMap.PageTitleEditAccessory}">
+							<platform-specific>
+								<html><html-template location="component://haze/webapp/accessoriespurchase/html/EditVariantProduct.ftl"/></html>
+							</platform-specific>
+						</screenlet>
+                   	</decorator-section>
+               	</decorator-screen>
+           </widgets>
+       </section>
+	</screen>
+	
+	<screen name="CreateNewVirtualProduct">
+		<section>
+			<actions>
+				<set field="titleProperty" value="EditAccessorySeason"/>
+				<set field="headerItem" value="EditAccessorySeason"/>
+				<set field="tabButtonItem" value="EditAccessorySeason"/>               
+				<set field="labelTitleProperty" value="PageTitleEditMaterialProduct"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+					<decorator-section name="body">
+						<screenlet title="分类列表">
+							<include-form name="selectProductCategory" location="component://zuczugcommon/widget/ZuczugCommonForms.xml"/>
+						</screenlet>						
+                   	</decorator-section>
+               	</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	
+	<screen name="CreateVirtualProduct">
+		<section>
+           <actions>
+               <set field="titleProperty" value="EditVirtualAccessoryProduct"/>
+               <set field="headerItem" value="EditVirtualAccessoryProduct"/>
+               <set field="tabButtonItem" value="EditVirtualAccessoryProduct"/>              
+               <set field="labelTitleProperty" value="PageTitleFindQuote"/>
+               <set field="productId" from-field="parameters.productId"/>
+               <set field="virtualProductId" from-field="parameters.virtualProductId" global="true"/>
+        	   <set field="formAction" value="createVirtualAccessory"/>
+        	   <set field="productCategoryId" from-field="parameters.productCategoryId"/>
+        	   <set field="errorMsg" from-field="errorMsg"/>
+        	   <set field="toVariant" value="N"/>
+        	   <set field="toVirtual" value="Y"/>
+        	   <set field="zuczugId" from-field="parameters.zuczugId"/>
+        	   <set field="internalName" from-field="parameters.internalName"/>
+        	   <set field="comments" from-field="parameters.comments"/>
+        	   <set field="module" value="HAZE"/>  
+               <script location="component://zuczugcommon/webapp/zuczugcommon/WEB-INF/actions/GetProductAllFeature.groovy"/>
+           </actions>
+           <widgets>
+               <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                   <decorator-section name="body">                   	  
+                       <platform-specific>
+							<html>
+								<html-template location="component://zuczugcommon/webapp/zuczugcommon/html/EditVariantProduct.ftl"/>
+							</html>
+						</platform-specific>
+												
+                   </decorator-section>
+               </decorator-screen>
+           </widgets>
+		</section>
+	</screen>
+	
+	<screen name="FindAccessoryQuoteKeyWord">
+		<section>
+           <actions>
+               <set field="titleProperty" value="FindAccessoryQuoteKeyWord"/>
+               <set field="headerItem" value="FindAccessoryQuoteKeyWord"/>
+               <set field="tabButtonItem" value="FindAccessoryQuoteKeyWord"/>               
+               <set field="labelTitleProperty" value="PageTitleFindQuote"/>               
+           </actions>
+           <widgets>
+               <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                   <decorator-section name="body">                  		
+                        <container style="button-bar">
+                            <link  text="新建物料" target="CreateNewVirtualProduct" style="buttontext create " ></link>                            
+                        </container>
+                        <include-menu location="component://haze/widget/AccessoriesPurchaseMenus.xml" name="FindAccessoryQuoteTabBar"/>
+                        <decorator-screen name="FindScreenDecorator" location="component://common/widget/CommonScreens.xml">
+                   			<decorator-section name="search-options">
+                        		<include-form name="FindAccessoryQuoteKeyWord" location="component://zuczugcommon/widget/ZuczugCommonForms.xml"/>
+                   			</decorator-section>
+                   			<decorator-section name="search-results">
+                         		<include-form name="ListKeyWordAccessoryQuote" location="component://zuczugcommon/widget/ZuczugCommonForms.xml"/>                         	
+                   			</decorator-section>
+                   		</decorator-screen>                
+                   </decorator-section>
+               </decorator-screen>
+           </widgets>
+		</section>
+	</screen>
+	
+	<screen name="FindAccessoryQuoteCategory">
+		<section>
+           <actions>
+               <set field="titleProperty" value="FindAccessoryQuoteCategory"/>
+               <set field="headerItem" value="FindAccessoryQuoteCategory"/>
+               <set field="tabButtonItem" value="FindAccessoryQuoteCategory"/>               
+               <set field="labelTitleProperty" value="PageTitleFindQuote"/>               
+           </actions>
+           <widgets>
+               <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                   <decorator-section name="body">                  		
+                        <container style="button-bar">
+                            <link  text="新建物料" target="CreateNewVirtualProduct" style="buttontext create "></link>                            
+                        </container>
+                        <include-menu location="component://haze/widget/AccessoriesPurchaseMenus.xml" name="FindAccessoryQuoteTabBar"/>
+                        <decorator-screen name="FindScreenDecorator" location="component://common/widget/CommonScreens.xml">
+                   			<decorator-section name="search-options">
+                        		<include-form name="FindAccessoryCategoryQuote" location="component://zuczugcommon/widget/ZuczugCommonForms.xml"/>
+                   			</decorator-section>
+                   			<decorator-section name="search-results">
+                         		<include-form name="ListCategoryAccessoryQuote" location="component://zuczugcommon/widget/ZuczugCommonForms.xml"/>                         	
+                   			</decorator-section>
+                   		</decorator-screen>                       
+                   </decorator-section>
+               </decorator-screen>
+           </widgets>
+		</section>
+	</screen>
+	
+	<screen name="EditProductFacilities">
+        <section>
+            <actions>
+                <set field="titleProperty" value="PageTitleEditProductFacilities"/>
+                <set field="tabButtonItem" value="EditProductFacilities"/>
+                <set field="labelTitleProperty" value="ProductFacilities"/>
+				<set field="idValue" from-field="parameters.idValue"/>   
+                <set field="productId" from-field="parameters.productId"/>           
+                <set field="labelTitleProperty" value="PageTitleEditMaterialProduct"/>
+                <set field="layoutSettings.javaScripts[]" value="/zuczugcommon/upload/plugins/validate/additional-methods.js" global="true"/>
+                <entity-one value-field="product" entity-name="Product">
+               		<field-map field-name="productId" from-field="parameters.productId"/>
+                </entity-one> 
+                <set field="productCategoryId" from-field="parameters.productCategoryId"/>
+                <set field="productTypeId" from-field="parameters.productTypeId"/> 
+                <set field="isVariant" from-field="product.isVariant"/>
+                <set field="isVirtual" from-field="product.isVirtual"/>
+                <entity-condition entity-name="ProductFacility" list="productFacilities">
+                    <condition-expr field-name="productId" from-field="parameters.productId"/>
+                    <order-by field-name="facilityId"/>
+                </entity-condition>
+                <entity-condition entity-name="Facility" list="facilities">
+                    <order-by field-name="facilityName"/>
+                </entity-condition>
+            </actions>
+            <widgets>
+                 <decorator-screen name="ProductEditCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">                   					
+                        <screenlet title="${uiLabelMap.PageTitleEditProductFacilities}">
+                            <include-form name="UpdateProductFacilities" location="component://product/widget/catalog/ProductForms.xml"/>
+                        </screenlet>
+                        <screenlet title="${uiLabelMap.ProductAddFacility}">
+                            <include-form name="AddProductFacility" location="component://product/widget/catalog/ProductForms.xml"/>
+                        </screenlet>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+</screens>
