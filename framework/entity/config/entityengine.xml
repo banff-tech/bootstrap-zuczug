@@ -342,7 +342,7 @@ access. For a detailed description see the core/docs/entityconfig.html file.
         <read-data reader-name="ext"/>
         <inline-jdbc
                 jdbc-driver="com.mysql.jdbc.Driver"
-                jdbc-uri="jdbc:mysql://127.0.0.1/ofbiz-bootstarp?autoReconnect=true&amp;characterEncoding=UTF-8"
+                jdbc-uri="jdbc:mysql://127.0.0.1/zuczugprod?autoReconnect=true&amp;characterEncoding=UTF-8"
                 jdbc-username="root"
                 jdbc-password="root"
                 isolation-level="ReadCommitted"
@@ -373,7 +373,7 @@ access. For a detailed description see the core/docs/entityconfig.html file.
         <read-data reader-name="ext"/>
         <inline-jdbc
                 jdbc-driver="com.mysql.jdbc.Driver"
-                jdbc-uri="jdbc:mysql://127.0.0.1/ofbiz-bootstarp?autoReconnect=true&amp;characterEncoding=UTF-8"
+                jdbc-uri="jdbc:mysql://127.0.0.1/zuczugprod?autoReconnect=true&amp;characterEncoding=UTF-8"
                 jdbc-username="root"
                 jdbc-password="root"
                 isolation-level="ReadCommitted"
@@ -404,7 +404,7 @@ access. For a detailed description see the core/docs/entityconfig.html file.
         <read-data reader-name="ext"/>
         <inline-jdbc
                 jdbc-driver="com.mysql.jdbc.Driver"
-                jdbc-uri="jdbc:mysql://127.0.0.1/ofbiz-bootstarp?autoReconnect=true&amp;characterEncoding=UTF-8"
+                jdbc-uri="jdbc:mysql://127.0.0.1/zuczugprod?autoReconnect=true&amp;characterEncoding=UTF-8"
                 jdbc-username="root"
                 jdbc-password="root"
                 isolation-level="ReadCommitted"

@@ -170,53 +170,55 @@
     <src_description expected_position="167">
       <src_folder value="GROOVY_SUPPORT" expected_position="0" />
       <src_folder value="file://$MODULE_DIR$/applications/accounting/src" expected_position="168" />
-      <src_folder value="file://$MODULE_DIR$/applications/content/src" expected_position="169" />
-      <src_folder value="file://$MODULE_DIR$/applications/manufacturing/src" expected_position="170" />
-      <src_folder value="file://$MODULE_DIR$/applications/marketing/src" expected_position="171" />
-      <src_folder value="file://$MODULE_DIR$/applications/order/src" expected_position="172" />
-      <src_folder value="file://$MODULE_DIR$/applications/party/src" expected_position="173" />
-      <src_folder value="file://$MODULE_DIR$/applications/product/src" expected_position="174" />
-      <src_folder value="file://$MODULE_DIR$/applications/securityext/src" expected_position="175" />
-      <src_folder value="file://$MODULE_DIR$/applications/humanres/src" expected_position="176" />
-      <src_folder value="file://$MODULE_DIR$/applications/workeffort/src" expected_position="177" />
-      <src_folder value="file://$MODULE_DIR$/framework/appserver/src" expected_position="178" />
-      <src_folder value="file://$MODULE_DIR$/framework/base/build/gen-src/javacc" expected_position="179" />
-      <src_folder value="file://$MODULE_DIR$/framework/base/src" expected_position="180" />
-      <src_folder value="file://$MODULE_DIR$/framework/bi/src" expected_position="181" />
-      <src_folder value="file://$MODULE_DIR$/framework/birt/src" expected_position="182" />
-      <src_folder value="file://$MODULE_DIR$/framework/catalina/src" expected_position="183" />
-      <src_folder value="file://$MODULE_DIR$/framework/common/src" expected_position="184" />
-      <src_folder value="file://$MODULE_DIR$/framework/datafile/src" expected_position="185" />
-      <src_folder value="file://$MODULE_DIR$/framework/entity/src" expected_position="186" />
-      <src_folder value="file://$MODULE_DIR$/framework/entityext/src" expected_position="187" />
-      <src_folder value="file://$MODULE_DIR$/framework/geronimo/src" expected_position="188" />
-      <src_folder value="file://$MODULE_DIR$/framework/jetty/src" expected_position="189" />
-      <src_folder value="file://$MODULE_DIR$/framework/minilang/src" expected_position="190" />
-      <src_folder value="file://$MODULE_DIR$/framework/security/src" expected_position="191" />
-      <src_folder value="file://$MODULE_DIR$/framework/service/src" expected_position="192" />
-      <src_folder value="file://$MODULE_DIR$/framework/sql/src" expected_position="193" />
-      <src_folder value="file://$MODULE_DIR$/framework/sql/build/gen-src/javacc" expected_position="194" />
-      <src_folder value="file://$MODULE_DIR$/framework/start/src" expected_position="195" />
-      <src_folder value="file://$MODULE_DIR$/framework/testtools/src" expected_position="196" />
-      <src_folder value="file://$MODULE_DIR$/framework/webapp/src" expected_position="197" />
-      <src_folder value="file://$MODULE_DIR$/framework/webtools/src" expected_position="198" />
-      <src_folder value="file://$MODULE_DIR$/framework/widget/src" expected_position="199" />
-      <src_folder value="file://$MODULE_DIR$/specialpurpose/assetmaint/src" expected_position="200" />
-      <src_folder value="file://$MODULE_DIR$/specialpurpose/ebay/src" expected_position="201" />
-      <src_folder value="file://$MODULE_DIR$/specialpurpose/ebaystore/src" expected_position="202" />
-      <src_folder value="file://$MODULE_DIR$/specialpurpose/ecommerce/src" expected_position="203" />
-      <src_folder value="file://$MODULE_DIR$/specialpurpose/example/src" expected_position="204" />
-      <src_folder value="file://$MODULE_DIR$/specialpurpose/googlebase/src" expected_position="205" />
-      <src_folder value="file://$MODULE_DIR$/specialpurpose/googlecheckout/src" expected_position="206" />
-      <src_folder value="file://$MODULE_DIR$/specialpurpose/hhfacility/src" expected_position="207" />
-      <src_folder value="file://$MODULE_DIR$/specialpurpose/ldap/src" expected_position="208" />
-      <src_folder value="file://$MODULE_DIR$/specialpurpose/oagis/src" expected_position="209" />
-      <src_folder value="file://$MODULE_DIR$/specialpurpose/pos/src" expected_position="210" />
-      <src_folder value="file://$MODULE_DIR$/specialpurpose/projectmgr/src" expected_position="211" />
-      <src_folder value="file://$MODULE_DIR$/specialpurpose/shark/src" expected_position="212" />
-      <src_folder value="file://$MODULE_DIR$/specialpurpose/webpos/src" expected_position="213" />
-      <src_folder value="file://$MODULE_DIR$/specialpurpose/workflow/src" expected_position="214" />
-      <src_folder value="GROOVY_DSL_SUPPORT" expected_position="215" />
+      <src_folder value="file://$MODULE_DIR$/applications/content/src" expected_position="171" />
+      <src_folder value="file://$MODULE_DIR$/applications/manufacturing/src" expected_position="172" />
+      <src_folder value="file://$MODULE_DIR$/applications/marketing/src" expected_position="173" />
+      <src_folder value="file://$MODULE_DIR$/applications/order/src" expected_position="174" />
+      <src_folder value="file://$MODULE_DIR$/applications/party/src" expected_position="175" />
+      <src_folder value="file://$MODULE_DIR$/applications/product/src" expected_position="176" />
+      <src_folder value="file://$MODULE_DIR$/applications/securityext/src" expected_position="177" />
+      <src_folder value="file://$MODULE_DIR$/applications/humanres/src" expected_position="178" />
+      <src_folder value="file://$MODULE_DIR$/applications/workeffort/src" expected_position="179" />
+      <src_folder value="file://$MODULE_DIR$/framework/appserver/src" expected_position="180" />
+      <src_folder value="file://$MODULE_DIR$/framework/base/build/gen-src/javacc" expected_position="181" />
+      <src_folder value="file://$MODULE_DIR$/framework/base/src" expected_position="182" />
+      <src_folder value="file://$MODULE_DIR$/framework/bi/src" expected_position="183" />
+      <src_folder value="file://$MODULE_DIR$/framework/birt/src" expected_position="184" />
+      <src_folder value="file://$MODULE_DIR$/framework/catalina/src" expected_position="185" />
+      <src_folder value="file://$MODULE_DIR$/framework/common/src" expected_position="186" />
+      <src_folder value="file://$MODULE_DIR$/framework/datafile/src" expected_position="187" />
+      <src_folder value="file://$MODULE_DIR$/framework/entity/src" expected_position="188" />
+      <src_folder value="file://$MODULE_DIR$/framework/entityext/src" expected_position="189" />
+      <src_folder value="file://$MODULE_DIR$/framework/geronimo/src" expected_position="190" />
+      <src_folder value="file://$MODULE_DIR$/framework/jetty/src" expected_position="191" />
+      <src_folder value="file://$MODULE_DIR$/framework/minilang/src" expected_position="192" />
+      <src_folder value="file://$MODULE_DIR$/framework/security/src" expected_position="193" />
+      <src_folder value="file://$MODULE_DIR$/framework/service/src" expected_position="194" />
+      <src_folder value="file://$MODULE_DIR$/framework/sql/src" expected_position="195" />
+      <src_folder value="file://$MODULE_DIR$/framework/sql/build/gen-src/javacc" expected_position="196" />
+      <src_folder value="file://$MODULE_DIR$/framework/start/src" expected_position="197" />
+      <src_folder value="file://$MODULE_DIR$/framework/testtools/src" expected_position="198" />
+      <src_folder value="file://$MODULE_DIR$/framework/webapp/src" expected_position="199" />
+      <src_folder value="file://$MODULE_DIR$/framework/webtools/src" expected_position="200" />
+      <src_folder value="file://$MODULE_DIR$/framework/widget/src" expected_position="201" />
+      <src_folder value="file://$MODULE_DIR$/specialpurpose/assetmaint/src" expected_position="202" />
+      <src_folder value="file://$MODULE_DIR$/specialpurpose/ebay/src" expected_position="203" />
+      <src_folder value="file://$MODULE_DIR$/specialpurpose/ebaystore/src" expected_position="204" />
+      <src_folder value="file://$MODULE_DIR$/specialpurpose/ecommerce/src" expected_position="205" />
+      <src_folder value="file://$MODULE_DIR$/specialpurpose/example/src" expected_position="206" />
+      <src_folder value="file://$MODULE_DIR$/specialpurpose/googlebase/src" expected_position="207" />
+      <src_folder value="file://$MODULE_DIR$/specialpurpose/googlecheckout/src" expected_position="208" />
+      <src_folder value="file://$MODULE_DIR$/specialpurpose/hhfacility/src" expected_position="209" />
+      <src_folder value="file://$MODULE_DIR$/specialpurpose/ldap/src" expected_position="210" />
+      <src_folder value="file://$MODULE_DIR$/specialpurpose/oagis/src" expected_position="211" />
+      <src_folder value="file://$MODULE_DIR$/specialpurpose/pos/src" expected_position="212" />
+      <src_folder value="file://$MODULE_DIR$/specialpurpose/projectmgr/src" expected_position="213" />
+      <src_folder value="file://$MODULE_DIR$/specialpurpose/shark/src" expected_position="214" />
+      <src_folder value="file://$MODULE_DIR$/specialpurpose/webpos/src" expected_position="215" />
+      <src_folder value="file://$MODULE_DIR$/specialpurpose/workflow/src" expected_position="216" />
+      <src_folder value="GROOVY_DSL_SUPPORT" expected_position="217" />
+      <src_folder value="file://$MODULE_DIR$/hot-deploy/zuczugcommon/src" expected_position="169" />
+      <src_folder value="file://$MODULE_DIR$/hot-deploy/haze/src" expected_position="170" />
     </src_description>
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="false">
@@ -270,6 +272,8 @@
       <sourceFolder url="file://$MODULE_DIR$/specialpurpose/shark/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/specialpurpose/webpos/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/specialpurpose/workflow/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/hot-deploy/zuczugcommon/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/hot-deploy/haze/src" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="module-library">
