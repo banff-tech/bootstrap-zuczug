@@ -31,6 +31,7 @@ under the License.
 
     <available file="applications/build.xml" property="applications.present"/>
     <available file="specialpurpose/build.xml" property="specialpurpose.present"/>
+    <available file="hot-deploy/build.xml" property="hd.present"/>
 
     <!-- ================================================================== -->
     <!-- Initialization of all property settings                            -->
