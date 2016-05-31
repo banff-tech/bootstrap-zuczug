@@ -8,7 +8,7 @@ framework/entity/lib/jdbc/*.jar
 hot-deploy/*/build
 specialpurpose/*/build
 applications/content/index/
-bin/
+bin/*
 ofbiz.jar
 changelog
 runtime/git-rebase/*
@@ -34,6 +34,7 @@ themes/flatgrey/webapp/flatgrey/javascript-min.css
 themes/flatgrey/webapp/flatgrey/js/application-min.js
 themes/flatgrey/webapp/flatgrey/maincss-min.css
 themes/flatgrey/webapp/flatgrey/mainrtl-min.css
+*.class
 .pc
 .DS_Store
 .idea
