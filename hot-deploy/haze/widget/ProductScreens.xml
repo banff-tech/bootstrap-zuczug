@@ -884,7 +884,7 @@
 		                   </container>  
 		               </screenlet> 
 		               <screenlet title="物料变型商品">
-		               		<include-form name="listProductVariantAssoc" location="component://zuczugcommon/widget/ZuczugCommonForms.xml"/>
+		               		<include-form name="listProductVariantAssoc" location="component://zuczugcommon/widget/ZuczugCommonProductForms.xml"/>
 		               </screenlet>              	                         
                    </decorator-section>
                </decorator-screen>

@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simple-methods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/simple-methods.xsd">
+                
+     <simple-method method-name="createAccessoriesCategory" login-required="true" short-description="createAccessoriesCategory">
+     	<if-compare operator="equals" value="create" field="parameters.updateMode">
+     		<set field="isRepeat" value="false"/>
+     		<entity-and list="prodCatalogCategorys" entity-name="ProdCatalogCategory">
+     			<field-map field-name="prodCatalogId" value="MATERIAL_CATALOG"/>
+     		</entity-and>
+     		<iterate entry="prodCatalogCategory" list="prodCatalogCategorys">     			
+		     	<entity-one value-field="productCategory" entity-name="ProductCategory">
+		     		<field-map field-name="productCategoryId" from-field="prodCatalogCategory.productCategoryId"/>
+		     	</entity-one>
+		     	<if-compare operator="equals" value="${productCategory.categoryName}" field="parameters.categoryName">
+		     		<set field="isRepeat" value="true"/>
+		     	</if-compare>
+     		</iterate>
+	     	<if-compare operator="equals" value="false" field="isRepeat">
+	     		<clear-field field="inMap"/>
+	     		<sequenced-id sequence-name="ProductCategory" field="productCategoryId"/>
+		     	<set field="inMap.productCategoryId" from-field="productCategoryId"/>
+		     	<set field="inMap.categoryName" from-field="parameters.categoryName"/>
+		     	<set field="inMap.description" from-field="parameters.description"/>
+		     	<set field="inMap.productCategoryTypeId" from-field="parameters.productCategoryTypeId"/>
+		     	<call-service service-name="createProductCategory" in-map-name="inMap"></call-service>	     	
+		     	<clear-field field="inMap"/>
+		     	<set field="inMap.prodCatalogCategoryTypeId" value="PCCT_OTHER_SEARCH"/>
+		     	<set field="inMap.prodCatalogId" value="MATERIAL_CATALOG"/>
+		     	<set field="inMap.productCategoryId" from-field="productCategoryId"/>
+		     	<call-service service-name="addProductCategoryToProdCatalog" in-map-name="inMap"></call-service>
+		    <else>
+		    	<add-error><fail-message message="创建失败:分类名“${parameters.categoryName}”已存在。"/></add-error>
+		    	<check-errors/>
+		    </else>
+	     	</if-compare>   		
+	    <else>
+	    	<entity-one value-field="productCategory" entity-name="ProductCategory">     		
+	     		<field-map field-name="productCategoryId" from-field="parameters.productCategoryId"/>
+	     	</entity-one>
+	     	<if-compare operator="not-equals" value="${productCategory.categoryName}" field="parameters.categoryName">
+	     		<entity-and list="productCategorys" entity-name="ProductCategory">     		
+		     		<field-map field-name="categoryName" from-field="parameters.categoryName"/>
+		     	</entity-and>		     	
+		     	<if-empty field="productCategorys">
+		     		<clear-field field="inMap"/>
+			     	<set field="inMap.productCategoryId" from-field="parameters.productCategoryId"/>
+			     	<set field="inMap.categoryName" from-field="parameters.categoryName"/>
+			     	<set field="inMap.description" from-field="parameters.description"/>
+			     	<set field="inMap.productCategoryTypeId" value="MATERIALS_CATEGORY"/>
+			     	<call-service service-name="updateProductCategory" in-map-name="inMap"></call-service>
+			    <else>
+			    	<add-error><fail-message message="更新失败:分类名“${parameters.categoryName}”已存在。"/></add-error>
+			    	<check-errors/>
+			    </else>	 
+		     	</if-empty>
+		     <else>
+		     	<clear-field field="inMap"/>
+			    <set field="inMap.productCategoryId" from-field="parameters.productCategoryId"/>
+			    <set field="inMap.categoryName" from-field="parameters.categoryName"/>
+			    <set field="inMap.description" from-field="parameters.description"/>
+			    <set field="inMap.productCategoryTypeId" value="MATERIALS_CATEGORY"/>
+			    <call-service service-name="updateProductCategory" in-map-name="inMap"></call-service>
+		    </else>	     		
+	     	</if-compare>	    	   	
+	    </else>
+     	</if-compare>
+     </simple-method>
+     
+      <simple-method method-name="removeAccessoryProductBom" login-required="true" short-description="removeAccessoryProductBom">
+      		<clear-field field="inMap"/>
+	        <set field="inMap.productId" from-field="parameters.variantProductId"/>
+	        <set field="inMap.productIdTo" from-field="parameters.productIdTo"/>
+	        <set field="inMap.fromDate" from-field="parameters.fromDate"/>
+	        <set field="inMap.productAssocTypeId" value="ENGINEER_COMPONENT"/>
+	        <call-service service-name="deleteProductAssoc" in-map-name="inMap"/>
+	        <check-errors/> 
+      </simple-method>
+      
+      <simple-method method-name="thruProductDate" login-required="true" short-description="thruProductDate">
+      		<entity-one value-field="product" entity-name="Product">
+      			<field-map field-name="productId" from-field="parameters.productId"/>
+      		</entity-one>
+      		<set field="product.productTypeId" value="CANCELED"/>
+      		<store-value value-field="product"/>
+      </simple-method>
+      
+     <simple-method method-name="updateProductAndFeature" login-required="true" short-description="" >
+		<clear-field field="inMap"/>
+        <set field="inMap.productId" from-field="parameters.productId"/>
+        <set field="inMap.internalName" from-field="parameters.internalName"/>
+        <set field="inMap.isVirtual" from-field="parameters.isVirtual"/>
+        <set field="inMap.isVariant" from-field="parameters.isVariant"/>
+        <set field="inMap.productTypeId" from-field="parameters.productTypeId"/>
+        <set field="inMap.description" from-field="parameters.description" default-value=" "/>
+        <set field="inMap.comments" from-field="parameters.comments"/>
+        <set field="inMap.longDescription" from-field="parameters.longDescription"/>
+        <set field="inMap.quantityUomId" from-field="parameters.quantityUomId"/>
+        <set field="inMap.widthUomId" from-field="parameters.widthUomId"/>
+        <set field="inMap.productWidth" from-field="parameters.productWidth"/>
+        <set field="inMap.productWeight" from-field="parameters.productWeight"/>
+       	<set field="inMap.primaryProductCategoryId" from-field="parameters.primaryProductCategoryId"/>
+        <call-service service-name="updateProduct" in-map-name="inMap"/>
+        <check-errors/> 
+
+		<entity-condition entity-name="ProductAssoc" list="productAssocList" filter-by-date="true">
+			<condition-list combine="and">
+				<condition-expr field-name="productId" from-field="parameters.productId"/>
+				<condition-expr field-name="productAssocTypeId" value="PRODUCT_VARIANT"/>
+			</condition-list>
+		</entity-condition>
+        <iterate list="productAssocList" entry="productAssoc">
+			<clear-field field="inMap"/>
+	        <set field="inMap.variantProductId" from-field="productAssoc.productIdTo"/>
+	        <set field="inMap.productId" from-field="parameters.productId"/>
+	        <log level="info" message="${productAssoc.productIdTo}"></log>       
+	        <call-service service-name="createOrUpdateVariantProduct" in-map-name="inMap"/>
+	        <check-errors/>  
+	    </iterate> 
+    
+	    <entity-condition entity-name="ProductFeatureAndAppl" list="productFeatureAndAppls">
+	    	<condition-list combine="and">
+	        	<condition-expr field-name="productId" from-field="parameters.productId"/>
+	            <condition-expr field-name="productFeatureTypeId" value="FABRIC_FEATURE"/>
+	        </condition-list>
+	    </entity-condition>
+	    <first-from-list entry="productFeatureAndAppl" list="productFeatureAndAppls"/>
+		<log level="info" message="${parameters.productId}, ${parameters.productFeatureId}, ${productFeatureAndAppl.fromDate}"/>
+		<if-not-empty field="productFeatureAndAppl">
+			<clear-field field="inMap"/>
+	        <set field="inMap.productId" from-field="parameters.productId"/>
+	        <set field="inMap.productFeatureId" from-field="productFeatureAndAppl.productFeatureId"/>
+	        <set field="inMap.fromDate" from-field="productFeatureAndAppl.fromDate"/>
+	        <call-service service-name="removeStandardFeatureFromProdAndVariant" in-map-name="inMap"/>
+	        <check-errors/> 
+	    </if-not-empty>
+        <if-not-empty field="parameters.productFeatureId">
+			<clear-field field="inMap"/>
+			<set field="inMap.productFeatureApplTypeId" from-field="parameters.productFeatureApplTypeId"/>
+	        <set field="inMap.productId" from-field="parameters.productId"/>
+	        <set field="inMap.productFeatureId" from-field="parameters.productFeatureId"/>
+	        <call-service service-name="applyFeatureToProduct" in-map-name="inMap"/>
+	        <check-errors/> 
+        </if-not-empty>
+		<clear-field field="inMap"/>
+		<!-- 查询商品的素然物料编号 -->
+		<entity-and list="productIdValues" entity-name="GoodIdentification">
+			<field-map field-name="productId" from-field="parameters.productId"/>
+			<field-map field-name="goodIdentificationTypeId" value="ZUCZUG_CODE"/>
+   			<field-map field-name="idValue" from-field="parameters.idValue"/>
+		</entity-and>
+		<first-from-list entry="productIdValue" list="productIdValues"/>
+		<!-- 判断有没有更改 -->
+		<if-compare operator="not-equals" type="String" value="${parameters.idValue}" field="productIdValue.idValue">			
+			<entity-and list="idValueList" entity-name="GoodIdentification">
+	   			<field-map field-name="goodIdentificationTypeId" value="ZUCZUG_CODE"/>
+	   			<field-map field-name="idValue" from-field="parameters.idValue"/>
+	   		</entity-and>
+	   		<!-- 去重 -->
+	   		<if-empty field="idValueList">
+	   			<call-simple-method method-name="updateProductZuczugCode" xml-resource="component://accessoriespurchase/script/AccessoriesPurchaseService.xml"/>
+	   			<set field="idValueRepeat" value="false"/>
+	   			
+	   		<else>
+	   			<set field="idValueRepeat" value="true"/>	   			
+	    	</else>
+	   		</if-empty>
+		</if-compare>		
+			
+        <set field="inMap.virtualProductId" from-field="parameters.productId"/>	
+        <call-service service-name="copyStandardFeaturesToVariants" in-map-name="inMap"/>
+        
+        <call-class-method method-name="updateProductDescription" class-name="com.zuczug.accessoriespurchase.AccessoriesPurchaseServices">
+        	<field field="parameters.productId" type="String"/>
+        	<field field="parameters.primaryProductCategoryId" type="String"/>
+        	<field field="delegator" type="org.ofbiz.entity.Delegator"/>
+    		<field field="dispatcher" type="org.ofbiz.service.LocalDispatcher"/>
+        </call-class-method>
+        <field-to-result field="idValueRepeat"/> 
+        
+    </simple-method>
+    
+    <simple-method method-name="updateProductZuczugCode" short-description="更新素然物料编号">
+		<clear-field field="inMap"/>
+		<!-- 更新素然物料编号 -->
+    	<if-not-empty field="parameters.idValue">   		
+   			<entity-one value-field="goodId" entity-name="GoodIdentification">
+    			<field-map field-name="goodIdentificationTypeId" value="ZUCZUG_CODE"/>
+    			<field-map field-name="productId" from-field="parameters.productId"/>
+    		</entity-one>
+    		<if-not-empty field="goodId">
+    			<set field="goodId.idValue" from-field="parameters.idValue"/>
+    			<set-service-fields service-name="updateZuczugCodeGoodIdentification" to-map="inMap" map="goodId"/>
+    			<call-service service-name="updateZuczugCodeGoodIdentification" in-map-name="inMap"></call-service>
+    		<else>
+				<set-service-fields service-name="createZuczugCodeGoodIdentification" to-map="inMap" map="parameters"/>
+    			<set field="inMap.goodIdentificationTypeId" value="ZUCZUG_CODE"/>
+    			<call-service service-name="createZuczugCodeGoodIdentification" in-map-name="inMap"/>
+    		</else>
+    		</if-not-empty>	    	   		
+    	</if-not-empty>
+    	<check-errors></check-errors>
+    	<clear-field field="inMap"/>
+	</simple-method>
+	
+	<simple-method method-name="removeProductCategoryFromProdCatalog" short-description="">
+		<entity-and entity-name="ProductCategoryMember" list="productCategoryMember" filter-by-date="true">
+			<field-map field-name="productCategoryId" from-field="parameters.productCategoryId"></field-map>
+		</entity-and>
+		<if-not-empty field="productCategoryMember">
+			<add-error><fail-message message="删除失败：该分类已关联到商品，无法删除！"/></add-error>
+			<check-errors/>
+		<else>
+			<set field="inMap.fromDate" from-field="parameters.fromDate"/>
+			<set field="inMap.prodCatalogCategoryTypeId" from-field="parameters.prodCatalogCategoryTypeId"/>
+			<set field="inMap.prodCatalogId" from-field="parameters.prodCatalogId"/>
+			<set field="inMap.productCategoryId" from-field="parameters.productCategoryId"/>
+			<call-service service-name="removeProductCategoryFromProdCatalog" in-map-name="inMap"></call-service>
+		</else>
+		</if-not-empty>
+	</simple-method>
+	
+	
+	
+	<simple-method method-name="createProdCatalog" short-description="">
+		<entity-and list="catagorys" entity-name="ProdCatalog">
+			<field-map field-name="catalogName" from-field="parameters.catalogName"/>
+		</entity-and>
+		<if-not-empty field="catagorys">
+			<add-error><fail-message message="该名称目录已存在，请确认"/></add-error>
+			<check-errors/>
+		<else>
+			<call-service service-name="createProdCatalog" in-map-name="parameters"></call-service>
+		</else>
+		</if-not-empty>
+	</simple-method>
+	
+	<simple-method method-name="updateProdCatalog" short-description="">
+		<entity-one value-field="prodCatalog" entity-name="ProdCatalog">
+			<field-map field-name="prodCatalogId" from-field="parameters.prodCatalogId"/>
+		</entity-one>
+		<if-compare operator="not-equals" value="${prodCatalog.catalogName}" field="parameters.catalogName">
+			<entity-and list="catagorys" entity-name="ProdCatalog">
+				<field-map field-name="catalogName" from-field="parameters.catalogName"/>
+			</entity-and>
+			<if-not-empty field="catagorys">
+				<add-error><fail-message message="该名称目录已存在，请确认"/></add-error>
+				<check-errors/>
+			<else>
+				<call-service service-name="updateProdCatalog" in-map-name="parameters"></call-service>
+			</else>
+			</if-not-empty>
+		</if-compare>		
+	</simple-method>
+	
+	<simple-method method-name="createProductToCategory" short-description="">
+		<entity-and list="productCategoryMember" entity-name="ProductCategoryMember">
+			<field-map field-name="productId" from-field="parameters.productId"/>
+			<field-map field-name="productCategoryId" from-field="parameters.createProductCategoryId"/>
+		</entity-and>
+		<if-empty field="productCategoryMember">
+			<now-timestamp field="now"/>
+			<set field="inMap.productId" from-field="parameters.productId"/>
+			<set field="inMap.productCategoryId" from-field="parameters.createProductCategoryId"/>
+			<set field="inMap.fromDate" from-field="now"/>
+			<call-service service-name="safeAddProductToCategory" in-map-name="inMap"></call-service>
+		<else>
+			<add-error ><fail-message message="物料已存在此分类中，请勿重复添加"/></add-error>
+			<check-errors/>
+		</else>
+		</if-empty>
+	</simple-method>
+	
+	<simple-method method-name="changeOrderStatus" short-description="">		
+		<set-service-fields service-name="changeOrderStatus" to-map="inMap" map="parameters"/>
+		<call-service service-name="changeOrderStatus" in-map-name="inMap"></call-service>
+		<check-errors/>
+		<entity-and list="orderItems" entity-name="OrderItem">
+			<field-map field-name="orderId" from-field="parameters.orderId"/>
+			<field-map field-name="orderItemTypeId" value="PRODUCT_ORDER_ITEM"/>
+		</entity-and>
+		<iterate entry="orderItem" list="orderItems">
+			<entity-and list="supplierProducts" entity-name="SupplierProduct">
+				<field-map field-name="productId" from-field="orderItem.productId"/>
+				<field-map field-name="partyId" from-field="parameters.partyId"/>
+			</entity-and>
+			<filter-list-by-date list="supplierProducts" to-list="supplierProducts" from-field-name="availableFromDate" thru-field-name="availableThruDate"/>
+			<first-from-list entry="supplierProduct" list="supplierProducts"/>
+			<clear-field field="inMap"/>
+			<set-service-fields service-name="updateSupplierProduct" to-map="inMap" map="supplierProduct"/>
+			<set field="inMap.lastPrice" from-field="orderItem.unitPrice"/>
+			<call-service service-name="updateSupplierProduct" in-map-name="inMap"></call-service>
+		</iterate>
+		<check-errors/>
+	</simple-method>
+	
+	<simple-method method-name="modifySupplierProduct" login-required="true" short-description="">
+
+	    <entity-condition entity-name="SupplierProduct" list="supplierProducts">
+	    	<condition-list combine="and">
+	        	<condition-expr field-name="productId" from-field="parameters.productId"/>
+	            <condition-expr field-name="partyId" from-field="parameters.partyId"/>
+	        </condition-list>
+	    </entity-condition>
+	    <first-from-list entry="supplierProduct" list="supplierProducts"/>
+	    <set field="mode" value="CREATE"/>
+	    <if-not-empty field="supplierProduct">
+	    	<clear-field field="inMap"/>
+			<set field="inMap.productId" from-field="parameters.productId"/>
+			<set field="inMap.partyId" from-field="parameters.partyId"/>
+			<set field="inMap.availableFromDate" from-field="supplierProduct.availableFromDate"/>
+			<set field="inMap.minimumOrderQuantity" from-field="supplierProduct.minimumOrderQuantity"/>
+			<set field="inMap.currencyUomId" from-field="supplierProduct.currencyUomId"/>
+	        <call-service service-name="removeSupplierProduct" in-map-name="inMap"/>
+	        <check-errors/>
+	        <set field="mode" value="UPDATE"/>
+	    </if-not-empty>
+		<clear-field field="inMap"/>
+		<set field="inMap.productId" from-field="parameters.productId"/>
+		<set field="inMap.partyId" from-field="parameters.partyId"/>
+		<set field="inMap.availableFromDate" from-field="parameters.availableFromDate"/>
+		<set field="inMap.availableThruDate" from-field="parameters.availableThruDate"/>
+		<set field="inMap.minimumOrderQuantity" default-value="0" from-field="parameters.minimumOrderQuantity"/>
+		<set field="inMap.currencyUomId" default-value="CNY" from-field="parameters.currencyUomId"/>
+		<set field="inMap.supplierProductId" from-field="parameters.supplierProductId"/>
+		<set field="inMap.supplierProductName" from-field="parameters.supplierProductName"/>
+		<set field="inMap.standardLeadTimeDays" from-field="parameters.standardLeadTimeDays"/>
+		<set field="inMap.quantityUomId" from-field="parameters.quantityUomId"/>
+		<set field="inMap.lastPrice" from-field="parameters.lastPrice"/>
+		<set field="inMap.comments" from-field="parameters.comments"/>
+		<set field="inMap.shippingPrice" from-field="parameters.shippingPrice"/>
+        <call-service service-name="createSupplierProduct" in-map-name="inMap"/>
+        <check-errors/>  
+		<clear-field field="inMap"/>
+        <set field="inMap.virtualProductId" from-field="parameters.productId"/>
+        <if-compare operator="equals" value="CREATE" field="mode"><!-- 只有新增，就会拷贝供应商 -->
+        	<call-service service-name="copyProductSupplierToVariants" in-map-name="inMap"/>
+        </if-compare>
+        <check-errors/>
+    </simple-method>
+</simple-methods>

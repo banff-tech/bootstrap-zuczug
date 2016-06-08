@@ -573,14 +573,13 @@
     
     
     
-    <form name="lookupSupplier" target="LookupSupplier" title="" type="single"
-        header-row-style="header-row" default-table-style="basic-table">
+    <form name="lookupSupplier" target="LookupSupplier" title="" type="single">
         <!--auto-fields-entity entity-name="SupplierView" default-field-type="find"/-->
         <field name="partyId" title="供应商标识"><text-find/></field>
         <field name="groupName" title="供应商名称"><text-find/></field>
         <field name="description" title="供应商描述"><text-find/></field>
         <field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
-        <field name="submitButton" title="${uiLabelMap.CommonFind}" widget-style="smallSubmit"><submit button-type="button"/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}" widget-area-style="submit"><submit button-type="button"/></field>
     </form>
     
     <form name="listLookupSupplier" list-name="listIt" title="" type="list" paginate-target="LookupSupplier"
@@ -1756,7 +1755,7 @@
         <field name="productCategoryId" title="分类标识"><text-find></text-find></field>
         <field name="categoryName" title="分类名"><text-find></text-find></field>
         <field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
-        <field name="submitButton" title="${uiLabelMap.CommonFind}" widget-style="smallSubmit"><submit button-type="button"/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}" widget-area-style="submit"><submit button-type="button"/></field>
     </form>
     
     <form name="listLookupProductCatalogCategory" list-name="listIt" title="" type="list"

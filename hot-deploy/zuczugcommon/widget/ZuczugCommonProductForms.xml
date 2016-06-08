@@ -2,8 +2,7 @@
 <forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
         xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-form.xsd">
     <form name="listProductVariantAssoc" title="" type="list" list-name="listIt"
-        paginate-target="FindAccessoryCategory" paginate="true" paginate-style="nav-pager"
-        odd-row-style="odd" header-row-style="header-row-2" default-table-style="basic-table hover-bar">
+        paginate-target="FindAccessoryCategory">
         <actions>
         	<set field="virtualProductId" from-field="parameters.productId"/>
         	<set field="productAssocTypeId" value="PRODUCT_VARIANT"/>
@@ -29,7 +28,7 @@
         	<set field="internalName" from-field="product.internalName"/>
         </row-actions>   
         <field name="productIdTo"><hidden value="${productIdTo}"/></field>
-        <field name="idValue" title="素然物料编号">
+        <field name="idValue" title="素然物料编号" title-style="listDisplay">
         	<hyperlink target="EditVariantProduct" description="${idValue}" also-hidden="false" target-window="_blank">
                 <parameter param-name="productId" from-field="productIdTo"/>
                 <parameter param-name="virtualProductId"/>  
@@ -37,10 +36,10 @@
                 <parameter param-name="idValue"/>               
             </hyperlink>
         </field>
-     	<field name="description"><display></display></field>
-        <field name="internalName"  title="名称"><display></display></field> 
-        <field name="fromDate"><display></display></field> 
-        <field name="deleteAssoc" title="删除" widget-style="buttontext">
+     	<field name="description"  title-style="listDisplay"><display></display></field>
+        <field name="internalName"  title="名称" title-style="listDisplay"><display></display></field> 
+        <field name="fromDate" title-style="listDisplay"><display></display></field> 
+        <field name="deleteAssoc" title="删除" widget-style="buttontext" title-style="listDisplay">
         	<hyperlink target="deleteProductAssoc" description="删除">
                 <parameter param-name="productIdTo" from-field="productIdTo"/>
                 <parameter param-name="productId"/>
@@ -50,7 +49,7 @@
                 <parameter param-name="zuczugId"/>              
             </hyperlink>
         </field>
-        <field name="accessoryProofing" title="打样" widget-style="buttontext">
+        <field name="accessoryProofing" title="打样" widget-style="buttontext" title-style="listDisplay">
         	<hyperlink target="AccessoryProofing" description="打样" target-window="_blank">
                 <parameter param-name="productId" from-field="productIdTo"/>
                 <parameter param-name="virtualProductId"/>  

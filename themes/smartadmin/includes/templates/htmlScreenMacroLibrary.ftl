@@ -191,7 +191,7 @@ under the License.
 						<a href="javascript:void(0);" class="button-icon jarviswidget-delete-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Delete"><i class="fa fa-times"></i></a>
 					</div>
 				</#if>
-				<h2>${title}</h2>
+				<div style="margin-left: 10px;"><h2>${title}</h2></div>
 			</header>
 		</#if>
 <div role="content" style="display: block;">

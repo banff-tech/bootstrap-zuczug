@@ -216,17 +216,16 @@
         <field name="fromDate" title="时间"><display/></field>         
     </form>
     
-    <form name="UpdateProductCategoryMember" type="list" target="updateProductToCategory" title="" list-name="productCategoryMembers"
-        odd-row-style="alternate-row" default-table-style="basic-table">
+    <form name="UpdateProductCategoryMember" type="list" target="updateProductToCategory" title="" list-name="productCategoryMembers">
         
         <field name="productId"><hidden/></field>
         <field name="idValue"><hidden value="${parameters.idValue}"/></field>
         <field name="isVirtual"><hidden value="${parameters.isVirtual}"/></field>
-        <field name="productCategoryId" title="分类">
+        <field name="productCategoryId" title="分类" title-style="listDisplay">
             <display-entity entity-name="ProductCategory" also-hidden="true" description="${categoryName}"></display-entity>
         </field>
-        <field name="fromDate" title="起始日期"><display/></field>
-        <field name="deleteLink" title="删除" widget-style="buttontext" use-when="${isUpdate!='Y'}">
+        <field name="fromDate" title="起始日期" title-style="listDisplay"><display/></field>
+        <field name="deleteLink" title="删除" widget-style="buttontext" use-when="${isUpdate!='Y'}" title-style="listDisplay">
             <hyperlink target="deleteProductFromCategory" description="${uiLabelMap.CommonDelete}" also-hidden="false">
                 <parameter param-name="productId"/>
                 <parameter param-name="deleteProductCategoryId" from-field="productCategoryId"/>
@@ -249,11 +248,10 @@
         <field name="thruDate" title="${uiLabelMap.CommonThruDate}" ><hidden/></field>
         <field name="sequenceNum" title="${uiLabelMap.ProductSequenceNum}" ><hidden/></field>
         <field name="quantity" title="${uiLabelMap.ProductQuantity}" ><hidden/></field>
-        <field name="submitButton" title="${uiLabelMap.CommonAdd}" widget-style="smallSubmit"><submit button-type="button"/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonAdd}" widget-area-style="submit"><submit button-type="button"/></field>
     </form>
     
-    <form name="ListSupplierProducts" type="list" target="EditAccessorySuppliers" title="" list-name="listIt"
-        odd-row-style="alternate-row" default-table-style="basic-table">
+    <form name="ListSupplierProducts" type="list" target="EditAccessorySuppliers" title="" list-name="listIt">
         <actions>
         	<set field="pcx.productId" from-field="parameters.productId"/>
             <service service-name="performFind" result-map="result" result-map-list="listIt">
@@ -272,7 +270,7 @@
         </row-actions>
         <field name="idValue"><hidden value="${parameters.idValue}"/></field>
         <field name="isVirtual"><hidden value="${parameters.isVirtual}"/></field>
-        <field name="partyId" title="${uiLabelMap.ProductSupplier}" widget-style="buttontext">
+        <field name="partyId" title="${uiLabelMap.ProductSupplier}" widget-style="buttontext" title-style="listDisplay">
            <hyperlink target="UpdateSupplierProduct" description="${partyId}" also-hidden="false" target-window="_BLANK">
                 <parameter param-name="productId"/>
                 <parameter param-name="partyId"/>
@@ -291,24 +289,24 @@
                 <parameter param-name="isVirtual" value="${parameters.isVirtual}"/>
             </hyperlink>
         </field>
-        <field name="PartyNameStr" title="供应商名称"><display/></field>
-        <field name="supplierProductId" title="供应商产品标识"><display/></field>
-        <field name="supplierProductName" title="${uiLabelMap.supplierProductName}"><display/></field>
-        <field name="minimumOrderQuantity" title="${uiLabelMap.ProductMinimumOrderQuantity}">
+        <field name="PartyNameStr" title="供应商名称" title-style="listDisplay"><display/></field>
+        <field name="supplierProductId" title="供应商产品标识" title-style="listDisplay"><display/></field>
+        <field name="supplierProductName" title="${uiLabelMap.supplierProductName}" title-style="listDisplay"><display/></field>
+        <field name="minimumOrderQuantity" title="${uiLabelMap.ProductMinimumOrderQuantity}" title-style="listDisplay">
             <display/>
         </field>
-        <field name="availableFromDate" title="${uiLabelMap.ProductAvailableFromDate}" sort-field="true"><display type="date" /></field>
+        <field name="availableFromDate" title="${uiLabelMap.ProductAvailableFromDate}" sort-field="true" title-style="listDisplay"><display type="date" /></field>
 
-        <field name="availableThruDate" title="${uiLabelMap.ProductAvailableThruDate}" sort-field="true"><display/></field>
-        <field name="standardLeadTimeDays" title="${uiLabelMap.DeliveryTime}" sort-field="true"><display/></field>
+        <field name="availableThruDate" title="${uiLabelMap.ProductAvailableThruDate}" sort-field="true" title-style="listDisplay"><display/></field>
+        <field name="standardLeadTimeDays" title="${uiLabelMap.DeliveryTime}" sort-field="true" title-style="listDisplay"><display/></field>
         <!--field name="quantityUomId"><display-entity entity-name="Uom" key-field-name="uomId"/></field-->
-        <field name="lastPrice" title="${uiLabelMap.ProductLastPrice}" sort-field="true">
+        <field name="lastPrice" title="${uiLabelMap.ProductLastPrice}" sort-field="true" title-style="listDisplay">
             <display type="currency" currency="${currencyUomId}"/>
         </field>
-        <field name="shippingPrice" title="${uiLabelMap.ProductShippingPrice}">
+        <field name="shippingPrice" title="${uiLabelMap.ProductShippingPrice}" title-style="listDisplay">
             <display type="currency" currency="${currencyUomId}"/>
         </field>
-        <field name="remove" title="${uiLabelMap.Operation}" widget-style="buttontext" use-when="${isUpdate!='Y'}">
+        <field name="remove" title="${uiLabelMap.Operation}" widget-style="buttontext" use-when="${isUpdate!='Y'}" title-style="listDisplay">
             <hyperlink target="RemoveSupplierProduct" description="${uiLabelMap.CommonDelete}" also-hidden="false">
                 <parameter param-name="productId"/>
                 <parameter param-name="partyId"/>
@@ -319,7 +317,7 @@
                 <parameter param-name="isVirtual" value="${parameters.isVirtual}"/>
             </hyperlink>
         </field>
-        <field name="update" title="${uiLabelMap.Operation}" widget-style="buttontext" use-when="${isUpdate!='Y'}">
+        <field name="update" title="${uiLabelMap.Operation}" widget-style="buttontext" use-when="${isUpdate!='Y'}" title-style="listDisplay">
             <hyperlink target="UpdateSupplierProduct" description="更新" also-hidden="false" target-window="_BLANK">
                 <parameter param-name="productId"/>
                 <parameter param-name="partyId"/>
@@ -410,7 +408,7 @@
         <field name="comments" title="备注">
             <textarea cols="60" rows="2"/>
         </field>
-        <field name="submitButton" title="创建"><submit button-type="button"/></field>
+        <field name="submitButton" title="创建" widget-area-style="submit"><submit button-type="button"/></field>
     </form>
     
     <form name="AddProductKeyword" type="single" target="${AddFormAction}" title=""
@@ -423,11 +421,10 @@
         <field name="relevancyWeight"><hidden value="1"/></field>
         <field name="keywordTypeId" title="关键字类型"><hidden value="KWT_TAG"/></field>
         <field name="statusId"><hidden value="KW_APPROVED"/></field>
-        <field name="submitButton" title="${uiLabelMap.CommonAdd}"><submit button-type="button"/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonAdd}" widget-area-style="submit"><submit button-type="button"/></field>
     </form>
     
-    <form name="UpdateProductKeyword" type="list" target="${UpdateFormAction}" title="" list-name=""
-        odd-row-style="alternate-row" default-table-style="basic-table">
+    <form name="UpdateProductKeyword" type="list" target="${UpdateFormAction}" title="" list-name="">
         <actions>
             <entity-condition entity-name="ProductKeyword">
                 <condition-list combine="and">
@@ -441,12 +438,12 @@
         </actions>
         <field name="productId"><hidden/></field>
         <field name="isVirtual"><hidden/></field>
-        <field name="keyword"><display/></field>
+        <field name="keyword" title-style="listDisplay"><display/></field>
         
-        <field name="keywordTypeId" title="类型">
+        <field name="keywordTypeId" title="类型" title-style="listDisplay">
             <display-entity entity-name="Enumeration" description="${description}" key-field-name="enumId"/>
         </field>
-        <field name="deleteLink" title="${uiLabelMap.CommonEmptyHeader}" widget-style="buttontext">
+        <field name="deleteLink" title="${uiLabelMap.CommonEmptyHeader}" widget-style="buttontext" title-style="listDisplay">
             <hyperlink target="${deleteKeyWordAction}" description="${uiLabelMap.CommonDelete}" also-hidden="false">
                 <parameter param-name="productId"/>
                 <parameter param-name="keyword"/>

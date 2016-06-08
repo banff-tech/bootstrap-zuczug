@@ -172,4 +172,45 @@
         <description>haze中预定shipment的库存并且需要改变状态</description>
         <attribute name="shipmentId" mode="IN" type="String" optional="false"></attribute>
     </service>
+    
+    <service name="updateProductAndFeature" engine="simple"
+                location="component://haze/script/com/zuczug/minilang/AccessoriesPurchaseService.xml" invoke="updateProductAndFeature" auth="true">
+        <description>更新商品信息</description>
+	    <attribute name="productId" type="String" mode="IN" optional="false"/>
+	    <attribute name="internalName" type="String" mode="IN" optional="false"/>
+	    <attribute name="idValue" type="String" mode="IN" optional="true"/>
+	    <attribute name="isVirtual" type="String" mode="IN" optional="false"/>
+	    <attribute name="isVariant" type="String" mode="IN" optional="false"/>
+	    <attribute name="productTypeId" type="String" mode="IN" optional="false"/>
+	    <attribute name="productFeatureApplTypeId" type="String" mode="IN" optional="false"/>
+	    <attribute name="description" type="String" mode="IN" allow-html="any" optional="true"/>
+	    <attribute name="comments" type="String" mode="IN" optional="true"/>
+	    <attribute name="longDescription" type="String" mode="IN" allow-html="any" optional="true"/>
+	    <attribute name="productFeatureId" type="String" mode="IN" optional="true"/>
+	    <attribute name="quantityUomId" type="String" mode="IN" optional="true"/>
+	    <attribute name="productWeight" type="BigDecimal" mode="IN" optional="true"/>
+	    <attribute name="weightUomId" type="String" mode="IN" optional="true"/>
+	    <attribute name="widthUomId" type="String" mode="IN" optional="true"/>
+	    <attribute name="productWidth" type="BigDecimal" mode="IN" optional="true"/>
+	    <attribute name="primaryProductCategoryId" type="String" mode="IN" optional="true"/>
+	    <attribute name="idValueRepeat" type="String" mode="OUT" optional="true"/>
+    </service>
+    <service name="modifySupplierProduct" engine="simple"
+                location="component://haze/script/com/zuczug/minilang/AccessoriesPurchaseService.xml" invoke="modifySupplierProduct" auth="true">
+		<description>修改product的supplier的信息</description>
+		<attribute name="productId" type="String" mode="IN" optional="false"/>
+		<attribute name="partyId" type="String" mode="IN" optional="false"/>
+		<attribute name="supplierProductName" type="String" mode="IN" optional="true"/>
+		<attribute name="availableFromDate" type="Timestamp" mode="IN" optional="false"/>
+		<attribute name="availableThruDate" type="Timestamp" mode="IN" optional="true"/>
+		<attribute name="minimumOrderQuantity" type="BigDecimal" mode="IN" optional="true" default-value="0"/>
+		<attribute name="currencyUomId" type="String" mode="IN" optional="false"/>
+		<attribute name="supplierProductId" type="String" mode="IN" optional="true"/>
+		<attribute name="standardLeadTimeDays" type="BigDecimal" mode="IN" optional="true"/>
+		<attribute name="quantityUomId" type="String" mode="IN" optional="true"/>
+		<attribute name="lastPrice" type="BigDecimal" mode="IN" optional="true" default-value="0"/>
+		<attribute name="comments" type="String" mode="IN" optional="true"/>
+		<attribute name="shippingPrice" type="BigDecimal" mode="IN" optional="true"/>
+		
+    </service>
 </services>

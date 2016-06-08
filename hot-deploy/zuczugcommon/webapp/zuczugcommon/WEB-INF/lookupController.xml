@@ -187,13 +187,13 @@
 	    <response name="success" type="view" value="LookupProductIngredient"/>
     </request-map>
     <request-map uri="LookupProductCatalogCategory">
-    	<security auth="true" https="true"/>
+    	<security auth="true" https="false"/>
     	<response name="success" type="view" value="LookupProductCatalogCategory"/>
     </request-map>
-    <request-map uri="LookupProductCatalogCategory">
-	    <security auth="true" https="true"/>
-	    <response name="success" type="view" value="LookupProductCatalogCategory"/>
-    </request-map>
+<!--     <request-map uri="LookupProductCatalogCategory"> -->
+<!-- 	    <security auth="true" https="true"/> -->
+<!-- 	    <response name="success" type="view" value="LookupProductCatalogCategory"/> -->
+<!--     </request-map> -->
     <request-map uri="LookupProductCategory"><security auth="true" https="true"/><response name="success" type="view" value="LookupProductCategory"/></request-map>
     
     <request-map uri="lookupProductByType">
@@ -281,7 +281,7 @@
 	<view-map name="LookupInventoryItem" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#LookupInventoryItem"/>
 	<view-map name="LookupProductCatalogCategory" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#LookupProductCatalogCategory"/>
 	<view-map name="LookupProductCategory" type="screen" page="component://product/widget/catalog/LookupScreens.xml#LookupProductCategory"/>
-    <view-map name="LookupProductCatalogCategory" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#LookupProductCatalogCategory"/>
+<!--     <view-map name="LookupProductCatalogCategory" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#LookupProductCatalogCategory"/> -->
 	<view-map name="lookupProductByType" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#lookupProductByType"/>	
     <view-map name="lookupVirtualAccessoryProduct" type="screen" page="component://zuczugcommon/widget/ZuczugCommonLookupScreens.xml#lookupVirtualAccessoryProduct"/>	
     <view-map name="LookupFacilityLocation" page="component://product/widget/facility/LookupScreens.xml#LookupFacilityLocation" type="screen"/>

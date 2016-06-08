@@ -80,7 +80,9 @@ function Lookup(date){
             //alert(divId);
             //将获取过来的前面的菜单栏给去掉
             data = data.replace('id="main"',"");
-            $("#"+divId).append(data);
+            data = data.replace(/submitPagination/g,'nextPageLookUp');
+            //$("#"+divId).append(data);
+            document.getElementById(divId). innerHTML = data ;
             jQuery("#" + divId + " section[id='widget-grid']").css("max-height",(height-73)+"px");
             handle(divId);
         }
@@ -98,7 +100,7 @@ function handle(divId){
     var submitButton = jQuery("#" + divId + " input[type='submit']");
     var buttonMarginLeft = $("#"+divId).width() * 0.165;
     //alert(buttonMarginLeft);
-    submitButton.css("margin-left",buttonMarginLeft);
+    //submitButton.css("margin-left",buttonMarginLeft);
     submitButton.attr("type","button");
     submitButton.click(function(){
         queryData();
@@ -178,7 +180,10 @@ function showDiv(divId){
 function queryData(){
     var data = jQuery("#form_" + inputFieldIdClick + "_div").serialize();
     var actions = jQuery("#form_" + inputFieldIdClick + "_div").attr("action");
-    queryIng(data,actions);
+    var strs = actions.split("/");
+    var action = strs[strs.length-1];
+    //alert(action);
+    queryIng(data,action);
 }
 
 function queryIng(data,actions){
@@ -193,8 +198,9 @@ function queryIng(data,actions){
 
             //btn-labeled
             $("#"+divId).empty();
-            $("#"+divId).append(result);
-            handle(divId);
+            //$("#"+divId).append(result);
+            document.getElementById(divId). innerHTML = result ;
+                handle(divId);
         }
     });
 }
@@ -207,5 +213,8 @@ function getValue(data){
 }
 
 function nextPageLookUp(val1,val2){
+    if(val2==null || val2 == ""){
+        return;
+    }
     queryIng(null,val2);
 }

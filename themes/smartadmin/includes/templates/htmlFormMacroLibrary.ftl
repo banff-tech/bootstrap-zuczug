@@ -138,7 +138,7 @@ under the License.
 <#macro renderDateTimeField name className alert title value size maxlength id dateType shortDateInput timeDropdownParamName defaultDateTimeString localizedIconTitle timeDropdown timeHourName classString hour1 hour2 timeMinutesName minutes isTwelveHour ampmName amSelected pmSelected compositeType formName mask="" event="" action="" step="" timeValues="">
 <div class="form-group">
     <div class="input-group" style="margin: 0px 13px 0px 13px;">
-        <input  type="text" <#if className?has_content && className?index_of("required") != -1>required="true";  </#if>  <#if name?has_content> name="${name}_fld0_value"</#if> placeholder="开始时间" value="${(value)!}" class="datepicker" data-dateformat="yy/mm/dd" style="
+        <input  type="text" <#if className?has_content && className?index_of("required") != -1>required="true";  </#if>  <#if name?has_content> name="${name}"</#if> placeholder="开始时间" value="${(value)!}" class="datepicker" data-dateformat="yyyy/MM/dd HH:mm:ms" style="
           width: 100%;
           height: 32px;
           padding: 6px 12px;

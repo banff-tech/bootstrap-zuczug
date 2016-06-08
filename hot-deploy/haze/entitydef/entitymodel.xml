@@ -77,5 +77,28 @@
 			</entity-condition>
 		</view-link>		
 	</view-entity>
+	
+	<view-entity entity-name="SupplierView"
+			package-name="org.ofbiz.party"
+			title="Party View Entity">
+		<member-entity entity-alias="PG" entity-name="PartyGroup"></member-entity>
+		<member-entity entity-alias="PR" entity-name="PartyRole"></member-entity>
+		<member-entity entity-alias="P" entity-name="Party"></member-entity>
+		<alias name="partyId" entity-alias="PG"/>
+		<alias name="groupName" entity-alias="PG"/>
+		<alias name="description" entity-alias="P"/>
+		<alias name="preferredCurrencyUomId" entity-alias="P"/>
+		<view-link entity-alias="P" rel-entity-alias="PG">
+			<key-map field-name="partyId"/>
+		</view-link>
+		<view-link entity-alias="PG" rel-entity-alias="PR">
+			<key-map field-name="partyId"/>
+		</view-link>
+		<entity-condition filter-by-date="true">
+			<condition-list combine="and">
+				<condition-expr entity-alias="PR" field-name="roleTypeId" operator="equals" value="SUPPLIER"/>
+			</condition-list>
+		</entity-condition>
+	</view-entity>
 
 </entitymodel>

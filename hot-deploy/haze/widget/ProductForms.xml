@@ -477,11 +477,10 @@
         <field name="relevancyWeight"><hidden value="1"/></field>
         <field name="keywordTypeId" title="关键字类型"><hidden value="KWT_TAG"/></field>
         <field name="statusId"><hidden value="KW_APPROVED"/></field>
-        <field name="submitButton" title="${uiLabelMap.CommonCreate}"><submit button-type="button"/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonCreate}" widget-area-style="submit"><submit button-type="button"/></field>
     </form>
     
-    <form name="UpdateProductKeyword" type="list" target="updateProductKeyword" title="" list-name=""
-        odd-row-style="alternate-row" default-table-style="basic-table">
+    <form name="UpdateProductKeyword" type="list" target="updateProductKeyword" title="" list-name="">
         <actions>
             <entity-condition entity-name="ProductKeyword">
                 <condition-list combine="and">
@@ -495,10 +494,10 @@
         </actions>
         <field name="productId"><hidden/></field>
         <field name="keyword"><display/></field>
-        <field name="keywordTypeId" title="类型">
+        <field name="keywordTypeId" title="类型" title-style="listDisplay">
             <display-entity entity-name="Enumeration" description="${description}" key-field-name="enumId"/>
         </field>
-        <field name="deleteLink" title="${uiLabelMap.CommonEmptyHeader}" widget-style="buttontext">
+        <field name="deleteLink" title="${uiLabelMap.CommonEmptyHeader}" widget-style="buttontext" title-style="listDisplay">
             <hyperlink target="deleteProductKeyword" description="${uiLabelMap.CommonDelete}" also-hidden="false">
                 <parameter param-name="productId"/>
                 <parameter param-name="keyword"/>

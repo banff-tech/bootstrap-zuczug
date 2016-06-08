@@ -396,7 +396,7 @@
     </request-map>
     
     <request-map uri="EditProductCategories">
-        <security https="true" auth="true"/>
+        <security https="false" auth="true"/>
         <response name="success" type="view" value="EditProductCategories"/>
     </request-map>
     
