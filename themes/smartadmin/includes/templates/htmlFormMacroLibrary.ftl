@@ -302,7 +302,7 @@ under the License.
 
 <#macro renderFormatListWrapperOpen formName style columnStyles>
 <div  style="margin: -13px -13px 0;">
-  <table cellspacing="0" class="<#if style?has_content>${style}<#else>table table-striped table-bordered table-hover dataTable no-footer</#if>">
+  <table cellspacing="0" class="table table-striped table-bordered table-hover dataTable no-footer">
 </#macro>
 
 <#macro renderFormatListWrapperClose formName>
@@ -312,7 +312,7 @@ under the License.
 
 <#macro renderFormatHeaderRowOpen style>
   <thead>
-  <tr <#if style?has_content>class="${style}"</#if> role="row" style="border-collapse:inherit">
+  <tr <#if style?has_content>class="${style}"</#if> role="row" style="border-collapse:inherit;">
 </#macro>
 <#macro renderFormatHeaderRowClose>
   </tr>

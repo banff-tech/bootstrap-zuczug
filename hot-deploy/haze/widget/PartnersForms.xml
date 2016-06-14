@@ -30,14 +30,13 @@
                 <option key="COMPETITOR" description="${uiLabelMap['RoleType.description.COMPETITOR']}"/>
         	</drop-down>
         </field>
-        <field name="submitButton" title="${uiLabelMap.CommonFind}">
+        <field name="submitButton" title="${uiLabelMap.CommonFind}" widget-area-style="submit">
             <submit button-type="button"/>
         </field>
     </form>
     
     
-    <form name="ListPartnersForm" type="list" list-name="partyList" paginate-target="FindFacility"
-        odd-row-style="alternate-row"  header-row-style="header-row-2" default-table-style="basic-table hover-bar">
+    <form name="ListPartnersForm" type="list" list-name="partyList" paginate-target="FindFacility">
         <actions>
             <service service-name="findParty" auto-field-map="parameters" result-map="result" result-map-list="partyList"/>
         </actions>
@@ -48,22 +47,34 @@
         	<set field="roleTyleList" value="${groovy:com.zuczug.party.ZuczugPartyUtil.getPartyRolesString(delegator, partyId)}" type="PlainString"/>
         	<set field="location" value="${groovy: com.zuczug.party.ZuczugPartyUtil.getPartyPostalAddress(delegator, partyId, &quot;PRIMARY_LOCATION&quot;)}" type="Object"/>
         </row-actions>
-        <field name="partyId" title="${uiLabelMap.Partners}${uiLabelMap.CommonId}" widget-style="buttontext">
+        <field name="partyId" title="${uiLabelMap.Partners}${uiLabelMap.CommonId}" widget-style="link" title-style="listDisplay">
             <hyperlink description="${partyId}" target="EditPartner">
             	<parameter param-name="partyId"/>
             </hyperlink>
         </field>
-        <field name="groupName" title="${uiLabelMap.CompanyName}" entry-name="pg.groupName">
+        <field name="groupName" title="${uiLabelMap.CompanyName}" entry-name="pg.groupName" title-style="listDisplay">
             <display></display>
         </field>
-        <field name="roleTyleList" title="${uiLabelMap.AccountingInvoiceRoles}">
+        <field name="roleTyleList" title="${uiLabelMap.AccountingInvoiceRoles}" title-style="listDisplay">
         	<display></display>
         </field>
-        <field name="fullAddress" title="${uiLabelMap.ContactAddress}" entry-name="location.fullAddress">
+        <field name="fullAddress" title="${uiLabelMap.ContactAddress}" entry-name="location.fullAddress" title-style="listDisplay">
         	<display></display>
         </field>
-        <field name="idNumber" title="${uiLabelMap.TheBusinesslicense}">
+        <field name="idNumber" title="${uiLabelMap.TheBusinesslicense}" title-style="listDisplay">
         	<display></display>
+        </field>
+    </form>
+    
+    <form name="ViewPartyRoles" type="list" list-name="partyRoles" target="viewroles">
+        <field name="roleTypeId" title="${uiLabelMap.PartyRoleTypeId}" title-style="listDisplay"><display/></field>
+        <field name="description" title="${uiLabelMap.PartyRole}" title-style="listDisplay"><display/></field>
+        <field name="parentTypeId"  title-style="listDisplay"><display-entity entity-name="RoleType" key-field-name="roleTypeId" description="${description}"/></field>
+        <field name="remove" title-style="listDisplay"  widget-style="buttontext">
+            <hyperlink target="deleterole" description="${uiLabelMap.CommonRemove}"  style="buttontext">
+                <parameter param-name="partyId"/>
+                <parameter param-name="roleTypeId"/>
+            </hyperlink>
         </field>
     </form>
     
@@ -77,7 +88,7 @@
                 <option key="COMPETITOR" description="${uiLabelMap['RoleType.description.COMPETITOR']}"/>
             </drop-down>
         </field>
-        <field name="add" title="${uiLabelMap.CommonAdd}"><submit/></field>
+        <field name="add" title="${uiLabelMap.CommonAdd}" widget-area-style="submit"><submit/></field>
     </form>
     
     

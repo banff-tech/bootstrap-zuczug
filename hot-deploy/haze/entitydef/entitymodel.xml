@@ -100,5 +100,45 @@
 			</condition-list>
 		</entity-condition>
 	</view-entity>
+	
+	<view-entity entity-name="ProdCatalogCategoryDetlView"
+			package-name="org.ofbiz.product.catalog"
+			title="Prod Catalog Category Detl View">
+		<member-entity entity-alias="PC" entity-name="ProductCategory"></member-entity>
+		<member-entity entity-alias="PCC" entity-name="ProdCatalogCategory"></member-entity>
+		<alias-all entity-alias="PC"></alias-all>
+		<alias name="prodCatalogId" entity-alias="PCC"></alias>
+		<alias name="prodCatalogCategoryTypeId" entity-alias="PCC"></alias>
+		<alias name="fromDate" entity-alias="PCC"></alias>
+		<view-link entity-alias="PC" rel-entity-alias="PCC">
+			<key-map field-name="productCategoryId"/>
+		</view-link>
+	</view-entity>
+	
+	<view-entity entity-name="PartyAddress"
+			package-name="org.ofbiz.product.catalog"
+			title="Supplier Address">
+		<member-entity entity-alias="PCMP" entity-name="PartyContactMechPurpose"></member-entity>
+		<member-entity entity-alias="PA" entity-name="PostalAddress"></member-entity>
+		<member-entity entity-alias="G" entity-name="Geo"></member-entity>
+		<alias-all entity-alias="PCMP">
+			<exclude field="contactMechId"/>
+		</alias-all>
+		<alias-all entity-alias="PA"></alias-all>
+		<alias-all entity-alias="G"></alias-all>
+		<view-link entity-alias="PCMP" rel-entity-alias="PA">
+			<key-map field-name="contactMechId"/>
+		</view-link>
+		<view-link entity-alias="PA" rel-entity-alias="G">
+			<key-map field-name="city" rel-field-name="geoName"/>
+		</view-link>
+		<entity-condition filter-by-date="true">
+			<condition-expr entity-alias="G" field-name="geoTypeId" value="CITY"/>
+		</entity-condition>
+	</view-entity>
+	
+	<extend-entity entity-name="ProductFeatureType">
+        <field name="productFeatureTypeState" type="description"></field>
+    </extend-entity>
 
 </entitymodel>

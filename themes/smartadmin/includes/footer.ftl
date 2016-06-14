@@ -623,3 +623,12 @@
 
 
 </html>
+<style>
+    .table-bordered>thead>tr>td{
+        border: 0px;
+    }
+    .table-bordered>tbody>tr>td{
+        BORDER-RIGHT: #f6f6f6 0px solid;
+        BORDER-BOTTOM: #f5f5f5 0px solid;
+    }
+</style>

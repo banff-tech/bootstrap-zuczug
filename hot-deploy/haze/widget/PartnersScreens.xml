@@ -110,7 +110,7 @@
                     	<include-menu location="component://haze/widget/HazeMenus.xml" name="PartnersManageTabBar"/>
                     	<include-menu location="component://haze/widget/HazeMenus.xml" name="PartnerSubTabBar"/>
                     	<screenlet title="${uiLabelMap.CommonFind}">
-							<include-form name="ViewPartyRoles" location="component://party/widget/partymgr/PartyForms.xml"/>
+							<include-form name="ViewPartyRoles" location="component://haze/widget/PartnersForms.xml"/>
                     	</screenlet>
                     	<screenlet title="${uiLabelMap.CommonList}">
                     		<include-form name="AddPartyRole" location="component://haze/widget/PartnersForms.xml"/>

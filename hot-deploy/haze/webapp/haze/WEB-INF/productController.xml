@@ -554,6 +554,25 @@
         <response name="success" type="view" value="EditProductFacilities"/>
         <response name="error" type="view" value="EditProductFacilities"/>
     </request-map>
+    
+    <request-map uri="FindProductSupplierProduct">
+	    <security auth="true"/>
+	    <response name="success" type="view" value="FindProductSupplierProduct"/>
+    </request-map>
+    <request-map uri="AccessoryMaintain">
+        <security auth="true"/>
+        <response name="success" type="view" value="AccessoryMaintain"/>
+        <response name="error" type="view" value="AccessoryMaintain"/>
+    </request-map>
+    <request-map uri="AccessoryProductFeature">
+    	<security auth="true"/>
+    	<response name="success" type="view" value="AccessoryProductFeature"/>
+    </request-map>
+    <request-map uri="AllProductList">
+        <security auth="true"/>
+        <response name="success" type="view" value="AllProductList"/>
+    </request-map>
+    
     <view-map name="ProductList" type="screen" page="component://haze/widget/ProductScreens.xml#ProductList"/>
     <view-map name="EditProdCatalog" type="screen" page="component://haze/widget/ProductScreens.xml#EditProdCatalog"/>
     <view-map name="EditProductCategory" type="screen" page="component://haze/widget/ProductScreens.xml#EditProductCategory"/>
@@ -596,5 +615,10 @@
     <view-map name="EditProductFacilities" type="screen" page="component://haze/widget/ProductScreens.xml#EditProductFacilities"/>
     
     <view-map name="FindCatalogAndCategory" type="screen" page="component://zuczugcommon/widget/ZuczugCommonProductScreens.xml#FindCatalogAndCategory"/>
+    
+    <view-map name="FindProductSupplierProduct"     			type="screen" page="component://haze/widget/ProductScreens.xml#FindProductSupplierProduct"/>
+    <view-map name="AccessoryMaintain" 							type="screen" page="component://haze/widget/ProductScreens.xml#AccessoryMaintain"/>
+    <view-map name="AccessoryProductFeature" 					type="screen" page="component://haze/widget/ProductScreens.xml#AccessoryProductFeature"/>
+    <view-map name="AllProductList" 							type="screen" page="component://haze/widget/ProductScreens.xml#AllProductList"/>
     
 </site-conf>

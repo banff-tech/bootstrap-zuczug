@@ -218,3 +218,40 @@ function nextPageLookUp(val1,val2){
     }
     queryIng(null,val2);
 }
+
+function ConstructLookup(fieldFormName,inputFieldId,dialogTarget,fillNameDesc,formName,width,height,position,defaultMinLength,ajaxUrl){
+
+    var option = {requestUrl : fieldFormName ,
+                    inputFieldId : inputFieldId,
+                    dialogTarget: dialogTarget,
+                    fillNameDesc: fillNameDesc,
+                    formName: formName,
+                    width:width,
+                    height:height,
+                    position:position,
+                    defaultMinLength:defaultMinLength,
+                    ajaxUrl:ajaxUrl
+                };
+    /* width: 100%;
+     height: 32px;
+     padding: 6px 12px;
+     border: 1px solid #ccc;
+     float: left;*/
+    $("#"+inputFieldId).css("width","100%");
+    $("#"+inputFieldId).css("height","32px");
+    $("#"+inputFieldId).css("padding","6px 12px");
+    $("#"+inputFieldId).css("border","1px solid #ccc");
+    $("#"+inputFieldId).css("float","left");
+
+    var divs = '<div class="input-group-addon" id="'+inputFieldId+'_button" onclick="showDiv(this);"><i class="fa fa-search"></i></div>' ;
+    $("#"+inputFieldId).after(divs);
+
+    $("#"+inputFieldId).parent().removeClass("field-lookup").addClass("input-group");
+
+
+//,height:"32px",padding:" 6px 12px",border:"1px solid #ccc",float:"left"
+
+
+
+    Lookup(option);
+}

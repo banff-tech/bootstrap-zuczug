@@ -1165,4 +1165,119 @@
             </widgets>
         </section>
     </screen>
+    <screen name="FindProductSupplierProduct">
+		<section>
+           <actions>
+               <set field="titleProperty" value="ProductList"/>
+               <set field="headerItem" value="ProductList"/>
+               <set field="tabButtonItem" value="ProductList"/>               
+               <set field="labelTitleProperty" value="PageTitleFindQuote"/>               
+           </actions>
+           <widgets>
+               <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                   <decorator-section name="body">                  		
+                        <include-menu location="component://haze/widget/AccessoriesPurchaseMenus.xml" name="ProductListTabBar"/>         		                   		                 		
+                        <container style="button-bar">
+                            <link  text="${uiLabelMap.TheNewMaterial}" target="CreateNewVirtualProduct" style="buttontext create " ></link>                            
+                        </container>
+                        <include-menu location="component://haze/widget/AccessoriesPurchaseMenus.xml" name="FindAccessoryQuoteTabBar"/>
+                        <decorator-screen name="FindScreenDecorator" location="component://common/widget/CommonScreens.xml">
+                   			<decorator-section name="search-options">
+                        		<include-form name="FindProductSupplierProduct" location="component://zuczugcommon/widget/ZuczugCommonForms.xml"/>
+                   			</decorator-section>
+                   			<decorator-section name="search-results">
+                         		<include-form name="ListProductSupplierProduct" location="component://zuczugcommon/widget/ZuczugCommonForms.xml"/>                   
+                   			</decorator-section>
+                   		</decorator-screen>                       
+                   </decorator-section>
+               </decorator-screen>
+           </widgets>
+		</section>
+	</screen>
+	<screen name="AccessoryMaintain">
+        <section>
+            <actions>
+               <set field="titleProperty" value="ProductList"/>
+               <set field="headerItem" value="ProductList"/>
+               <set field="tabButtonItem" value="ProductList"/>   
+               <set field="productTypeId" value="RAW_MATERIAL"/>        
+                     
+            </actions>
+            <widgets>
+            	<decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                   <decorator-section name="body">  
+                   		<include-menu location="component://haze/widget/AccessoriesPurchaseMenus.xml" name="ProductListTabBar"/>         		                   		                 		
+                        <container style="button-bar">
+                            <link  text="${uiLabelMap.TheNewMaterial}" target="CreateNewVirtualProduct" style="buttontext create " ></link>                            
+                        </container>
+                   		<include-menu location="component://haze/widget/AccessoriesPurchaseMenus.xml" name="FindAccessoryQuoteTabBar"/>               		
+                   		<decorator-screen name="FindScreenDecorator" location="component://common/widget/CommonScreens.xml">
+                   			<decorator-section name="search-options">
+                   				<platform-specific>
+									<html><html-template location="component://haze/webapp/haze/html/FindAccessoryProductFeature.ftl"/></html>
+								</platform-specific>
+                   			</decorator-section>
+                   			<decorator-section name="search-results">
+                   				<include-form name="ListRepeatAccessory" location="component://zuczugcommon/widget/ZuczugCommonForms.xml"/>
+                   			</decorator-section>
+                   		</decorator-screen>         	                                              		
+                   </decorator-section>
+               </decorator-screen>                
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="AccessoryProductFeature">
+       <section>
+           <actions>               
+               <set field="productId" from-field="parameters.productId" global="true"/>
+        	   <set field="formAction" value="findAccessoryProduct"/>
+        	   <set field="productCategoryId" from-field="parameters.productCategoryId"/>
+        	   <set field="productTypeId" value="RAW_MATERIAL"/>
+        	   <set field="virtualProductId" from-field="parameters.virtualProductId" global="true"/>
+        	   <set field="isVariant" from-field="parameters.isVariant"/>
+        	   <script location="component://zuczugcommon/webapp/zuczugcommon/WEB-INF/actions/EditVirtualProduct.groovy"/>
+           </actions>
+	       <widgets>           					
+				<platform-specific>
+					<html>
+						<html-template location="component://haze/webapp/haze/html/AccessoryMaintain.ftl"/>
+					</html>
+				</platform-specific>     
+           </widgets>
+       </section>
+	</screen>
+	
+	<screen name="AllProductList">
+		<section>
+           <actions>
+               <set field="titleProperty" value="ProductList"/>
+               <set field="headerItem" value="ProductList"/>
+               <set field="tabButtonItem" value="ProductList"/>               
+               <set field="labelTitleProperty" value="PageTitleFindQuote"/>
+               <set field="productTypeId" from-field="parameters.productTypeId"/>
+        	   <set field="isVariant" from-field="parameters.isVariant"/> 
+        	   <set field="module" value="ZUCZUG"/>                  
+           </actions>
+           <widgets>
+               <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                   <decorator-section name="body">                  		
+                        <include-menu location="component://haze/widget/AccessoriesPurchaseMenus.xml" name="ProductListTabBar"/>         		                   		                 		
+                        <container style="button-bar">
+                            <link  text="${uiLabelMap.TheNewMaterial}" target="CreateNewVirtualProduct" style="buttontext create " ></link>                            
+                        </container>                        <include-menu location="component://haze/widget/AccessoriesPurchaseMenus.xml" name="FindAccessoryQuoteTabBar"/>
+                        <decorator-screen name="FindScreenDecorator" location="component://common/widget/CommonScreens.xml">
+                   			<decorator-section name="search-options">
+                        		<include-form name="AllProductList" location="component://zuczugcommon/widget/ZuczugCommonForms.xml"/>
+                   			</decorator-section>
+                   			<decorator-section name="search-results">
+                         		<include-form name="AllIdValueForm" location="component://zuczugcommon/widget/ZuczugCommonForms.xml"/>                   	
+                   			</decorator-section>
+                   		</decorator-screen>                                                
+                   </decorator-section>
+               </decorator-screen>
+           </widgets>
+		</section>
+	</screen>
+    
 </screens>

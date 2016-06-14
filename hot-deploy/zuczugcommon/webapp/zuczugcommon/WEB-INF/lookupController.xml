@@ -178,7 +178,7 @@
     </request-map>
     
     <request-map uri="LookupPartyName">
-	    <security auth="true"/>
+	    <security auth="true" https="false"/>
 	    <response name="success" type="view" value="LookupPartyName"/>
     </request-map>
     

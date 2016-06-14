@@ -213,4 +213,11 @@
 		<attribute name="shippingPrice" type="BigDecimal" mode="IN" optional="true"/>
 		
     </service>
+    
+    <service name="findRepeatFeatureAccessory" engine="java"
+                location="com.zuczug.haze.AccessoriesPurchaseServices" invoke="findRepeatFeatureAccessory" auth="true">
+       	<description>创建设计商品的组别</description>
+        <attribute name="parameters" type="java.util.Map" mode="IN" optional="true"/>
+		<attribute name="listIt" type="java.util.List" mode="OUT" optional="false"/>
+    </service>
 </services>
