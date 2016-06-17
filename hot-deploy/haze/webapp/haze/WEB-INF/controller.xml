@@ -5,7 +5,6 @@
          can be found in the following xml file. A component can override the
          elements found in the common-controller.xml file. -->
     <include location="component://common/webcommon/WEB-INF/common-controller.xml"/>
-    <include location="component://zuczugcommon/webapp/zuczugcommon/WEB-INF/lookupController.xml"/>
     <include location="component://haze/webapp/haze/WEB-INF/facilityController.xml"/>
     <include location="component://haze/webapp/haze/WEB-INF/productController.xml"/>
     <include location="component://haze/webapp/haze/WEB-INF/purchaseController.xml"/>
@@ -13,6 +12,7 @@
     <include location="component://haze/webapp/haze/WEB-INF/partnersController.xml"/>
     <include location="component://haze/webapp/haze/WEB-INF/manufactController.xml"/>
     <include location="component://haze/webapp/haze/WEB-INF/accountingController.xml"/>
+    <include location="component://zuczugcommon/webapp/zuczugcommon/WEB-INF/lookupController.xml"/>
 
     <description>Haze Component Site Configuration File</description>
 

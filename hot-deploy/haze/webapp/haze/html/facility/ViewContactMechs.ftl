@@ -19,14 +19,14 @@ under the License.
 
 <div>
   <#if contactMeches?has_content>
-    <table class="basic-table" cellspacing="0">
+    <table class="basic-table" cellspacing="0" style="width: 100%;">
       <#list contactMeches as contactMechMap>
           <#assign contactMech = contactMechMap.contactMech>
           <#assign facilityContactMech = contactMechMap.facilityContactMech>
           <tr><td colspan="3"><hr/></td></tr>
           <tr>
             <td class="label" valign="top">
-              ${contactMechMap.contactMechType.get("description",locale)}
+            	<label class="col-md-2 control-label" style="color: black; font-size: 13px;">${contactMechMap.contactMechType.get("description",locale)}</label>
             </td>
             <td valign="top">
               <#list contactMechMap.facilityContactMechPurposes as facilityContactMechPurpose>
@@ -51,7 +51,10 @@ under the License.
                       <#if contactMechPurposeType?has_content>
                         <#assign popUptitle = contactMechPurposeType.get("description", locale) + uiLabelMap.CommonGeoLocation>
                       </#if>
-                      <a href="javascript:popUp('<@ofbizUrl>PartyGeoLocation?geoPointId=${postalAddress.geoPointId}&partyId=${partyId}</@ofbizUrl>', '${popUptitle?if_exists}', '450', '550')" class="buttontext">${uiLabelMap.CommonGeoLocation}</a>
+                      
+                      <a class="btn btn-primary" href="javascript:popUp('<@ofbizUrl>PartyGeoLocation?geoPointId=${postalAddress.geoPointId}&partyId=${partyId}</@ofbizUrl>', '${popUptitle?if_exists}', '450', '550')">${uiLabelMap.CommonGeoLocation}</a>
+                      
+                      <#!--<a href="javascript:popUp('<@ofbizUrl>PartyGeoLocation?geoPointId=${postalAddress.geoPointId}&partyId=${partyId}</@ofbizUrl>', '${popUptitle?if_exists}', '450', '550')" class="buttontext">${uiLabelMap.CommonGeoLocation}</a> -->
                     </#if>
               <#elseif "TELECOM_NUMBER" = contactMech.contactMechTypeId>
                   <#assign telecomNumber = contactMechMap.telecomNumber>
@@ -73,10 +76,13 @@ under the License.
             <td class="button-col">
               &nbsp;
               <#if security.hasEntityPermission("FACILITY", "_UPDATE", session)>
-                <a href='<@ofbizUrl>facility.EditContactMech?facilityId=${facilityId}&amp;contactMechId=${contactMech.contactMechId}</@ofbizUrl>'>${uiLabelMap.CommonUpdate}</a>
+                <#--<a href='<@ofbizUrl>facility.EditContactMech?facilityId=${facilityId}&amp;contactMechId=${contactMech.contactMechId}</@ofbizUrl>'>${uiLabelMap.CommonUpdate}</a> -->
+                <a class="btn btn-primary" href="<@ofbizUrl>facility.EditContactMech?facilityId=${facilityId}&amp;contactMechId=${contactMech.contactMechId}</@ofbizUrl>">${uiLabelMap.CommonUpdate}</a>
+                
               </#if>
               <#if security.hasEntityPermission("FACILITY", "_DELETE", session)>
-                <a href="javascript:document.deleteContactForm_${contactMechMap_index}.submit()">${uiLabelMap.CommonExpire}</a>
+              	<a class="btn btn-primary" href="javascript:document.deleteContactForm_${contactMechMap_index}.submit()">${uiLabelMap.CommonExpire}</a>
+                <#-- <a href="javascript:document.deleteContactForm_${contactMechMap_index}.submit()">${uiLabelMap.CommonExpire}</a> -->
                 <form action="<@ofbizUrl>facility.deleteContactMech</@ofbizUrl>" name="deleteContactForm_${contactMechMap_index}" method="post">
                   <input type="hidden" name="facilityId" value="${facilityId?if_exists}"/>
                   <input type="hidden" name="contactMechId" value="${contactMech.contactMechId?if_exists}"/>

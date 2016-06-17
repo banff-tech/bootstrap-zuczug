@@ -101,7 +101,7 @@
     
     <request-map uri="LookupProduct">
     	<description>无条件查询商品</description>
-    	<security auth="true" />
+    	<security auth="true" https="false"/>
     	<response name="success" type="view" value="LookupProduct"/>
     </request-map>
     
@@ -215,7 +215,7 @@
     </request-map>
     
     <request-map uri="LookupFacilityLocation">
-    	<security auth="true" https="true"/>
+    	<security auth="true" https="false"/>
     	<response name="success" type="view" value="LookupFacilityLocation"/>
     </request-map>
     

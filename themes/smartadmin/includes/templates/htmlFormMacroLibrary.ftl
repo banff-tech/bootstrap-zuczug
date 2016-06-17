@@ -228,7 +228,7 @@ under the License.
     <#if title?has_content> alt="${title}"</#if><#if event?has_content> ${event}="${action}"</#if>
     <#if confirmation?has_content>onclick="return confirm('${confirmation?js_string}');"</#if>/>
   <#else>
-    <input type="<#if containerId?has_content>button<#else>submit</#if>" <#if className?has_content><@renderClass className alert /><#else>class="btn btn-sm btn-primary"</#if>
+    <input type="<#if containerId?has_content>button<#else>submit</#if>" class="btn btn-sm btn-primary"
     <#if name??> name="${name}"</#if><#if title?has_content> value="${title}"</#if><#if event?has_content> ${event}="${action}"</#if>
     <#if containerId?has_content> onclick="<#if confirmation?has_content>if (confirm('${confirmation?js_string}')) </#if>ajaxSubmitFormUpdateAreas('${containerId}', '${ajaxUrl}')"
       <#else><#if confirmation?has_content> onclick="return confirm('${confirmation?js_string}');"</#if>

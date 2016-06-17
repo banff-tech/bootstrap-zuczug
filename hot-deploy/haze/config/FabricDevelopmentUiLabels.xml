@@ -1,0 +1,700 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <property key="FabricDevelopmentApplication">
+        <value xml:lang="en">FabricDevelopment Application</value>
+        <value xml:lang="zh">面料开发</value>
+    </property>
+    <property key="FabricDevelopmentCompanyName">
+        <value xml:lang="en">面料</value>
+    </property>
+    <property key="FabricDevelopmentCompanySubtitle">
+        <value xml:lang="en">Part of the Open For Business Family of Open Source Software</value>
+        <value xml:lang="it">Un modulo della famiglia di software open source Open For Business</value>
+        <value xml:lang="zh">开源软件OFBiz的组成部分</value>
+    </property>
+    <property key="FabricDevelopmentViewPermissionError">
+        <value xml:lang="en">You are not allowed to view this page.</value>
+        <value xml:lang="zh">不允许你浏览这个页面。</value>
+    </property>
+    <property key="FabricDevelopment">
+        <value xml:lang="en">面料开发</value>
+    </property>
+    <property key="NewFabric">
+        <value xml:lang="en">New Frabric</value>
+        <value xml:lang="zh">新建面料</value>
+    </property>
+    <property key="FabricProduct">
+        <value xml:lang="en">Frabric</value>
+        <value xml:lang="zh">物料</value>
+    </property>
+    <property key="FabricProductId">
+        <value xml:lang="en">Frabric ID</value>
+        <value xml:lang="zh">物料ID</value>
+    </property>
+    <property key="FabricInternalName">
+        <value xml:lang="en">Internal Name</value>
+        <value xml:lang="zh">物料内部名称</value>
+    </property>
+    <property key="FabricComments">
+        <value xml:lang="en">Comments</value>
+        <value xml:lang="zh">备注</value>
+    </property>
+    <property key="CreateFabric">
+        <value xml:lang="en">Create</value>
+        <value xml:lang="zh">创建</value>
+    </property>
+    <property key="UpdateFabric">
+        <value xml:lang="en">Update</value>
+        <value xml:lang="zh">更新</value>
+    </property>
+    <property key="Description">
+        <value xml:lang="en">Description</value>
+        <value xml:lang="zh">描述</value>
+    </property>
+    <property key="CreatedDate">
+        <value xml:lang="en">Created Date</value>
+        <value xml:lang="zh">创建时间</value>
+    </property>
+    <property key="FabricColors">
+        <value xml:lang="en">Colors</value>
+        <value xml:lang="zh">颜色</value>
+    </property>
+    <property key="FabricSuppliers">
+        <value xml:lang="en">Suppliers</value>
+        <value xml:lang="zh">供应商</value>
+    </property>
+    <property key="PageTitleEditMaterialProduct">
+        <value xml:lang="en">Fabric</value>
+        <value xml:lang="zh">面料</value>
+    </property>
+    <property key="PageTitleEditFabric">
+        <value xml:lang="en">Edit Fabric</value>
+        <value xml:lang="zh">编辑面料</value>
+    </property>
+    <property key="ProductLastModifiedBy">
+        <value xml:lang="en">Modified By</value>
+        <value xml:lang="zh">最后更新</value>
+    </property>
+    <property key="PageTitleListFabricColors">
+        <value xml:lang="en">Colors</value>
+        <value xml:lang="zh">面料颜色</value>
+    </property>
+    <property key="PageTitleAddFabricColor">
+        <value xml:lang="en">Add Color</value>
+        <value xml:lang="zh">添加颜色</value>
+    </property>
+    <property key="color">
+        <value xml:lang="en">Color</value>
+        <value xml:lang="zh">颜色</value>
+    </property>
+    <property key="Color">
+        <value xml:lang="en">Color</value>
+        <value xml:lang="zh">颜色</value>
+    </property>
+    <property key="ColorIdCode">
+        <value xml:lang="en">Color Code</value>
+        <value xml:lang="zh">色号</value>
+    </property>
+    <property key="SeasonId">
+        <value xml:lang="en">Season</value>
+        <value xml:lang="zh">季节</value>
+    </property>
+
+    <property key="FabricFeatureId">
+        <value xml:lang="en">Fabric Feature</value>
+        <value xml:lang="zh">面料特征</value>
+    </property>
+    
+     <property key="FabricComponentId">
+        <value xml:lang="en">Fabric Component</value>
+        <value xml:lang="zh">规格</value>
+    </property>
+     <property key="FabricSeriesId">
+        <value xml:lang="en">Fabric Series</value>
+        <value xml:lang="zh">系列</value>
+    </property>
+     <property key="Percentage">
+        <value xml:lang="en">Percentage</value>
+        <value xml:lang="zh">百分比</value>
+    </property>
+    
+     <property key="PageTitleListFabricSeries">
+        <value xml:lang="en">Fabric Series</value>
+        <value xml:lang="zh">面料系列</value>
+    </property>
+    <property key="PageTitleAddFabricSeries">
+        <value xml:lang="en">Add Fabric Series</value>
+        <value xml:lang="zh">添加系列</value>
+    </property>
+    
+    <property key="PageTitleListFabricComponent">
+        <value xml:lang="en">Fabric Componen</value>
+        <value xml:lang="zh">面料成分</value>
+    </property>
+    <property key="PageTitleAddFabricComponent">
+        <value xml:lang="en">Add Fabric Component</value>
+        <value xml:lang="zh">添加成分</value>
+    </property>
+    
+    <property key="PageTitleLookupProductComponent">
+        <value xml:lang="en">Lookup Fabric Component</value>
+        <value xml:lang="zh">查询面料成分</value>
+    </property>
+    <property key="PageTitleLookupProductSeries">
+        <value xml:lang="en">Lookup Fabric Series</value>
+        <value xml:lang="zh">查询面料系列</value>
+    </property>
+    <property key="PageTitleLookupProductColor">
+        <value xml:lang="en">Lookup Fabric Color</value>
+        <value xml:lang="zh">查询面料颜色</value>
+    </property>    
+    <property key="FabricSeasonId">
+        <value xml:lang="en">Fabric Season</value>
+        <value xml:lang="zh">季</value>
+    </property>
+    <property key="PageTitleFabricSeason">
+        <value xml:lang="en">Fabric Season</value>
+        <value xml:lang="zh">季</value>
+    </property>  
+
+    <property key="Remove">
+        <value xml:lang="en">Remove</value>
+        <value xml:lang="zh">删除</value>
+    </property>    
+    <property key="Operation">
+        <value xml:lang="en">Operation</value>
+        <value xml:lang="zh">操作</value>
+    </property>    
+    
+    <property key="productFeatureId">
+        <value xml:lang="en">Product Feature Id</value>
+        <value xml:lang="zh">产品特征标识</value>
+    </property>  
+    <property key="description">
+        <value xml:lang="en">Description</value>
+        <value xml:lang="zh">产品特征描述 </value>
+    </property> 
+    <property key="idCode">
+        <value xml:lang="en">Id Code</value>
+        <value xml:lang="zh">标识代码 </value>
+    </property>
+    <property key="abbrve">
+        <value xml:lang="en">Abbrve</value>
+        <value xml:lang="zh">缩写</value>
+    </property>
+    <property key="PageTitleAddFabricSuppliers">
+        <value xml:lang="en">Add Supplier</value>
+        <value xml:lang="zh">添加供应商</value>
+    </property>
+    <property key="PageTitleListSupplierProduct">
+        <value xml:lang="en">Supplier</value>
+        <value xml:lang="zh">供应商</value>
+    </property>
+
+    <property key="ProductSupplier">
+        <value xml:lang="en">Product Supplier</value>
+        <value xml:lang="zh">供应商</value>
+    </property>
+    <property key="SupplierProductId">
+        <value xml:lang="en">Supplier Product Id</value>
+        <value xml:lang="zh">供应商产品标识</value>
+    </property>
+    <property key="ProductMinimumOrderQuantity">
+        <value xml:lang="en">Product Minimum Order Quantity</value>
+        <value xml:lang="zh">最小起订数量</value>
+    </property>
+    <property key="ProductAvailableFromDate">
+        <value xml:lang="en">Product Available From Date</value>
+        <value xml:lang="zh">有效的开始日期</value>
+    </property>
+    <property key="ProductAvailableThruDate">
+        <value xml:lang="en">Product Available Thru Date</value>
+        <value xml:lang="zh">有效的结束日期</value>
+    </property>
+    <property key="ProductLastPrice">
+        <value xml:lang="en">"Product Price"</value>
+        <value xml:lang="zh">产品单价</value>
+    </property>
+    <property key="ProductShippingPrice">
+        <value xml:lang="en">"Shipping Price"</value>
+        <value xml:lang="zh">货运价格</value>
+    </property>
+    <property key="supplierProductName">
+        <value xml:lang="en">Supplier Product Name</value>
+        <value xml:lang="zh">供应商产品名称</value>
+    </property>
+    <property key="ProductQuantityUomId">
+        <value xml:lang="en">Supplier Quantity Uom Id</value>
+        <value xml:lang="zh">数量度量单位</value>
+    </property>
+    <property key="FindMaterialSupplier">
+        <value xml:lang="en">Supplier</value>
+        <value xml:lang="zh">供应商</value>
+    </property>
+    <property key="PageTitleFindMaterialSuppliers">
+        <value xml:lang="en">Supplier</value>
+        <value xml:lang="zh">供应商</value>
+    </property>
+    <property key="NewSupplier">
+        <value xml:lang="en">New Supplier</value>
+        <value xml:lang="zh">新建供应商</value>
+    </property>
+    <property key="NewSupplierContacts">
+        <value xml:lang="en">New Supplier Contacts</value>
+        <value xml:lang="zh">新建供应商联系人</value>
+    </property>
+    <property key="SupplierCompanyID">
+        <value xml:lang="en">Supplier Company ID</value>
+        <value xml:lang="zh">供应商标识</value>
+    </property>
+    <property key="City">
+        <value xml:lang="en">City</value>
+        <value xml:lang="zh">供应商所在城市</value>
+    </property>
+    <property key="GroupName">
+        <value xml:lang="en">Supplier Company Name</value>
+        <value xml:lang="zh">供应商名称</value>
+    </property>
+    <property key="ContactsName">
+        <value xml:lang="en">Contacts Name</value>
+        <value xml:lang="zh">联系人姓名</value>
+    </property>
+
+    <property key="FabricProofing">
+        <value xml:lang="en">Fabric Proofing</value>
+        <value xml:lang="zh">面料打样</value>
+    </property>
+    <property key="AddFabricProofing">
+        <value xml:lang="en">Add Fabric Proofing</value>
+        <value xml:lang="zh">新增面料打样</value>
+    </property>
+    <property key="ListFabricProofing">
+        <value xml:lang="en">Fabric Proofing List</value>
+        <value xml:lang="zh">打样列表</value>
+    </property>
+    <property key="ProofingSupplier">
+        <value xml:lang="en">ProofingSupplier</value>
+        <value xml:lang="zh">打样厂家</value>
+    </property>
+    <property key="Quantity">
+        <value xml:lang="en">Quantity</value>
+        <value xml:lang="zh">数量</value>
+    </property>
+    <property key="ExpectQuantity">
+        <value xml:lang="en">ExpectQuantity</value>
+        <value xml:lang="zh">下单数量</value>
+    </property>
+    <property key="UnitPrice">
+        <value xml:lang="en">UnitPrice</value>
+        <value xml:lang="zh">单价</value>
+    </property>
+    <property key="FabricName">
+        <value xml:lang="en">FabricName</value>
+        <value xml:lang="zh">面料名称</value>
+    </property>
+    <property key="UnitId">
+        <value xml:lang="en">UnitId</value>
+        <value xml:lang="zh">单位</value>
+    </property>
+    <property key="ProofingOrderCreateSuccess">
+        <value xml:lang="en">ProofingOrderCreateSuccess</value>
+        <value xml:lang="zh">打样单创建成功</value>
+    </property>
+    <property key="FabricPurchaseOrderCreateSuccess">
+        <value xml:lang="en">FabricPurchaseOrderCreateSuccess</value>
+        <value xml:lang="zh">采购单创建成功，单号为 [ ${orderId} ]</value>
+    </property>
+    <property key="ProofingNum">
+        <value xml:lang="en">ProofingNum</value>
+        <value xml:lang="zh">打样编号</value>
+    </property>
+    <property key="OrderStatus">
+        <value xml:lang="en">OrderStatus</value>
+        <value xml:lang="zh">状态</value>
+    </property>
+    <property key="SumPrice">
+        <value xml:lang="en">SumPrice</value>
+        <value xml:lang="zh">总金额</value>
+    </property>
+    <property key="ReceiveProofing">
+        <value xml:lang="en">ReceiveProofing</value>
+        <value xml:lang="zh">打样收货</value>
+    </property>
+    <property key="ReceiveShip">
+        <value xml:lang="en">ReceiveShip</value>
+        <value xml:lang="zh">接收</value>
+    </property>
+    <property key="ReceiveQuantity">
+        <value xml:lang="en">ReceiveQuantity</value>
+        <value xml:lang="zh">接收数量</value>
+    </property>
+
+	<property key="Address1">
+        <value xml:lang="en">Address</value>
+        <value xml:lang="zh">供应商公司地址</value>
+    </property>
+    <property key="Fax">
+        <value xml:lang="en">Fax</value>
+        <value xml:lang="zh">传真</value>
+    </property>
+    <property key="MobilePhone">
+        <value xml:lang="en">Mobile Phone</value>
+        <value xml:lang="zh">联系人手机</value>
+    </property>		
+    <property key="Phone">
+        <value xml:lang="en">Phone</value>
+        <value xml:lang="zh">电话</value>
+    </property>		
+    <property key="ContacterID">
+        <value xml:lang="en">Contacter ID</value>
+        <value xml:lang="zh">联系人标识</value>
+    </property>
+    <property key="SupplierInfo">
+        <value xml:lang="en">Supplier</value>
+        <value xml:lang="zh">供应商</value>
+    </property>
+    <property key="SupplierContacter">
+        <value xml:lang="en">Supplier Contacter</value>
+        <value xml:lang="zh">供应商联系人</value>
+    </property>
+    <property key="Email">
+        <value xml:lang="en">Email</value>
+        <value xml:lang="zh">邮箱</value>
+    </property>
+    <property key="PageTitleEditSupplierInfo">
+        <value xml:lang="en">Edit Supplier</value>
+        <value xml:lang="zh">编辑供应商</value>
+    </property>
+    <property key="CommonDescription">
+        <value xml:lang="en">Description</value>
+        <value xml:lang="zh">描述</value>
+    </property>
+    <property key="PreferredCurrencyUomId">
+        <value xml:lang="en">Preferred Currency Uom Id</value>
+        <value xml:lang="zh">货币优先选择标识</value>
+    </property>
+
+    <property key="ApproveProofing">
+        <value xml:lang="en">ApproveProofing</value>
+        <value xml:lang="zh">批准</value>
+    </property>
+    
+
+    <property key="CurrencyUomId">
+        <value xml:lang="en">Currency Uom Id</value>
+        <value xml:lang="zh">货币标识</value>
+    </property>
+    <property key="FabricGroup">
+        <value xml:lang="en">Fabric Group</value>
+        <value xml:lang="zh">面料组别</value>
+    </property> 
+    <property key="PageTitleEditFabricGroup">
+        <value xml:lang="en">Fabric Group</value>
+        <value xml:lang="zh">面料组别</value>
+    </property> 
+    <property key="PageTitleListFabricGroupName">
+        <value xml:lang="en">List Fabric Group Name</value>
+        <value xml:lang="zh">面料组别列表</value>
+    </property> 
+    <property key="PageTitleAddFabricGroupName">
+        <value xml:lang="en">Add Fabric Group Name</value>
+        <value xml:lang="zh">添加面料组别</value>
+    </property> 
+    <property key="PageTitleListFabricSeason">
+        <value xml:lang="en">List Fabric Season</value>
+        <value xml:lang="zh">季列表</value>
+    </property> 
+    <property key="PageTitleAddFabricSeason">
+        <value xml:lang="en">AddFabricSeason</value>
+        <value xml:lang="zh">添加季</value>
+    </property> 
+    <property key="PageTitleLookupSupplier">
+        <value xml:lang="en">Lookup Supplier</value>
+        <value xml:lang="zh">供应商查询</value>
+    </property> 
+    <property key="ReleatedContacter">
+        <value xml:lang="en">Releated Contacter</value>
+        <value xml:lang="zh">相关联系人</value>
+    </property>
+    <property key="ErrorMessage_NotFoundProofingOrder">
+        <value xml:lang="en">not found proofing orders</value>
+        <value xml:lang="zh">没有找到面料打样单据.</value>
+    </property> 
+
+    <property key="ErrorMessage_ProofingOrderStatusError">
+        <value xml:lang="en">proofing order status error</value>
+        <value xml:lang="zh">面料打样单状态错误.</value>
+    </property> 
+
+    <property key="FindFabricQuote">
+        <value xml:lang="en">Fabric Quote</value>
+        <value xml:lang="zh">面料开发</value>
+    </property> 
+    <property key="NewFabricQuote">
+        <value xml:lang="en">Create Fabric Quote</value>
+        <value xml:lang="zh">新建面料询价</value>
+    </property> 
+    <property key="FabricSupplierProductId">
+        <value xml:lang="en">Supplier Fabric Product Id</value>
+        <value xml:lang="zh">供应商面料编号</value>
+    </property> 
+    <property key="FabricProductId">
+        <value xml:lang="en">Fabric Product Id</value>
+        <value xml:lang="zh">物料编号</value>
+    </property> 
+    <property key="FabricSupplierName">
+        <value xml:lang="en">Fabric Supplier Name</value>
+        <value xml:lang="zh">供应商名称</value>
+    </property> 
+    <property key="FabricProductDesc">
+        <value xml:lang="en">Fabric Description</value>
+        <value xml:lang="zh">产品规格</value>
+    </property> 
+    <property key="FabricProductCommnets">
+        <value xml:lang="en">Fabric Commnets</value>
+        <value xml:lang="zh">备注1</value>
+    </property>
+    <property key="FabricProductDescOther">
+        <value xml:lang="en">Fabric Other Commnets</value>
+        <value xml:lang="zh">备注2</value>
+    </property>
+    <property key="PageTitleEditFabricQuote">
+        <value xml:lang="en">Edit Fabric Quote</value>
+        <value xml:lang="zh">编辑面料询价</value>
+    </property>
+    <property key="ProdcutFabricBasicInfo">
+        <value xml:lang="en">Fabric Basic Info</value>
+        <value xml:lang="zh">面料开发基本信息</value>
+    </property>
+    <property key="ProdcutFabricQuoteInfo">
+        <value xml:lang="en">Fabric Quote Info</value>
+        <value xml:lang="zh">面料开发询价信息</value>
+    </property>
+    <property key="QuoteDate">
+        <value xml:lang="en">Fabric Quote Date</value>
+        <value xml:lang="zh">询价日期</value>
+    </property>
+    <property key="FirstName">
+        <value xml:lang="en">First Name</value>
+        <value xml:lang="zh">姓氏</value>
+    </property>
+    <property key="LastName">
+        <value xml:lang="en">Last Name</value>
+        <value xml:lang="zh">名字</value>
+    </property> 
+    <property key="DeliveryTime">
+        <value xml:lang="en">Delivery Time</value>
+        <value xml:lang="zh">交期</value>
+    </property> 
+    <property key="SupplierId">
+        <value xml:lang="en">Supplier Id</value>
+        <value xml:lang="zh">供应商编号</value>
+    </property> 
+    <property key="Currency">
+        <value xml:lang="en">Currency</value>
+        <value xml:lang="zh">币种</value>
+    </property> 
+    <property key="Currency">
+        <value xml:lang="en">Currency</value>
+        <value xml:lang="zh">币种</value>
+    </property> 
+    <property key="quantityUomId">
+        <value xml:lang="en">Quantity Uom Id</value>
+        <value xml:lang="zh"> 采购单位</value>
+    </property> 
+    <property key="PageTitleEditFabricQuotation">
+        <value xml:lang="en">Fabric Quotation</value>
+        <value xml:lang="zh">面料询价</value>
+    </property> 
+    <property key="PageTitleListFabricQuotation">
+        <value xml:lang="en">List Fabric Quotation</value>
+        <value xml:lang="zh">面料询价列表</value>
+    </property> 
+    <property key="PageTitleAddFabricQuotation">
+        <value xml:lang="en">Add Fabric Quotation</value>
+        <value xml:lang="zh">添加面料询价</value>
+    </property> 
+        <property key="PageTitleAddFabricQuotation">
+        <value xml:lang="en">Add Fabric Quotation</value>
+        <value xml:lang="zh">添加面料询价</value>
+    </property> 
+    <property key="PageTitleUpdateSupplierProduct">
+        <value xml:lang="en">Suppliers</value>
+        <value xml:lang="zh">供应商</value>
+    </property>
+	<property key="ProofingDate">
+        <value xml:lang="en">Proofing Date</value>
+        <value xml:lang="zh">打样时间</value>
+    </property>
+    <property key="EstimatedShipDate">
+        <value xml:lang="en">Estimated Ship Date</value>
+        <value xml:lang="zh">预计收样时间</value>
+    </property>
+
+    <property key="NuclearAccounts">
+        <value xml:lang="en">Nuclear Accounts</value>
+        <value xml:lang="zh">核账</value>
+    </property>
+	<property key="City">
+        <value xml:lang="en">City</value>
+        <value xml:lang="zh">城市</value>
+    </property>	
+
+    
+    <property key="CancelProofing">
+        <value xml:lang="en">CancelProofing</value>
+        <value xml:lang="zh">取消打样</value>
+    </property>	
+
+
+	<property key="PageTitleLookupCity">
+        <value xml:lang="en">Lookup City</value>
+        <value xml:lang="zh">城市搜索帮助</value>
+    </property>
+	<property key="PageTitleLookupSupplier">
+        <value xml:lang="en">Lookup Supplier</value>
+        <value xml:lang="zh">供应商搜索帮助</value>
+    </property>
+    <property key="ReceiptQuantity">
+        <value xml:lang="en">Receipt Quantity</value>
+        <value xml:lang="zh">收货数量</value>
+    </property>
+    <property key="RealUnitPrice">
+        <value xml:lang="en">Real UnitPrice</value>
+        <value xml:lang="zh">实际单价</value>
+    </property>
+    <property key="EditNuclearAccounts">
+        <value xml:lang="en">EditNuclear Accounts</value>
+        <value xml:lang="zh">打样支付</value>
+    </property>
+	<property key="ReceiptUnitPrice">
+        <value xml:lang="en">Receipt Unit Price</value>
+        <value xml:lang="zh">收货单价</value>
+    </property>
+    <property key="InvoiceQuantity">
+        <value xml:lang="en">Invoice Quantity</value>
+        <value xml:lang="zh">开票数量</value>
+    </property>
+    <property key="InvoiceUnitPrice">
+        <value xml:lang="en">Invoice UnitPrice</value>
+        <value xml:lang="zh">开票单价</value>
+    </property>
+    <property key="InvoiceAmount">
+        <value xml:lang="en">Invoice Amount</value>
+        <value xml:lang="zh">开票金额</value>
+    </property>
+    <property key="NuclearAccountsStatusList">
+        <value xml:lang="en">Nuclear Accounts Status List</value>
+        <value xml:lang="zh">申请核销列表</value>
+    </property>
+    <property key="InvoiceId">
+        <value xml:lang="en">InvoiceId</value>
+        <value xml:lang="zh">发票序号</value>
+    </property>
+    <property key="ErrorMessage_DuplicateColor">
+        <value xml:lang="en">Duplicate Color</value>
+        <value xml:lang="zh">颜色编号已经存在</value>
+    </property>
+    <property key="ErrorMessage_DuplicateColorInProd">
+        <value xml:lang="en">Duplicate Color</value>
+        <value xml:lang="zh">该颜色已经绑定该产品</value>
+    </property> 
+    <property key="ErrorMessage_DuplicateFeature">
+        <value xml:lang="en">Duplicate Feature</value>
+        <value xml:lang="zh">该特征已经绑定该产品</value>
+    </property>
+    <property key="UserLoginId">
+        <value xml:lang="en">UserLoginId</value>
+        <value xml:lang="zh">创建者</value>
+    </property>
+    <property key="SelectProduct">
+        <value xml:lang="en">SelectProduct</value>
+        <value xml:lang="zh">选择物料</value>
+    </property> 
+    
+    <property key="CommitPurchase">
+        <value xml:lang="en">UserLoginId</value>
+        <value xml:lang="zh">提交采购单</value>
+    </property> 
+    <property key="ClearOrder">
+        <value xml:lang="en">ClearOrder</value>
+        <value xml:lang="zh">清除订单</value>
+    </property> 
+    <property key="ClearOrderConfrim">
+        <value xml:lang="en">ClearOrderConfrim</value>
+        <value xml:lang="zh">您确定要清除这个订单吗？</value>
+    </property> 
+    <property key="Supplier">
+        <value xml:lang="en">Supplier</value>
+        <value xml:lang="zh">物料供应商</value>
+    </property> 
+    <property key="PleaseSelect">
+        <value xml:lang="en">PleaseSelect</value>
+        <value xml:lang="zh">-请选择-</value>
+    </property> 
+    <property key="AgentSupplier">
+        <value xml:lang="en">AgentSupplier</value>
+        <value xml:lang="zh">采购商</value>
+    </property> 
+    <property key="SupplierDescription">
+        <value xml:lang="en">SupplierDescription</value>
+        <value xml:lang="zh">物料供应商，不选默认和采购商一致</value>
+    </property>
+    <property key="AgentSupplierDescription">
+        <value xml:lang="en">AgentSupplierDescription</value>
+        <value xml:lang="zh">也是结算方</value>
+    </property>
+    <property key="OrderName">
+        <value xml:lang="en">OrderName</value>
+        <value xml:lang="zh">订单名称</value>
+    </property>
+    <property key="ExternalId">
+        <value xml:lang="en">ExternalId</value>
+        <value xml:lang="zh">自定义订单号</value>
+    </property> 
+    
+    <property key="EstimatedShipDate">
+        <value xml:lang="en">EstimatedShipDate</value>
+        <value xml:lang="zh">预计到货日期</value>
+    </property> 
+    <property key="ReceiveFacility">
+        <value xml:lang="en">ReceiveFacility</value>
+        <value xml:lang="zh">收货仓库</value>
+    </property>
+    <property key="CreatedBy">
+        <value xml:lang="en">CreatedBy</value>
+        <value xml:lang="zh">制单人</value>
+    </property> 
+    <property key="SaveAgain">
+        <value xml:lang="en">SaveAgain</value>
+        <value xml:lang="zh">再次保存</value>
+    </property> 
+    <property key="Next">
+        <value xml:lang="en">Next</value>
+        <value xml:lang="zh">下一步</value>
+    </property> 
+    <property key="CartItemList">
+        <value xml:lang="en">CartItemList</value>
+        <value xml:lang="zh">已添加的物料列表</value>
+    </property>
+    <property key="AddProductItem">
+        <value xml:lang="en">AddProductItem</value>
+        <value xml:lang="zh">添加订单项到订单中</value>
+    </property>
+    <property key="AddFacbricPurchase">
+        <value xml:lang="en">AddFacbricPurchase</value>
+        <value xml:lang="zh">订单头信息</value>
+    </property>
+    <property key="Sumtotal">
+        <value xml:lang="en">Sumtotal</value>
+        <value xml:lang="zh">合计</value>
+    </property> 
+    <property key="Recalculated">
+        <value xml:lang="en">Recalculated</value>
+        <value xml:lang="zh">重新计算</value>
+    </property> 
+    <property key="ConfirmSave">
+        <value xml:lang="en">ConfirmSave</value>
+        <value xml:lang="zh">提交这个采购单？</value>
+    </property> 
+</resource>

@@ -140,5 +140,34 @@
 	<extend-entity entity-name="ProductFeatureType">
         <field name="productFeatureTypeState" type="description"></field>
     </extend-entity>
+    
+    <!-- 查询一个订单的订单项一共的收货条数 -->
+	<view-entity entity-name="ShipmentAndReceiptView"
+            package-name="org.ofbiz.shipment.shipment"
+            title="Order Shipment And Receipt View">
+      <member-entity entity-alias="OS" entity-name="OrderShipment"/>
+      <member-entity entity-alias="SR" entity-name="ShipmentReceipt"/>
+      <alias entity-alias="SR" name="quantityAccepted"/>
+      <alias entity-alias="SR" name="inventoryItemId"/>
+      <alias entity-alias="SR" name="orderId"/>
+      <alias entity-alias="SR" name="orderItemSeqId"/>
+      <alias entity-alias="OS" name="shipGroupSeqId"/>
+      <view-link entity-alias="SR" rel-entity-alias="OS">
+        <key-map field-name="shipmentId"/>
+        <key-map field-name="shipmentItemSeqId"/>
+        <key-map field-name="orderId"/>
+        <key-map field-name="orderItemSeqId"/>
+      </view-link>
+    </view-entity>
+    <view-entity entity-name="ShipmentTransferTotalReceipt" package-name="">
+		<member-entity entity-alias="SM" entity-name="Shipment"></member-entity>
+		<member-entity entity-alias="SR" entity-name="ShipmentReceipt"></member-entity>
+		<alias name="shipmentId" entity-alias="SM" group-by="true"></alias>
+		<alias name="shipmentItemSeqId" entity-alias="SR" group-by="true"></alias>
+		<alias name="quantityAccepted" entity-alias="SR" function="sum" />
+		<view-link rel-entity-alias="SR" entity-alias="SM">
+			<key-map field-name="shipmentId"/>
+		</view-link>
+	</view-entity>
 
 </entitymodel>

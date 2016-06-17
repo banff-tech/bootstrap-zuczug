@@ -12,23 +12,23 @@
                 <field-map field-name="viewSize" from-field="viewSize"/>
             </service>
         </actions>
-        <field name="facilityId">
+        <field name="facilityId" title-style="listDisplay" widget-style="link">
             <hyperlink target="EditFacility" description="${facilityId}">
                 <parameter param-name="facilityId"/>
             </hyperlink>
         </field>
-        <field name="facilityName"><display/></field>
-        <field name="facilityTypeId" title="${uiLabelMap.ProductFacilityType}">
+        <field name="facilityName" title-style="listDisplay"><display/></field>
+        <field name="facilityTypeId" title="${uiLabelMap.ProductFacilityType}" title-style="listDisplay">
             <display-entity entity-name="FacilityType" description="${description}"/>
         </field>
-        <field name="ownerPartyId" title="${uiLabelMap.ProductFacilityOwner}"><display/></field>
-        <field name="FacilitySize" title="${uiLabelMap.ProductFacilitySize}"><display/></field>
-        <field name="description"><display/></field>
+        <field name="ownerPartyId" title="${uiLabelMap.ProductFacilityOwner}" title-style="listDisplay"><display/></field>
+        <field name="FacilitySize" title="${uiLabelMap.ProductFacilitySize}" title-style="listDisplay"><display/></field>
+        <field name="description"  title-style="listDisplay"><display/></field>
         <on-event-update-area event-type="paginate" area-id="search-results" area-target="FacilitySearchResults"/>
     </form>
 
     <form name="FindFacilityOptions" extends="lookupFacility" extends-resource="component://product/widget/facility/FieldLookupForms.xml" target="FindFacility">
-        <field name="submitButton" title="${uiLabelMap.CommonFind}"><submit button-type="button"/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonFind}"  widget-area-style="submit"><submit button-type="button"/></field>
     </form>
 
     <form name="FindInventoryItemSearchParams" type="single" target="FindInventoryItem"
@@ -43,7 +43,7 @@
         <field name="productId"><text-find/></field>
         <field name="productName" title="${uiLabelMap.ProductName}"><text-find/></field>
         <field name="internalName"><text-find/></field>
-        <field name="submitButton" title="${uiLabelMap.CommonFind}">
+        <field name="submitButton" title="${uiLabelMap.CommonFind}" widget-area-style="submit">
             <submit button-type="button"/>
         </field>
     </form>
@@ -57,11 +57,11 @@
                 <field-map field-name="viewSize" from-field="viewSize"/>
             </service>
         </actions>
-        <field name="inventoryItemId"><display/></field>
-        <field name="productId"><display/></field>
-        <field name="internalName"><display/></field>
-        <field name="datetimeReceived"><display/></field>
-        <field name="quantityOnHandTotal"><display description="${availableToPromiseTotal} / ${quantityOnHandTotal}"/></field>
+        <field name="inventoryItemId" title-style="listDisplay"><display/></field>
+        <field name="productId" title-style="listDisplay"><display/></field>
+        <field name="internalName" title-style="listDisplay"><display/></field>
+        <field name="datetimeReceived" title-style="listDisplay"><display/></field>
+        <field name="quantityOnHandTotal" title-style="listDisplay"><display description="${availableToPromiseTotal} / ${quantityOnHandTotal}"/></field>
         <on-event-update-area event-type="paginate" area-id="search-results" area-target="InventoryItemSearchResults"/>
     </form>
 
@@ -190,7 +190,7 @@
         </field>    
         <field name="orderTypeId"><hidden value="PURCHASE_ORDER"/></field>
         <field name="roleTypeId"><hidden value="SUPPLIER_AGENT"/></field>
-        <field name="submitButton" title="${uiLabelMap.CommonSearch}"><submit button-type="button"/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonSearch}" widget-area-style="submit"><submit button-type="button"/></field>
     </form>
     
     
@@ -223,38 +223,38 @@
 				<field-map field-name="orderId" from-field="orderId"/>
 			</entity-and>
 		</row-actions>
-        <field name="_rowSubmit" title="${uiLabelMap.PurchaseOrderId}">
+        <field name="_rowSubmit" title="${uiLabelMap.PurchaseOrderId}" title-style="listDisplay">
         	<check all-checked="false">
         		<option key="${orderId}"/>
         	</check>
         </field>
-		<field name="productId"><hidden/></field>
-        <field name="partyId" title="${uiLabelMap.PageTitleListSupplierProduct}">
+		<field name="productId" title-style="listDisplay"><hidden/></field>
+        <field name="partyId" title="${uiLabelMap.PageTitleListSupplierProduct}" title-style="listDisplay">
         	<display-entity entity-name="PartyGroup" description="${groupName}" key-field-name="partyId"></display-entity>
         </field>
-        <field name="orderDate" title="${uiLabelMap.OrderDate}"><display type="date"/></field>
-        <field name="estimateDate" title="${uiLabelMap.estimatedReceiveDate}"><display type="date"/></field>
-        <field name="remarks" title="${uiLabelMap.Description}">
+        <field name="orderDate" title="${uiLabelMap.OrderDate}" title-style="listDisplay"><display type="date"/></field>
+        <field name="estimateDate" title="${uiLabelMap.estimatedReceiveDate}" title-style="listDisplay"><display type="date"/></field>
+        <field name="remarks" title="${uiLabelMap.Description}" title-style="listDisplay">
         	<display></display>
         </field>
-        <field name="originFacilityId" title="${uiLabelMap.Warehouse}">
+        <field name="originFacilityId" title="${uiLabelMap.Warehouse}" title-style="listDisplay">
         	<display-entity entity-name="Facility" description="${facilityName}" key-field-name="facilityId"></display-entity>
         </field>
-        <field name="statusId" title="${uiLabelMap.CommonStatus}">
+        <field name="statusId" title="${uiLabelMap.CommonStatus}" title-style="listDisplay">
         	<display-entity entity-name="StatusItem" description="${description}" key-field-name="statusId"></display-entity>
         </field>
-        <field name="receiveShip" title=" " widget-style="buttontext" use-when="${statusId=='ORDER_APPROVED'}">
+        <field name="receiveShip" title=" " widget-style="buttontext" use-when="${statusId=='ORDER_APPROVED'}" title-style="listDisplay">
         	<hyperlink target="FindReceivePurchaseItem" description="${uiLabelMap.CommonReceive}" target-window="_blank">
         		<parameter param-name="orderId"/>
         	</hyperlink>
         </field>
-        <field name="ForcedCompleteBtn" title=" " widget-style="buttontext" use-when="osList!=null &amp;&amp; osList.size()&gt;0 &amp;&amp; &quot;ORDER_APPROVED&quot;.equals(statusId)">
+        <field name="ForcedCompleteBtn" title=" " widget-style="buttontext" use-when="osList!=null &amp;&amp; osList.size()&gt;0 &amp;&amp; &quot;ORDER_APPROVED&quot;.equals(statusId)" title-style="listDisplay">
         	<hyperlink target="facility.completePurchaseOrder" description="${uiLabelMap.ProductCompleteForce}" confirmation-message="您确定这个采购单已经入库完成？结束后将无法再对这个采购单做入库。">
         		<parameter param-name="orderId"/>
         		<parameter param-name="facilityId" from-field="oisg[0].facilityId"/>
         	</hyperlink>
         </field>
-        <field name="viewDetail" title=" " widget-style="buttontext" use-when="${statusId=='ORDER_COMPLETED'}">
+        <field name="viewDetail" title=" " widget-style="buttontext" use-when="${statusId=='ORDER_COMPLETED'}" title-style="listDisplay">
         	<hyperlink target="ShowClothPurchaseItem" description="${uiLabelMap.CommonDetail}" target-window="_blank">
         		<parameter param-name="orderId"/>
         	</hyperlink>
@@ -281,7 +281,7 @@
 		<field name="partyId" title="${uiLabelMap['PartyRelationshipType.partyRelationshipName.CUSTOMER_REL']}">
 			<lookup target-form-name="LookupPartyName"></lookup>
 		</field>
-        <field name="submitButton" title="${uiLabelMap.CommonSearch}"><submit button-type="button"/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonSearch}" widget-area-style="submit"><submit button-type="button"/></field>
     </form>
     
     <form name="ListSalesOrderHeader" type="multi" target="FindSalesOrders" list-name="listIt" 
@@ -302,7 +302,7 @@
 			</entity-and>
 			<set field="printedFalg" from-field="oaList[0].attrValue"/>
 		</row-actions>
-        <field name="_rowSubmit" title="${uiLabelMap.OrderId}" widget-style="buttontext">
+        <field name="_rowSubmit" title="${uiLabelMap.OrderId}" widget-style="buttontext"  title-style="listDisplay">
         	<!-- <hyperlink description="${orderId}" target-window="_blank" url-mode="plain" target-type="plain" target="FindClothSalesOrderItem" >
         		<parameter param-name="orderId"/>
         	</hyperlink> -->
@@ -310,23 +310,23 @@
 				<option key="${orderId}"/>
 			</check>
         </field>
-        <field name="productStoreId" entry-name="oh.productStoreId">
+        <field name="productStoreId" entry-name="oh.productStoreId" title-style="listDisplay">
         	<display-entity entity-name="ProductStore" description="${storeName}" key-field-name="productStoreId"></display-entity>
         </field>
-        <field name="orderDate" title="${uiLabelMap.OrderDate}"><display type="date-time" /></field>
-        <field name="coustmer" title="${uiLabelMap['PartyRelationshipType.partyRelationshipName.CUSTOMER_REL']}">
+        <field name="orderDate" title="${uiLabelMap.OrderDate}" title-style="listDisplay"><display type="date-time" /></field>
+        <field name="coustmer" title="${uiLabelMap['PartyRelationshipType.partyRelationshipName.CUSTOMER_REL']}" title-style="listDisplay">
         	<display default-value="${billToPartyName}" description="" />
         </field>
-        <field name="allItemTotal" title="${uiLabelMap.ShipAllItemTotal}">
+        <field name="allItemTotal" title="${uiLabelMap.ShipAllItemTotal}" title-style="listDisplay">
         	<display></display>
         </field>
-        <field name="statusId" title="${uiLabelMap.CommonStatus}">
+        <field name="statusId" title="${uiLabelMap.CommonStatus}" title-style="listDisplay">
         	<display-entity entity-name="StatusItem" description="${description}" key-field-name="statusId"></display-entity>
         </field>
-        <field name="printedFalg" title="${uiLabelMap.ShiFouDaYinJianHuoDan}">
+        <field name="printedFalg" title="${uiLabelMap.ShiFouDaYinJianHuoDan}" title-style="listDisplay">
         	<display></display>
         </field>
-        <field name="detailBtn" title="${uiLabelMap.CommonDetail}" widget-style="buttontext">
+        <field name="detailBtn" title="${uiLabelMap.CommonDetail}" widget-style="buttontext" title-style="listDisplay">
         	<hyperlink description="${uiLabelMap.CommonDetail}" target-window="_blank" target-type="plain" target="Facility.FindSalesOrderItem" >
         		<parameter param-name="orderId"/>
         	</hyperlink>
@@ -364,7 +364,7 @@
         <field name="description">
         	<text size="50"></text>
         </field>
-        <field name="submitButton" title="${uiLabelMap.CommonSave}"><submit button-type="button"/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonSave}" widget-area-style="submit"><submit button-type="button"/></field>
     </form>
 
 	<form name="EditFacilityLocation" type="single" target="CreateFacilityLocation" title="" default-map-name="facilityLocation"
@@ -577,7 +577,7 @@
 		</field>
 		<field name="shipmentTypeId"><hidden value="TRANSFER"/></field>
 		<!-- <field name="originFacilityId"><hidden value="ZUCZUG_CLOTHESFACILITY"/></field> -->
-        <field name="submitButton" title="${uiLabelMap.CommonSearch}"><submit button-type="button"/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonSearch}" widget-area-style="submit"><submit button-type="button"/></field>
     </form>
     
     <form name="ListOutTransferShipment" type="multi" target="sendShipmentForTransfer" list-name="listIt" 
@@ -605,39 +605,39 @@
         	</entity-and>
         	<set field="saPrinted" from-field="saList[0].attrValue"/>
 		</row-actions>
-        <field name="_rowSubmit" title="转运编号">
+        <field name="_rowSubmit" title="转运编号" title-style="listDisplay">
         	<check all-checked="false">
         		<option key="${shipmentId}"/>
         	</check>
         </field>
-        <field name="destinationFacilityId" title="转入仓库">
+        <field name="destinationFacilityId" title="转入仓库" title-style="listDisplay">
 			<display-entity entity-name="Facility" description="${facilityName}" key-field-name="facilityId"></display-entity>
         </field>
-        <field name="handlingInstructions" title="说明备注">
+        <field name="handlingInstructions" title="说明备注" title-style="listDisplay">
         	<display></display>
         </field>
-        <field name="createdDate" title="创建时间">
+        <field name="createdDate" title="创建时间" title-style="listDisplay">
         	<display type="date-time"></display>
         </field>
-		<field name="statusId" title="状态">
+		<field name="statusId" title="状态" title-style="listDisplay">
 			<display-entity entity-name="StatusItem" description="${description}" key-field-name="statusId"></display-entity>
 		</field>
-		<field name="saPrinted" title="是否打印拣货单">
+		<field name="saPrinted" title="是否打印拣货单" title-style="listDisplay">
 			<display></display>
 		</field>
-        <field name="packageBtn" title="打包" widget-style="buttontext" use-when="(&quot;SHIPMENT_SCHEDULED&quot;).equals(statusId)">
+        <field name="packageBtn" title="打包" widget-style="buttontext" use-when="(&quot;SHIPMENT_SCHEDULED&quot;).equals(statusId)" title-style="listDisplay">
         	<hyperlink description="打包" target-window="_blank" target="ShowShipmentPacking?shipmentId=${shipmentId}">
         	</hyperlink>
         </field>
-        <field name="pickBtn" title="拣货单" widget-style="buttontext" use-when="(&quot;SHIPMENT_SCHEDULED&quot;).equals(statusId)">
+        <field name="pickBtn" title="拣货单" widget-style="buttontext" use-when="(&quot;SHIPMENT_SCHEDULED&quot;).equals(statusId)" title-style="listDisplay">
         	<hyperlink description="拣货单" target-window="_blank" target="ShipmentPickList.pdf?shipmentId=${shipmentId}">
         	</hyperlink>
         </field>
-        <field name="sendBtm" title="发货" widget-style="buttontext" use-when="(&quot;SHIPMENT_SCHEDULED&quot;).equals(statusId)">
+        <field name="sendBtm" title="发货" widget-style="buttontext" use-when="(&quot;SHIPMENT_SCHEDULED&quot;).equals(statusId)" title-style="listDisplay">
         	<hyperlink description="发货" confirmation-message="您确定这个发货单已经全部打包并且发出了吗？一旦操作无法修改" target="Facility.sendShipmentForTransfer?shipmentId=${shipmentId}&amp;facilityId=${parameters.facilityId}">
         	</hyperlink>
         </field>
-        <field name="editBtn" title="编辑" widget-style="buttontext" use-when="(&quot;SHIPMENT_INPUT&quot;).equals(statusId)">
+        <field name="editBtn" title="编辑" widget-style="buttontext" use-when="(&quot;SHIPMENT_INPUT&quot;).equals(statusId)" title-style="listDisplay">
         	<hyperlink description="编辑" target-type="plain" target="Facility.NewShipmentOut?shipmentId=${shipmentId}&amp;facilityId=${parameters.facilityId}">
         	</hyperlink>
         </field>
@@ -718,5 +718,40 @@
         	<submit/>
         </field>
 	</form>
+	
+	<form name="FindFabricReceiveInventory" type="single" target="receiveSingleInventoryProduct" title=""
+        header-row-style="header-row" default-table-style="basic-table">
+        <actions>
+        </actions>
+		<field name="facilityId">
+			<hidden/>
+		</field>
+		<field name="ownerPartyId"><hidden value="Company"/></field>
+		<field name="inventoryItemTypeId"><hidden value="NON_SERIAL_INV_ITEM"/> </field>
+		<field name="productId" title="面辅料编号">
+			<lookup target-form-name="LookupProduct"></lookup>
+		</field>
+		<field name="datetimeReceived">
+			<date-time default-value="${nowDate}"/>
+		</field>
+		<field name="lotId" title="批号">
+			<text></text>
+		</field>
+		<field name="locationSeqId" title="位置">
+			<lookup target-form-name="LookupFacilityLocation?facilityId=${facility.facilityId}"></lookup>
+		</field>
+		<field name="quantityAccepted" title="接收数量" required-field="true" required-field-style="integerNumber">
+			<text></text>
+		</field>
+		<field name="itemDescription" title="备注">
+			<text></text>
+		</field>
+		<field name="quantityRejected">
+			<hidden value="0"/>
+		</field>
+        <field name="submitBtn" title="提交" widget-area-style="submit">
+        	<submit/>
+        </field>
+    </form>
 	
 </forms>
