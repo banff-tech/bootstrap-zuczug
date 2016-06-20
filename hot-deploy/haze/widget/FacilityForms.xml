@@ -387,7 +387,7 @@
         <field name="positionId" >
         	<text></text>
         </field>
-        <field name="submitButton" title="${uiLabelMap.CommonSave}"><submit button-type="button"/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonSave}" widget-area-style="submit"><submit button-type="button"/></field>
     </form>
 	
 	<form name="FacilityLocationList" type="list" list-name="listIt" paginate-target="FindFacility"
@@ -400,26 +400,26 @@
                 <field-map field-name="viewSize" from-field="viewSize"/>
             </service>
         </actions>
-        <field name="locationSeqId" widget-style="buttontext">
+        <field name="locationSeqId" widget-style="link" title-style="listDisplay">
         	<hyperlink description="${locationSeqId}" target="EditFacilityLocation">
         		<parameter param-name="locationSeqId"/>
         		<parameter param-name="facilityId"/>
         	</hyperlink>
         </field>
         <field name="facilityId"><hidden/></field>
-        <field name="areaId" >
+        <field name="areaId"  title-style="listDisplay">
         	<display/>
         </field>
-        <field name="aisleId" >
+        <field name="aisleId"  title-style="listDisplay">
         	<display/>
         </field>
-        <field name="sectionId" >
+        <field name="sectionId"  title-style="listDisplay">
         	<display/>
         </field>
-        <field name="levelId" >
+        <field name="levelId"  title-style="listDisplay">
         	<display/>
         </field>
-        <field name="positionId" >
+        <field name="positionId"  title-style="listDisplay">
         	<display/>
         </field>
     </form>
@@ -449,7 +449,7 @@
 			<text-find></text-find>
 		</field>
 		<field name="shipmentTypeId"><hidden value="TRANSFER"/></field>
-        <field name="submitButton" title="${uiLabelMap.CommonSearch}"><submit button-type="button"/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonSearch}" widget-area-style="submit"><submit button-type="button"/></field>
     </form>
     
     
@@ -471,25 +471,25 @@
         	</entity-and>
 		</row-actions>
 		<field name="destinationFacilityId"><hidden/></field>
-		<field name="facilityId"><hidden value="${parameters.facilityId}"/></field>
-        <field name="_rowSubmit" title="转运编号">
+		<field name="facilityId" title-style="listDisplay"><hidden value="${parameters.facilityId}"/></field>
+        <field name="_rowSubmit" title="转运编号" title-style="listDisplay">
         	<check>
         		<option key="${shipmentId}"/>
         	</check>
         </field>
-        <field name="originFacilityId" title="转出仓库">
+        <field name="originFacilityId" title="转出仓库" title-style="listDisplay">
 			<display-entity entity-name="Facility" description="${facilityName}" key-field-name="facilityId"></display-entity>
         </field>
-        <field name="createdDate" title="录入时间">
+        <field name="createdDate" title="录入时间" title-style="listDisplay">
         	<display type="date-time"></display>
         </field>
-        <field name="handlingInstructions" title="说明备注">
+        <field name="handlingInstructions" title="说明备注" title-style="listDisplay">
         	<display></display>
         </field>
-		<field name="statusId" title="状态">
+		<field name="statusId" title="状态" title-style="listDisplay">
 			<display-entity entity-name="StatusItem" description="${description}" key-field-name="statusId"></display-entity>
 		</field>
-        <field name="submitBtm" title="接收" widget-style="buttontext">
+        <field name="submitBtm" title="接收" widget-style="link" title-style="listDisplay">
         	<hyperlink description="接收" target-window="_blank" target="ReceiveInTransferShipment?shipmentId=${shipmentId}&amp;facilityId=${parameters.facilityId}">
         	</hyperlink>
         </field>
@@ -668,9 +668,9 @@
 			<display-entity entity-name="StatusItem" description="${description}" key-field-name="statusId"></display-entity>
 		</field>
 		<field name="shipmentTypeId"><hidden value="TRANSFER"/></field>
-        <field name="submitButton" title="${uiLabelMap.CommonAdd}" use-when="shipment==null"><submit button-type="button"/></field>
-        <field name="submitButton" title="${uiLabelMap.CommonSave}" use-when="shipment!=null"><submit button-type="button"/></field>
-        <field name="submitButton" title="${uiLabelMap.CommonEmptyHeader}" use-when="shipment!=null &amp;&amp; &quot;SHIPMENT_INPUT&quot;.equals(shipmentStatusId)" tooltip="只有确认的发货单才可以打包" widget-style="buttontext">
+        <field name="submitButton" title="${uiLabelMap.CommonAdd}" use-when="shipment==null" widget-area-style="submit"><submit button-type="button"/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonSave}" use-when="shipment!=null" widget-area-style="submit"><submit button-type="button"/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonEmptyHeader}" widget-area-style="submit" use-when="shipment!=null &amp;&amp; &quot;SHIPMENT_INPUT&quot;.equals(shipmentStatusId)" tooltip="只有确认的发货单才可以打包" widget-style="buttontext">
         	<hyperlink target="Facility.ConfirmShipment?facilityId=${parameters.facilityId}&amp;shipmentId=${parameters.shipmentId}" target-type="plain" description="确认发货单">
         	</hyperlink>
         </field>
