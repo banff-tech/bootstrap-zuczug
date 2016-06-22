@@ -242,16 +242,16 @@ function ConstructLookup(fieldFormName,inputFieldId,dialogTarget,fillNameDesc,fo
     $("#"+inputFieldId).css("padding","6px 12px");
     $("#"+inputFieldId).css("border","1px solid #ccc");
     $("#"+inputFieldId).css("float","left");
-
-    var divs = '<div class="input-group-addon" id="'+inputFieldId+'_button" onclick="showDiv(this);"><i class="fa fa-search"></i></div>' ;
-    $("#"+inputFieldId).after(divs);
-
-    $("#"+inputFieldId).parent().removeClass("field-lookup").addClass("input-group");
+    
+    var inputFieldButton = $("#"+inputFieldId+"_button").attr("id");
+    if(inputFieldButton == null ){
+    	var divs = '<div class="input-group-addon" id="'+inputFieldId+'_button" onclick="showDiv(this);"><i class="fa fa-search"></i></div>' ;    	
+    	$("#"+inputFieldId).after(divs);    	
+    	$("#"+inputFieldId).parent().removeClass("field-lookup").addClass("input-group");
+    }
 
 
 //,height:"32px",padding:" 6px 12px",border:"1px solid #ccc",float:"left"
-
-
 
     Lookup(option);
 }

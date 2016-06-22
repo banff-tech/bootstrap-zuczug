@@ -28,6 +28,8 @@
 		<!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
 		<link rel="stylesheet" type="text/css" media="screen" href="/smartadmin/css/demo.min.css">
 
+        <link rel="stylesheet" type="text/css" media="screen" href="/smartadmin/css/banff.css">
+
 		<!-- #FAVICONS -->
 		<link rel="shortcut icon" href="/smartadmin/img/favicon/favicon.ico" type="image/x-icon">
 		<link rel="icon" href="/smartadmin/img/favicon/favicon.ico" type="image/x-icon">

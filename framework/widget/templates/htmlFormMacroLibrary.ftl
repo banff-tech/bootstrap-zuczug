@@ -627,7 +627,7 @@ Parameter: lastViewName, String, optional - If the ajaxEnabled parameter is true
     </script>
 </#if>
 <span class="field-lookup">
-<#if size?has_content && size=="0"><input type="hidden" <#if name?has_content> name="${name}"/></#if><#else><input type="text" <@renderClass className alert /><#if name?has_content> name="${name}"</#if><#if value?has_content> value="${value}"</#if><#if size?has_content> size="${size}"</#if><#if maxlength?has_content> maxlength="${maxlength}"</#if><#if id?has_content> id="${id}"</#if><#rt/><#if readonly?has_content && readonly> readonly="readonly"</#if><#rt/><#if event?has_content && action?has_content> ${event}="${action}"</#if><#rt/><#if autocomplete?has_content> autocomplete="off"</#if>/><#rt/></#if>
+<#if size?has_content && size=="0"><input type="hidden" <#if name?has_content> name="${name}"/></#if><#else><input type="text" <@renderClass className alert /><#if name?has_content> name="${name}"</#if><#if value?has_content> value="${value}"</#if><#if size?has_content> size="${size}"</#if><#if maxlength?has_content> maxlength="${maxlength}"</#if><#if id?has_content> id="${name}"</#if><#rt/><#if readonly?has_content && readonly> readonly="readonly"</#if><#rt/><#if event?has_content && action?has_content> ${event}="${action}"</#if><#rt/><#if autocomplete?has_content> autocomplete="off"</#if>/><#rt/></#if>
 <#if presentation?has_content && descriptionFieldName?has_content && presentation == "window">
      <a href="javascript:call_fieldlookup3(document.${formName?html}.${name?html},document.${formName?html}.${descriptionFieldName},'${fieldFormName}', '${presentation}'<#rt/>
     <#if targetParameterIter?has_content>
@@ -659,7 +659,7 @@ Parameter: lastViewName, String, optional - If the ajaxEnabled parameter is true
     </#if>
     <script type="text/javascript">
         jQuery(document).ready(function(){
-            new ConstructLookup("${fieldFormName}", "${id}", document.${formName?html}.${name?html}, <#if descriptionFieldName?has_content>document.${formName?html}.${descriptionFieldName}<#else>null</#if>, "${formName?html}", "${width}", "${height}", "${position}", "${fadeBackground}", <#if ajaxEnabled?has_content && ajaxEnabled>"${ajaxUrl}", ${showDescription}<#else>"", false</#if>, "${presentation!}", "${defaultMinLength!2}", "${defaultDelay!300}"<#rt/>
+            new ConstructLookup("${fieldFormName}", "${name}", document.${formName?html}.${name?html}, <#if descriptionFieldName?has_content>document.${formName?html}.${descriptionFieldName}<#else>null</#if>, "${formName?html}", "${width}", "${height}", "${position}", "${fadeBackground}", <#if ajaxEnabled?has_content && ajaxEnabled>"${ajaxUrl}", ${showDescription}<#else>"", false</#if>, "${presentation!}", "${defaultMinLength!2}", "${defaultDelay!300}"<#rt/>
     <#if targetParameterIter?has_content>
       <#assign isFirst = true>
       <#lt/>, [<#rt/>
