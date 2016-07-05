@@ -99,22 +99,22 @@
             	<field-map field-name="ownerPartyId" from-field="parameters.partyId"/>
             </entity-and>
         </actions>
-        <field name="finAccountId" widget-style="buttontext">
+        <field name="finAccountId" widget-style="link" title-style="listDisplay">
         	<hyperlink description="${finAccountId}" target="EditFinAccount">
         		<parameter param-name="finAccountId"/>
         		<parameter param-name="partyId"/>
         	</hyperlink>
         </field>
-        <field name="finAccountTypeId">
+        <field name="finAccountTypeId" title-style="listDisplay">
         	<display-entity entity-name="FinAccountType" description="${description}" key-field-name="finAccountTypeId"></display-entity>
         </field>
-        <field name="statusId">
+        <field name="statusId" title-style="listDisplay">
         	<display-entity entity-name="StatusItem" description="${description}" key-field-name="statusId"></display-entity>
         </field>
-        <field name="finAccountName" title="${uiLabelMap.BankName}"><display></display></field>
-        <field name="finAccountCode" title="${uiLabelMap.Accounting}"><display></display></field>
-        <field name="currencyUomId"><display></display></field>
-        <field name="delBtn" title=" ">
+        <field name="finAccountName" title="${uiLabelMap.BankName}" title-style="listDisplay"><display></display></field>
+        <field name="finAccountCode" title="${uiLabelMap.Accounting}" title-style="listDisplay"><display></display></field>
+        <field name="currencyUomId" title-style="listDisplay"><display></display></field>
+        <field name="delBtn" title=" "  widget-style="buttontext">
         	<hyperlink description="${uiLabelMap.CommonDelete}" target="deleteFinAccount" confirmation-message="删除这个银行账户吗？">
         		<parameter param-name="finAccountId"/>
         		<parameter param-name="partyId"/>
@@ -156,27 +156,27 @@
         <field name="statusId" title="${uiLabelMap.CommonStatus}">
             <hidden value="FNACT_ACTIVE"/>
         </field>
-        <field name="submitButton" use-when="finAccountId==null" title="${uiLabelMap.CommonCreate}" widget-style="smallSubmit"><submit button-type="button"/></field>
-        <field name="submitButton" use-when="finAccountId!=null" title="${uiLabelMap.CommonUpdate}" widget-style="smallSubmit"><submit button-type="button"/></field>
+        <field name="submitButton" use-when="finAccountId==null" title="${uiLabelMap.CommonCreate}" widget-style="smallSubmit"  widget-area-style="submit"><submit button-type="button"/></field>
+        <field name="submitButton" use-when="finAccountId!=null" title="${uiLabelMap.CommonUpdate}" widget-style="smallSubmit" widget-area-style="submit"><submit button-type="button"/></field>
     </form>
     
     <form name="ListBillingAccountsByParty" type="list" list-name="billingAccounts" paginate-target="FindBillingAccount"
         odd-row-style="alternate-row" default-table-style="basic-table hover-bar">
-        <field name="billingAccountId" widget-style="buttontext">
+        <field name="billingAccountId" widget-style="link" title-style="listDisplay">
             <hyperlink description="${billingAccountId}" target="EditBillingAccount">
                 <parameter param-name="billingAccountId"/>
                 <parameter param-name="partyId" from-field="${partyId}"/>
             </hyperlink>
         </field>
-        <field name="accountLimit" title="${uiLabelMap.AcctgTransType.description.CREDIT_LINE}">
+        <field name="accountLimit" title="${uiLabelMap.AcctgTransType.description.CREDIT_LINE}" title-style="listDisplay">
             <display type="currency" currency="${billingAccount.accountCurrencyUomId}"/>
         </field>
-        <field name="accountBalance" title="${uiLabelMap.Balance}"><display type="currency"/></field>
-        <field name="description"><display/></field>
-        <field name="fromDate"><display/></field>
-        <field name="thruDate"><display/></field>
-        <field name="partyId" title="${uiLabelMap.PartyPartyId}"><display description="${parameters.partyId}"/></field>
-        <field name="roleTypeId" title="${uiLabelMap.AccountingRoleType}"><display-entity entity-name="RoleType"/></field>
+        <field name="accountBalance" title="${uiLabelMap.Balance}" title-style="listDisplay"><display type="currency"/></field>
+        <field name="description" title-style="listDisplay"><display/></field>
+        <field name="fromDate" title-style="listDisplay"><display/></field>
+        <field name="thruDate" title-style="listDisplay"><display/></field>
+        <field name="partyId" title="${uiLabelMap.PartyPartyId}" title-style="listDisplay"><display description="${parameters.partyId}"/></field>
+        <field name="roleTypeId" title="${uiLabelMap.AccountingRoleType}" title-style="listDisplay"><display-entity entity-name="RoleType"/></field>
     </form>
     
     <form name="EditBillingAccount" type="single" target="updateBillingAccount" title=""
@@ -212,7 +212,7 @@
         <field name="availableBalance" title="${uiLabelMap.AccountingBillingAvailableBalance}" tooltip="${uiLabelMap.AccountingBillingAvailableBalanceMessage}">
             <display type="currency" currency="${billingAccount.accountCurrencyUomId}"/>
         </field>
-        <field name="submitButton" title="${uiLabelMap.CommonCreate}" use-when="billingAccount == null" widget-style="smallSubmit"><submit button-type="button"/></field>
-        <field name="submitButton" title="${uiLabelMap.CommonUpdate}" use-when="billingAccount!=null" widget-style="smallSubmit"><submit button-type="button"/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonCreate}" use-when="billingAccount == null" widget-style="smallSubmit" widget-area-style="submit"><submit button-type="button"/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonUpdate}" use-when="billingAccount!=null" widget-style="smallSubmit" widget-area-style="submit"><submit button-type="button"/></field>
     </form>
 </forms>

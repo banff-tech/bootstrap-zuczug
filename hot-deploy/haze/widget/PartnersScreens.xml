@@ -135,7 +135,9 @@
                     <decorator-section name="body">
                     	<include-menu location="component://haze/widget/HazeMenus.xml" name="PartnersManageTabBar"/>
                     	<include-menu location="component://haze/widget/HazeMenus.xml" name="PartnerSubTabBar"/>
-                   		<include-screen name="Contact" />
+                    	<screenlet title="${uiLabelMap.PartyContactInformation}">
+                   			<include-screen name="Contact" />
+                   		</screenlet>
                     </decorator-section>
                 </decorator-screen>
             </widgets>
@@ -182,6 +184,8 @@
                 <set field="descName" value="geoName"/>
                 <set field="selectedDependentOption" from-field="mechMap.postalAddress.stateProvinceGeoId" default-value="_none_"/>
                 
+                <set field="donePage" value="EditPartnerContactMech?partyId=${partyId}"/>
+                
                 <!-- 国家列表 -->
 				<entity-condition list="countryGeoList" entity-name="Geo">
 					<condition-expr field-name="geoTypeId" operator="equals" value="COUNTRY" />
@@ -198,12 +202,14 @@
                     <decorator-section name="body">
                     	<include-menu location="component://haze/widget/HazeMenus.xml" name="PartnersManageTabBar"/>
                     	<include-menu location="component://haze/widget/HazeMenus.xml" name="PartnerSubTabBar"/>
-						<platform-specific>
-						    <html>
-						        <!-- <html-template location="component://common/webcommon/includes/setDependentDropdownValuesJs.ftl"/> -->
-						        <html-template location="component://haze/webapp/haze/html/party/editcontactmech.ftl"/>
-						    </html>
-						</platform-specific>
+                    	<screenlet title="${uiLabelMap.PartyContactInformation}">
+							<platform-specific>
+							    <html>
+							        <!-- <html-template location="component://common/webcommon/includes/setDependentDropdownValuesJs.ftl"/> -->
+							        <html-template location="component://haze/webapp/haze/html/party/editcontactmech.ftl"/>
+							    </html>
+							</platform-specific>
+						</screenlet>
                     </decorator-section>
                 </decorator-screen>
             </widgets>
@@ -224,19 +230,20 @@
                 <entity-and entity-name="PartyNoteView" list="notes">
                     <field-map field-name="targetPartyId" from-field="partyId"/>
                     <order-by field-name="-noteDateTime"/>
-                </entity-and>
+                </entity-and>FindPartnerNotes
             </actions>
             <widgets>
             	<decorator-screen name="HazeCommonDecorator" location="${parameters.mainDecoratorLocation}">
                     <decorator-section name="body">
                     	<include-menu location="component://haze/widget/HazeMenus.xml" name="PartnersManageTabBar"/>
                     	<include-menu location="component://haze/widget/HazeMenus.xml" name="PartnerSubTabBar"/>
-                    	<platform-specific>
-		                    <html>
-		                        <html-template location="component://party/webapp/partymgr/party/profileblocks/Notes.ftl"/>
-		                    </html>
-		                </platform-specific>
-                    	
+                    	<screenlet title="${uiLabelMap.CommonNotes}">
+	                    	<platform-specific>
+			                    <html>
+			                        <html-template location="component://haze/webapp/haze/html/party/Notes.ftl"/>
+			                    </html>
+			                </platform-specific>
+                    	</screenlet>
                    	</decorator-section>
              	</decorator-screen>
             </widgets>
@@ -285,8 +292,8 @@
                     <decorator-section name="body">
                     	<include-menu location="component://haze/widget/HazeMenus.xml" name="PartnersManageTabBar"/>
                     	<include-menu location="component://haze/widget/HazeMenus.xml" name="PartnerSubTabBar"/>
+                       	<link target="EditFinAccount?partyId=${partyId}" text="${uiLabelMap.AddNewAccount}" style="buttontext"></link>
                         <screenlet title="${uiLabelMap.Partners}${uiLabelMap.Accounting}">
-                        	<link target="EditFinAccount?partyId=${partyId}" text="${uiLabelMap.AddNewAccount}" style="buttontext"></link>
                             <include-form name="PartnerFinAccountList" location="component://haze/widget/PartnersForms.xml"/>
                         </screenlet>
                     </decorator-section>
@@ -339,11 +346,11 @@
                     <decorator-section name="body">
                     	<include-menu location="component://haze/widget/HazeMenus.xml" name="PartnersManageTabBar"/>
                     	<include-menu location="component://haze/widget/HazeMenus.xml" name="PartnerSubTabBar"/>
+                        <link target="EditBillingAccount" text="${uiLabelMap.CommonNew} " style="buttontext">
+                            <parameter param-name="partyId" from-field="parameters.partyId"/>
+                            <parameter param-name="roleTypeId" value="BILL_TO_CUSTOMER"/>
+                        </link>
 	                    <screenlet title="${uiLabelMap.PageTitleFindBillingAccount}">
-	                        <link target="EditBillingAccount" text="${uiLabelMap.CommonNew} " style="buttontext">
-	                            <parameter param-name="partyId" from-field="parameters.partyId"/>
-	                            <parameter param-name="roleTypeId" value="BILL_TO_CUSTOMER"/>
-	                        </link>
 	                        <include-form name="ListBillingAccountsByParty" location="component://haze/widget/PartnersForms.xml"/>
 	                    </screenlet>
                     </decorator-section>
