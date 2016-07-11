@@ -112,7 +112,7 @@ under the License.
 		</field>
         <field name="quoteName" title="${uiLabelMap.OrderOrderQuoteName}"><text/></field>
         <field name="description" title="${uiLabelMap.CommonDescription}"><text/></field>
-        <field name="submitButton" title="${uiLabelMap.CommonSubmit}" widget-style="smallSubmit"><submit button-type="button"/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonSubmit}" widget-style="smallSubmit"  widget-area-style="submit"><submit button-type="button"/></field>
     </form>
     <form name="ListQuoteRoles" target="" title="" type="list" list-name="quoteRoles"
         odd-row-style="alternate-row" default-table-style="basic-table hover-bar" paginate-target="ListQuoteRoles">
@@ -147,12 +147,12 @@ under the License.
         <!-- <auto-fields-entity entity-name="QuoteItem" default-field-type="display"/> -->
         <field name="quoteId"><hidden/></field>
         <field name="quoteItemSeqId"><hidden/></field>
-        <field name="quoteItemSeqId" title="${uiLabelMap.OrderOrderQuoteItemSeqId}"><display/></field>
-        <field name="productId" title="${uiLabelMap.ProductProductId}">
+        <field name="quoteItemSeqId" title="${uiLabelMap.OrderOrderQuoteItemSeqId}" title-style="listDisplay"><display/></field>
+        <field name="productId" title="${uiLabelMap.ProductProductId}" title-style="listDisplay">
             <display-entity entity-name="Product" key-field-name="productId" description="${productId} - ${internalName}"/>
         </field>
         <!-- <field name="workEffortId" title="${uiLabelMap.OrderOrderQuoteWorkEffortId}"></field> -->
-        <field name="quantity" title="${uiLabelMap.CommonQuantity}">
+        <field name="quantity" title="${uiLabelMap.CommonQuantity}" title-style="listDisplay">
             <display>
                 <in-place-editor url="/haze/control/updateQuoteQuantityAjax" cancel-control="button" saving-text="Updating..." text-between-controls=" ">
                     <simple-editor/>
@@ -162,25 +162,25 @@ under the License.
                 </in-place-editor>
             </display>
         </field>
-        <field name="productListPrice" title="${uiLabelMap.ProductListPrice}"><display/></field>
-        <field name="quoteUnitPrice" title="${uiLabelMap.OrderOrderQuoteUnitPrice}"><display/></field>
-        <field name="totalRequirementQuantityApprovedNumber" title="${uiLabelMap.RequestSureTotal}"><display/></field>
-        <field name="totalRequirementQuantity" title="${uiLabelMap.TotalRequirementQuantity}"><display/></field>
-        <field name="estimatedDeliveryDate" title="${uiLabelMap.OrderOrderQuoteEstimatedDeliveryDate}"><display/></field>
+        <field name="productListPrice" title="${uiLabelMap.ProductListPrice}" title-style="listDisplay"><display/></field>
+        <field name="quoteUnitPrice" title="${uiLabelMap.OrderOrderQuoteUnitPrice}" title-style="listDisplay"><display/></field>
+        <field name="totalRequirementQuantityApprovedNumber" title="${uiLabelMap.RequestSureTotal}" title-style="listDisplay"><display/></field>
+        <field name="totalRequirementQuantity" title="${uiLabelMap.TotalRequirementQuantity}" title-style="listDisplay"><display/></field>
+        <field name="estimatedDeliveryDate" title="${uiLabelMap.OrderOrderQuoteEstimatedDeliveryDate}" title-style="listDisplay"><display/></field>
         <field name="productFeatureId"><hidden/></field>
         <field name="skillTypeId"><hidden/></field>
         <field name="deliverableTypeId"><hidden/></field>
         <field name="comments"><hidden/></field>
         <field name="uomId"><hidden/></field>
         <!--<field name="custRequestId"><display description="${custRequestId} - ${custRequestItemSeqId}"/></field>-->
-        <field name="custRequestId" title="${uiLabelMap.CommonViewRequest}" widget-style="buttontext">
+        <field name="custRequestId" title="${uiLabelMap.CommonViewRequest}" widget-style="link" title-style="listDisplay">
             <hyperlink also-hidden="false" description="${custRequestId}-${custRequestItemSeqId}" target="requestitem">
                 <parameter param-name="custRequestId"/>
                 <parameter param-name="custRequestItemSeqId"/>
             </hyperlink>
         </field>
         <field name="custRequestItemSeqId"><hidden/></field>
-        <field name="deleteLink" title="${uiLabelMap.CommonEmptyHeader}" widget-style="buttontext">
+        <field name="deleteLink" title="${uiLabelMap.CommonEmptyHeader}" widget-style="buttontext" title-style="listDisplay">
             <hyperlink target="removeQuoteItem" description="${uiLabelMap.CommonRemove}" also-hidden="false">
                 <parameter param-name="quoteItemSeqId"/>
                 <parameter param-name="quoteId"/>
@@ -409,22 +409,22 @@ under the License.
             </service>
     	</actions>
     	
-    	<field name="autoCalc" title="  " widget-style="buttontext"  >
+    	<field name="autoCalc" title="  "   widget-style="link">
             <hyperlink target="calcQuoteQuantity" target-type="inter-app" description="${uiLabelMap.AutoCalcProductNum}" also-hidden="false">
                 <parameter param-name="quoteId" from-field="quote.quoteId"/>
             </hyperlink>
         </field>
         <field name="quoteTypeId" title="${uiLabelMap.CommonType}" position="1"><display-entity entity-name="QuoteType" description="${description}"/></field>
         <field name="statusId" title="${uiLabelMap.CommonStatus}" position="2"><display-entity entity-name="StatusItem" description="${description}"/></field>
-        <field name="partyId" title="${uiLabelMap.AgentStore}" position="3">
+        <field name="partyId" title="${uiLabelMap.AgentStore}" position="1" widget-style="link">
             <hyperlink target="/partymgr/control/viewprofile" target-type="inter-app" description="${partyNameResultTo.fullName} [${quote.partyId}]">
                 <parameter param-name="partyId" from-field="quote.partyId"/>
             </hyperlink>
         </field>
-        <field name="quoteName" title="${uiLabelMap.CommonName}" encode-output="false" position="1"><display/></field>
-        <field name="description" title="${uiLabelMap.CommonDescription}" position="2"><display/></field>
-        <field name="validFromDate" title="${uiLabelMap.ValidFromDate}" position="1"><display/></field>
-        <field name="validThruDate" title="${uiLabelMap.ValidThruDate}" position="2"><display/></field>
+        <field name="quoteName" title="${uiLabelMap.CommonName}" encode-output="false" position="2"><display/></field>
+        <field name="description" title="${uiLabelMap.CommonDescription}" position="1"><display/></field>
+        <field name="validFromDate" title="${uiLabelMap.ValidFromDate}" position="2"><display/></field>
+        <field name="validThruDate" title="${uiLabelMap.ValidThruDate}" position="1"><display/></field>
     </form>
     
     <form name="ListQuoteItemsNoSales" list-name="quoteItemsNoSales" target="quoteImportSalesOrder?quoteId=${quoteId}&amp;shipContactMechId=${shipContactMechId}&amp;shipId=${shipId}&amp;paymentType=${paymentType}" title="" type="multi" use-row-submit="true" paginate="1"

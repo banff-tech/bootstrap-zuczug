@@ -311,7 +311,7 @@ under the License.
         <field name="createdByUserLogin"><hidden/></field>
         <field name="lastModifiedDate"><hidden/></field>
         <field name="lastModifiedByUserLogin"><hidden/></field>
-        <field name="submitButton" title="${uiLabelMap.CommonSubmit}" widget-style="smallSubmit"><submit button-type="button"/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonSubmit}" widget-style="smallSubmit" widget-area-style="submit"><submit button-type="button"/></field>
     </form>
     <form name="EditSmallCustRequest" extends="EditCustRequest">
         <field name="salesChannelEnumId"><ignored/></field>

@@ -32,7 +32,9 @@ under the License.
     </#if>
 
     <#if description?has_content>
-        ${description?replace("\n", "<br />")}
+      <div style="margin-top: 7px;">
+      ${description?replace("\n", "<br />")}
+      </div>
       <#t/>
     <#else>
       &nbsp;<#t/>

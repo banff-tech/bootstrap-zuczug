@@ -751,7 +751,9 @@ under the License.
                 <set field="quoteStatusId" from-field="quote.statusId"/>
             </actions>
             <widgets>
-            	<include-form name="ListQuoteItems" location="component://haze/widget/QuoteForms.xml"/>
+            	<screenlet id="search-results" title="">
+            		<include-form name="ListQuoteItems" location="component://haze/widget/QuoteForms.xml"/>
+            	</screenlet>
             	<!-- 
                 <platform-specific>
                     <html><html-template location="component://order/webapp/ordermgr/quote/ViewQuoteItemInfo.ftl"/></html>
@@ -1063,9 +1065,11 @@ under the License.
             <widgets>
                 <decorator-screen name="CommonQuoteDecorator" location="${parameters.quoteDecoratorLocation}">
                     <decorator-section name="body">
+                    	<screenlet title="${uiLabelMap.FindProduct}">
                             <platform-specific>
                             	<html><html-template location="component://haze/webapp/haze/html/quote/EditQuoteItems.ftl"/></html>
                         	</platform-specific>
+                       	</screenlet>
                     </decorator-section>
                 </decorator-screen>
             </widgets>

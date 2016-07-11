@@ -1,29 +1,20 @@
 <div class="screenlet">
-    <div class="screenlet-title-bar">
-        <ul>
-            <li class="h3">
-                	${uiLabelMap.FindProduct}
-            </li>
-        </ul>
-        <br class="clear">
-    </div>
     <div id="screenlet_4_col" class="screenlet-body">
-    <form method="post" action="<@ofbizUrl>queryQuoteProductRealView</@ofbizUrl>" id="queryQuoteProductRealView" name="queryQuoteProductRealView">
+    <form method="post" action="<@ofbizUrl>queryQuoteProductRealView</@ofbizUrl>" id="queryQuoteProductRealView" name="queryQuoteProductRealView" class="form-horizontal">
     	<input type="hidden" name="quoteId" value="${quoteId}"/>
-    	<table cellspacing="0" class="basic-table">
-		    <tbody>
-		    <tr>
-		        <td class="label">${uiLabelMap.FindProductGroup}：</td>
-	            <td>
-	            	<@htmlTemplate.lookupField formName="queryQuoteProductRealView" width="800" name="productId" fieldFormName="LookupRealProductNoVariantForSku" value="" className="required" maxlength="50"/>
-	            </td>
 
-	            <td>
-					<input type="submit" value="${uiLabelMap.Find}"/>
-				</td>
-	        </tr>
-		    </tbody>
-		</table>
+        <div class="form-group">
+            <label class="col-md-2 control-label" id="">${uiLabelMap.FindProductGroup}：</label>
+            <div class="col-sm-4">
+				<@htmlTemplate.lookupField formName="queryQuoteProductRealView" width="800" name="productId" fieldFormName="LookupRealProductNoVariantForSku" value="" className="required" maxlength="50"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label" id="">&nbsp;</label>
+            <div class="col-sm-4">
+                <input type="submit" value="${uiLabelMap.Find}" class="btn btn-sm btn-primary"/>
+            </div>
+        </div>
 	</form>
     </div>
 </div>
@@ -41,7 +32,7 @@
    		<input type="hidden" name="quoteId" value="${quoteId}"/>
    		<input type="hidden" name="productGroup" value="${productGroup}"/>
     	<table cellspacing="0" class="basic-table">
-		    <tbody>
+		    <tbody>xxxxxxxxxxxxx
 		    <tr class="header-row-2">
 		    <#list productRealViews as productRealView>
 		    	<td>${(productRealView.get("productId"))}</td>

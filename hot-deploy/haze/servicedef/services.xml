@@ -220,4 +220,18 @@
         <attribute name="parameters" type="java.util.Map" mode="IN" optional="true"/>
 		<attribute name="listIt" type="java.util.List" mode="OUT" optional="false"/>
     </service>
+    
+    <service name="findRequestItems" engine="java" auth="true"
+            location="com.zuczug.sales.RequestServices" invoke="findRequestItems" transaction-timeout="7200">
+        <description>返回所有某个requestId的所有requestItem，同时针对每个requestItem，做出一些跟订货会相关的统计  by liujia</description>
+        <attribute name="custRequestId" type="String" mode="IN" optional="false"/>
+        <attribute name="theRequestItems" type="List" mode="OUT" optional="true"/>
+    </service>
+    
+    <service name="findQuoteItems" engine="java" auth="true"
+            location="com.zuczug.sales.QuoteServices" invoke="findQuoteItems" transaction-timeout="7200">
+        <description>返回所有某个quoteId的所有quoteItem，同时针对每个quoteItem，做出一些跟订货会相关的统计  by liujia</description>
+        <attribute name="quoteId" type="String" mode="IN" optional="false"/>
+        <attribute name="theQuoteItems" type="List" mode="OUT" optional="true"/>
+    </service>
 </services>

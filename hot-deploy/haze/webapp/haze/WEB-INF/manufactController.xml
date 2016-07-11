@@ -12,7 +12,12 @@
     	<response name="error" type="view" value="FindBom"></response>
     </request-map>
     
+    <request-map uri="EditProductBom">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="EditProductBom"/>
+    </request-map>
     
     <view-map name="FindBom" type="screen" page="component://haze/widget/ManufactScreens.xml#FindBom"/>
+    <view-map name="EditProductBom" page="component://haze/widget/ManufactScreens.xml#EditProductBom" type="screen"/>
     
 </site-conf>

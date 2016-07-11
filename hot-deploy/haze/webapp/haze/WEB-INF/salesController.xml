@@ -4,8 +4,13 @@
     <!-- The controller elements that are common to all OFBiz components
          can be found in the following xml file. A component can override the
          elements found in the common-controller.xml file. -->
+	 <request-map uri="EditRequestItem">
+			<security https="true" auth="true"/>
+			<response name="success" type="view" value="EditRequestItem"/>
+	</request-map>
     <include location="component://order/webapp/ordermgr/WEB-INF/controller.xml"/>
-    
+   
+   
    <request-map uri="ViewRequest">
    		<security https="true" auth="true"/>
    		<response name="success" type="view" value="ViewRequest"/>
@@ -853,6 +858,8 @@
     <!-- end of Dealers screens --> 
     
     <view-map name="CustDataAnalysis" type="screen" page="component://haze/widget/CustRequestScreens.xml#CustDataAnalysis"/>
+    <view-map name="EditRequestItem" type="screen" page="component://haze/widget/CustRequestScreens.xml#EditRequestItem"/>
+    
     
     <view-map name="SalesProductsView" type="screen" page="component://haze/widget/SalesProductsScreens.xml#SalesProductsView"/>
     <view-map name="EditProductVirtual" type="screen" page="component://haze/widget/SalesProductsScreens.xml#EditProductVirtual"/>

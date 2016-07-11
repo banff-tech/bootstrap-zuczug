@@ -26,7 +26,7 @@
         </field>    
         <field name="orderTypeId"><hidden value="PURCHASE_ORDER"/></field>
         <field name="roleTypeId"><hidden value="SUPPLIER_AGENT"/></field>
-        <field name="submitButton" title="${uiLabelMap.CommonSearch}"><submit button-type="button"/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonSearch}" widget-area-style="submit"><submit button-type="button"/></field>
     </form>
     
     

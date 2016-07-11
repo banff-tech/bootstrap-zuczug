@@ -140,4 +140,38 @@
         </section>
     </screen>
     
+    <screen name="EditRequestItem">
+        <section>
+            <actions>
+                <set field="titleProperty" value="PageTitleEditRequestItem"/>
+                <set field="tabButtonItem" value="requestitem"/>
+                <set field="headerItem" value="request"/>
+                <set field="custRequestId" from-field="parameters.custRequestId"/>
+                <set field="custRequestItemSeqId" from-field="parameters.custRequestItemSeqId"/>
+                <entity-one entity-name="CustRequest" value-field="custRequest"/>
+                <entity-one entity-name="CustRequestItem" value-field="custRequestItem"/>
+                <set field="statusId" from-field="custRequestItem.statusId"/>
+                <entity-one entity-name="StatusItem" value-field="currentStatus"/>
+                <script location="component://order/webapp/ordermgr/WEB-INF/actions/request/GetNextSequenceNum.groovy"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <screenlet title="${uiLabelMap.CommonId}:${custRequestItem.custRequestItemSeqId} ${custRequestItem.description}">
+                            <container>
+                                <link target="requestitem" text="${uiLabelMap.OrderNewRequestItem}" style="buttontext">
+                                    <parameter param-name="custRequestId"/>
+                                </link>
+                            </container>
+                            <include-form name="EditCustRequestItem" location="component://haze/widget/CustRequestForms.xml"/>
+                            <platform-specific>
+                                <html><html-template location="component://haze/webapp/haze/html/sales/CopyRequestItem.ftl"/></html>
+                            </platform-specific>
+                        </screenlet>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
 </screens>
