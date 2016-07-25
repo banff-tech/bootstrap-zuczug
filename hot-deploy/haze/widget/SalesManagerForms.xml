@@ -429,7 +429,7 @@
 			<text-find ignore-case="true"/>
 		</field>
         <field name="payToPartyId" title="${uiLabelMap.PayToPartyId}"><lookup target-form-name="LookupPartyName"></lookup></field>
-        <field name="submitButton" title="${uiLabelMap.CommonSearch}"><submit button-type="button"/></field>
+        <field name="submitButton" title="${uiLabelMap.CommonSearch}" widget-area-style="submit"><submit button-type="button"/></field>
     </form>
     
     <form name="ListProductStore" type="list" list-name="listIt" odd-row-style="alternate-row"
@@ -446,12 +446,12 @@
             </service>
         </actions>
         <field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
-        <field name="productStoreId" title="${uiLabelMap.ProductStoreId}" widget-style="buttontext" sort-field="true">
+        <field name="productStoreId" title="${uiLabelMap.ProductStoreId}" widget-style="link" sort-field="true" title-style="listDisplay">
             <hyperlink target="EditProductStore" description="${productStoreId}">
                 <parameter param-name="productStoreId"/>
             </hyperlink>
         </field>
-        <field name="storeName" title="${uiLabelMap.ProductStoreName}" sort-field="true"><display/></field>
+        <field name="storeName" title="${uiLabelMap.ProductStoreName}" sort-field="true" title-style="listDisplay"><display/></field>
     </form>
     
     <!-- 新增门店表单 -->
@@ -554,8 +554,8 @@
 
         <field position="1" name="productStoreId" title="${uiLabelMap.ProductStoreId}" tooltip="${uiLabelMap.CommonRequired}" widget-style="required"><text size="30" maxlength="50"/></field>    
 		<field position="2" name="storeName" title="${uiLabelMap.ProductStoreName}" tooltip="${uiLabelMap.CommonRequired}" widget-style="required"><text size="30" maxlength="100"/></field>		
-		<field position="3" name="payToPartyId" title="${uiLabelMap.PayToPartyId}" widget-style="required" tooltip="${uiLabelMap.CommonRequired}"><lookup target-form-name="LookupPartyName"/></field>
-		<field position="1" name="city" title="${uiLabelMap.City}" widget-style="required" tooltip="${uiLabelMap.CommonRequired}"><lookup target-form-name="LookupCity" default-value="${city}" ></lookup></field>
+		<field position="1" name="payToPartyId" title="${uiLabelMap.PayToPartyId}" widget-style="required" tooltip="${uiLabelMap.CommonRequired}"><lookup target-form-name="LookupPartyName"/></field>
+		<field position="2" name="city" title="${uiLabelMap.City}" widget-style="required" tooltip="${uiLabelMap.CommonRequired}"><lookup target-form-name="LookupCity" default-value="${city}" ></lookup></field>
 		<!--field name="city" title="${uiLabelMap.City}" >
             <drop-down no-current-selected-key="${cityId}">
                 <entity-options entity-name="Geo" key-field-name="geoId" description="${geoName}">
@@ -564,14 +564,14 @@
                 </entity-options>
             </drop-down>
         </field-->
-		<field position="2" name="address1" title="${uiLabelMap.Address}" widget-style="required" tooltip="${uiLabelMap.CommonRequired}"><text size="30" maxlength="250" default-value="${address1}" /></field> 
-		<field position="3" name="shippingAddress" title="${uiLabelMap.ShippingAddress}" widget-style="required" tooltip="${uiLabelMap.CommonRequired}"><text size="30" maxlength="250" default-value="${shippingAddress}" /></field> 
+		<field position="1" name="address1" title="${uiLabelMap.Address}" widget-style="required" tooltip="${uiLabelMap.CommonRequired}"><text size="30" maxlength="250" default-value="${address1}" /></field> 
+		<field position="2" name="shippingAddress" title="${uiLabelMap.ShippingAddress}" widget-style="required" tooltip="${uiLabelMap.CommonRequired}"><text size="30" maxlength="250" default-value="${shippingAddress}" /></field> 
 		<field position="1" name="askForName" title="${uiLabelMap.AskForName}"><text size="30" maxlength="100" default-value="${askForName}"/></field> 
 		<field position="2" name="fax" title="${uiLabelMap.Fax}"><text size="30" maxlength="60" default-value="${fax}"/></field>    
-		<field position="3" name="phone" title="${uiLabelMap.Phone}"><text size="30" maxlength="60" default-value="${phone}"/></field>  
-		<field position="1" name="mobile" title="${uiLabelMap.ContactPersonPhone}"><text size="30" maxlength="60" default-value="${mobile}"/></field> 
-		<field position="2" name="email" title="${uiLabelMap.Email}"><text size="30" maxlength="100" default-value="${email}"/></field>
-		<field position="3" name="area" title="${uiLabelMap.StroeArea}" tooltip="${uiLabelMap.SQM}"><text size="30" maxlength="100" default-value="${area}"/></field>   
+		<field position="1" name="phone" title="${uiLabelMap.Phone}"><text size="30" maxlength="60" default-value="${phone}"/></field>  
+		<field position="2" name="mobile" title="${uiLabelMap.ContactPersonPhone}"><text size="30" maxlength="60" default-value="${mobile}"/></field> 
+		<field position="1" name="email" title="${uiLabelMap.Email}"><text size="30" maxlength="100" default-value="${email}"/></field>
+		<field position="2" name="area" title="${uiLabelMap.StroeArea}" tooltip="${uiLabelMap.SQM}"><text size="30" maxlength="100" default-value="${area}"/></field>   
 				
 		<field position="1" name="storeTypeId" title="${uiLabelMap.StoreType}">
             <drop-down no-current-selected-key="${storeTypeId}">
@@ -587,28 +587,28 @@
                 </entity-options>
             </drop-down>
         </field>
-        <field position="3" name="storeLevelId" title="${uiLabelMap.StoreLevel}">
+        <field position="1" name="storeLevelId" title="${uiLabelMap.StoreLevel}">
             <drop-down no-current-selected-key="${storeLevelId}">
                 <entity-options entity-name="StoreLevel" description="${description}">
                 	<entity-constraint name="productStoreGroupTypeId" value="STORELEVEL"/>
                 </entity-options>
             </drop-down>
         </field>
-        <field position="1" name="storeFeatureId" title="${uiLabelMap.StoreFeature}">
+        <field position="2" name="storeFeatureId" title="${uiLabelMap.StoreFeature}">
             <drop-down no-current-selected-key="${storeFeatureId}">
                 <entity-options entity-name="StoreFeature" description="${description}">
                 	<entity-constraint name="productStoreGroupTypeId" value="STOREFEATURE"/>
                 </entity-options>
             </drop-down>
         </field>
-        <field position="2" name="storeOwnerRegionId" title="${uiLabelMap.StoreOwnerRegion}">
+        <field position="1" name="storeOwnerRegionId" title="${uiLabelMap.StoreOwnerRegion}">
             <drop-down no-current-selected-key="${storeOwnerRegionId}">
                 <entity-options entity-name="StoreOwnerRegion" description="${description}">
                 	<entity-constraint name="productStoreGroupTypeId" value="OWNERREGION"/>
                 </entity-options>
             </drop-down>
         </field>
-        <field position="3" name="storeBusinessModelId" title="${uiLabelMap.StoreBusinessModel}">
+        <field position="2" name="storeBusinessModelId" title="${uiLabelMap.StoreBusinessModel}">
             <drop-down no-current-selected-key="${storeBusinessModelId}">
                 <entity-options entity-name="StoreBusinessModel" description="${description}">
                 	<entity-constraint name="productStoreGroupTypeId" value="BUSINESSMODEL"/>
@@ -617,12 +617,12 @@
         </field>
         <field position="1" name="regionManager" title="${uiLabelMap.RegionManager}" widget-style="required" tooltip="${uiLabelMap.CommonRequired}"><lookup target-form-name="LookupPartyForRegionManager" default-value="${regionManager}"/></field>
 		<field position="2" name="openedDate" title="${uiLabelMap.OpenedDate}" ><date-time default-value="${openedDate}"/></field>
-        <field position="3" name="closedDate" title="${uiLabelMap.ClosedDate}"><date-time default-value="${closedDate}"/></field>
-		<field name="submitButton" title="提交"><submit button-type="button"/></field>
+        <field position="1" name="closedDate" title="${uiLabelMap.ClosedDate}"><date-time default-value="${closedDate}"/></field>
+		<field name="submitButton" title="提交" widget-area-style="submit" position="2"><submit button-type="button"/></field>
     </form>
     
     <!-- 修改门店表单 -->
-    <form name="EditProductStore" type="single" target="updateSaleStore" title="" default-map-name="productStore"
+     <form name="EditProductStore" type="single" target="updateSaleStore" title="" default-map-name="productStore"
         header-row-style="header-row" default-table-style="basic-table">       
         <actions>
             <!-- 通过商店Id查询场所Id -->
@@ -743,8 +743,8 @@
         <field name="facilityId" map-name="productStoreFacility[0]"><hidden/></field>
         <field position="1" name="productStoreId" title="${uiLabelMap.ProductStoreId}"><display></display></field>    
 		<field position="2" name="storeName" title="${uiLabelMap.ProductStoreName}" tooltip="${uiLabelMap.CommonRequired}" widget-style="required"><text size="30" maxlength="100"/></field>		
-		<field position="3" name="payToPartyId" title="${uiLabelMap.PayToPartyId}" widget-style="required" tooltip="${uiLabelMap.CommonRequired}"><lookup target-form-name="LookupPartyName"/></field>
-		<field position="1" name="city" title="${uiLabelMap.City}" widget-style="required" tooltip="${uiLabelMap.CommonRequired}"><lookup target-form-name="LookupCity" default-value="${city}"></lookup></field>
+		<field position="1" name="payToPartyId" title="${uiLabelMap.PayToPartyId}" widget-style="required" tooltip="${uiLabelMap.CommonRequired}"><lookup target-form-name="LookupPartyName"/></field>
+		<field position="2" name="city" title="${uiLabelMap.City}" widget-style="required" tooltip="${uiLabelMap.CommonRequired}"><lookup target-form-name="LookupCity" default-value="${city}"></lookup></field>
 		<!--field name="city" title="${uiLabelMap.City}" >
             <drop-down no-current-selected-key="${cityId}">
                 <entity-options entity-name="Geo" key-field-name="geoId" description="${geoName}">
@@ -753,14 +753,14 @@
                 </entity-options>
             </drop-down>
         </field-->
-		<field position="2" name="address1" title="${uiLabelMap.Address}" widget-style="required" tooltip="${uiLabelMap.CommonRequired}"><text size="30" maxlength="250" default-value="${address1}"/></field> 
-		<field position="3" name="shippingAddress" title="${uiLabelMap.ShippingAddress}" widget-style="required" tooltip="${uiLabelMap.CommonRequired}"><text size="30" maxlength="250" default-value="${shippingAddress}"/></field> 
+		<field position="1" name="address1" title="${uiLabelMap.Address}" widget-style="required" tooltip="${uiLabelMap.CommonRequired}"><text size="30" maxlength="250" default-value="${address1}"/></field> 
+		<field position="2" name="shippingAddress" title="${uiLabelMap.ShippingAddress}" widget-style="required" tooltip="${uiLabelMap.CommonRequired}"><text size="30" maxlength="250" default-value="${shippingAddress}"/></field> 
 		<field position="1" name="askForName" title="${uiLabelMap.AskForName}"><text size="30" maxlength="100" default-value="${askForName}"/></field> 
 		<field position="2" name="fax" title="${uiLabelMap.Fax}"><text size="30" maxlength="60" default-value="${fax}"/></field>
-		<field position="3" name="phone" title="${uiLabelMap.Phone}"><text size="30" maxlength="60" default-value="${phone}"/></field>
-		<field position="1" name="mobile" title="${uiLabelMap.ContactPersonPhone}"><text size="30" maxlength="60" default-value="${mobile}"/></field>
-		<field position="2" name="email" title="${uiLabelMap.Email}"><text size="30" maxlength="100" default-value="${email}"/></field>
-		<field position="3" name="area" title="${uiLabelMap.StroeArea}" tooltip="${uiLabelMap.SQM}"><text size="30" maxlength="100" default-value="${area}"/></field>
+		<field position="1" name="phone" title="${uiLabelMap.Phone}"><text size="30" maxlength="60" default-value="${phone}"/></field>
+		<field position="2" name="mobile" title="${uiLabelMap.ContactPersonPhone}"><text size="30" maxlength="60" default-value="${mobile}"/></field>
+		<field position="1" name="email" title="${uiLabelMap.Email}"><text size="30" maxlength="100" default-value="${email}"/></field>
+		<field position="2" name="area" title="${uiLabelMap.StroeArea}" tooltip="${uiLabelMap.SQM}"><text size="30" maxlength="100" default-value="${area}"/></field>
 		
 		<field position="1" name="storeTypeId" title="${uiLabelMap.StoreType}">
             <drop-down no-current-selected-key="${oldStoreTypeId}">
@@ -776,28 +776,28 @@
                 </entity-options>
             </drop-down>
         </field>
-        <field position="3" name="storeLevelId" title="${uiLabelMap.StoreLevel}">
+        <field position="1" name="storeLevelId" title="${uiLabelMap.StoreLevel}">
             <drop-down no-current-selected-key="${oldStoreLevelId}">
                 <entity-options entity-name="StoreLevel" description="${description}">
                 	<entity-constraint name="productStoreGroupTypeId" value="STORELEVEL"/>
                 </entity-options>
             </drop-down>
         </field>
-        <field position="1" name="storeFeatureId" title="${uiLabelMap.StoreFeature}">
+        <field position="2" name="storeFeatureId" title="${uiLabelMap.StoreFeature}">
             <drop-down no-current-selected-key="${oldStoreFeatureId}">
                 <entity-options entity-name="StoreFeature" description="${description}">
                 	<entity-constraint name="productStoreGroupTypeId" value="STOREFEATURE"/>
                 </entity-options>
             </drop-down>
         </field>
-        <field position="2" name="storeOwnerRegionId" title="${uiLabelMap.StoreOwnerRegion}">
+        <field position="1" name="storeOwnerRegionId" title="${uiLabelMap.StoreOwnerRegion}">
             <drop-down no-current-selected-key="${oldStoreOwnerRegionId}">
                 <entity-options entity-name="StoreOwnerRegion" description="${description}">
                 	<entity-constraint name="productStoreGroupTypeId" value="OWNERREGION"/>
                 </entity-options>
             </drop-down>
         </field>
-        <field position="3" name="storeBusinessModelId" title="${uiLabelMap.StoreBusinessModel}">
+        <field position="2" name="storeBusinessModelId" title="${uiLabelMap.StoreBusinessModel}">
             <drop-down no-current-selected-key="${oldStoreBusinessModelId}">
                 <entity-options entity-name="StoreBusinessModel" description="${description}">
                 	<entity-constraint name="productStoreGroupTypeId" value="BUSINESSMODEL"/>
@@ -806,9 +806,9 @@
         </field>
         <field position="1" name="regionManager" title="${uiLabelMap.RegionManager}" widget-style="required" tooltip="${uiLabelMap.CommonRequired}"><lookup target-form-name="LookupPartyForRegionManager" default-value="${oldRegionManager}"/></field>
 		<field position="2" name="openedDate" title="${uiLabelMap.OpenedDate}" ><date-time default-value="${openedDate}"/></field>
-        <field position="3" name="closedDate" title="${uiLabelMap.ClosedDate}"><date-time default-value="${closedDate}"/></field>
+        <field position="1" name="closedDate" title="${uiLabelMap.ClosedDate}"><date-time default-value="${closedDate}"/></field>
 		
-		<field name="submitButton" title="${uiLabelMap.Submit}"><submit button-type="button"/></field>
+		<!-- <field name="submitButton" title="${uiLabelMap.Submit}"><submit button-type="button"/></field> -->
     </form>
     
 </forms>

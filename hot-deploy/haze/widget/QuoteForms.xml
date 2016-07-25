@@ -42,7 +42,7 @@ under the License.
         <field name="validFromDate"><hidden/></field>
         <field name="validThruDate"><hidden/></field>
 
-        <field name="submitButton" title="${uiLabelMap.CommonFind}" widget-style="smallSubmit">
+        <field name="submitButton" title="${uiLabelMap.CommonFind}" widget-area-style="submit" widget-style="smallSubmit">
             <submit button-type="button"/>
         </field>
         <field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
@@ -58,24 +58,28 @@ under the License.
                   <field-map field-name="viewSize" from-field="viewSize"/>
               </service>
           </actions>
-        <auto-fields-entity entity-name="Quote" default-field-type="display"/>
-        <field name="quoteId" title="${uiLabelMap.OrderOrderQuoteId}" widget-style="buttontext">
+        <auto-fields-entity entity-name="Quote" default-field-type="display" title-style="listDisplay"/>
+        <field name="quoteId" title="${uiLabelMap.OrderOrderQuoteId}" widget-style="buttontext" title-style="listDisplay">
             <hyperlink also-hidden="false" description="${quoteId}" target="ViewQuote">
                 <parameter param-name="quoteId"/>
             </hyperlink>
         </field>
-        <field name="quoteTypeId" title="${uiLabelMap.OrderOrderQuoteTypeId}"><display-entity entity-name="QuoteType"/></field>
-        <field name="statusId" title="${uiLabelMap.CommonStatus}"><display-entity also-hidden="false" entity-name="StatusItem"/></field>
-        <field name="partyId" title="${uiLabelMap.Customer}"></field>
-        <field name="quoteName" title="${uiLabelMap.OrderOrderQuoteName}"></field>
-        <field name="description" title="${uiLabelMap.CommonDescription}"></field>
-        <field name="issueDate" title="${uiLabelMap.OrderOrderQuoteIssueDate}"><display type="date"/></field>
-        <field name="statusId" title="${uiLabelMap.CommonStatus}"></field>
-        <field name="currencyUomId" title="${uiLabelMap.CommonCurrency}"></field>
-        <field name="validFromDate" title="${uiLabelMap.CommonValidFromDate}"></field>
-        <field name="validThruDate" title="${uiLabelMap.CommonValidThruDate}"></field>
+        <field name="quoteTypeId" title="${uiLabelMap.OrderOrderQuoteTypeId}" title-style="listDisplay"><display-entity entity-name="QuoteType"/></field>
+        <field name="statusId" title="${uiLabelMap.CommonStatus}" title-style="listDisplay"><display-entity also-hidden="false" entity-name="StatusItem"/></field>
+        <field name="partyId" title="${uiLabelMap.Customer}" title-style="listDisplay"></field>
+        <field name="quoteName" title="${uiLabelMap.OrderOrderQuoteName}" title-style="listDisplay"></field>
+        <field name="description" title="${uiLabelMap.CommonDescription}" title-style="listDisplay"></field>
+        <field name="issueDate" title="${uiLabelMap.OrderOrderQuoteIssueDate}" title-style="listDisplay"><display type="date"/></field>
+        <field name="statusId" title="${uiLabelMap.CommonStatus}" title-style="listDisplay"></field>
+        <field name="currencyUomId" title="${uiLabelMap.CommonCurrency}" title-style="listDisplay"></field>
         
-        <field name="updateStatusLink" title="   " widget-style="buttontext" use-when="&quot;QUO_CREATED&quot;.equals(statusId)">
+        <field name="productStoreId" title-style="listDisplay"></field>
+        <field name="salesChannelEnumId" title-style="listDisplay"></field>
+        
+        <field name="validFromDate" title="${uiLabelMap.CommonValidFromDate}" title-style="listDisplay"></field>
+        <field name="validThruDate" title="${uiLabelMap.CommonValidThruDate}" title-style="listDisplay"></field>
+        
+        <field name="updateStatusLink" title="   " title-style="listDisplay" widget-style="buttontext" use-when="&quot;QUO_CREATED&quot;.equals(statusId)">
             <hyperlink target="updateQuoteApprovedStatus" description="${uiLabelMap.Sure}" also-hidden="false" confirmation-message="${uiLabelMap.SureAfterCantModifyNumAndPrice}">
                 <parameter param-name="quoteId"/>
             </hyperlink>

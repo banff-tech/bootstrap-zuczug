@@ -75,11 +75,13 @@ under the License.
                     	<container>
                                 <link target="FindSkuQuotes" text="${uiLabelMap.ProductView}" style="buttontext"/>
                         </container>
-                        <screenlet title="${uiLabelMap.OrderOrderQuotes}">
+                        <screenlet title="${uiLabelMap.OrderOrderQuotes}查询">
                             <container>
                                 <link target="EditQuote" text="${uiLabelMap.OrderCreateOrderQuote}" style="buttontext"/>
                             </container>
                             <include-form name="FindQuotes" location="component://haze/widget/QuoteForms.xml"/>
+                        </screenlet>
+                        <screenlet title="${uiLabelMap.OrderOrderQuotes}列表">
                             <include-form name="ListQuotes" location="component://haze/widget/QuoteForms.xml"/>
                         </screenlet>
                     </decorator-section>

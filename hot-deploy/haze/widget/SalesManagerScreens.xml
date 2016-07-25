@@ -292,7 +292,7 @@
                             <parameter param-name="facilityId"/>
                         </link>
                         <screenlet title="${uiLabelMap.PartyContactInformation}">
-                            <platform-specific><html><html-template location="component://salesmanager/webapp/salesmanager/facility/ViewContactMechs.ftl"/></html></platform-specific>
+                            <platform-specific><html><html-template location="component://zuczugcommon/webapp/zuczugcommon/facility/ViewContactMechs.ftl"/></html></platform-specific>
                         </screenlet>
             		</decorator-section>
             	</decorator-screen>
